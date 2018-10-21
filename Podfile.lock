@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (4.5.1)
+  - Kingfisher (4.3.1)
+  - SkyFloatingLabelTextField (3.4.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Kingfisher (~> 4.0)
+  - SkyFloatingLabelTextField (~> 3.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Kingfisher
+    - SkyFloatingLabelTextField
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
+  SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
+
+PODFILE CHECKSUM: 6bb8065028908d9766bfbbaa97784ec33b0eaa81
+
+COCOAPODS: 1.5.0
