@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
+		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
+		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
+		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
+		ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5B1217E06650075C4CE /* LoginVC.swift */; };
+		ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
 		EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731D9217B4E7000D302DF /* AppDelegate.swift */; };
 		EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731DD217B4E7000D302DF /* Main.storyboard */; };
@@ -21,6 +26,11 @@
 /* Begin PBXFileReference section */
 		1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.debug.xcconfig"; sourceTree = "<group>"; };
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED1FB5AB217E00880075C4CE /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
+		ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
+		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
+		ED1FB5B1217E06650075C4CE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		EDE731D6217B4E7000D302DF /* Plug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE731D9217B4E7000D302DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDE731DB217B4E7000D302DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,10 +95,15 @@
 			isa = PBXGroup;
 			children = (
 				EDE731EB217C1D1100D302DF /* UIColor+Additions.swift */,
+				ED1FB5AF217E05240075C4CE /* MNFunction.swift */,
+				ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */,
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
 				EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */,
 				EDE731DB217B4E7000D302DF /* ViewController.swift */,
+				ED1FB5B1217E06650075C4CE /* LoginVC.swift */,
+				ED1FB5AB217E00880075C4CE /* WideButton.swift */,
 				EDE731DD217B4E7000D302DF /* Main.storyboard */,
+				ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */,
 				EDE731E0217B4E7100D302DF /* Assets.xcassets */,
 				EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */,
 				EDE731E5217B4E7100D302DF /* Info.plist */,
@@ -159,6 +174,7 @@
 			files = (
 				EDE731E4217B4E7100D302DF /* LaunchScreen.storyboard in Resources */,
 				EDE731E1217B4E7100D302DF /* Assets.xcassets in Resources */,
+				ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +233,11 @@
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
+				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
+				ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */,
+				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
+				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
