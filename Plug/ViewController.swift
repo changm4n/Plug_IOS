@@ -14,7 +14,6 @@ class ViewController: PlugViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-
     }
     
     func setUI() {

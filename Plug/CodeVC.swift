@@ -1,5 +1,5 @@
 //
-//  LoginVC.swift
+//  CodeVC.swift
 //  Plug
 //
 //  Created by changmin lee on 2018. 10. 22..
@@ -8,16 +8,20 @@
 
 import UIKit
 
-class LoginVC: PlugViewController {
-
+class CodeVC: PlugViewController {
     @IBOutlet weak var bottomBtn: WideButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setKeyboardHide()
-        self.bottomButton = bottomBtn
-//        bottomBtn.isEnabled = false
+        setKeyboardHide()
+        bottomButton = bottomBtn
         self.bottomAction = {
             self.performSegue(withIdentifier: "next", sender: nil)
         }
+    }
+}
+
+class ChioceVC: PlugViewController {
+    @IBAction func buttonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "next", sender: nil)
     }
 }
