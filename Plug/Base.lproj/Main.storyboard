@@ -219,13 +219,13 @@
         <!--로그인-->
         <scene sceneID="6TW-sP-byD">
             <objects>
-                <viewController id="43r-q4-fWt" sceneMemberID="viewController">
+                <viewController id="43r-q4-fWt" customClass="LoginVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ie-HV-Jkf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hEk-rZ-Zhb" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="139" y="100" width="97" height="30"/>
+                                <rect key="frame" x="42" y="104" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZgK-ZF-Lke"/>
                                 </constraints>
@@ -251,8 +251,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-f4-jOm" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="139" y="166" width="97" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-f4-jOm" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                <rect key="frame" x="42" y="174" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Bgh-jC-hD6"/>
                                 </constraints>
@@ -278,13 +278,34 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJ4-kH-NzR" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="Umv-gV-WSI"/>
+                                </constraints>
+                                <state key="normal" title="로그인"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="is8-fU-RlL">
+                                <rect key="frame" x="144" y="277" width="88" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WfG-08-Bmj"/>
+                                    <constraint firstAttribute="width" constant="100" id="fkJ-9H-jVc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <state key="normal" title="비밀번호 찾기"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hEk-rZ-Zhb" firstAttribute="leading" secondItem="D25-ho-EP4" secondAttribute="leading" constant="42" id="0Sd-d5-nST"/>
                             <constraint firstItem="Fsz-f4-jOm" firstAttribute="leading" secondItem="D25-ho-EP4" secondAttribute="leading" constant="42" id="2zF-5m-w3B"/>
+                            <constraint firstItem="is8-fU-RlL" firstAttribute="centerX" secondItem="2ie-HV-Jkf" secondAttribute="centerX" id="4Dc-ym-JUO"/>
+                            <constraint firstItem="AJ4-kH-NzR" firstAttribute="leading" secondItem="D25-ho-EP4" secondAttribute="leading" id="JpM-25-PJt"/>
                             <constraint firstItem="hEk-rZ-Zhb" firstAttribute="top" secondItem="D25-ho-EP4" secondAttribute="top" constant="40" id="OId-QQ-MG3"/>
+                            <constraint firstItem="D25-ho-EP4" firstAttribute="trailing" secondItem="AJ4-kH-NzR" secondAttribute="trailing" id="PN6-E2-Cru"/>
+                            <constraint firstItem="is8-fU-RlL" firstAttribute="top" secondItem="Fsz-f4-jOm" secondAttribute="bottom" constant="53" id="Um3-0V-Qaw"/>
                             <constraint firstItem="D25-ho-EP4" firstAttribute="trailing" secondItem="Fsz-f4-jOm" secondAttribute="trailing" constant="42" id="ZEd-6N-q9I"/>
+                            <constraint firstItem="D25-ho-EP4" firstAttribute="bottom" secondItem="AJ4-kH-NzR" secondAttribute="bottom" id="bw1-w3-8eG"/>
                             <constraint firstItem="Fsz-f4-jOm" firstAttribute="top" secondItem="hEk-rZ-Zhb" secondAttribute="bottom" constant="20" id="dFk-lJ-thS"/>
                             <constraint firstItem="D25-ho-EP4" firstAttribute="trailing" secondItem="hEk-rZ-Zhb" secondAttribute="trailing" constant="42" id="jfZ-Hr-Bn4"/>
                         </constraints>
@@ -293,10 +314,41 @@
                     <navigationItem key="navigationItem" title="로그인" id="Zfu-5m-t8a">
                         <barButtonItem key="backBarButtonItem" title="이전" id="o7C-yC-2hX"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bottomBtn" destination="AJ4-kH-NzR" id="o9A-dA-4eC"/>
+                        <segue destination="qfm-eU-g5P" kind="presentation" identifier="next" id="zqc-fU-pif"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zai-uU-iYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3386" y="134"/>
+            <point key="canvasLocation" x="3384.8000000000002" y="133.5832083958021"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cvj-R7-o03">
+            <objects>
+                <tabBarController id="qfm-eU-g5P" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OMi-wb-Ydt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="V3T-Ga-KoE" kind="relationship" relationship="viewControllers" id="ysD-zG-AHM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDA-9a-QIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4118" y="133"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="fmf-U3-Kh8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Chat" id="V3T-Ga-KoE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="BLK-Xi-fDZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iRi-hw-5EU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4654" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vyv-R7-3Ob">
