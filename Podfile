@@ -7,7 +7,7 @@ target 'Plug' do
     pod 'SkyFloatingLabelTextField', '~> 3.0'
     pod 'Kingfisher', '~> 4.0'
     pod 'Alamofire'
-    
+    pod 'CropViewController'
     # Pods for Plug
     
 end

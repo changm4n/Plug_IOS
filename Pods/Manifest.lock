@@ -1,24 +1,32 @@
 PODS:
   - Alamofire (4.5.1)
+  - CropViewController (2.3.4):
+    - TOCropViewController
   - Kingfisher (4.3.1)
   - SkyFloatingLabelTextField (3.4.0)
+  - TOCropViewController (2.3.4)
 
 DEPENDENCIES:
   - Alamofire
+  - CropViewController
   - Kingfisher (~> 4.0)
   - SkyFloatingLabelTextField (~> 3.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - CropViewController
     - Kingfisher
     - SkyFloatingLabelTextField
+    - TOCropViewController
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  CropViewController: b5ecd6625fb6bbefaacc19fe42ecee719f81f75e
   Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
+  TOCropViewController: 808c9724904be931dd2de5f97fcccf4cc8f8b03f
 
-PODFILE CHECKSUM: 6bb8065028908d9766bfbbaa97784ec33b0eaa81
+PODFILE CHECKSUM: 7ce29af604299734f21e75f3086c58c22884c74c
 
 COCOAPODS: 1.5.0

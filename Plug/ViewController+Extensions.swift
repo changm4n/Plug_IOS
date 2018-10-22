@@ -17,6 +17,10 @@ class PlugViewController: UIViewController {
         }
     }
     var bottomAction: (() -> Void)?
+    var keyboardHeight: CGFloat = 0
+    var isKeyboardShow: Bool = false
+    @IBAction func back(segue: UIStoryboardSegue) {}
+    
     func hideNavigationBar() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -24,32 +28,52 @@ class PlugViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
     }
     
+    func resetNavigationBar() {
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PlugViewController.dismissKeyboard))
-        self.view.addGestureRecognizer(tap)
-        
+      
     }
     
     @objc func bottomButtonPressed() {
         bottomAction?()
     }
     
+    func setKeyboardHide() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PlugViewController.dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let bottomButton = bottomButton else { return }
+        let offset = SCREEN_HEIGHT - bottomButton.frame.size.height
+        bottomButton.frame.origin.y = isKeyboardShow ? offset - keyboardHeight : offset
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
+        isKeyboardShow = true
         guard let bottomButton = bottomButton else { return }
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
             if bottomButton.frame.origin.y == SCREEN_HEIGHT - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y -= keyboardSize.height
+                bottomButton.frame.origin.y = SCREEN_HEIGHT - bottomButton.frame.size.height - keyboardSize.height
             }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        isKeyboardShow = false
         guard let bottomButton = bottomButton else { return }
         if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if bottomButton.frame.origin.y != SCREEN_HEIGHT - bottomButton.frame.size.height {
