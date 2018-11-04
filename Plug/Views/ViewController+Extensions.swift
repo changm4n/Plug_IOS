@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkyFloatingLabelTextField
 
 class PlugViewController: UIViewController {
     
@@ -19,6 +20,12 @@ class PlugViewController: UIViewController {
     var bottomAction: (() -> Void)?
     var keyboardHeight: CGFloat = 0
     var isKeyboardShow: Bool = false
+    var statusbarLight: Bool = true {
+        didSet {
+            UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
+        }
+    }
+    
     @IBAction func back(segue: UIStoryboardSegue) {}
     
     func hideNavigationBar() {
@@ -83,3 +90,13 @@ class PlugViewController: UIViewController {
     }
 }
 
+
+extension UIViewController {
+    func setStatusBar(isWhite: Bool) {
+        UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
