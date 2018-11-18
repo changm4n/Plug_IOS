@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YaR-Rc-Dba">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="myb-nQ-tHY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -948,7 +948,7 @@ CQ
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="AOR-nU-GaK" id="nkx-ZA-Iv7"/>
-                        <segue destination="rKe-Ev-k1c" kind="show" identifier="next" id="yRg-fp-Ind"/>
+                        <segue destination="rKe-Ev-k1c" kind="presentation" identifier="next" id="yRg-fp-Ind"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5c-ov-3iQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1064,6 +1064,57 @@ CQ
             </objects>
             <point key="canvasLocation" x="4290" y="-529"/>
         </scene>
+        <!--StartVC-->
+        <scene sceneID="8Ea-2c-hy6">
+            <objects>
+                <viewController id="myb-nQ-tHY" customClass="StartVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8KK-Ts-Wui">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAppIconPrimary" translatesAutoresizingMaskIntoConstraints="NO" id="olA-6A-Oyo">
+                                <rect key="frame" x="114" y="270" width="147" height="127"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="127" id="4iF-eB-RKL"/>
+                                    <constraint firstAttribute="width" constant="147" id="MGt-cv-LrX"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icTextLogoPrimary" translatesAutoresizingMaskIntoConstraints="NO" id="XJd-PF-gah">
+                                <rect key="frame" x="165.5" y="591" width="44" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="IR1-XW-lJb"/>
+                                    <constraint firstAttribute="width" constant="44" id="VoE-ka-w0G"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="olA-6A-Oyo" firstAttribute="centerX" secondItem="8KK-Ts-Wui" secondAttribute="centerX" id="Fmw-13-SoS"/>
+                            <constraint firstItem="s5N-xI-Sgf" firstAttribute="bottom" secondItem="XJd-PF-gah" secondAttribute="bottom" constant="50" id="ZW6-2L-Fpz"/>
+                            <constraint firstItem="XJd-PF-gah" firstAttribute="centerX" secondItem="8KK-Ts-Wui" secondAttribute="centerX" id="mVJ-3C-NBc"/>
+                            <constraint firstItem="olA-6A-Oyo" firstAttribute="centerY" secondItem="8KK-Ts-Wui" secondAttribute="centerY" id="vvl-SG-LqS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="s5N-xI-Sgf"/>
+                    </view>
+                    <connections>
+                        <outlet property="logoImage" destination="olA-6A-Oyo" id="wuj-Sb-GKM"/>
+                        <outlet property="titleImage" destination="XJd-PF-gah" id="LiH-AC-hr9"/>
+                        <segue destination="j51-Tp-HTi" kind="show" identifier="Login" animates="NO" id="dXD-lM-Kn2"/>
+                        <segue destination="y2H-1e-fXC" kind="show" identifier="Main" animates="NO" id="uCq-mn-5Ah"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSY-id-7mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1326" y="-529"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="oD4-VQ-EI4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Chat" id="y2H-1e-fXC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H9q-DG-8Xo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-697" y="-997"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="vyv-R7-3Ob">
             <objects>
@@ -1105,5 +1156,6 @@ CQ
         <image name="avatar_seleted" width="24" height="24"/>
         <image name="btnChevronWhite" width="12" height="20"/>
         <image name="icAppIconPrimary" width="147" height="127"/>
+        <image name="icTextLogoPrimary" width="44" height="26"/>
     </resources>
 </document>

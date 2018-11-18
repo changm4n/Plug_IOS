@@ -14,7 +14,7 @@ class CreateClassVC: PlugViewController {
     @IBOutlet weak var yearTextField: PlugTextField!
     @IBOutlet weak var bottomBtn: WideButton!
     
-    let rows = ["2016","2017","2018","2019","2020"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
@@ -41,10 +41,10 @@ extension CreateClassVC: UIPickerViewDelegate, UIPickerViewDataSource{
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return rows[row]
+        return kYears[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        yearTextField.text = rows[row]
+        yearTextField.text = kYears[row]
     }
 }

@@ -9,13 +9,12 @@
 import UIKit
 
 class ClassTVC: UITableViewController {
-    
-    
     var type = UserType.teacher
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setStatusBar(isWhite: true)
+        self.setNavibar(isBlue: true)
     }
    
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,7 +62,7 @@ class ClassTVC: UITableViewController {
                 self.performSegue(withIdentifier: "join", sender: nil)
             }
         } else {
-            
+            self.performSegue(withIdentifier: "list", sender: nil)
         }
     }
 }

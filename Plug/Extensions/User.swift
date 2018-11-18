@@ -8,7 +8,8 @@
 
 import Foundation
 
-
+let kYears = ["2016","2017","2018","2019","2020"]
+let kDidLogoutNotification = "kDidLogoutNotification"
 enum UserType {
     case parent, teacher
 }

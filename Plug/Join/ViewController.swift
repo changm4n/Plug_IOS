@@ -23,6 +23,7 @@ class ViewController: PlugViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
+        self.setStatusBar(isWhite: false)
     }
 }
 

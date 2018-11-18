@@ -99,4 +99,18 @@ extension UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func setNavibar(isBlue: Bool) {
+        self.navigationController?.navigationBar.barTintColor = isBlue ? UIColor.plugBlue : UIColor.white
+        self.navigationController?.navigationBar.tintColor = isBlue ? UIColor.white : UIColor.black
+    }
+    
+    func setNavibar(isHide: Bool) {
+        if isHide {
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        } else {
+            self.navigationController?.navigationBar.shadowImage = nil
+        }
+    }
 }

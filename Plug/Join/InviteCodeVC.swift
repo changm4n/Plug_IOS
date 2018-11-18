@@ -19,7 +19,7 @@ class InviteCodeVC: PlugViewController {
     
     func setButtonAction() {
         self.bottomAction = {
-            
+            self.performSegue(withIdentifier: "next", sender: nil)
         }
     }
 }
