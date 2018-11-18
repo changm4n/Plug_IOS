@@ -13,6 +13,12 @@
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
 		ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5B1217E06650075C4CE /* LoginVC.swift */; };
 		ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
+		ED3D980521A0187200B61748 /* EditClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980421A0187200B61748 /* EditClassVC.swift */; };
+		ED3D980721A05E6300B61748 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3D980621A05E6300B61748 /* Note.storyboard */; };
+		ED3D980A21A05FE100B61748 /* NoteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980921A05FE100B61748 /* NoteMainVC.swift */; };
+		ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980C21A060E000B61748 /* NoteModel.swift */; };
+		ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980E21A0695B00B61748 /* NotePlainCell.swift */; };
+		ED3D981121A111CD00B61748 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
 		EDAE3A4E217E13020015EAF2 /* PasswdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */; };
 		EDAE3A50217E15BA0015EAF2 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */; };
 		EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A51217E175A0015EAF2 /* CodeVC.swift */; };
@@ -21,6 +27,7 @@
 		EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */; };
 		EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */; };
 		EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */; };
+		EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */; };
 		EDD8C38F218710A3008DA9E7 /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */; };
 		EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C390218715FC008DA9E7 /* PlugTextField.swift */; };
 		EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3952187243C008DA9E7 /* HomeVC.swift */; };
@@ -51,6 +58,12 @@
 		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
 		ED1FB5B1217E06650075C4CE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		ED3D980421A0187200B61748 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
+		ED3D980621A05E6300B61748 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
+		ED3D980921A05FE100B61748 /* NoteMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMainVC.swift; sourceTree = "<group>"; };
+		ED3D980C21A060E000B61748 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		ED3D980E21A0695B00B61748 /* NotePlainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePlainCell.swift; sourceTree = "<group>"; };
+		ED3D981021A111CD00B61748 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswdVC.swift; sourceTree = "<group>"; };
 		EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		EDAE3A51217E175A0015EAF2 /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
@@ -59,6 +72,7 @@
 		EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeVC2.swift; sourceTree = "<group>"; };
 		EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeVC.swift; sourceTree = "<group>"; };
 		EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectClassTVC.swift; sourceTree = "<group>"; };
+		EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageClassVC.swift; sourceTree = "<group>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
 		EDD8C390218715FC008DA9E7 /* PlugTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugTextField.swift; sourceTree = "<group>"; };
 		EDD8C3952187243C008DA9E7 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -113,6 +127,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED3D980821A05FB300B61748 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				EDD8C3952187243C008DA9E7 /* HomeVC.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		ED3D980B21A05FF000B61748 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				ED3D980921A05FE100B61748 /* NoteMainVC.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
 		EDD8C39221872405008DA9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +156,7 @@
 				EDD8C39D21896F80008DA9E7 /* HomeHeaderCell.swift */,
 				EDD8C3A5218ED1CB008DA9E7 /* ClassHeader.xib */,
 				EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */,
+				ED3D980E21A0695B00B61748 /* NotePlainCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +168,7 @@
 				ED1FB5AF217E05240075C4CE /* MNFunction.swift */,
 				ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */,
 				EDD8C3A3218ED036008DA9E7 /* User.swift */,
+				ED3D980C21A060E000B61748 /* NoteModel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -152,6 +184,7 @@
 				EDAE3A53217E37B60015EAF2 /* ProfileImageVC.swift */,
 				EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */,
 				EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */,
+				ED3D981021A111CD00B61748 /* StartVC.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -163,6 +196,8 @@
 				EDB373E6218ED85100F4A8BF /* CreateClassVC2.swift */,
 				EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */,
 				EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */,
+				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
+				ED3D980421A0187200B61748 /* EditClassVC.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -190,12 +225,14 @@
 			children = (
 				EDD8C3932187240D008DA9E7 /* Extensions */,
 				EDD8C39221872405008DA9E7 /* Views */,
+				ED3D980821A05FB300B61748 /* Chat */,
 				EDD8C3942187241E008DA9E7 /* Join */,
 				EDD8C3A9218ED4A8008DA9E7 /* Class */,
+				ED3D980B21A05FF000B61748 /* Note */,
 				EDE731DD217B4E7000D302DF /* Main.storyboard */,
 				ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */,
 				EDD8C39F218D7765008DA9E7 /* Class.storyboard */,
-				EDD8C3952187243C008DA9E7 /* HomeVC.swift */,
+				ED3D980621A05E6300B61748 /* Note.storyboard */,
 				EDE731E0217B4E7100D302DF /* Assets.xcassets */,
 				EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */,
 				EDE731E5217B4E7100D302DF /* Info.plist */,
@@ -266,6 +303,7 @@
 			files = (
 				EDE731E4217B4E7100D302DF /* LaunchScreen.storyboard in Resources */,
 				EDD8C3A0218D7765008DA9E7 /* Class.storyboard in Resources */,
+				ED3D980721A05E6300B61748 /* Note.storyboard in Resources */,
 				EDD8C39A218964E5008DA9E7 /* HomeHeaderView.xib in Resources */,
 				EDE731E1217B4E7100D302DF /* Assets.xcassets in Resources */,
 				ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */,
@@ -336,12 +374,16 @@
 				EDB373E7218ED85100F4A8BF /* CreateClassVC2.swift in Sources */,
 				EDAE3A54217E37B60015EAF2 /* ProfileImageVC.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
+				ED3D980A21A05FE100B61748 /* NoteMainVC.swift in Sources */,
+				ED3D980521A0187200B61748 /* EditClassVC.swift in Sources */,
 				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
+				ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */,
 				EDD8C39E21896F80008DA9E7 /* HomeHeaderCell.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */,
 				EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */,
 				ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */,
+				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
 				EDD8C398218964CF008DA9E7 /* HomeHeaderView.swift in Sources */,
 				EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
@@ -351,6 +393,8 @@
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
 				EDAE3A4E217E13020015EAF2 /* PasswdVC.swift in Sources */,
 				EDD8C38F218710A3008DA9E7 /* CreateClassVC.swift in Sources */,
+				EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */,
+				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDD8C3A2218D77CC008DA9E7 /* ClassTVC.swift in Sources */,
 				EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */,
