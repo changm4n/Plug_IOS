@@ -8,6 +8,7 @@ target 'Plug' do
     pod 'Kingfisher', '~> 4.0'
     pod 'Alamofire'
     pod 'CropViewController'
+    pod 'Apollo'
     # Pods for Plug
     
 end

@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 class JoinVC: PlugViewController {
 
     @IBOutlet weak var bottomBtn: WideButton!
+    
+    @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
         self.bottomButton = bottomBtn
         self.bottomAction = {
+            guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
+            let user = User()
+            user.userId = email
+            User.me = user
             self.performSegue(withIdentifier: "next", sender: nil)
         }
     }
@@ -25,15 +34,4 @@ class JoinVC: PlugViewController {
         super.viewWillAppear(animated)
         resetNavigationBar()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

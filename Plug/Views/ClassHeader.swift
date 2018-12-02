@@ -12,7 +12,7 @@ import UIKit
 class ClassHeader: UIView {
     
     @IBOutlet weak var label: UILabel!
-    func configure(type: UserType, count: Int) {
-        label.text = type == .teacher ? "관리중인 클래스(\(count))" : "가입한 클래스\(count)"
+    func configure(type: Role, count: Int) {
+        label.text = type == .TEACHER ? "관리중인 클래스(\(count))" : "가입한 클래스\(count)"
     }
 }

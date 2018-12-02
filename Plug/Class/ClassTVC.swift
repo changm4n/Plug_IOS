@@ -9,7 +9,7 @@
 import UIKit
 
 class ClassTVC: UITableViewController {
-    var type = UserType.teacher
+    var type = Role.TEACHER
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,7 +23,7 @@ class ClassTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return type == .teacher ? 2 : 1
+            return type == .TEACHER ? 2 : 1
         } else {
             return 1
         }
@@ -44,7 +44,7 @@ class ClassTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
-        header?.configure(type: .teacher, count: 3)
+        header?.configure(type: .TEACHER, count: 3)
         return header
     }
     
@@ -55,7 +55,7 @@ class ClassTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         if indexPath.section == 0 {
-            if type == .teacher {
+            if type == .TEACHER {
                 let segue = row == 0 ? "create" : "invite"
                 self.performSegue(withIdentifier: segue, sender: nil)
             } else {

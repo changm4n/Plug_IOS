@@ -248,6 +248,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="cDa-xN-Bdf" id="lwQ-rK-xp2"/>
+                        <outlet property="emailTextField" destination="c89-ph-cK9" id="gfH-X3-iuY"/>
+                        <outlet property="passwordTextField" destination="YoM-qw-YdY" id="Vrc-uu-GgV"/>
                         <segue destination="ujq-Fv-7Na" kind="show" identifier="next" id="O3f-tr-rwZ"/>
                     </connections>
                 </viewController>
@@ -563,6 +565,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="AJ4-kH-NzR" id="o9A-dA-4eC"/>
+                        <outlet property="emailTextField" destination="hEk-rZ-Zhb" id="YLJ-3b-oBF"/>
+                        <outlet property="passwordTextField" destination="Fsz-f4-jOm" id="OqL-xs-YkP"/>
                         <segue destination="qfm-eU-g5P" kind="presentation" identifier="next" id="zqc-fU-pif"/>
                     </connections>
                 </viewController>
@@ -1035,7 +1039,7 @@ CQ
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bq-GC-ntK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3994" y="-381"/>
+            <point key="canvasLocation" x="3993" y="-152"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cvj-R7-o03">
@@ -1105,7 +1109,7 @@ CQ
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSY-id-7mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1326" y="-529"/>
+            <point key="canvasLocation" x="-950" y="-528"/>
         </scene>
         <!--Chat-->
         <scene sceneID="oD4-VQ-EI4">
@@ -1131,7 +1135,7 @@ CQ
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8k-SK-jFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="-527"/>
+            <point key="canvasLocation" x="-164" y="-528"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Gi-5Q-jT5">

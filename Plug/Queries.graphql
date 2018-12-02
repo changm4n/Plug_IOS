@@ -1,0 +1,20 @@
+mutation SignIn($userId: String!, $password: String!) {
+    signin(userId: $userId, password: $password) {
+        token
+    }
+}
+
+query MessageSummaries {
+    messageSummaries {
+        chatRoom {
+            name
+        }
+        sender {
+            name
+        }
+        receiver {
+            name
+        }
+        id
+    }
+}

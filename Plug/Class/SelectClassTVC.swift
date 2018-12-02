@@ -10,7 +10,7 @@ import UIKit
 
 class SelectClassTVC: UITableViewController {
 
-    var type = UserType.teacher
+    var type = Role.TEACHER
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -36,7 +36,7 @@ class SelectClassTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
-        header?.configure(type: .teacher, count: 3)
+        header?.configure(type: .TEACHER, count: 3)
         return header
     }
     

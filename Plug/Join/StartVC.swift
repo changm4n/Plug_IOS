@@ -29,11 +29,13 @@ class StartVC: PlugViewController {
     }
     
     fileprivate func show() {
-        //        if User.fetchToken() != nil {
-        self.animateSegue("Main", sender: nil)
-        //        } else {
-        //            self.animateSegue("Login", sender: nil)
-        //        }
+        if User.fetchToken() != nil {
+            print("[token] \(User.me?.token ?? "")")
+            self.animateSegue("Main", sender: nil)
+            //        self.animateSegue("Login", sender: nil)
+        } else {
+            self.animateSegue("Login", sender: nil)
+        }
     }
     
     func animateSegue(_ identifier:String,sender:AnyObject?) {

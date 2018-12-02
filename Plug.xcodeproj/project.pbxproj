@@ -19,6 +19,12 @@
 		ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980C21A060E000B61748 /* NoteModel.swift */; };
 		ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980E21A0695B00B61748 /* NotePlainCell.swift */; };
 		ED3D981121A111CD00B61748 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
+		ED5D58D021B3D3B2001EB2A2 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = ED5D58CF21B3D3B2001EB2A2 /* schema.json */; };
+		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
+		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
+		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
+		ED7D59D121B3FEAE0029E80A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
+		ED7D59D321B43BBE0029E80A /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D221B43BBE0029E80A /* Secret.swift */; };
 		EDAE3A4E217E13020015EAF2 /* PasswdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */; };
 		EDAE3A50217E15BA0015EAF2 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */; };
 		EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A51217E175A0015EAF2 /* CodeVC.swift */; };
@@ -64,6 +70,12 @@
 		ED3D980C21A060E000B61748 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		ED3D980E21A0695B00B61748 /* NotePlainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePlainCell.swift; sourceTree = "<group>"; };
 		ED3D981021A111CD00B61748 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
+		ED5D58CF21B3D3B2001EB2A2 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
+		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
+		ED7D59D021B3FEAE0029E80A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		ED7D59D221B43BBE0029E80A /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswdVC.swift; sourceTree = "<group>"; };
 		EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		EDAE3A51217E175A0015EAF2 /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
@@ -146,7 +158,6 @@
 		EDD8C39221872405008DA9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
 				EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */,
 				ED1FB5AB217E00880075C4CE /* WideButton.swift */,
 				EDD8C390218715FC008DA9E7 /* PlugTextField.swift */,
@@ -169,6 +180,8 @@
 				ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */,
 				EDD8C3A3218ED036008DA9E7 /* User.swift */,
 				ED3D980C21A060E000B61748 /* NoteModel.swift */,
+				ED5D58D121B3D3D8001EB2A2 /* Network.swift */,
+				ED7D59CC21B3DCA90029E80A /* Queries.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +236,11 @@
 		EDE731D8217B4E7000D302DF /* Plug */ = {
 			isa = PBXGroup;
 			children = (
+				ED5D58CF21B3D3B2001EB2A2 /* schema.json */,
+				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
+				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
+				ED7D59D021B3FEAE0029E80A /* API.swift */,
+				ED7D59D221B43BBE0029E80A /* Secret.swift */,
 				EDD8C3932187240D008DA9E7 /* Extensions */,
 				EDD8C39221872405008DA9E7 /* Views */,
 				ED3D980821A05FB300B61748 /* Chat */,
@@ -249,6 +267,7 @@
 			buildConfigurationList = EDE731E8217B4E7100D302DF /* Build configuration list for PBXNativeTarget "Plug" */;
 			buildPhases = (
 				A1C3FC55F00CF14CF8FC5B9D /* [CP] Check Pods Manifest.lock */,
+				ED5D58CD21B3D2A0001EB2A2 /* Generate Apollo GraphQL API */,
 				EDE731D2217B4E7000D302DF /* Sources */,
 				EDE731D3217B4E7000D302DF /* Frameworks */,
 				EDE731D4217B4E7000D302DF /* Resources */,
@@ -307,6 +326,8 @@
 				EDD8C39A218964E5008DA9E7 /* HomeHeaderView.xib in Resources */,
 				EDE731E1217B4E7100D302DF /* Assets.xcassets in Resources */,
 				ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */,
+				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
+				ED5D58D021B3D3B2001EB2A2 /* schema.json in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */,
@@ -324,6 +345,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
@@ -332,6 +354,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
@@ -360,6 +383,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		ED5D58CD21B3D2A0001EB2A2 /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -368,11 +409,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
+				ED7D59D321B43BBE0029E80A /* Secret.swift in Sources */,
 				EDAE3A50217E15BA0015EAF2 /* JoinVC.swift in Sources */,
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				EDB373E7218ED85100F4A8BF /* CreateClassVC2.swift in Sources */,
 				EDAE3A54217E37B60015EAF2 /* ProfileImageVC.swift in Sources */,
+				ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED3D980A21A05FE100B61748 /* NoteMainVC.swift in Sources */,
 				ED3D980521A0187200B61748 /* EditClassVC.swift in Sources */,
@@ -385,6 +428,7 @@
 				ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */,
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
 				EDD8C398218964CF008DA9E7 /* HomeHeaderView.swift in Sources */,
+				ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */,
 				EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */,
@@ -397,6 +441,7 @@
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDD8C3A2218D77CC008DA9E7 /* ClassTVC.swift in Sources */,
+				ED7D59D121B3FEAE0029E80A /* API.swift in Sources */,
 				EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +590,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47RZ4GF77T;
 				INFOPLIST_FILE = Plug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -564,6 +610,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47RZ4GF77T;
 				INFOPLIST_FILE = Plug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
