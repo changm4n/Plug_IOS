@@ -23,9 +23,9 @@ class JoinVC: PlugViewController {
         self.bottomButton = bottomBtn
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
-            let user = User()
+            let user = Session()
             user.userId = email
-            User.me = user
+            Session.me = user
             self.performSegue(withIdentifier: "next", sender: nil)
         }
     }

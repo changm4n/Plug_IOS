@@ -9,12 +9,28 @@
 import UIKit
 
 class ClassTVC: UITableViewController {
-    var type = Role.TEACHER
+    var type = SessionRole.TEACHER
+    
+    var classData: [ChatRoomApolloFragment] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setStatusBar(isWhite: true)
         self.setNavibar(isBlue: true)
+        self.setData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "list" {
+            let vc = segue.destination as! ManageClassVC
+            vc.classData = sender as! ChatRoomApolloFragment
+        }
+    }
+    func setData() {
+        Networking.getMyClasses { (classData) in
+            self.classData = classData
+            self.tableView.reloadData()
+        }
     }
    
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,7 +41,7 @@ class ClassTVC: UITableViewController {
         if section == 0 {
             return type == .TEACHER ? 2 : 1
         } else {
-            return 1
+            return classData.count
         }
     }
     
@@ -37,7 +53,8 @@ class ClassTVC: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(section + 1)", for: indexPath)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(indexPath.section + 1)", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(indexPath.section + 1)", for: indexPath) as! ClassCell
+            cell.classNameLabel.text = classData[indexPath.row].name
             return cell
         }
     }
@@ -62,7 +79,13 @@ class ClassTVC: UITableViewController {
                 self.performSegue(withIdentifier: "join", sender: nil)
             }
         } else {
-            self.performSegue(withIdentifier: "list", sender: nil)
+            self.performSegue(withIdentifier: "list", sender: classData[indexPath.row])
         }
     }
+}
+
+
+class ClassCell: UITableViewCell {
+    @IBOutlet weak var classNameLabel: UILabel!
+    @IBOutlet weak var classInfoLabel: UILabel!
 }

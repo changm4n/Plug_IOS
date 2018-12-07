@@ -10,7 +10,7 @@ import UIKit
 
 class SelectClassTVC: UITableViewController {
 
-    var type = Role.TEACHER
+    var type = SessionRole.TEACHER
     override func viewDidLoad() {
         super.viewDidLoad()
     }

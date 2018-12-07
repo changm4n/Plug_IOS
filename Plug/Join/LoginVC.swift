@@ -27,12 +27,19 @@ class LoginVC: PlugViewController {
             
             Networking.login(email, password: password, completion: { (token) in
                 if let token = token {
-                    let user = User()
-                    user.userId = email
-                    User.me = user
-                    user.token = token
-                    user.save()
-                    self.performSegue(withIdentifier: "next", sender: nil)
+                    let tmp = Session()
+                    Session.me = tmp
+                    tmp.token = token
+                    tmp.save()
+                    Networking.getMe(completion: { (me) in
+                        if let me = me {
+                            let user = Session(withUser: me)
+                            user.token = token
+                            Session.me = user
+                            user.save()
+                            self.performSegue(withIdentifier: "next", sender: nil)
+                        }
+                    })
                 }
             })
         }

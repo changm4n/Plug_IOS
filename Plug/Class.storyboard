@@ -51,7 +51,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" id="FDu-uK-8hk">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" id="FDu-uK-8hk" customClass="ClassCell" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="104" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FDu-uK-8hk" id="Lzo-cv-W4r">
@@ -84,6 +84,10 @@
                                         <constraint firstItem="5Ub-Vt-ikS" firstAttribute="leading" secondItem="Lzo-cv-W4r" secondAttribute="leading" constant="15" id="pMe-h1-CV3"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="classInfoLabel" destination="mHE-r3-ZIx" id="p9K-wy-cx1"/>
+                                    <outlet property="classNameLabel" destination="5Ub-Vt-ikS" id="VKj-hh-tiU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -170,7 +174,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="HSL-jX-OyJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="HSL-jX-OyJ" customClass="MemberCell" customModule="Plug" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="150" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HSL-jX-OyJ" id="L5W-2J-v9e">
@@ -201,6 +205,10 @@
                                                 <constraint firstItem="ekc-Be-g8u" firstAttribute="centerY" secondItem="L5W-2J-v9e" secondAttribute="centerY" id="vM9-H3-FA1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="memberNameLabel" destination="UCy-id-XSO" id="1Jv-f5-GfF"/>
+                                            <outlet property="profileImage" destination="ekc-Be-g8u" id="fxR-sM-bf7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -226,6 +234,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="classInfoLabel" destination="cyq-j3-Zvr" id="E7R-04-PPG"/>
+                        <outlet property="classNameLabel" destination="ime-Ex-84G" id="JXm-T6-SEB"/>
+                        <outlet property="tableView" destination="icy-od-DUg" id="R0l-Ec-Ahh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHF-12-cYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -704,6 +717,6 @@
         <image name="myClassActive" width="48" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qFE-wC-wvg"/>
+        <segue reference="ABZ-cE-bXh"/>
     </inferredMetricsTieBreakers>
 </document>
