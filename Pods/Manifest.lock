@@ -3,15 +3,20 @@ PODS:
   - Apollo (0.9.4):
     - Apollo/Core (= 0.9.4)
   - Apollo/Core (0.9.4)
+  - Apollo/WebSocket (0.9.4):
+    - Apollo/Core
+    - Starscream (~> 3.0.2)
   - CropViewController (2.3.4):
     - TOCropViewController
   - Kingfisher (4.3.1)
   - SkyFloatingLabelTextField (3.4.0)
+  - Starscream (3.0.6)
   - TOCropViewController (2.3.4)
 
 DEPENDENCIES:
   - Alamofire
   - Apollo
+  - Apollo/WebSocket
   - CropViewController
   - Kingfisher (~> 4.0)
   - SkyFloatingLabelTextField (~> 3.0)
@@ -23,6 +28,7 @@ SPEC REPOS:
     - CropViewController
     - Kingfisher
     - SkyFloatingLabelTextField
+    - Starscream
     - TOCropViewController
 
 SPEC CHECKSUMS:
@@ -31,8 +37,9 @@ SPEC CHECKSUMS:
   CropViewController: b5ecd6625fb6bbefaacc19fe42ecee719f81f75e
   Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TOCropViewController: 808c9724904be931dd2de5f97fcccf4cc8f8b03f
 
-PODFILE CHECKSUM: d086e3d8aca261b6358f69a47ce8ecaf3ddc8a5e
+PODFILE CHECKSUM: 7321c9c26265e5d927dbda458149242ad9bf1f03
 
 COCOAPODS: 1.5.0

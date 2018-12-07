@@ -9,6 +9,8 @@ target 'Plug' do
     pod 'Alamofire'
     pod 'CropViewController'
     pod 'Apollo'
+    pod 'Apollo/WebSocket'
+
     # Pods for Plug
     
 end

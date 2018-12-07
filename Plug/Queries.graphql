@@ -4,17 +4,114 @@ mutation SignIn($userId: String!, $password: String!) {
     }
 }
 
-query MessageSummaries {
-    messageSummaries {
-        chatRoom {
-            name
-        }
-        sender {
-            name
-        }
-        receiver {
-            name
-        }
-        id
+query MyChatrooms($userId: String) {
+    chatRooms(where: { admins_some: { userId: $userId }}) {
+        ...ChatRoomApolloFragment
     }
+}
+
+query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {
+    messageSummaries(
+                     where: {
+                     receiver : {
+                     userId_in: [ $myId ]
+                     }
+                     },
+                     first: $pageCount
+                     after: $startCursor
+                     ) {
+        ... MessageSummaryApolloFragment
+    }
+}
+
+query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {
+    messages(
+             where:{
+             chatRoom: {
+             id: $chatRoomId
+             }
+             receivers_some : {
+             userId_in: [ $myId, $userId ]
+             }
+             sender: {
+             userId_in : [ $myId, $userId ]
+             }
+             },
+             first: $pageCount
+             after: $startCursor
+             ) {
+        ... MessageApolloFragment
+    }
+}
+
+query Me {
+    me {
+        ...UserApolloFragment
+    }
+}
+
+subscription MessageSubscription {
+    message {
+        ... MessageSubscriptionPayloadApolloFragment
+    }
+}
+
+fragment UserApolloFragment on User {
+    id
+    type
+    role
+    userId
+    name
+    profileImageUrl
+    phoneNumber
+}
+
+fragment ChatRoomApolloFragment on ChatRoom {
+    id
+    name
+    admins { ...UserApolloFragment }
+    users { ...UserApolloFragment }
+    createdAt
+}
+
+fragment MessageApolloFragment on Message {
+    id
+    chatRoom { id }
+    text
+    receivers {
+        userId
+        profileImageUrl
+        name
+    }
+    sender {
+        userId
+        profileImageUrl
+        name
+    }
+    createdAt
+    readedAt
+}
+
+fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
+    id
+    text
+    createdAt
+    readedAt
+}
+
+fragment MessageSummaryApolloFragment on MessageSummary {
+    id
+    chatRoom { id, name }
+    sender { ...UserApolloFragment }
+    receiver { ...UserApolloFragment }
+    unReadMessageCount,
+    lastMessage { ...MessageApolloFragment }
+    createdAt
+}
+
+fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
+    mutation
+    node { ...MessageApolloFragment }
+    updatedFields
+    previousValues {...MessagePreviousValuesApolloFragment}
 }
