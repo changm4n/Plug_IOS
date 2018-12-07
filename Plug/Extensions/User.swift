@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Sessionswift
 //  Plug
 //
 //  Created by changmin lee on 04/11/2018.
@@ -12,42 +12,52 @@ let kYears = ["2016","2017","2018","2019","2020"]
 let kDidLogoutNotification = "kDidLogoutNotification"
 let kSavedUserData = "kSavedUserData"
 
-public enum UserType: String {
+public enum SessionType: String {
     case KAKAO = "KAKAO"
     , EMAIL = "EMAIL"
 }
 
 
-public enum Role: String {
+public enum SessionRole: String {
     case PARENT = "PARENT"
     , TEACHER = "TEACHER"
 }
 
-open class User : NSObject {
+open class Session : NSObject {
     
-    open static var me: User? = nil
+    open static var me: Session? = nil
     
     open var id: String?
     open var name: String?
-    open var role: Role?
-    open var userType: UserType?
+    open var role: SessionRole?
+    open var userType: SessionType?
     open var userId: String?
     open var profileImageUrl: String?
     open var phoneNumber: String?
     open var token: String?
     
-    let appPushID: String?
+    var appPushID: String?
     
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
     }
     
+    public init (withUser data: UserApolloFragment) {
+        id = data.id
+        name = data.name
+        role = SessionRole(rawValue: data.role.rawValue)
+        userType = SessionType(rawValue: data.type.rawValue)
+        userId = data.userId
+        profileImageUrl = data.profileImageUrl
+        phoneNumber = data.phoneNumber
+    }
+    
     public init (withDic dic: [String : Any]) {
         id = dic["id"] as? String
         name = dic["name"] as? String
-        role = Role(rawValue: dic["role"] as! String)
-        userType = UserType(rawValue: dic["userType"] as! String)
+        role = SessionRole(rawValue: dic["role"] as! String)
+        userType = SessionType(rawValue: dic["userType"] as! String)
         userId = dic["userId"] as? String
         profileImageUrl = dic["profileImageUrl"] as? String
         phoneNumber = dic["phoneNumber"] as? String
@@ -57,7 +67,7 @@ open class User : NSObject {
     }
     
     func save() {
-        User.me = self
+        Session.me = self
         self.saveToken()
         self.saveMyProfile()
     }
@@ -67,16 +77,16 @@ open class User : NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    open static func fetchUserFromSavedData() -> User? {
+    open static func fetchUserFromSavedData() -> Session? {
         guard let savedDic = UserDefaults.standard.object(forKey: kSavedUserData) as? [String:AnyObject] else {
             return nil
         }
         
-        return User(withDic: savedDic)
+        return Session(withDic: savedDic)
     }
     
     open static func removeSavedUser() {
-        User.me = nil
+        Session.me = nil
         UserDefaults.standard.removeObject(forKey: "UserToken")
         UserDefaults.standard.removeObject(forKey: "DeviceKey")
         UserDefaults.standard.removeObject(forKey: kSavedUserData)
@@ -116,22 +126,22 @@ open class User : NSObject {
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as AnyObject }
         if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as AnyObject }
         if let token = self.token { data["token"] = token as AnyObject }
-        data["push_id"] = User.fetchDeviceKey() as AnyObject
+        data["push_id"] = Session.fetchDeviceKey() as AnyObject
         
         UserDefaults.standard.set(data, forKey: kSavedUserData)
         UserDefaults.standard.synchronize()
         
-        User.me = self
+        Session.me = self
     }
     
     //MARK: UserProtocol
     open func httpHeaders() -> [String:String] {
         var defaultHeaders = [String:String]()
         
-        if let token = User.fetchToken() {
+        if let token = Session.fetchToken() {
             defaultHeaders["Authorization"] = token
         }
-        defaultHeaders["pushtoken"] = User.fetchDeviceKey()
+        defaultHeaders["pushtoken"] = Session.fetchDeviceKey()
         
         return defaultHeaders
     }
@@ -147,7 +157,7 @@ open class User : NSObject {
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as String }
         if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as String }
         
-        data["push_id"] = User.fetchDeviceKey()
+        data["push_id"] = Session.fetchDeviceKey()
      
         return data
     }
