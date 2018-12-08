@@ -10,7 +10,12 @@ import UIKit
 
 class ChatVC: PlugViewController {
 
-    let data = ["asdfasdf","asdfasdfasdfasdfasdfasdf","asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf","asdf\nasdfasdf\n"]
+    let chatModel = MessageModel()
+    /*
+     [[날짜헤더 ..cells..][날짜헤더 ..]]
+     cells => [ssssbrrrrbsssb]
+     */
+    
     var messageData: [MessageApolloFragment] = []
     
     var receiverId: String? = nil
@@ -21,7 +26,8 @@ class ChatVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.tableView.dataSource = chatModel
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
     }
@@ -38,30 +44,38 @@ class ChatVC: PlugViewController {
             let receiverId = receiverId,
             let senderid = senderId else { return }
         
-        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 100, end: nil) { (messages) in
+        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 30, end: nil) { (messages) in
             self.messageData = messages
-            self.tableView.reloadData()
+            self.title = "\(messages.count) 개 수신"
+            self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
+            }))
+            self.reloadTableView()
         }
         
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
                 self.messageData.append(newMessage)
-                self.tableView.reloadData()
+                self.reloadTableView()
             }
         }
     }
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
+//        self.tableView.scrollToRow(at: IndexPath(row: self.messageData.count - 1, section: 0), at: .bottom, animated: true)
+    }
 }
 
-extension ChatVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messageData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "rcell", for: indexPath) as! ChatRCell
-        let message = messageData[indexPath.row]
-        cell.messageLabel.text = message.text ?? "no text"
-        return cell
+extension ChatVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch chatModel.getType(of: indexPath) {
+        case .BLANK:
+            return 5
+        case .LCELL, .RCELL:
+            return UITableViewAutomaticDimension
+        case .STAMP:
+            return 30
+        }
     }
 }
 
@@ -71,6 +85,7 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
 class ChatCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bubbleView: UIView!
+    @IBOutlet weak var timeLabel: UILabel!
 }
 
 
@@ -79,4 +94,19 @@ class ChatRCell: ChatCell {
         bubbleView.layer.cornerRadius = 16
         bubbleView.clipsToBounds = true
     }
+    
+    func configure(viewItem: MessageViewItem) {
+        if let message = viewItem.message {
+            messageLabel.text = message.text
+            timeLabel.text = message.timeStamp
+            timeLabel.isHidden = !viewItem.isShowTime
+//            timeLabel.backgroundColor = viewItem.isShowTime ? .blue : .clear
+        }
+    }
+}
+
+
+class StampCell: UITableViewCell {
+    
+    @IBOutlet weak var timeLabel: UILabel!
 }

@@ -55,7 +55,6 @@ subscription MessageSubscription {
         ... MessageSubscriptionPayloadApolloFragment
     }
 }
-
 fragment UserApolloFragment on User {
     id
     type
@@ -66,12 +65,28 @@ fragment UserApolloFragment on User {
     phoneNumber
 }
 
+fragment KidApolloFragment on Kid {
+    id
+    name
+    parents { ...UserApolloFragment }
+}
+
 fragment ChatRoomApolloFragment on ChatRoom {
     id
     name
     admins { ...UserApolloFragment }
     users { ...UserApolloFragment }
+    kids { ...KidApolloFragment }
+    inviteCode,
+    chatRoomAt
     createdAt
+}
+
+fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
+    mutation
+    node { ...MessageApolloFragment }
+    updatedFields
+    previousValues {...MessagePreviousValuesApolloFragment}
 }
 
 fragment MessageApolloFragment on Message {
@@ -102,16 +117,9 @@ fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
 fragment MessageSummaryApolloFragment on MessageSummary {
     id
     chatRoom { id, name }
-    sender { ...UserApolloFragment }
-    receiver { ...UserApolloFragment }
+    sender { ...UserApolloFragment },
+    receiver { ...UserApolloFragment },
     unReadMessageCount,
     lastMessage { ...MessageApolloFragment }
     createdAt
-}
-
-fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
-    mutation
-    node { ...MessageApolloFragment }
-    updatedFields
-    previousValues {...MessagePreviousValuesApolloFragment}
 }

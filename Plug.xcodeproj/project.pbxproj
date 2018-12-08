@@ -57,7 +57,21 @@
 		EDF609BA21B7915500CB3529 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609B921B7915500CB3529 /* ChatVC.swift */; };
 		EDF609BC21BA468400CB3529 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = EDF609BB21BA468400CB3529 /* schema.json */; };
 		EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */; };
+		EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */; };
+		EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */; };
+		EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
+		EDF609CC21BBDD7100CB3529 /* PlugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609CB21BBDD7100CB3529 /* PlugTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EDF609CE21BBDD7100CB3529 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDE731CE217B4E7000D302DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EDE731D5217B4E7000D302DF;
+			remoteInfo = Plug;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +127,12 @@
 		EDF609B921B7915500CB3529 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		EDF609BB21BA468400CB3529 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataHeader.swift; sourceTree = "<group>"; };
+		EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDateHeader.xib; sourceTree = "<group>"; };
+		EDF609C321BBC2AC00CB3529 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		EDF609C921BBDD7100CB3529 /* PlugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDF609CB21BBDD7100CB3529 /* PlugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugTests.swift; sourceTree = "<group>"; };
+		EDF609CD21BBDD7100CB3529 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F64DDDE6650DF586CD6AFD19 /* Pods-Plug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +142,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDF609C621BBDD7100CB3529 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +202,8 @@
 				EDD8C3A5218ED1CB008DA9E7 /* ClassHeader.xib */,
 				EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */,
 				ED3D980E21A0695B00B61748 /* NotePlainCell.swift */,
+				EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */,
+				EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +220,7 @@
 				ED5D58D121B3D3D8001EB2A2 /* Network.swift */,
 				ED7D59CC21B3DCA90029E80A /* Queries.swift */,
 				EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */,
+				EDF609C321BBC2AC00CB3529 /* MessageModel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -228,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE731D8217B4E7000D302DF /* Plug */,
+				EDF609CA21BBDD7100CB3529 /* PlugTests */,
 				EDE731D7217B4E7000D302DF /* Products */,
 				30E4AA3D87D91C47FE7F7BCC /* Pods */,
 				E99EA7AB4A5EC20FCF99424D /* Frameworks */,
@@ -238,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE731D6217B4E7000D302DF /* Plug.app */,
+				EDF609C921BBDD7100CB3529 /* PlugTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,6 +300,15 @@
 			path = Plug;
 			sourceTree = "<group>";
 		};
+		EDF609CA21BBDD7100CB3529 /* PlugTests */ = {
+			isa = PBXGroup;
+			children = (
+				EDF609CB21BBDD7100CB3529 /* PlugTests.swift */,
+				EDF609CD21BBDD7100CB3529 /* Info.plist */,
+			);
+			path = PlugTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,18 +332,40 @@
 			productReference = EDE731D6217B4E7000D302DF /* Plug.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EDF609C821BBDD7100CB3529 /* PlugTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDF609D021BBDD7100CB3529 /* Build configuration list for PBXNativeTarget "PlugTests" */;
+			buildPhases = (
+				EDF609C521BBDD7100CB3529 /* Sources */,
+				EDF609C621BBDD7100CB3529 /* Frameworks */,
+				EDF609C721BBDD7100CB3529 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EDF609CF21BBDD7100CB3529 /* PBXTargetDependency */,
+			);
+			name = PlugTests;
+			productName = PlugTests;
+			productReference = EDF609C921BBDD7100CB3529 /* PlugTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		EDE731CE217B4E7000D302DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = changmin;
 				TargetAttributes = {
 					EDE731D5217B4E7000D302DF = {
 						CreatedOnToolsVersion = 9.4.1;
+					};
+					EDF609C821BBDD7100CB3529 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = EDE731D5217B4E7000D302DF;
 					};
 				};
 			};
@@ -320,6 +383,7 @@
 			projectRoot = "";
 			targets = (
 				EDE731D5217B4E7000D302DF /* Plug */,
+				EDF609C821BBDD7100CB3529 /* PlugTests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,11 +399,19 @@
 				EDD8C39A218964E5008DA9E7 /* HomeHeaderView.xib in Resources */,
 				EDE731E1217B4E7100D302DF /* Assets.xcassets in Resources */,
 				ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */,
+				EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */,
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDF609C721BBDD7100CB3529 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +520,7 @@
 				EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */,
 				EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
+				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
 				EDAE3A4E217E13020015EAF2 /* PasswdVC.swift in Sources */,
 				EDD8C38F218710A3008DA9E7 /* CreateClassVC.swift in Sources */,
@@ -455,12 +528,29 @@
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDD8C3A2218D77CC008DA9E7 /* ClassTVC.swift in Sources */,
+				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
 				ED7D59D121B3FEAE0029E80A /* API.swift in Sources */,
 				EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EDF609C521BBDD7100CB3529 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF609CC21BBDD7100CB3529 /* PlugTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EDF609CF21BBDD7100CB3529 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EDE731D5217B4E7000D302DF /* Plug */;
+			targetProxy = EDF609CE21BBDD7100CB3529 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EDE731DD217B4E7000D302DF /* Main.storyboard */ = {
@@ -636,6 +726,51 @@
 			};
 			name = Release;
 		};
+		EDF609D121BBDD7100CB3529 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 47RZ4GF77T;
+				INFOPLIST_FILE = PlugTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = changmin.PlugTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Plug.app/Plug";
+			};
+			name = Debug;
+		};
+		EDF609D221BBDD7100CB3529 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 47RZ4GF77T;
+				INFOPLIST_FILE = PlugTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = changmin.PlugTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Plug.app/Plug";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -653,6 +788,15 @@
 			buildConfigurations = (
 				EDE731E9217B4E7100D302DF /* Debug */,
 				EDE731EA217B4E7100D302DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDF609D021BBDD7100CB3529 /* Build configuration list for PBXNativeTarget "PlugTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDF609D121BBDD7100CB3529 /* Debug */,
+				EDF609D221BBDD7100CB3529 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
