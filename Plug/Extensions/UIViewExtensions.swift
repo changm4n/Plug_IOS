@@ -16,3 +16,21 @@ extension UIView {
         self.clipsToBounds = true
     }
 }
+
+
+extension Date {
+    func isSameDay(rhs: Date) -> Bool {
+        return Calendar.current.isDate(self, inSameDayAs: rhs)
+    }
+    
+    func isSameMin(rhs: Date) -> Bool {
+        let cal = Calendar.current
+        return cal.component(.minute, from: self) == cal.component(.minute, from: rhs)
+    }
+    
+    func toString(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+}
