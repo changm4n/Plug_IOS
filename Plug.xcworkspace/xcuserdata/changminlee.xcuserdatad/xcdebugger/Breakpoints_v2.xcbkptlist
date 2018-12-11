@@ -9,14 +9,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/Network.swift"
-            timestampString = "565966623.180913"
+            filePath = "Plug/Chat/ChatVC.swift"
+            timestampString = "566216493.649183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "subscribeMessage(completion:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "addMessage(newMessage:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Plug.ChatVC.addMessage(newMessage: Plug.MessageItem) -&gt; ()"
+                  moduleName = "Plug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Chat/ChatVC.swift"
+                  timestampString = "566216307.888165"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "755">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Plug.ChatVC.addMessage(newMessage: Plug.MessageItem) -&gt; ()"
+                  moduleName = "Plug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Chat/ChatVC.swift"
+                  timestampString = "566216307.891376"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "794">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,29 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/MessageModel.swift"
-            timestampString = "565966623.181017"
+            filePath = "Plug/Chat/ChatVC.swift"
+            timestampString = "566216493.650062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/MessageModel.swift"
-            timestampString = "565966623.181581"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "setViewModel()"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "addMessage(newMessage:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Chat/ChatVC.swift"
-            timestampString = "565966623.1819431"
+            timestampString = "566216493.6504641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "setData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/MessageModel.swift"
-            timestampString = "565966623.182016"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "setViewModel()"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "addMessage(newMessage:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

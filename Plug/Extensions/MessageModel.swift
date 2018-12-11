@@ -27,7 +27,20 @@ struct MessageItem {
         formatter.dateFormat = "hh:mm"
         return formatter.string(from: createAt)
     }
-
+    let kDefault = "default"
+    
+    init() {
+        self.id = kDefault
+        self.chatroomId = kDefault
+        self.text = "text"
+        self.receiverId = Session.me!.userId!
+        self.receiverName = kDefault
+        self.senderId = "lcmini6528@gmail.com"
+        self.senderName = kDefault
+        self.isMine = false
+        self.createAt = Date()
+    }
+    
     public init(with message: MessageApolloFragment, isMine: Bool) {
         id = message.id
         chatroomId = message.chatRoom.id
@@ -72,6 +85,11 @@ class MessageModel: NSObject {
     private var mItems: [MessageItem] = []
     var mViewModel: [[MessageViewItem]] = []
     
+    var lastIndexPath: IndexPath {
+        return IndexPath(row: mViewModel[mViewModel.count - 1].count - 1,
+                         section: mViewModel.count - 1)
+    }
+    
     
     override init() {
         super.init()
@@ -89,7 +107,55 @@ class MessageModel: NSObject {
     public func setItems(messages: [MessageItem]) {
         self.mItems = messages
         setViewModel()
-        print("reloaded")
+    }
+    
+    public func addNew() -> [(IndexPath, Int)] {
+        return addMessage(newMessage: MessageItem())
+    }
+    
+    public func addMessage(newMessage: MessageItem) -> [(IndexPath, Int)] {
+        //Remove last blank
+        mViewModel[mViewModel.count - 1].removeLast()
+        let r = mViewModel[mViewModel.count - 1].count - 1
+        let s = mViewModel.count - 1
+        if let lastMessage = mViewModel.last?.last?.message {
+            
+            var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
+            item.isShowTime = true
+            
+            if !lastMessage.createAt.isSameDay(rhs: newMessage.createAt) {
+                mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
+                return [(IndexPath(row: mViewModel[mViewModel.count - 2].count, section: mViewModel.count - 2), -1),
+                        (IndexPath(row: 0, section: mViewModel.count - 1), 1),
+                        (IndexPath(row: 1, section: mViewModel.count - 1), 1),
+                        (IndexPath(row: 2, section: mViewModel.count - 1), 1)]
+            }
+            
+            var result: [(IndexPath, Int)] = []
+            
+            result.append(
+                (IndexPath(row:  mViewModel[mViewModel.count - 1].count - 1, section: mViewModel.count - 1), 0))
+            if lastMessage.isMine == newMessage.isMine &&
+                lastMessage.createAt.isSameMin(rhs: newMessage.createAt) {
+                mViewModel[s][r].isShowTime = false
+            } else {
+                result.append(
+                    (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), 0))
+                mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
+            }
+            
+            result.append(
+                (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), result.count == 2 ? 1 : 0))
+            mViewModel[mViewModel.count - 1].append(item)
+            
+            result.append(
+                (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), 1))
+            mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
+            
+            return result
+        } else {
+            return []
+        }
     }
     
     public func getType(of indexPath: IndexPath) -> MessageViewType {

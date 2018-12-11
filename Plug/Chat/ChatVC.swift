@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatVC: PlugViewController {
-
+    
     let chatModel = MessageModel()
     /*
      [[날짜헤더 ..cells..][날짜헤더 ..]]
@@ -38,13 +38,17 @@ class ChatVC: PlugViewController {
         setData()
     }
     
+    @IBAction func addSampleMessage(_ sender: Any) {
+        addMessage(newMessage: MessageItem())
+    }
+    
     func setData() {
         guard
             let chatroomId = chatroomId,
             let receiverId = receiverId,
             let senderid = senderId else { return }
         
-        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 30, end: nil) { (messages) in
+        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 100, end: nil) { (messages) in
             self.messageData = messages
             self.title = "\(messages.count) 개 수신"
             self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
@@ -54,15 +58,35 @@ class ChatVC: PlugViewController {
         
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
-                self.messageData.append(newMessage)
-                self.reloadTableView()
+                self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
             }
         }
     }
     
+    func addMessage(newMessage: MessageItem) {
+        let indexes = self.chatModel.addMessage(newMessage: newMessage)
+        self.tableView.beginUpdates()
+        
+        for index in indexes {
+            switch index.1 {
+            case -1:
+                self.tableView.deleteRows(at: [index.0], with: .automatic)
+            case 0:
+                self.tableView.reloadRows(at: [index.0], with: .automatic)
+            case 1:
+                self.tableView.insertRows(at: [index.0], with: .automatic)
+            default:
+                break
+            }
+        }
+        
+        self.tableView.endUpdates()
+        self.tableView.scrollToRow(at: indexes.last!.0, at: .bottom, animated: true)
+    }
+    
     func reloadTableView() {
         self.tableView.reloadData()
-//        self.tableView.scrollToRow(at: IndexPath(row: self.messageData.count - 1, section: 0), at: .bottom, animated: true)
+        self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: true)
     }
 }
 
@@ -70,7 +94,7 @@ extension ChatVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch chatModel.getType(of: indexPath) {
         case .BLANK:
-            return 5
+            return 30
         case .LCELL, .RCELL:
             return UITableViewAutomaticDimension
         case .STAMP:
@@ -100,7 +124,7 @@ class ChatRCell: ChatCell {
             messageLabel.text = message.text
             timeLabel.text = message.timeStamp
             timeLabel.isHidden = !viewItem.isShowTime
-//            timeLabel.backgroundColor = viewItem.isShowTime ? .blue : .clear
+            //            timeLabel.backgroundColor = viewItem.isShowTime ? .blue : .clear
         }
     }
 }
