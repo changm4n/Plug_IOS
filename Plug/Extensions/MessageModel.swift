@@ -125,7 +125,9 @@ class MessageModel: NSObject {
             
             if !lastMessage.createAt.isSameDay(rhs: newMessage.createAt) {
                 mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
-                return [(IndexPath(row: mViewModel[mViewModel.count - 2].count, section: mViewModel.count - 2), -1),
+                return [
+                    (IndexPath(row: mViewModel[mViewModel.count - 2].count, section: mViewModel.count - 2), -1),
+                    (IndexPath(row: 0, section: mViewModel.count - 1), 2),
                         (IndexPath(row: 0, section: mViewModel.count - 1), 1),
                         (IndexPath(row: 1, section: mViewModel.count - 1), 1),
                         (IndexPath(row: 2, section: mViewModel.count - 1), 1)]

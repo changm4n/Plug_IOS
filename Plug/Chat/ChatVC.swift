@@ -15,6 +15,7 @@ class ChatVC: PlugViewController {
      [[날짜헤더 ..cells..][날짜헤더 ..]]
      cells => [ssssbrrrrbsssb]
      */
+    @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
     
     var messageData: [MessageApolloFragment] = []
     
@@ -24,12 +25,38 @@ class ChatVC: PlugViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setKeyboardHide()
         self.tableView.dataSource = chatModel
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+    }
+    
+    @objc override func keyboardWillShow(notification: NSNotification) {
+        isKeyboardShow = true
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            if textFieldBottomLayout.constant == 0 {
+                textFieldBottomLayout.constant = keyboardHeight
+                
+                self.view.layoutIfNeeded()
+//                self.setTableViewScrollBottom()
+            }
+        }
+    }
+    
+    @objc override func keyboardWillHide(notification: NSNotification) {
+        isKeyboardShow = false
+        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if textFieldBottomLayout.constant != 0 {
+                textFieldBottomLayout.constant = 0
+                
+                self.view.layoutIfNeeded()
+//                self.setTableViewScrollBottom()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +102,8 @@ class ChatVC: PlugViewController {
                 self.tableView.reloadRows(at: [index.0], with: .automatic)
             case 1:
                 self.tableView.insertRows(at: [index.0], with: .automatic)
+            case 2:
+                self.tableView.insertSections(IndexSet(integer: index.0.section), with: .automatic)
             default:
                 break
             }
@@ -86,6 +115,10 @@ class ChatVC: PlugViewController {
     
     func reloadTableView() {
         self.tableView.reloadData()
+        self.setTableViewScrollBottom()
+    }
+    
+    func setTableViewScrollBottom() {
         self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: true)
     }
 }
@@ -102,6 +135,15 @@ extension ChatVC: UITableViewDelegate {
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 
