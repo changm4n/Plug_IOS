@@ -115,6 +115,7 @@ class MessageModel: NSObject {
     
     public func addMessage(newMessage: MessageItem) -> [(IndexPath, Int)] {
         //Remove last blank
+        mViewModel = self.reverse(array: mViewModel)
         mViewModel[mViewModel.count - 1].removeLast()
         let r = mViewModel[mViewModel.count - 1].count - 1
         let s = mViewModel.count - 1
@@ -208,7 +209,16 @@ class MessageModel: NSObject {
         
         tmp.append(MessageViewItem(type: .BLANK))
         mViewModel.append(tmp)
-        
+        mViewModel = self.reverse(array: mViewModel)
+    }
+    
+    
+    func reverse(array: [[MessageViewItem]]) -> [[MessageViewItem]] {
+        var result: [[MessageViewItem]] = []
+        for item in array {
+            result.insert(item.reversed(), at: 0)
+        }
+        return result
     }
 }
 
@@ -222,15 +232,20 @@ extension MessageModel: UITableViewDataSource {
         } else if item.messageType == .RCELL {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
             cell.configure(viewItem: item)
+            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
+
             return cell
             
         } else if item.messageType == .LCELL {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
+            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
+
             cell.configure(viewItem: item)
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! StampCell
+            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
             return cell
         }
     }

@@ -16,6 +16,8 @@ class ChatVC: PlugViewController {
      cells => [ssssbrrrrbsssb]
      */
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTopLayout: NSLayoutConstraint!
     
     var messageData: [MessageApolloFragment] = []
     
@@ -29,19 +31,25 @@ class ChatVC: PlugViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
+        self.tableView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi));
         self.tableView.dataSource = chatModel
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
     }
     
+    override func viewDidLayoutSubviews() {
+        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: SCREEN_WIDTH - 10)
+    }
     @objc override func keyboardWillShow(notification: NSNotification) {
         isKeyboardShow = true
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             if textFieldBottomLayout.constant == 0 {
                 textFieldBottomLayout.constant = keyboardHeight
-                
+                tableViewBottomLayout.constant = keyboardHeight + 48
+//                tableViewTopLayout.constant = (keyboardHeight + 48)
                 self.view.layoutIfNeeded()
+                
 //                self.setTableViewScrollBottom()
             }
         }
@@ -52,7 +60,7 @@ class ChatVC: PlugViewController {
         if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if textFieldBottomLayout.constant != 0 {
                 textFieldBottomLayout.constant = 0
-                
+                tableViewBottomLayout.constant = 48
                 self.view.layoutIfNeeded()
 //                self.setTableViewScrollBottom()
             }
@@ -61,7 +69,6 @@ class ChatVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setData()
     }
     
@@ -115,7 +122,7 @@ class ChatVC: PlugViewController {
     
     func reloadTableView() {
         self.tableView.reloadData()
-        self.setTableViewScrollBottom()
+//        self.setTableViewScrollBottom()
     }
     
     func setTableViewScrollBottom() {

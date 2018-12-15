@@ -325,12 +325,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="trailing" secondItem="6Kn-LC-c09" secondAttribute="trailing" id="AvT-yD-0Qr"/>
+                            <constraint firstItem="c4C-OJ-6Ra" firstAttribute="bottom" secondItem="JQV-VV-BPb" secondAttribute="bottom" constant="48" id="NaN-Rc-heX"/>
                             <constraint firstItem="JQV-VV-BPb" firstAttribute="leading" secondItem="c4C-OJ-6Ra" secondAttribute="leading" id="czf-Le-FRS"/>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="trailing" secondItem="JQV-VV-BPb" secondAttribute="trailing" id="kRV-cJ-qCV"/>
                             <constraint firstItem="JQV-VV-BPb" firstAttribute="top" secondItem="c4C-OJ-6Ra" secondAttribute="top" id="q8g-B4-dzj"/>
                             <constraint firstItem="6Kn-LC-c09" firstAttribute="leading" secondItem="c4C-OJ-6Ra" secondAttribute="leading" id="sia-9s-s3l"/>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="bottom" secondItem="6Kn-LC-c09" secondAttribute="bottom" id="u1f-fc-paS"/>
-                            <constraint firstItem="6Kn-LC-c09" firstAttribute="top" secondItem="JQV-VV-BPb" secondAttribute="bottom" id="xId-od-X87"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c4C-OJ-6Ra"/>
                     </view>
@@ -339,6 +339,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="JQV-VV-BPb" id="bRK-OR-3Cx"/>
+                        <outlet property="tableViewBottomLayout" destination="NaN-Rc-heX" id="yqe-eJ-ee5"/>
+                        <outlet property="tableViewTopLayout" destination="q8g-B4-dzj" id="tYn-mB-NCO"/>
                         <outlet property="textFieldBottomLayout" destination="u1f-fc-paS" id="uOD-lR-jae"/>
                     </connections>
                 </viewController>
