@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatVC: PlugViewController {
+class ChatVC: PlugViewController, UITextViewDelegate {
     
     let chatModel = MessageModel()
     /*
@@ -19,6 +19,8 @@ class ChatVC: PlugViewController {
     @IBOutlet weak var tableViewBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var tableViewTopLayout: NSLayoutConstraint!
     
+    @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
+    
     var messageData: [MessageApolloFragment] = []
     
     var receiverId: String? = nil
@@ -26,7 +28,22 @@ class ChatVC: PlugViewController {
     var chatroomId: String? = nil
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     
+    func textViewDidChange(_ textView: UITextView) {
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        newSize.height += 15
+        self.textView.isScrollEnabled = newSize.height >= 67 + 15
+        inputViewHeight.constant = min(newSize.height, 67 + 15)
+    }
+    
+    func resetTextView() {
+        self.textView.text = ""
+        self.inputViewHeight.constant = 50
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +52,7 @@ class ChatVC: PlugViewController {
         self.tableView.dataSource = chatModel
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,10 +65,8 @@ class ChatVC: PlugViewController {
             if textFieldBottomLayout.constant == 0 {
                 textFieldBottomLayout.constant = keyboardHeight
                 tableViewBottomLayout.constant = keyboardHeight + 48
-//                tableViewTopLayout.constant = (keyboardHeight + 48)
                 self.view.layoutIfNeeded()
                 
-//                self.setTableViewScrollBottom()
             }
         }
     }
@@ -62,7 +78,6 @@ class ChatVC: PlugViewController {
                 textFieldBottomLayout.constant = 0
                 tableViewBottomLayout.constant = 48
                 self.view.layoutIfNeeded()
-//                self.setTableViewScrollBottom()
             }
         }
     }
@@ -73,7 +88,19 @@ class ChatVC: PlugViewController {
     }
     
     @IBAction func addSampleMessage(_ sender: Any) {
-        addMessage(newMessage: MessageItem())
+        let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard
+            text.count > 0,
+            let senderId = self.senderId,
+            let chatRoomId = self.chatroomId
+            else { return }
+        self.resetTextView()
+        Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
+            if let message = result {
+                print("handler")
+//                self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
+            }
+        }
     }
     
     func setData() {
@@ -87,7 +114,7 @@ class ChatVC: PlugViewController {
             self.title = "\(messages.count) 개 수신"
             self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
             }))
-            self.reloadTableView()
+            self.tableView.reloadData()
         }
         
         Networking.subscribeMessage { (message) in
@@ -98,31 +125,8 @@ class ChatVC: PlugViewController {
     }
     
     func addMessage(newMessage: MessageItem) {
-        let indexes = self.chatModel.addMessage(newMessage: newMessage)
-        self.tableView.beginUpdates()
-        
-        for index in indexes {
-            switch index.1 {
-            case -1:
-                self.tableView.deleteRows(at: [index.0], with: .automatic)
-            case 0:
-                self.tableView.reloadRows(at: [index.0], with: .automatic)
-            case 1:
-                self.tableView.insertRows(at: [index.0], with: .automatic)
-            case 2:
-                self.tableView.insertSections(IndexSet(integer: index.0.section), with: .automatic)
-            default:
-                break
-            }
-        }
-        
-        self.tableView.endUpdates()
-        self.tableView.scrollToRow(at: indexes.last!.0, at: .bottom, animated: true)
-    }
-    
-    func reloadTableView() {
+        self.chatModel.addMessage(newMessage: newMessage)
         self.tableView.reloadData()
-//        self.setTableViewScrollBottom()
     }
     
     func setTableViewScrollBottom() {
@@ -142,6 +146,10 @@ extension ChatVC: UITableViewDelegate {
         }
     }
 }
+//
+//extension ChatVC: UITableViewDelegate {
+//
+//}
 
 
 

@@ -109,14 +109,12 @@ class MessageModel: NSObject {
         setViewModel()
     }
     
-    public func addNew() -> [(IndexPath, Int)] {
-        return addMessage(newMessage: MessageItem())
-    }
-    
-    public func addMessage(newMessage: MessageItem) -> [(IndexPath, Int)] {
+    public func addMessage(newMessage: MessageItem) {
         //Remove last blank
+        print("message added")
         mViewModel = self.reverse(array: mViewModel)
         mViewModel[mViewModel.count - 1].removeLast()
+        
         let r = mViewModel[mViewModel.count - 1].count - 1
         let s = mViewModel.count - 1
         if let lastMessage = mViewModel.last?.last?.message {
@@ -126,39 +124,22 @@ class MessageModel: NSObject {
             
             if !lastMessage.createAt.isSameDay(rhs: newMessage.createAt) {
                 mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
-                return [
-                    (IndexPath(row: mViewModel[mViewModel.count - 2].count, section: mViewModel.count - 2), -1),
-                    (IndexPath(row: 0, section: mViewModel.count - 1), 2),
-                        (IndexPath(row: 0, section: mViewModel.count - 1), 1),
-                        (IndexPath(row: 1, section: mViewModel.count - 1), 1),
-                        (IndexPath(row: 2, section: mViewModel.count - 1), 1)]
+                mViewModel = self.reverse(array: mViewModel)
+                return
             }
             
-            var result: [(IndexPath, Int)] = []
-            
-            result.append(
-                (IndexPath(row:  mViewModel[mViewModel.count - 1].count - 1, section: mViewModel.count - 1), 0))
             if lastMessage.isMine == newMessage.isMine &&
                 lastMessage.createAt.isSameMin(rhs: newMessage.createAt) {
                 mViewModel[s][r].isShowTime = false
             } else {
-                result.append(
-                    (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), 0))
                 mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
             }
-            
-            result.append(
-                (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), result.count == 2 ? 1 : 0))
+        
             mViewModel[mViewModel.count - 1].append(item)
-            
-            result.append(
-                (IndexPath(row:  mViewModel[mViewModel.count - 1].count, section: mViewModel.count - 1), 1))
             mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
             
-            return result
-        } else {
-            return []
-        }
+            mViewModel = self.reverse(array: mViewModel)
+        } 
     }
     
     public func getType(of indexPath: IndexPath) -> MessageViewType {
@@ -205,7 +186,6 @@ class MessageModel: NSObject {
             }
             
         }
-        
         
         tmp.append(MessageViewItem(type: .BLANK))
         mViewModel.append(tmp)

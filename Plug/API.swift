@@ -658,6 +658,106 @@ public final class MessageSubscriptionSubscription: GraphQLSubscription {
   }
 }
 
+public final class SendMessageMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {\n  sendMessage(data: {text: $text, chatRoomId: $chatRoomId, fileIds: $fileIds, receiverIds: [$receiverId]}) {\n    __typename\n    ...MessageApolloFragment\n  }\n}"
+
+  public var queryDocument: String { return operationDefinition.appending(MessageApolloFragment.fragmentDefinition) }
+
+  public var text: String
+  public var chatRoomId: GraphQLID
+  public var receiverId: GraphQLID
+  public var fileIds: [GraphQLID]
+
+  public init(text: String, chatRoomId: GraphQLID, receiverId: GraphQLID, fileIds: [GraphQLID]) {
+    self.text = text
+    self.chatRoomId = chatRoomId
+    self.receiverId = receiverId
+    self.fileIds = fileIds
+  }
+
+  public var variables: GraphQLMap? {
+    return ["text": text, "chatRoomId": chatRoomId, "receiverId": receiverId, "fileIds": fileIds]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("sendMessage", arguments: ["data": ["text": GraphQLVariable("text"), "chatRoomId": GraphQLVariable("chatRoomId"), "fileIds": GraphQLVariable("fileIds"), "receiverIds": [GraphQLVariable("receiverId")]]], type: .nonNull(.object(SendMessage.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(sendMessage: SendMessage) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "sendMessage": sendMessage.resultMap])
+    }
+
+    public var sendMessage: SendMessage {
+      get {
+        return SendMessage(unsafeResultMap: resultMap["sendMessage"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "sendMessage")
+      }
+    }
+
+    public struct SendMessage: GraphQLSelectionSet {
+      public static let possibleTypes = ["Message"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(MessageApolloFragment.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var messageApolloFragment: MessageApolloFragment {
+          get {
+            return MessageApolloFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
 public struct UserApolloFragment: GraphQLFragment {
   public static let fragmentDefinition =
     "fragment UserApolloFragment on User {\n  __typename\n  id\n  type\n  role\n  userId\n  name\n  profileImageUrl\n  phoneNumber\n}"

@@ -79,6 +79,18 @@ class Networking: NSObject {
         }
     }
     
+    static func sendMessage(text: String, chatRoomId: String, receiverId: String, completion:@escaping (_ message: MessageApolloFragment?) -> Void) {
+        
+        getClient().perform(mutation: SendMessageMutation(text: text, chatRoomId: chatRoomId, receiverId: receiverId, fileIds: []), queue: .main)
+        { (result, error) in
+            if let message = result?.data?.sendMessage.fragments.messageApolloFragment {
+                completion(message)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     static func subscribeMessage(completion:@escaping (_ message: MessageSubscriptionPayloadApolloFragment) -> Void) {
         getSubscriptClient().subscribe(subscription: MessageSubscriptionSubscription(), queue: DispatchQueue.main) { (result, error) in
             if let message = result?.data?.message?.fragments.messageSubscriptionPayloadApolloFragment {

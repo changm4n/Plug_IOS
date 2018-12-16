@@ -55,6 +55,18 @@ subscription MessageSubscription {
         ... MessageSubscriptionPayloadApolloFragment
     }
 }
+
+mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {
+    sendMessage(data: {
+                text : $text
+                chatRoomId : $chatRoomId
+                fileIds : $fileIds
+                receiverIds : [$receiverId]
+                }) {
+        ... MessageApolloFragment
+    }
+}
+
 fragment UserApolloFragment on User {
     id
     type
