@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LDV-py-NkN" customClass="PlugClassCell" customModule="Plug" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LDV-py-NkN" id="J0G-Tz-anM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서원초 5-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQr-nx-J4B">
+                        <rect key="frame" x="15" y="9" width="74" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="CzK-jH-FDn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018 학년도 ・ 32명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdX-cj-6Pf">
+                        <rect key="frame" x="15" y="32" width="131.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="wnW-D3-u69"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xpq-Au-E4m">
+                        <rect key="frame" x="347" y="20" width="10" height="20"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="LBt-ee-fUZ"/>
+                            <constraint firstAttribute="width" constant="10" id="gLa-Xz-N5j"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Xpq-Au-E4m" firstAttribute="centerY" secondItem="J0G-Tz-anM" secondAttribute="centerY" id="0Xu-dP-acf"/>
+                    <constraint firstAttribute="trailing" secondItem="Xpq-Au-E4m" secondAttribute="trailing" constant="18" id="6Mt-dv-rPG"/>
+                    <constraint firstItem="bQr-nx-J4B" firstAttribute="top" secondItem="J0G-Tz-anM" secondAttribute="top" constant="9" id="Lrh-he-8Pq"/>
+                    <constraint firstItem="TdX-cj-6Pf" firstAttribute="leading" secondItem="bQr-nx-J4B" secondAttribute="leading" id="Nws-YO-7IT"/>
+                    <constraint firstItem="bQr-nx-J4B" firstAttribute="leading" secondItem="J0G-Tz-anM" secondAttribute="leading" constant="15" id="mNl-0y-a71"/>
+                    <constraint firstItem="TdX-cj-6Pf" firstAttribute="top" secondItem="bQr-nx-J4B" secondAttribute="bottom" constant="1" id="oFf-85-92v"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="arrowImage" destination="Xpq-Au-E4m" id="0U8-3s-Vvz"/>
+                <outlet property="infoLabel" destination="TdX-cj-6Pf" id="s9A-Mg-Dno"/>
+                <outlet property="nameLabel" destination="bQr-nx-J4B" id="vKT-hq-LZT"/>
+            </connections>
+            <point key="canvasLocation" x="192.80000000000001" y="-103.44827586206897"/>
+        </tableViewCell>
+    </objects>
+</document>
