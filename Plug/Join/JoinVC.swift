@@ -34,4 +34,13 @@ class JoinVC: PlugViewController {
         super.viewWillAppear(animated)
         resetNavigationBar()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "next" {
+            let vc = segue.destination as! CodeVC
+            vc.bottomAction = {
+                vc.performSegue(withIdentifier: "next", sender: nil)
+            }
+        }
+    }
 }

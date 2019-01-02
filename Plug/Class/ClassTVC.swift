@@ -88,4 +88,9 @@ class ClassTVC: UITableViewController {
 class ClassCell: UITableViewCell {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var classInfoLabel: UILabel!
+    
+    func configure(title: String, info: String) {
+        self.classNameLabel.text = title
+        self.classInfoLabel.text = info
+    }
 }

@@ -712,7 +712,7 @@ CQ
         <!--Image EditVC-->
         <scene sceneID="GFT-PX-8ul">
             <objects>
-                <viewController id="Zfn-tQ-1cp" customClass="ImageEditVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageEditVC" id="Zfn-tQ-1cp" customClass="ImageEditVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qcb-tr-T1u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

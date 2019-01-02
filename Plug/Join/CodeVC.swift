@@ -14,9 +14,6 @@ class CodeVC: PlugViewController {
         super.viewDidLoad()
         setKeyboardHide()
         bottomButton = bottomBtn
-        self.bottomAction = {
-            self.performSegue(withIdentifier: "next", sender: nil)
-        }
     }
 }
 

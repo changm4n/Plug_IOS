@@ -64,7 +64,7 @@ class PlugViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let bottomButton = bottomButton else { return }
-        let offset = SCREEN_HEIGHT - bottomButton.frame.size.height
+        let offset = view.frame.size.height - bottomButton.frame.size.height
         bottomButton.frame.origin.y = isKeyboardShow ? offset - keyboardHeight : offset
     }
     
@@ -73,8 +73,8 @@ class PlugViewController: UIViewController {
         guard let bottomButton = bottomButton else { return }
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
-            if bottomButton.frame.origin.y == SCREEN_HEIGHT - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = SCREEN_HEIGHT - bottomButton.frame.size.height - keyboardSize.height
+            if bottomButton.frame.origin.y == view.frame.size.height - bottomButton.frame.size.height {
+                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
             }
         }
     }
@@ -83,8 +83,8 @@ class PlugViewController: UIViewController {
         isKeyboardShow = false
         guard let bottomButton = bottomButton else { return }
         if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if bottomButton.frame.origin.y != SCREEN_HEIGHT - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = SCREEN_HEIGHT - bottomButton.frame.size.height
+            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
+                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height
             }
         }
     }

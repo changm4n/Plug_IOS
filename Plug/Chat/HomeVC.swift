@@ -32,7 +32,6 @@ class HomeVC: PlugViewController {
         hideNavigationBar()
         self.statusbarLight = true
         setData()
-        
     }
     
     func setData() {

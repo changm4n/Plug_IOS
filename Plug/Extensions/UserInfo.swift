@@ -11,7 +11,7 @@ import Apollo
 
 class UserInfo: NSObject {
     
-    open static var myClasses: [ChatRoomApolloFragment]? = nil
+    public static var myClasses: [ChatRoomApolloFragment]? = nil
     
     open var id: String?
     open var name: String?

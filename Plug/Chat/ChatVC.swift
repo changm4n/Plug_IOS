@@ -138,7 +138,7 @@ extension ChatVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch chatModel.getType(of: indexPath) {
         case .BLANK:
-            return 30
+            return 4
         case .LCELL, .RCELL:
             return UITableViewAutomaticDimension
         case .STAMP:
@@ -146,20 +146,6 @@ extension ChatVC: UITableViewDelegate {
         }
     }
 }
-//
-//extension ChatVC: UITableViewDelegate {
-//
-//}
-
-
-
-
-
-
-
-
-
-
 
 
 

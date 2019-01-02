@@ -21,6 +21,7 @@ public enum SessionType: String {
 public enum SessionRole: String {
     case PARENT = "PARENT"
     , TEACHER = "TEACHER"
+    , NONE = "NONE"
 }
 
 open class Session : NSObject {
@@ -35,12 +36,14 @@ open class Session : NSObject {
     open var profileImageUrl: String?
     open var phoneNumber: String?
     open var token: String?
+    var schedule: Schedule
     
     var appPushID: String?
     
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
+         schedule = Schedule(schedule: "0-30 9-18 1,2,3")
     }
     
     public init (withUser data: UserApolloFragment) {
@@ -51,6 +54,7 @@ open class Session : NSObject {
         userId = data.userId
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
+        schedule = Schedule(schedule: "0-30 9-18 1,2,3")
     }
     
     public init (withDic dic: [String : Any]) {
@@ -64,6 +68,8 @@ open class Session : NSObject {
         token = dic["token"] as? String
         
         appPushID = dic["appPushId"] as? String
+        
+        schedule = Schedule(schedule: "0-30 9-18 1,2,3")
     }
     
     func save() {
