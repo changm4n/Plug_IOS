@@ -51,3 +51,12 @@ extension UINavigationController {
     }
     
 }
+
+
+extension UITableViewCell {
+    func addBottomLine() {
+        let line: UIView = UIView(frame: CGRect(x: 0, y: self.frame.size.height - 0.5, width: SCREEN_WIDTH, height: 0.5))
+        line.backgroundColor = UIColor.separatorGray
+        self.addSubview(line)
+    }
+}

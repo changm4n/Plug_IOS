@@ -87,9 +87,7 @@ extension EditProfileVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: item.1, for: indexPath)
         
         if row == currentItems[section].count - 1 {
-            let line: UIView = UIView(frame: CGRect(x: 0, y: 44.5, width: SCREEN_WIDTH, height: 0.5))
-            line.backgroundColor = self.tableView.separatorColor
-            cell.addSubview(line)
+            cell.addBottomLine()
         }
         
         switch item.0 {

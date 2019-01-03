@@ -36,18 +36,8 @@
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xpq-Au-E4m">
-                        <rect key="frame" x="347" y="20" width="10" height="20"/>
-                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="LBt-ee-fUZ"/>
-                            <constraint firstAttribute="width" constant="10" id="gLa-Xz-N5j"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Xpq-Au-E4m" firstAttribute="centerY" secondItem="J0G-Tz-anM" secondAttribute="centerY" id="0Xu-dP-acf"/>
-                    <constraint firstAttribute="trailing" secondItem="Xpq-Au-E4m" secondAttribute="trailing" constant="18" id="6Mt-dv-rPG"/>
                     <constraint firstItem="bQr-nx-J4B" firstAttribute="top" secondItem="J0G-Tz-anM" secondAttribute="top" constant="9" id="Lrh-he-8Pq"/>
                     <constraint firstItem="TdX-cj-6Pf" firstAttribute="leading" secondItem="bQr-nx-J4B" secondAttribute="leading" id="Nws-YO-7IT"/>
                     <constraint firstItem="bQr-nx-J4B" firstAttribute="leading" secondItem="J0G-Tz-anM" secondAttribute="leading" constant="15" id="mNl-0y-a71"/>
@@ -55,7 +45,6 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="arrowImage" destination="Xpq-Au-E4m" id="0U8-3s-Vvz"/>
                 <outlet property="infoLabel" destination="TdX-cj-6Pf" id="s9A-Mg-Dno"/>
                 <outlet property="nameLabel" destination="bQr-nx-J4B" id="vKT-hq-LZT"/>
             </connections>

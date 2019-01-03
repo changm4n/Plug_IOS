@@ -17,6 +17,8 @@ class SettingVC: PlugViewController {
     var teacherTitlesOff: [(String, String)] = [("플러그 오프 설정","plug"),  ("","desc")]
     let shareTitles: [(String, String)] = [("접근 권한 설정","cell"), ("약관 및 개인정보 처리방침","cell"), ("오픈소스 라이선스","cell")]
     
+    var classItems = ["title"]
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -59,6 +61,7 @@ class SettingVC: PlugViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.keyboardDismissMode = .onDrag
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "classCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,9 +141,8 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if self.role == .PARENT {
-//            let item = parentTitles[row]
             if section == 0 {
-                
+                performSegue(withIdentifier: "out", sender: nil)
             } else {
                 
             }
@@ -192,13 +194,19 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
         } else if self.role == .PARENT {
             if section == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlugClassCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! PlugClassCell
                 cell.configure(title: "창민학교", info: "2018 학년도 ・ 이아린", showArrow: true)
+                if row == classItems.count - 1 {
+                    cell.addBottomLine()
+                }
                 return cell
                 
             } else {
                 let item = shareTitles[row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: item.1, for: indexPath)
+                if row == shareTitles.count - 1 {
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                }
                 cell.textLabel?.text = item.0
                 return cell
             }
@@ -221,7 +229,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if self.role == .PARENT {
-            return section == 0 ? 0 : shareTitles.count
+            return section == 0 ? classItems.count : shareTitles.count
         } else {
             return 0
         }
