@@ -4,6 +4,17 @@ mutation SignIn($userId: String!, $password: String!) {
     }
 }
 
+mutation createRoom($roomName: String!, $userId: ID!) {
+    createChatRoom(data :{
+                   name : $roomName
+                   userIds: [$userId]
+                   }) {
+        users {
+            userId
+        }
+    }
+}
+
 query MyChatrooms($userId: String) {
     chatRooms(where: { admins_some: { userId: $userId }}) {
         ...ChatRoomApolloFragment

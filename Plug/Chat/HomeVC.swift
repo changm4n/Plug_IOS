@@ -14,6 +14,8 @@ class HomeVC: PlugViewController {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var selectedFilter = -1
+    
     var filterCollectionView: UICollectionView?
     
     var messageCount = 0
@@ -81,12 +83,23 @@ class HomeVC: PlugViewController {
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeHeaderCell
-        cell.label.text = classData[indexPath.row].name
+        cell.label.text = "    \(classData[indexPath.row].name)    "
+        cell.setSeleted(selected: selectedFilter == indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return classData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
+        if selectedFilter == row {
+            selectedFilter = -1
+        } else {
+            selectedFilter = row
+        }
+        collectionView.reloadData()
     }
 }
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
@@ -122,7 +135,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             filterCollectionView?.dataSource = self
             filterCollectionView?.delegate = self
             filterCollectionView?.showsHorizontalScrollIndicator = false
-            
+            filterCollectionView?.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             header.addSubview(filterCollectionView!)
         }
         

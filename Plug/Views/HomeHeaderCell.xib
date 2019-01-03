@@ -13,26 +13,40 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="asb-b6-DSu" customClass="HomeHeaderCell" customModule="Plug" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="72" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFT-PB-sdk">
-                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="72" height="60"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NH-Z0-e8L">
-                            <rect key="frame" x="9" y="15" width="42" height="30"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMF-Zt-6qA">
+                            <rect key="frame" x="0.0" y="15" width="72" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label   " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NH-Z0-e8L">
+                                    <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="v2I-yb-VrI"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <constraints>
+                                <constraint firstItem="5NH-Z0-e8L" firstAttribute="leading" secondItem="kMF-Zt-6qA" secondAttribute="leading" id="nC9-SX-eaT"/>
+                                <constraint firstAttribute="trailing" secondItem="5NH-Z0-e8L" secondAttribute="trailing" id="oJh-3g-svv"/>
+                                <constraint firstItem="5NH-Z0-e8L" firstAttribute="centerY" secondItem="kMF-Zt-6qA" secondAttribute="centerY" id="sLV-Gp-Feb"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="iNF-Fc-EZ1" firstAttribute="trailing" secondItem="5NH-Z0-e8L" secondAttribute="trailing" constant="9" id="pPT-bk-cu4"/>
-                        <constraint firstItem="5NH-Z0-e8L" firstAttribute="top" secondItem="iNF-Fc-EZ1" secondAttribute="top" constant="15" id="rcE-sN-JdV"/>
-                        <constraint firstItem="5NH-Z0-e8L" firstAttribute="leading" secondItem="iNF-Fc-EZ1" secondAttribute="leading" constant="9" id="uQq-Fc-Sil"/>
-                        <constraint firstItem="iNF-Fc-EZ1" firstAttribute="bottom" secondItem="5NH-Z0-e8L" secondAttribute="bottom" constant="15" id="x5l-fv-E1q"/>
+                        <constraint firstItem="kMF-Zt-6qA" firstAttribute="top" secondItem="RFT-PB-sdk" secondAttribute="top" constant="15" id="2FR-HT-Z0k"/>
+                        <constraint firstItem="kMF-Zt-6qA" firstAttribute="leading" secondItem="RFT-PB-sdk" secondAttribute="leading" id="DNu-DO-Eg8"/>
+                        <constraint firstAttribute="bottom" secondItem="kMF-Zt-6qA" secondAttribute="bottom" constant="15" id="rRF-ar-qHt"/>
+                        <constraint firstAttribute="trailing" secondItem="kMF-Zt-6qA" secondAttribute="trailing" id="xne-kF-u4p"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="iNF-Fc-EZ1"/>
                 </view>
@@ -45,9 +59,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="uU6-0T-p4g"/>
             <connections>
+                <outlet property="container" destination="kMF-Zt-6qA" id="Lge-SE-ESI"/>
                 <outlet property="label" destination="5NH-Z0-e8L" id="YE0-st-vbZ"/>
             </connections>
-            <point key="canvasLocation" x="488" y="86.35682158920541"/>
+            <point key="canvasLocation" x="497.60000000000002" y="86.35682158920541"/>
         </collectionReusableView>
     </objects>
 </document>
