@@ -60,3 +60,8 @@ extension UITableViewCell {
         self.addSubview(line)
     }
 }
+
+
+func PlugLog(string: String) {
+    print("[LOG] \(string)")
+}

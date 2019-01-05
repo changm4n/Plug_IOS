@@ -11,13 +11,10 @@ import UIKit
 class ChatVC: PlugViewController, UITextViewDelegate {
     
     let chatModel = MessageModel()
-    /*
-     [[날짜헤더 ..cells..][날짜헤더 ..]]
-     cells => [ssssbrrrrbsssb]
-     */
+    
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
-    @IBOutlet weak var tableViewBottomLayout: NSLayoutConstraint!
-    @IBOutlet weak var tableViewTopLayout: NSLayoutConstraint!
+//    @IBOutlet weak var tableViewBottomLayout: NSLayoutConstraint!
+//    @IBOutlet weak var tableViewTopLayout: NSLayoutConstraint!
     
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
     
@@ -27,67 +24,30 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     var senderId: String? = nil
     var chatroomId: String? = nil
     
+    var kOriginHeight: CGFloat = 0
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textView: UITextView!
     
-    func textViewDidChange(_ textView: UITextView) {
-        let fixedWidth = textView.frame.size.width
-        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        newSize.height += 15
-        self.textView.isScrollEnabled = newSize.height >= 67 + 15
-        inputViewHeight.constant = min(newSize.height, 67 + 15)
-    }
-    
-    func resetTextView() {
-        self.textView.text = ""
-        self.inputViewHeight.constant = 50
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
-        self.tableView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi));
+
         self.tableView.dataSource = chatModel
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: SCREEN_WIDTH - 10)
-    }
-    @objc override func keyboardWillShow(notification: NSNotification) {
-        isKeyboardShow = true
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            if textFieldBottomLayout.constant == 0 {
-                textFieldBottomLayout.constant = keyboardHeight
-                tableViewBottomLayout.constant = keyboardHeight + 48
-                self.view.layoutIfNeeded()
-                
-            }
-        }
-    }
-    
-    @objc override func keyboardWillHide(notification: NSNotification) {
-        isKeyboardShow = false
-        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if textFieldBottomLayout.constant != 0 {
-                textFieldBottomLayout.constant = 0
-                tableViewBottomLayout.constant = 48
-                self.view.layoutIfNeeded()
-            }
-        }
+        kOriginHeight = self.view.frame.size.height
+        setData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setData()
     }
     
     @IBAction func addSampleMessage(_ sender: Any) {
+        self.tableView.reloadData()
+        return
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
             text.count > 0,
@@ -97,7 +57,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.resetTextView()
         Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
             if let message = result {
-                print("handler")
 //                self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
             }
         }
@@ -115,6 +74,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
             }))
             self.tableView.reloadData()
+            self.setTableViewScrollBottom()
         }
         
         Networking.subscribeMessage { (message) in
@@ -129,9 +89,48 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.tableView.reloadData()
     }
     
-    func setTableViewScrollBottom() {
-        self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: true)
+    func setTableViewScrollBottom(animated: Bool = false) {
+        self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
     }
+    
+    @objc override func keyboardWillShow(notification: NSNotification) {
+        isKeyboardShow = true
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            
+            if self.view.frame.origin.y == 0  {
+                self.view.frame.origin.y -= keyboardHeight
+                self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }
+        }
+    }
+    
+    @objc override func keyboardWillHide(notification: NSNotification) {
+        isKeyboardShow = false
+        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0  {
+                self.view.frame.origin.y = 0
+                self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        newSize.height += 15
+        self.textView.isScrollEnabled = newSize.height >= 67 + 15
+        inputViewHeight.constant = min(newSize.height, 67 + 15)
+    }
+    
+    func resetTextView() {
+        self.textView.text = ""
+        self.inputViewHeight.constant = 50
+    }
+    
 }
 
 extension ChatVC: UITableViewDelegate {
@@ -155,7 +154,6 @@ class ChatCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
 }
 
-
 class ChatRCell: ChatCell {    
     override func awakeFromNib() {
         bubbleView.layer.cornerRadius = 16
@@ -172,8 +170,6 @@ class ChatRCell: ChatCell {
     }
 }
 
-
 class StampCell: UITableViewCell {
-    
     @IBOutlet weak var timeLabel: UILabel!
 }

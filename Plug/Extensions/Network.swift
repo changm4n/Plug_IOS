@@ -71,7 +71,7 @@ class Networking: NSObject {
     }
     
     static func getMeassages(chatroomId: String, userId: String, receiverId: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
-        getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .global()) { (result, error) in
+        getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
             if let messages = result?.data?.messages { completion(messages.compactMap({$0.fragments.messageApolloFragment}))
             } else {
                 completion([])
