@@ -25,15 +25,25 @@ class ProfileImageVC: PlugViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bottomBtn: WideButton!
+    @IBOutlet weak var nameTextField: PlugTextField!
     
     var selectedRow = 1
     var profileImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setKeyboardHide()
+        self.setTextFields()
         bottomButton = bottomBtn
         self.bottomAction = {
             self.performSegue(withIdentifier: "next", sender: nil)
+        }
+    }
+    
+    func setTextFields() {
+        nameTextField.type = .name
+        nameTextField.changeHandler = { [weak self] text, check in
+            self?.bottomButton?.isEnabled = check
         }
     }
     

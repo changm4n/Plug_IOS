@@ -74,9 +74,9 @@ class HomeVC: PlugViewController {
         if segue.identifier == "chat" {
             let vc = segue.destination as! ChatVC
             let data = sender as! MessageSummaryApolloFragment
-            vc.receiverId = data.receiver.fragments.userApolloFragment.userId
-            vc.senderId = data.sender.fragments.userApolloFragment.userId
-            vc.chatroomId = data.chatRoom.id
+            vc.receiver = data.receiver.fragments.userApolloFragment
+            vc.sender = data.sender.fragments.userApolloFragment
+            vc.chatroom = data.chatRoom.fragments.chatRoomSummaryApolloFragment
         }
     }
 }
@@ -170,7 +170,7 @@ class SummaryCell: UITableViewCell {
         nameLabel.text = sender.name
         newBadge.isHidden = item.unReadMessageCount != 0
         messageLabel.text = item.lastMessage?.fragments.messageApolloFragment.text
-        classLabel.text = item.chatRoom.name
+        classLabel.text = item.chatRoom.fragments.chatRoomSummaryApolloFragment.name
         if let url = sender.profileImageUrl, sender.profileImageUrl != ""{
             profileImage.kf.setImage(with: URL(string: url))
         }

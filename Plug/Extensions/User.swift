@@ -36,6 +36,7 @@ open class Session : NSObject {
     open var profileImageUrl: String?
     open var phoneNumber: String?
     open var token: String?
+    open var password = "password"
     var schedule: Schedule
     
     var appPushID: String?

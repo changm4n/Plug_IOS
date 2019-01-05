@@ -224,7 +224,9 @@ extension MessageModel: UITableViewDataSource {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! StampCell
-//            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
+            if let date = mViewModel[indexPath.section][1].message?.createAt {
+                cell.setTimeStamp(date: date)
+            }
             return cell
         }
     }

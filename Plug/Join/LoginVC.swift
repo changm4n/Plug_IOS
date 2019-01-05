@@ -7,24 +7,34 @@
 //
 
 import UIKit
-import SkyFloatingLabelTextField
 
-class LoginVC: PlugViewController {
+class LoginVC: PlugViewController ,UITextFieldDelegate {
 
     @IBOutlet weak var bottomBtn: WideButton!
     
-    @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
-    @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var emailTextField: PlugTextField!
+    @IBOutlet weak var passwordTextField: PlugTextField!
+    
+    var emailCheck = false {
+        didSet {
+            bottomBtn.isEnabled = emailCheck && passwdCheck
+        }
+    }
+    var passwdCheck = false {
+        didSet {
+            bottomBtn.isEnabled = emailCheck && passwdCheck
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
+        self.setTextFields()
         self.bottomButton = bottomBtn
-//        bottomBtn.isEnabled = false
+        bottomBtn.isEnabled = false
         
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
-            
             Networking.login(email, password: password, completion: { (token) in
                 if let token = token {
                     let tmp = Session()
@@ -40,9 +50,35 @@ class LoginVC: PlugViewController {
                             self.performSegue(withIdentifier: "next", sender: nil)
                         }
                     })
+                } else {
+                    showAlertWithString("", message: "이메일 또는 비밀번호가 틀렸습니다.", sender: self)
                 }
             })
         }
+    }
+    
+    func setTextFields() {
+        emailTextField.delegate = self
+        emailTextField.type = .email
+        emailTextField.changeHandler = { [weak self] text, check in
+            self?.emailCheck = check
+        }
+        
+        passwordTextField.delegate = self
+        passwordTextField.type = .passwd
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.changeHandler = { [weak self] text, check in
+            self?.passwdCheck = check
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == 0 {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+        return true
     }
 }
 

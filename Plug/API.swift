@@ -402,7 +402,7 @@ public final class MessageSummariesQuery: GraphQLQuery {
   public let operationDefinition =
     "query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {\n  messageSummaries(where: {receiver: {userId_in: [$myId]}}, first: $pageCount, after: $startCursor) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
 
-  public var queryDocument: String { return operationDefinition.appending(MessageSummaryApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
   public var myId: String
   public var pageCount: Int
@@ -876,6 +876,85 @@ public final class SendMessageMutation: GraphQLMutation {
   }
 }
 
+public final class VerifyEmailResponseMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation VerifyEmailResponse($email: String!) {\n  verifyEmail(email: $email) {\n    __typename\n    verifyCode\n  }\n}"
+
+  public var email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var variables: GraphQLMap? {
+    return ["email": email]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("verifyEmail", arguments: ["email": GraphQLVariable("email")], type: .nonNull(.object(VerifyEmail.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(verifyEmail: VerifyEmail) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "verifyEmail": verifyEmail.resultMap])
+    }
+
+    public var verifyEmail: VerifyEmail {
+      get {
+        return VerifyEmail(unsafeResultMap: resultMap["verifyEmail"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "verifyEmail")
+      }
+    }
+
+    public struct VerifyEmail: GraphQLSelectionSet {
+      public static let possibleTypes = ["VerifyEmailResponse"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("verifyCode", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(verifyCode: String) {
+        self.init(unsafeResultMap: ["__typename": "VerifyEmailResponse", "verifyCode": verifyCode])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var verifyCode: String {
+        get {
+          return resultMap["verifyCode"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "verifyCode")
+        }
+      }
+    }
+  }
+}
+
 public struct UserApolloFragment: GraphQLFragment {
   public static let fragmentDefinition =
     "fragment UserApolloFragment on User {\n  __typename\n  id\n  type\n  role\n  userId\n  name\n  profileImageUrl\n  phoneNumber\n}"
@@ -1086,6 +1165,76 @@ public struct KidApolloFragment: GraphQLFragment {
           resultMap += newValue.resultMap
         }
       }
+    }
+  }
+}
+
+public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
+  public static let fragmentDefinition =
+    "fragment ChatRoomSummaryApolloFragment on ChatRoom {\n  __typename\n  id\n  name\n  chatRoomAt\n  createdAt\n}"
+
+  public static let possibleTypes = ["ChatRoom"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+    GraphQLField("name", type: .nonNull(.scalar(String.self))),
+    GraphQLField("chatRoomAt", type: .nonNull(.scalar(String.self))),
+    GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(id: GraphQLID, name: String, chatRoomAt: String, createdAt: String) {
+    self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name, "chatRoomAt": chatRoomAt, "createdAt": createdAt])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var id: GraphQLID {
+    get {
+      return resultMap["id"]! as! GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var name: String {
+    get {
+      return resultMap["name"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var chatRoomAt: String {
+    get {
+      return resultMap["chatRoomAt"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "chatRoomAt")
+    }
+  }
+
+  public var createdAt: String {
+    get {
+      return resultMap["createdAt"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "createdAt")
     }
   }
 }
@@ -1855,7 +2004,7 @@ public struct MessagePreviousValuesApolloFragment: GraphQLFragment {
 
 public struct MessageSummaryApolloFragment: GraphQLFragment {
   public static let fragmentDefinition =
-    "fragment MessageSummaryApolloFragment on MessageSummary {\n  __typename\n  id\n  chatRoom {\n    __typename\n    id\n    name\n  }\n  sender {\n    __typename\n    ...UserApolloFragment\n  }\n  receiver {\n    __typename\n    ...UserApolloFragment\n  }\n  unReadMessageCount\n  lastMessage {\n    __typename\n    ...MessageApolloFragment\n  }\n  createdAt\n}"
+    "fragment MessageSummaryApolloFragment on MessageSummary {\n  __typename\n  id\n  chatRoom {\n    __typename\n    ...ChatRoomSummaryApolloFragment\n  }\n  sender {\n    __typename\n    ...UserApolloFragment\n  }\n  receiver {\n    __typename\n    ...UserApolloFragment\n  }\n  unReadMessageCount\n  lastMessage {\n    __typename\n    ...MessageApolloFragment\n  }\n  createdAt\n}"
 
   public static let possibleTypes = ["MessageSummary"]
 
@@ -1957,8 +2106,7 @@ public struct MessageSummaryApolloFragment: GraphQLFragment {
 
     public static let selections: [GraphQLSelection] = [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-      GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(ChatRoomSummaryApolloFragment.self),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -1967,8 +2115,8 @@ public struct MessageSummaryApolloFragment: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: GraphQLID, name: String) {
-      self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name])
+    public init(id: GraphQLID, name: String, chatRoomAt: String, createdAt: String) {
+      self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name, "chatRoomAt": chatRoomAt, "createdAt": createdAt])
     }
 
     public var __typename: String {
@@ -1980,21 +2128,29 @@ public struct MessageSummaryApolloFragment: GraphQLFragment {
       }
     }
 
-    public var id: GraphQLID {
+    public var fragments: Fragments {
       get {
-        return resultMap["id"]! as! GraphQLID
+        return Fragments(unsafeResultMap: resultMap)
       }
       set {
-        resultMap.updateValue(newValue, forKey: "id")
+        resultMap += newValue.resultMap
       }
     }
 
-    public var name: String {
-      get {
-        return resultMap["name"]! as! String
+    public struct Fragments {
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
       }
-      set {
-        resultMap.updateValue(newValue, forKey: "name")
+
+      public var chatRoomSummaryApolloFragment: ChatRoomSummaryApolloFragment {
+        get {
+          return ChatRoomSummaryApolloFragment(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
       }
     }
   }

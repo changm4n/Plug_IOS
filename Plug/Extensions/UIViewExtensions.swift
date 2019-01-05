@@ -17,6 +17,27 @@ extension UIView {
     }
 }
 
+extension UIButton {
+    func setPlugBlue() {
+        layer.cornerRadius = 2
+        layer.borderWidth = 0
+        clipsToBounds = true
+        backgroundColor = UIColor.plugBlue
+        setTitleColor(UIColor.white, for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    }
+    
+    func setPlugWhite() {
+        layer.cornerRadius = 2
+        layer.borderWidth = 1
+        layer.borderColor = UIColor(r: 53, g: 99, b: 217).cgColor
+        clipsToBounds = true
+        backgroundColor = UIColor.white
+        setTitleColor(UIColor.plugBlue, for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    }
+}
+
 
 extension Date {
     func isSameDay(rhs: Date) -> Bool {

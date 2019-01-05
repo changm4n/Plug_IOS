@@ -59,6 +59,13 @@ class Networking: NSObject {
         }
     }
     
+    static func verifyEmail(_ email:String, completion:@escaping (_ code:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: VerifyEmailResponseMutation(email: email), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.verifyEmail.verifyCode)
+        }
+    }
+    
     static func getMessageSummary(userID: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageSummaryApolloFragment]) -> Void) {
         let apollo = getClient()
         apollo.fetch(query: MessageSummariesQuery(myId: userID, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in

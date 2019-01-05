@@ -20,10 +20,12 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     var messageData: [MessageApolloFragment] = []
     
-    var receiverId: String? = nil
-    var senderId: String? = nil
-    var chatroomId: String? = nil
     
+    var receiver: UserApolloFragment? = nil
+    var sender: UserApolloFragment? = nil
+    var chatroom: ChatRoomSummaryApolloFragment? = nil
+    
+
     var kOriginHeight: CGFloat = 0
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,20 +41,38 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         kOriginHeight = self.view.frame.size.height
         setData()
+        setTitle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setColors()
         super.viewWillAppear(animated)
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        if parent == nil {
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+            statusbarLight = true
+        }
+        
+        super.willMove(toParentViewController: parent)
+    }
+    
+    private func setColors() {
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        statusbarLight = false
+    }
     @IBAction func addSampleMessage(_ sender: Any) {
-        self.tableView.reloadData()
-        return
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
             text.count > 0,
-            let senderId = self.senderId,
-            let chatRoomId = self.chatroomId
+            let senderId = self.sender?.userId,
+            let chatRoomId = self.chatroom?.id
             else { return }
         self.resetTextView()
         Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
@@ -64,9 +84,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     func setData() {
         guard
-            let chatroomId = chatroomId,
-            let receiverId = receiverId,
-            let senderid = senderId else { return }
+            let chatroomId = chatroom?.id,
+            let receiverId = receiver?.userId,
+            let senderid = sender?.userId else { return }
         
         Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 100, end: nil) { (messages) in
             self.messageData = messages
@@ -80,8 +100,40 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
                 self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
+                self.tableView.reloadData()
+                self.setTableViewScrollBottom()
             }
         }
+    }
+    
+    func setTitle() {
+        guard let senderName = sender?.name,
+            let chatroomName = chatroom?.name else { return }
+        let topText = senderName
+        let bottomText = "\(chatroomName) ･ 플러그 오프"
+        
+        let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.darkGrey,
+                               NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16, weight: .medium)]
+        let subtitleParameters = [NSAttributedStringKey.foregroundColor : UIColor.grey,
+                                  NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12, weight: .regular)]
+        
+        let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
+        let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
+        
+        title.append(NSAttributedString(string: "\n"))
+        title.append(subtitle)
+        
+        let size = title.size()
+        
+        let width = size.width
+        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        titleLabel.attributedText = title
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
+        navigationItem.titleView = titleLabel
     }
     
     func addMessage(newMessage: MessageItem) {
@@ -172,4 +224,11 @@ class ChatRCell: ChatCell {
 
 class StampCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
+    
+    func setTimeStamp(date: Date) {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy. MM. dd. (E)"
+        format.locale = Locale(identifier: "ko_KR")
+        timeLabel.text = format.string(from: date)
+    }
 }

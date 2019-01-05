@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="127" id="LRG-cB-8So"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnF-cM-THL">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnF-cM-THL">
                                 <rect key="frame" x="50" y="540" width="275" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="pFI-cJ-84A"/>
@@ -44,7 +44,7 @@
                                     <segue destination="oRu-8y-0U3" kind="show" id="dwL-0c-tYJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjH-hf-XgS">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjH-hf-XgS">
                                 <rect key="frame" x="50" y="486" width="275" height="46"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -90,20 +90,11 @@
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="하셨나요">
+                                        <fragment content="하셨나요?">
                                             <attributes>
                                                 <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="15" name=".AppleSDGothicNeoI-Regular"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="?">
-                                            <attributes>
-                                                <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" red="0.050979999999999998" green="0.81176000000000004" blue="0.85489999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content=" ">
@@ -152,6 +143,8 @@
                         <barButtonItem key="backBarButtonItem" title="이전" id="nfn-XE-nCr"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="emailBtn" destination="BnF-cM-THL" id="GDM-98-Ept"/>
+                        <outlet property="kakaoBtn" destination="KjH-hf-XgS" id="HTH-b3-yPb"/>
                         <outlet property="titleLabel" destination="jsf-WB-AXR" id="4nc-PD-nFp"/>
                     </connections>
                 </viewController>
@@ -167,14 +160,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-xN-Bdf" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-xN-Bdf" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Mxx-lF-zfr"/>
                                 </constraints>
-                                <state key="normal" title="로그인"/>
+                                <state key="normal" title="다음"/>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c89-ph-cK9" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c89-ph-cK9" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="104" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yza-2E-eUB"/>
@@ -201,7 +194,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-qw-YdY" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-qw-YdY" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="174" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="C4a-K6-BbR"/>
@@ -273,7 +266,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yDn-yB-b33" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yDn-yB-b33" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="173" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Eg7-n5-2yk"/>
@@ -300,12 +293,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4M-bc-CHs" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4M-bc-CHs" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="NWJ-4e-sek"/>
                                 </constraints>
-                                <state key="normal" title="로그인"/>
+                                <state key="normal" title="다음"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -326,6 +319,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="l4M-bc-CHs" id="OFG-St-fgb"/>
+                        <outlet property="codeTextField" destination="yDn-yB-b33" id="cuq-nb-yyM"/>
+                        <outlet property="titleLabel" destination="4GW-79-0kq" id="jBv-Lr-akB"/>
                         <segue destination="5Ss-Ya-QdL" kind="show" identifier="next" id="OEX-KR-GYl"/>
                     </connections>
                 </viewController>
@@ -387,6 +382,8 @@
                         <barButtonItem key="backBarButtonItem" title="이전" id="XgK-Rw-caY"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="parentBtn" destination="fk1-Ah-he1" id="EnG-EO-IHj"/>
+                        <outlet property="teacherBtn" destination="W0H-0h-jCv" id="hnT-sR-Xzv"/>
                         <segue destination="AeG-ow-CPm" kind="show" identifier="next" id="nnc-js-mm2"/>
                     </connections>
                 </viewController>
@@ -397,7 +394,7 @@
         <!--로그인-->
         <scene sceneID="mdg-cB-WWQ">
             <objects>
-                <viewController id="ncu-bg-dMf" sceneMemberID="viewController">
+                <viewController id="ncu-bg-dMf" customClass="LoginSelectVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LZd-3h-ZKT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -456,6 +453,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emailBtn" destination="GV5-P1-jEB" id="daK-TW-fI0"/>
+                        <outlet property="kakaoBtn" destination="7GA-oP-GHj" id="j3M-EX-e5y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAO-uy-pfB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kak-Iu-pmp" userLabel="Exit" sceneMemberID="exit"/>
@@ -470,7 +471,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hEk-rZ-Zhb" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hEk-rZ-Zhb" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="104" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZgK-ZF-Lke"/>
@@ -497,7 +498,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-f4-jOm" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-f4-jOm" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="174" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Bgh-jC-hD6"/>
@@ -643,14 +644,11 @@
                                     <outlet property="delegate" destination="AeG-ow-CPm" id="MEW-gH-GFR"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8DH-80-pOK" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8DH-80-pOK" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="206" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="knd-gY-0Rd"/>
                                 </constraints>
-                                <string key="text" base64-UTF8="YES">
-CQ
-</string>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -678,7 +676,7 @@ CQ
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="tdZ-MG-4Un"/>
                                 </constraints>
-                                <state key="normal" title="로그인" image="btnChevronWhite"/>
+                                <state key="normal" title="다음" image="btnChevronWhite"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -701,6 +699,7 @@ CQ
                     <connections>
                         <outlet property="bottomBtn" destination="Tsb-Ed-yGY" id="Meu-V0-25g"/>
                         <outlet property="collectionView" destination="ogn-m8-74C" id="SSb-jF-o5Z"/>
+                        <outlet property="nameTextField" destination="8DH-80-pOK" id="dmq-NB-wur"/>
                         <segue destination="YaR-Rc-Dba" kind="show" identifier="next" id="KdC-L9-AZe"/>
                         <segue destination="Zfn-tQ-1cp" kind="presentation" identifier="edit" id="mMl-yr-KKw"/>
                     </connections>
@@ -845,7 +844,7 @@ CQ
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="sgt-fs-njL"/>
                                 </constraints>
-                                <state key="normal" title="로그인" image="btnChevronWhite"/>
+                                <state key="normal" title="다음" image="btnChevronWhite"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

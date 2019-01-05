@@ -11,6 +11,9 @@ import UIKit
 class ViewController: PlugViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var kakaoBtn: UIButton!
+    @IBOutlet weak var emailBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -18,6 +21,8 @@ class ViewController: PlugViewController {
     
     func setUI() {
         titleLabel.attributedText = kP01Str
+        kakaoBtn.setPlugBlue()
+        emailBtn.setPlugWhite()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,3 +32,20 @@ class ViewController: PlugViewController {
     }
 }
 
+class LoginSelectVC: PlugViewController {
+    @IBOutlet weak var kakaoBtn: UIButton!
+    @IBOutlet weak var emailBtn: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUI()
+    }
+    
+    func setUI() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+    
+        kakaoBtn.setPlugBlue()
+        emailBtn.setPlugWhite()
+    } 
+}

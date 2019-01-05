@@ -78,6 +78,12 @@ mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileId
     }
 }
 
+mutation VerifyEmailResponse($email: String!) {
+    verifyEmail(email: $email) {
+        verifyCode
+    }
+}
+
 fragment UserApolloFragment on User {
     id
     type
@@ -92,6 +98,13 @@ fragment KidApolloFragment on Kid {
     id
     name
     parents { ...UserApolloFragment }
+}
+
+fragment ChatRoomSummaryApolloFragment on ChatRoom {
+    id
+    name
+    chatRoomAt
+    createdAt
 }
 
 fragment ChatRoomApolloFragment on ChatRoom {
@@ -139,7 +152,7 @@ fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
 
 fragment MessageSummaryApolloFragment on MessageSummary {
     id
-    chatRoom { id, name }
+    chatRoom { ...ChatRoomSummaryApolloFragment }
     sender { ...UserApolloFragment },
     receiver { ...UserApolloFragment },
     unReadMessageCount,

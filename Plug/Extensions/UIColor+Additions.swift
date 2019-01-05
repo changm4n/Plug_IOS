@@ -10,6 +10,10 @@ import UIKit
 
 extension UIColor {
     
+    convenience public init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1) {
+        self.init(red: r/255, green: g/255, blue: b/255, alpha: a)
+    }
+    
     @nonobjc class var plugBlue: UIColor {
         return UIColor(red: 56.0 / 255.0, green: 103.0 / 255.0, blue: 214.0 / 255.0, alpha: 1.0)
     }
