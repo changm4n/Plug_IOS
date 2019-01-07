@@ -25,6 +25,15 @@ class HomeVC: PlugViewController {
     
     var classData: [ChatRoomApolloFragment] = []
     var summaryData: [MessageSummaryApolloFragment] = []
+    
+    var filteredSet: Set<String> = Set<String>()
+    var filteredList: [MessageSummaryApolloFragment] {
+        let list = summaryData.filter({ filteredSet.contains($0.chatRoom.fragments.chatRoomSummaryApolloFragment.name) })
+        return filteredSet.count == 0 ? summaryData : list
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
@@ -82,9 +91,10 @@ class HomeVC: PlugViewController {
 }
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeHeaderCell
         cell.label.text = "    \(classData[indexPath.row].name)    "
-        cell.setSeleted(selected: selectedFilter == indexPath.row)
+        cell.setSeleted(selected: filteredSet.contains(classData[row].name))
         return cell
     }
     
@@ -94,17 +104,19 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
-        if selectedFilter == row {
-            selectedFilter = -1
+        
+        if filteredSet.contains(classData[row].name) {
+            filteredSet.remove(classData[row].name)
         } else {
-            selectedFilter = row
+            filteredSet.insert(classData[row].name)
         }
+        tableView.reloadData()
         collectionView.reloadData()
     }
 }
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return summaryData.count
+        return filteredList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
