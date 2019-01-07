@@ -13,6 +13,10 @@ class ClassTVC: UITableViewController {
     
     var classData: [ChatRoomApolloFragment] = []
     
+    var items: [(String, String)] =
+        [("classPlus","새로운 클래스 만들기"),
+         ("classInvite","기존 클래스에 초대하기")]
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setStatusBar(isWhite: true)
@@ -24,6 +28,10 @@ class ClassTVC: UITableViewController {
         if segue.identifier == "list" {
             let vc = segue.destination as! ManageClassVC
             vc.classData = sender as! ChatRoomApolloFragment
+        } else if segue.identifier == "invite" {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! SelectClassTVC
+            vc.classData = classData
         }
     }
     func setData() {
@@ -50,11 +58,17 @@ class ClassTVC: UITableViewController {
         let row = indexPath.row
         
         if section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(section + 1)", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+            if let label = cell.viewWithTag(2) as? UILabel,
+                let imageView = cell.viewWithTag(1) as? UIImageView {
+                imageView.image = UIImage(named: items[row].0)
+                label.text = items[row].1
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(indexPath.section + 1)", for: indexPath) as! ClassCell
-            cell.classNameLabel.text = classData[indexPath.row].name
+            let classItem = classData[indexPath.row]
+            cell.configure(title: classItem.name, year: classItem.chatRoomAt, count: classItem.kids?.count ?? 0)
             return cell
         }
     }
@@ -92,5 +106,10 @@ class ClassCell: UITableViewCell {
     func configure(title: String, info: String) {
         self.classNameLabel.text = title
         self.classInfoLabel.text = info
+    }
+    
+    func configure(title: String, year: String, count: Int) {
+        self.classNameLabel.text = title
+        self.classInfoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(count)명"
     }
 }

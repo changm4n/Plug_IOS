@@ -29,6 +29,15 @@ class CreateClassVC: PlugViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "next" {
+            let vc = segue.destination as! InviteCodeVC
+            vc.bottomAction = {
+                vc.performSegue(withIdentifier: "next", sender: nil)
+            }
+        }
+    }
+    
 }
 
 extension CreateClassVC: UIPickerViewDelegate, UIPickerViewDataSource{

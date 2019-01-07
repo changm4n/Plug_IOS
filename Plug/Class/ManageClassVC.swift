@@ -22,16 +22,26 @@ class ManageClassVC: PlugViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setNavibar(isBlue: false)
-        self.setStatusBar(isWhite: false)
-        self.setNavibar(isHide: true)
         self.setData()
+        setColors()
+        super.viewWillAppear(animated)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.setNavibar(isHide: false)
+    override func willMove(toParentViewController parent: UIViewController?) {
+        if parent == nil {
+            navigationController?.navigationBar.barTintColor = UIColor.plugBlue
+            navigationController?.navigationBar.tintColor = .white
+            self.navigationController?.navigationBar.shadowImage = nil
+            statusbarLight = true
+        }
+        super.willMove(toParentViewController: parent)
+    }
+    
+    private func setColors() {
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        statusbarLight = false
     }
     
     func setData() {

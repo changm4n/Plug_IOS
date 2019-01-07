@@ -10,9 +10,16 @@ import UIKit
 
 class InviteCodeVC2: InviteCodeVC {
     
-    override func setButtonAction() {
-        self.bottomAction = {
-            self.dismiss(animated: true, completion: nil)
-        }
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var codeLabel: UILabel!
+    
+    var code: String = "-"
+    var nameText: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.bottomButton = self.bottomBtn
+        nameLabel.text = nameText
+        codeLabel.text = code
     }
 }

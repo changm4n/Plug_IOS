@@ -14,12 +14,5 @@ class InviteCodeVC: PlugViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bottomButton = bottomBtn
-        setButtonAction()
-    }
-    
-    func setButtonAction() {
-        self.bottomAction = {
-            self.performSegue(withIdentifier: "next", sender: nil)
-        }
     }
 }

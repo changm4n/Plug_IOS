@@ -10,6 +10,7 @@
 		56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
 		ED1F586121DE29C100126A07 /* OutClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586021DE29C100126A07 /* OutClassVC.swift */; };
 		ED1F586321E09A2500126A07 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
+		ED1F586521E1CF5F00126A07 /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586421E1CF5F00126A07 /* SecretVC.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
@@ -89,6 +90,7 @@
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1F586021DE29C100126A07 /* OutClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutClassVC.swift; sourceTree = "<group>"; };
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
 		ED1FB5AB217E00880075C4CE /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
 		ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
 		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				EDD8C3952187243C008DA9E7 /* HomeVC.swift */,
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
+				ED1F586421E1CF5F00126A07 /* SecretVC.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				ED7D59D321B43BBE0029E80A /* Secret.swift in Sources */,
 				ED1F586121DE29C100126A07 /* OutClassVC.swift in Sources */,
 				EDAE3A50217E15BA0015EAF2 /* JoinVC.swift in Sources */,
+				ED1F586521E1CF5F00126A07 /* SecretVC.swift in Sources */,
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				EDB373E7218ED85100F4A8BF /* CreateClassVC2.swift in Sources */,
@@ -751,7 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = changmin.Plug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -771,7 +775,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = changmin.Plug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

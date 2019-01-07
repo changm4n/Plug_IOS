@@ -9,9 +9,47 @@
 import UIKit
 
 class CreateClassVC2: CreateClassVC {
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setStatusBar(isWhite: false)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setTextFields()
+        self.bottomBtn.isEnabled = false
+        self.bottomAction = {
+            guard let name = self.nameTextField.text ,
+                let me = Session.me?.userId,
+                let year = self.yearTextField.text else { return }
+            self.view.endEditing(true)
+            Networking.createChatRoom(name, userID: me, year: year, completion: { (code) in
+                if let code = code {
+                    self.performSegue(withIdentifier: "next", sender: (name,code))
+                }
+            })
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "next" {
+            if let set = sender as? (String, String) {
+                let vc = segue.destination as! InviteCodeVC2
+                vc.code = set.1
+                vc.nameText = "\(set.0) 클래스를 만들었습니다."
+                vc.bottomAction = {
+                    vc.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    
+    func setTextFields() {
+        nameTextField.type = .name
+        nameTextField.changeHandler = { [weak self] text, check in
+            self?.bottomButton?.isEnabled = check
+        }
     }
 }

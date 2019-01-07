@@ -66,6 +66,13 @@ class Networking: NSObject {
         }
     }
     
+    static func createChatRoom(_ name:String, userID: String, year: String, completion:@escaping (_ code:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: CreateRoomMutation(roomName: name, userId: userID, year: "\(year)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.createChatRoom.inviteCode)
+        }
+    }
+    
     static func getMessageSummary(userID: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageSummaryApolloFragment]) -> Void) {
         let apollo = getClient()
         apollo.fetch(query: MessageSummariesQuery(myId: userID, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in

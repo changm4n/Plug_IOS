@@ -188,25 +188,27 @@ public final class SignInMutation: GraphQLMutation {
 
 public final class CreateRoomMutation: GraphQLMutation {
   public let operationDefinition =
-    "mutation createRoom($roomName: String!, $userId: ID!) {\n  createChatRoom(data: {name: $roomName, userIds: [$userId]}) {\n    __typename\n    users {\n      __typename\n      userId\n    }\n  }\n}"
+    "mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {\n  createChatRoom(data: {name: $roomName, userIds: [$userId], chatRoomAt: $year}) {\n    __typename\n    inviteCode\n  }\n}"
 
   public var roomName: String
   public var userId: GraphQLID
+  public var year: String
 
-  public init(roomName: String, userId: GraphQLID) {
+  public init(roomName: String, userId: GraphQLID, year: String) {
     self.roomName = roomName
     self.userId = userId
+    self.year = year
   }
 
   public var variables: GraphQLMap? {
-    return ["roomName": roomName, "userId": userId]
+    return ["roomName": roomName, "userId": userId, "year": year]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createChatRoom", arguments: ["data": ["name": GraphQLVariable("roomName"), "userIds": [GraphQLVariable("userId")]]], type: .nonNull(.object(CreateChatRoom.selections))),
+      GraphQLField("createChatRoom", arguments: ["data": ["name": GraphQLVariable("roomName"), "userIds": [GraphQLVariable("userId")], "chatRoomAt": GraphQLVariable("year")]], type: .nonNull(.object(CreateChatRoom.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -233,7 +235,7 @@ public final class CreateRoomMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("users", type: .list(.nonNull(.object(User.selections)))),
+        GraphQLField("inviteCode", type: .nonNull(.scalar(String.self))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -242,8 +244,8 @@ public final class CreateRoomMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(users: [User]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ChatRoom", "users": users.flatMap { (value: [User]) -> [ResultMap] in value.map { (value: User) -> ResultMap in value.resultMap } }])
+      public init(inviteCode: String) {
+        self.init(unsafeResultMap: ["__typename": "ChatRoom", "inviteCode": inviteCode])
       }
 
       public var __typename: String {
@@ -255,49 +257,12 @@ public final class CreateRoomMutation: GraphQLMutation {
         }
       }
 
-      public var users: [User]? {
+      public var inviteCode: String {
         get {
-          return (resultMap["users"] as? [ResultMap]).flatMap { (value: [ResultMap]) -> [User] in value.map { (value: ResultMap) -> User in User(unsafeResultMap: value) } }
+          return resultMap["inviteCode"]! as! String
         }
         set {
-          resultMap.updateValue(newValue.flatMap { (value: [User]) -> [ResultMap] in value.map { (value: User) -> ResultMap in value.resultMap } }, forKey: "users")
-        }
-      }
-
-      public struct User: GraphQLSelectionSet {
-        public static let possibleTypes = ["User"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("userId", type: .nonNull(.scalar(String.self))),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(userId: String) {
-          self.init(unsafeResultMap: ["__typename": "User", "userId": userId])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var userId: String {
-          get {
-            return resultMap["userId"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "userId")
-          }
+          resultMap.updateValue(newValue, forKey: "inviteCode")
         }
       }
     }

@@ -4,14 +4,13 @@ mutation SignIn($userId: String!, $password: String!) {
     }
 }
 
-mutation createRoom($roomName: String!, $userId: ID!) {
+mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {
     createChatRoom(data :{
                    name : $roomName
                    userIds: [$userId]
+                   chatRoomAt: $year
                    }) {
-        users {
-            userId
-        }
+        inviteCode
     }
 }
 
