@@ -15,7 +15,7 @@ class CodeVC: PlugViewController {
     @IBOutlet weak var codeTextField: PlugTextField!
     
     var key = "ERRORR"
-    
+    var email = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setKeyboardHide()
@@ -26,9 +26,7 @@ class CodeVC: PlugViewController {
     }
     
     func setUI() {
-        if let email = Session.me?.userId {
-            titleLabel.text = "\(email)으로 전송된\n인증번호 6자리를 입력해주세요."
-        }
+        titleLabel.text = "\(email)으로 전송된\n인증번호 6자리를 입력해주세요."
     }
     
     func setTextFields() {

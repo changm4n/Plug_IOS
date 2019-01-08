@@ -49,6 +49,7 @@ class HomeVC: PlugViewController {
         guard let userId = Session.me?.userId else { return }
         
         Networking.getMyClasses { (classData) in
+            Session.me?.classData = classData
             self.classData = classData
             self.filterCollectionView?.reloadData()
         }

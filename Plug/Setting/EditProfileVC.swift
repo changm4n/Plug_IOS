@@ -19,7 +19,7 @@ class EditProfileVC: PlugViewController {
         return isOn ? itemsOn : itemsOffs
     }
     
-    var isOn: Bool = true
+    var isOn: Bool = false
     var selectedRow = 0
     var profileImage: UIImage?
     
@@ -31,11 +31,34 @@ class EditProfileVC: PlugViewController {
         self.tableView.keyboardDismissMode = .onDrag
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "cell2")
+        
+        setData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setColors()
         super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let newField = tableView.cellForRow(at: IndexPath(item: 0, section: 0))?.viewWithTag(1) as? UITextField,
+            let newName = newField.text,
+        let me = Session.me{
+            if me.name != newName {
+                Networking.updateUser(user: me, name: newName, url: "") { (name, error) in
+                    if error == nil {
+                        Session.me?.refreshMe(completion: { (me) in})
+                    }
+                }
+            }
+        }
+        
+    }
+    func setData() {
+        guard let me = Session.me else { return }
+        isOn = me.userId != nil
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -69,8 +92,7 @@ extension EditProfileVC: UITableViewDataSource, UITableViewDelegate {
         
         switch item.0 {
         case "플러그 계정":
-            performSegue(withIdentifier: "register", sender: nil)
-//            performSegue(withIdentifier: "change", sender: nil)
+            performSegue(withIdentifier: isOn ? "changeID" : "register", sender: nil)
         case "비밀번호 변경":
             performSegue(withIdentifier: "changePW", sender: nil)
         default:

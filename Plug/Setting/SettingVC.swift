@@ -48,7 +48,6 @@ class SettingVC: PlugViewController {
         super.viewDidLoad()
         self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "class")
         self.profileImageView.makeCircle()
-        self.setUI()
         self.setData()
         
         view.addSubview(textfield)
@@ -66,7 +65,18 @@ class SettingVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setUI()
         self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let me = Session.me, let type = Session.me?.role else { return }
+        if type == .TEACHER {
+            Networking.updateOffice(me.schedule.toString()) { (cron) in
+            }
+        }
+        
     }
     
     func setData() {

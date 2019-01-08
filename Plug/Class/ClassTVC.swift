@@ -27,7 +27,7 @@ class ClassTVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "list" {
             let vc = segue.destination as! ManageClassVC
-            vc.classData = sender as! ChatRoomApolloFragment
+            vc.classID = (sender as! ChatRoomApolloFragment).id
         } else if segue.identifier == "invite" {
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! SelectClassTVC
@@ -35,10 +35,8 @@ class ClassTVC: UITableViewController {
         }
     }
     func setData() {
-        Networking.getMyClasses { (classData) in
-            self.classData = classData
-            self.tableView.reloadData()
-        }
+        self.classData = Session.me?.classData ?? []
+        self.tableView.reloadData()
     }
    
     override func numberOfSections(in tableView: UITableView) -> Int {

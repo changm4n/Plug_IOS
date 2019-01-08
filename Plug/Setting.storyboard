@@ -114,7 +114,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="토, 일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-2U-iye">
-                                                    <rect key="frame" x="298.5" y="11" width="38.5" height="22"/>
+                                                    <rect key="frame" x="328.5" y="11" width="38.5" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="pP7-ts-u8R"/>
                                                     </constraints>
@@ -125,7 +125,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="WXm-2U-iye" firstAttribute="centerY" secondItem="jaz-3d-Ken" secondAttribute="centerY" id="5nX-m6-V28"/>
-                                                <constraint firstAttribute="trailing" secondItem="WXm-2U-iye" secondAttribute="trailing" constant="38" id="pqD-AW-4XW"/>
+                                                <constraint firstAttribute="trailing" secondItem="WXm-2U-iye" secondAttribute="trailing" constant="8" id="pqD-AW-4XW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -756,7 +756,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9fN-OA-48A" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9fN-OA-48A" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="109" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Prf-Dg-K4s"/>
@@ -810,6 +810,8 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomBtn" destination="Cd3-63-7V1" id="yQL-u2-zrR"/>
+                        <outlet property="codeTextField" destination="9fN-OA-48A" id="3sP-VV-gaq"/>
+                        <outlet property="titleLabel" destination="Rhy-Yy-nS6" id="9Jq-3i-zpC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDj-yB-RxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -880,7 +882,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rPy-XV-Lox"/>
                     </view>
-                    <navigationItem key="navigationItem" title="플러그 계정 변경" id="IpG-PL-YVG"/>
+                    <navigationItem key="navigationItem" title="플러그 계정 변경" id="IpG-PL-YVG">
+                        <barButtonItem key="backBarButtonItem" title="이전" id="RxW-f3-TwE"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="NnU-i7-Jre" id="xLr-qK-TLV"/>
                         <outlet property="emailTextField" destination="ag8-0r-vkf" id="zeb-cH-mKy"/>
@@ -909,7 +913,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IlY-Da-RKZ" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IlY-Da-RKZ" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="40" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Vo-Ts-8GB"/>
@@ -1002,7 +1006,7 @@
         <image name="icClassGray" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRu-ez-0l3"/>
-        <segue reference="2oq-ZY-DBl"/>
+        <segue reference="uK4-vl-8hE"/>
+        <segue reference="0qc-Ei-UeO"/>
     </inferredMetricsTieBreakers>
 </document>

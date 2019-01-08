@@ -18,7 +18,7 @@ class RegisterPlugIDVC: PlugViewController {
         super.viewDidLoad()
         self.setKeyboardHide()
         bottomButton = bottomBtn
-//        self.bottomBtn.isEnabled = false
+        self.bottomBtn.isEnabled = false
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
             self.performSegue(withIdentifier: "next", sender: nil)
@@ -28,8 +28,14 @@ class RegisterPlugIDVC: PlugViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
             let vc = segue.destination as! RegisterCodeVC
+            vc.key = sender as! String
+            vc.email = emailTextField.text ?? ""
             vc.bottomAction = {
-                vc.navigationController?.popViewControllers(viewsToPop: 2, animated: true)
+                if let input = vc.codeTextField.text, input == vc.key {
+                    vc.navigationController?.popViewControllers(viewsToPop: 2, animated: true)
+                } else {
+                    showAlertWithString("인증코드 오류", message: "유효하지 않은 인증코드입니다.\n초대코드는 6자리의 알파벳 대문자입니다.", sender: vc)
+                }
             }
         }
     }

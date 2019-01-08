@@ -59,6 +59,30 @@ class Networking: NSObject {
         }
     }
     
+    static func changePW(_ id:String, old:String, new:String, completion:@escaping (_ name:String?, _ error: GraphQLError?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: ChangePwMutation(userId: id, old: old, new: new), queue: DispatchQueue.main) { (result, error) in
+            if result?.errors?.first != nil {
+                completion(nil, result?.errors?.first)
+            } else {
+                completion(result?.data?.updateNewPassword?.name, nil)
+            }
+        }
+    }
+    
+    static func updateUser(user: Session, name: String, url: String, completion:@escaping (_ name:String?, _ error: GraphQLError?) -> Void) {
+        let apollo = getClient()
+        let data = UserUpdateInput(role: user.role == .PARENT ? .parent : .teacher, name: name, profileImageUrl: url, phoneNumber: user.phoneNumber)
+        let input = UserWhereUniqueInput(id: user.id, userId: user.userId)
+        apollo.perform(mutation: UpdateUserMutation(data: data, where: input), queue: DispatchQueue.main) { (result, error) in
+            if result?.errors?.first != nil {
+                completion(nil, result?.errors?.first)
+            } else {
+                completion(result?.data?.updateUser?.name, nil)
+            }
+        }
+    }
+    
     static func verifyEmail(_ email:String, completion:@escaping (_ code:String?) -> Void) {
         let apollo = getClient()
         apollo.perform(mutation: VerifyEmailResponseMutation(email: email), queue: DispatchQueue.main) { (result, error) in
@@ -70,6 +94,27 @@ class Networking: NSObject {
         let apollo = getClient()
         apollo.perform(mutation: CreateRoomMutation(roomName: name, userId: userID, year: "\(year)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
             completion(result?.data?.createChatRoom.inviteCode)
+        }
+    }
+    
+    static func updateChatRoom(_ roomID:String, newName: String, newYear: String, completion:@escaping (_ id:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: UpdateChatRoomMutation(id: roomID, newName: newName, newYear: "\(newYear)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.updateChatRoom.id)
+        }
+    }
+    
+    static func updateOffice(_ crontab:String, completion:@escaping (_ crontab:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: SetOfficeMutation(crontab: crontab), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.upsertOfficePeriod.crontab)
+        }
+    }
+    
+    static func withdrawKid(_ roomID:String, userID: String, kidName: String, completion:@escaping (_ id:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: WithdrawKidMutation(chatroomID: roomID, userID: userID, kidName: kidName), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.withdrawChatRoomUser.id)
         }
     }
     

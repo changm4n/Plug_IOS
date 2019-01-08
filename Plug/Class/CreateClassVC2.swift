@@ -26,7 +26,9 @@ class CreateClassVC2: CreateClassVC {
             self.view.endEditing(true)
             Networking.createChatRoom(name, userID: me, year: year, completion: { (code) in
                 if let code = code {
-                    self.performSegue(withIdentifier: "next", sender: (name,code))
+                    Session.me?.refreshRoom(completion: { (rooms) in
+                        self.performSegue(withIdentifier: "next", sender: (name,code))
+                    })
                 }
             })
         }

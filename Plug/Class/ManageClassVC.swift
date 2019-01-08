@@ -9,16 +9,38 @@
 import UIKit
 
 class ManageClassVC: PlugViewController {
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classNameLabel: UILabel!
-    var classData: ChatRoomApolloFragment!
     @IBOutlet weak var classInfoLabel: UILabel!
     
+    
+    var classID: String?
+    var classData: ChatRoomApolloFragment? {
+        return Session.me?.getChatroomBy(id: classID)
+    }
     var members: [UserApolloFragment] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "invite" {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! InviteCodeVC2
+            vc.title = "클래스에 초대하기"
+            vc.code = classData?.inviteCode ?? "-"
+            vc.nameText = "\(classData?.name ?? "") 클래스의 초대코드입니다."
+            vc.bottomAction = {
+                vc.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! EditClassVC
+            vc.classID = self.classID
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,16 +67,15 @@ class ManageClassVC: PlugViewController {
     }
     
     func setData() {
-        guard let me = Session.me , let userId = me.userId else { return }
+        guard let me = Session.me , let userId = me.userId , let classData = classData else { return }
         members = classData.users?.map({$0.fragments.userApolloFragment}) ?? []
         members = members.filter{ $0.userId != userId }
-        for member in members {
-            print(member.userId)
-        }
+       
         tableView.reloadData()
         
+        let year = classData.chatRoomAt
         classNameLabel.text = classData.name
-        classInfoLabel.text = "\(members.count) ・ 2018 학년도"
+        classInfoLabel.text = "\(members.count) ・ \(year[...year.index(year.startIndex, offsetBy: 3)]) 학년도"
     }
 }
 
@@ -68,6 +89,7 @@ extension ManageClassVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberCell
         let member = members[indexPath.row]
         cell.memberNameLabel.text = member.name
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
@@ -86,6 +108,4 @@ extension ManageClassVC: UITableViewDataSource, UITableViewDelegate {
 class MemberCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var memberNameLabel: UILabel!
-    
-    
 }

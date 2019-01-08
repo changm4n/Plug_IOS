@@ -230,7 +230,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="hsa-4B-1h7"/>
                         <barButtonItem key="rightBarButtonItem" title="편집" id="e90-um-dsk">
                             <connections>
-                                <segue destination="A5o-sG-YV3" kind="presentation" id="XDr-UL-NQD"/>
+                                <segue destination="A5o-sG-YV3" kind="presentation" identifier="edit" id="XDr-UL-NQD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -256,7 +256,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="option" rowHeight="50" id="XMm-oo-04c" customClass="EditCell" customModule="Plug" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="option" rowHeight="50" id="XMm-oo-04c" customClass="EditCell" customModule="Plug" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XMm-oo-04c" id="T0w-af-WAu">
@@ -272,29 +272,30 @@
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서원초 5-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLX-6f-lhE">
-                                                    <rect key="frame" x="263" y="14" width="74" height="22"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ME-ys-5zz">
+                                                    <rect key="frame" x="260" y="10" width="100" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="r2j-5W-uY6"/>
+                                                        <constraint firstAttribute="width" constant="100" id="3KJ-it-3Ow"/>
+                                                        <constraint firstAttribute="height" constant="30" id="8a6-ka-QiY"/>
                                                     </constraints>
+                                                    <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="iLX-6f-lhE" secondAttribute="trailing" constant="38" id="7lr-Vm-rnF"/>
-                                                <constraint firstItem="iLX-6f-lhE" firstAttribute="centerY" secondItem="T0w-af-WAu" secondAttribute="centerY" id="bGC-1k-dOR"/>
+                                                <constraint firstItem="0ME-ys-5zz" firstAttribute="centerY" secondItem="T0w-af-WAu" secondAttribute="centerY" id="cjW-k9-6Yr"/>
                                                 <constraint firstItem="km5-Hf-sEO" firstAttribute="centerY" secondItem="T0w-af-WAu" secondAttribute="centerY" id="mhy-1N-KQJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="0ME-ys-5zz" secondAttribute="trailing" constant="15" id="ttW-fY-8pP"/>
                                                 <constraint firstItem="km5-Hf-sEO" firstAttribute="leading" secondItem="T0w-af-WAu" secondAttribute="leading" constant="16" id="zG0-gy-kfe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="leftLabel" destination="km5-Hf-sEO" id="XMR-FZ-Pvu"/>
-                                            <outlet property="rightLabel" destination="iLX-6f-lhE" id="aow-48-s78"/>
+                                            <outlet property="textField" destination="0ME-ys-5zz" id="NUE-T4-fDg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="cQ0-Nx-d1M">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="cQ0-Nx-d1M" customClass="MemberCell" customModule="Plug" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="78" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cQ0-Nx-d1M" id="gX0-ZI-dzu">
@@ -325,6 +326,10 @@
                                                 <constraint firstItem="rMX-ia-3wt" firstAttribute="centerY" secondItem="gX0-ZI-dzu" secondAttribute="centerY" id="aRN-UV-NnN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="memberNameLabel" destination="rMX-ia-3wt" id="YEo-t1-HVj"/>
+                                            <outlet property="profileImage" destination="8sj-md-Ef7" id="kkV-qi-XOI"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -343,21 +348,89 @@
                         <viewLayoutGuide key="safeArea" id="xcd-rS-twc"/>
                     </view>
                     <navigationItem key="navigationItem" title="클래스 편집" id="TdG-vO-52O">
+                        <barButtonItem key="backBarButtonItem" title="이전" id="TcG-lo-z2J"/>
                         <barButtonItem key="leftBarButtonItem" title="취소" id="oB0-Ad-0Kh">
                             <connections>
                                 <segue destination="MNc-dH-a3I" kind="unwind" unwindAction="backWithSegue:" id="2xX-A5-UU2"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="완료" id="ELZ-kx-4pC"/>
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="ELZ-kx-4pC">
+                            <connections>
+                                <action selector="confirmButtonPressed:" destination="U17-p8-VCJ" id="VKk-fz-Zgy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="CQo-sC-75s" id="d6j-Gi-Jf1"/>
+                        <segue destination="PV4-M6-arh" kind="show" identifier="edit" id="XTg-lj-aPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26Z-Av-S5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="MNc-dH-a3I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2322" y="1898"/>
+        </scene>
+        <!--클래스 이름 변경-->
+        <scene sceneID="w5f-mp-qWk">
+            <objects>
+                <viewController id="PV4-M6-arh" customClass="EditClassNameVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="88n-7r-jF1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="변경할 클래스 이름을 입력해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDp-Ec-v4C">
+                                <rect key="frame" x="15" y="86" width="345" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="m6G-Ni-GER"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xh-YA-xuN">
+                                <rect key="frame" x="0.0" y="113" width="375" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hk0-YE-ef6">
+                                        <rect key="frame" x="16" y="15.5" width="343" height="19"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="hk0-YE-ef6" firstAttribute="leading" secondItem="3xh-YA-xuN" secondAttribute="leading" constant="16" id="Kjw-AJ-39C"/>
+                                    <constraint firstItem="hk0-YE-ef6" firstAttribute="centerY" secondItem="3xh-YA-xuN" secondAttribute="centerY" id="TMh-v5-Dj4"/>
+                                    <constraint firstAttribute="height" constant="50" id="sFM-1W-8rL"/>
+                                    <constraint firstAttribute="trailing" secondItem="hk0-YE-ef6" secondAttribute="trailing" constant="16" id="uYZ-7w-08n"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rXk-Gx-CY9" firstAttribute="trailing" secondItem="3xh-YA-xuN" secondAttribute="trailing" id="1fU-bS-l1q"/>
+                            <constraint firstItem="3xh-YA-xuN" firstAttribute="leading" secondItem="rXk-Gx-CY9" secondAttribute="leading" id="D2P-6N-XbI"/>
+                            <constraint firstItem="NDp-Ec-v4C" firstAttribute="top" secondItem="rXk-Gx-CY9" secondAttribute="top" constant="22" id="YhU-f8-1JA"/>
+                            <constraint firstItem="NDp-Ec-v4C" firstAttribute="leading" secondItem="rXk-Gx-CY9" secondAttribute="leading" constant="15" id="ojF-dF-Soi"/>
+                            <constraint firstItem="rXk-Gx-CY9" firstAttribute="trailing" secondItem="NDp-Ec-v4C" secondAttribute="trailing" constant="15" id="pcF-c1-4sA"/>
+                            <constraint firstItem="3xh-YA-xuN" firstAttribute="top" secondItem="NDp-Ec-v4C" secondAttribute="bottom" constant="6" id="vGo-jS-KEK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rXk-Gx-CY9"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="클래스 이름 변경" id="983-xo-28u">
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="taL-ff-b85">
+                            <connections>
+                                <action selector="confirmButtonPressed:" destination="PV4-M6-arh" id="rLu-jJ-bH6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="hk0-YE-ef6" id="3XP-K2-TNW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yvE-3r-a6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3047" y="1898"/>
         </scene>
         <!--내 클래스-->
         <scene sceneID="dtz-QJ-XOo">
@@ -630,6 +703,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0Qr-AX-iQ4">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYz-gy-iFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="mOK-Cf-VtW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="U6U-gH-NOH">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -639,9 +713,8 @@
                         <segue destination="6A3-fr-m2H" kind="relationship" relationship="rootViewController" id="qFE-wC-wvg"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cYz-gy-iFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1598" y="1173"/>
+            <point key="canvasLocation" x="1623" y="1173"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6ti-d7-WFt">

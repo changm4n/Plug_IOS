@@ -30,7 +30,7 @@ open class Session : NSObject {
     
     open var id: String?
     open var name: String?
-    open var role: SessionRole?
+    open var role: SessionRole = .NONE
     open var userType: SessionType?
     open var userId: String?
     open var profileImageUrl: String?
@@ -41,6 +41,8 @@ open class Session : NSObject {
     
     var appPushID: String?
     
+    var classData: [ChatRoomApolloFragment] = []
+    
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
@@ -50,7 +52,7 @@ open class Session : NSObject {
     public init (withUser data: UserApolloFragment) {
         id = data.id
         name = data.name
-        role = SessionRole(rawValue: data.role.rawValue)
+        role = SessionRole(rawValue: data.role.rawValue) ?? .NONE
         userType = SessionType(rawValue: data.type.rawValue)
         userId = data.userId
         profileImageUrl = data.profileImageUrl
@@ -61,7 +63,7 @@ open class Session : NSObject {
     public init (withDic dic: [String : Any]) {
         id = dic["id"] as? String
         name = dic["name"] as? String
-        role = SessionRole(rawValue: dic["role"] as! String)
+        role = SessionRole(rawValue: dic["role"] as! String) ?? .NONE
         userType = SessionType(rawValue: dic["userType"] as! String)
         userId = dic["userId"] as? String
         profileImageUrl = dic["profileImageUrl"] as? String
@@ -77,6 +79,33 @@ open class Session : NSObject {
         Session.me = self
         self.saveToken()
         self.saveMyProfile()
+    }
+    
+    func refreshRoom(completion:@escaping (_ chatrooms:[ChatRoomApolloFragment]) -> Void) {
+        Networking.getMyClasses { (classData) in
+            Session.me?.classData = classData
+            completion(classData)
+        }
+    }
+    
+    func refreshMe(completion:@escaping (_ m: Session) -> Void) {
+        Networking.getMe(completion: { (me) in
+            if let me = me {
+                let user = Session(withUser: me)
+                user.token = self.token
+                Session.me = user
+                user.save()
+                completion(user)
+            }
+        })
+    }
+    
+    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
+        if let id = id {
+            return Session.me?.classData.filter({$0.id == id}).first ?? nil
+        } else {
+            return nil
+        }
     }
     
     fileprivate func saveToken() {
@@ -127,14 +156,13 @@ open class Session : NSObject {
         
         if let id = self.id { data["id"] = id as AnyObject }
         if let name = self.name { data["name"] = name as AnyObject }
-        if let role = self.role?.rawValue { data["role"] = role as AnyObject }
         if let userType = self.userType?.rawValue { data["userType"] = userType as AnyObject }
         if let userId = self.userId { data["userId"] = userId as AnyObject }
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as AnyObject }
         if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as AnyObject }
         if let token = self.token { data["token"] = token as AnyObject }
         data["push_id"] = Session.fetchDeviceKey() as AnyObject
-        
+        data["role"] = role.rawValue as AnyObject
         UserDefaults.standard.set(data, forKey: kSavedUserData)
         UserDefaults.standard.synchronize()
         
@@ -158,12 +186,13 @@ open class Session : NSObject {
         
         if let id = self.id { data["id"] = id as String }
         if let name = self.name { data["name"] = name as String }
-        if let role = self.role?.rawValue { data["role"] = role as String }
+        
         if let userType = self.userType?.rawValue { data["userType"] = userType as String }
         if let userId = self.userId { data["userId"] = userId as String }
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as String }
         if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as String }
         
+        data["role"] = role.rawValue
         data["push_id"] = Session.fetchDeviceKey()
      
         return data

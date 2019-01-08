@@ -10,21 +10,35 @@ import UIKit
 
 class EditClassVC: PlugViewController {
 
-    var data = ["a","b","c","d","e"]
-    var yearField = UITextField(frame: CGRect.zero)
     var selectedYear = 2019
+    var selectedName: String = ""
+    
+    var classID: String?
+    var classData: ChatRoomApolloFragment? {
+        return Session.me?.getChatroomBy(id: classID)
+    }
+    
+    var users: [UserApolloFragment] {
+        return classData?.users?.map({$0.fragments.userApolloFragment}) ?? []
+    }
+    var kids: [KidApolloFragment] {
+        return classData?.kids?.map({$0.fragments.kidApolloFragment}) ?? []
+    }
+    
+    let toolBar = UIToolbar()
+    let thePicker = UIPickerView()
+    
+    var nameTextField: UITextField?
+    var yearTextField: UITextField?
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let thePicker = UIPickerView()
+        self.setKeyboardHide()
         thePicker.delegate = self
-        yearField.inputView = thePicker
-        yearField.text = "2019"
-        view.addSubview(yearField)
         
-        let toolBar = UIToolbar()
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
         toolBar.sizeToFit()
@@ -33,43 +47,92 @@ class EditClassVC: PlugViewController {
         let cancelButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(self.cancelClick))
         toolBar.setItems([spaceButton, cancelButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        yearField.inputAccessoryView = toolBar
+        
+        tableView.keyboardDismissMode = .onDrag
+        setData()
+    }
+    
+    func setData() {
+        guard let me = Session.me , let classData = classData else { return }
+        
+        selectedName = classData.name
+        selectedYear = Int(classData.chatRoomAt.substr(to: 3)) ?? 2019
+        
+        tableView.reloadData()
     }
     
     @objc func cancelClick() {
-        yearField.resignFirstResponder()
+        view.endEditing(true)
+    }
+    
+    
+    @IBAction func confirmButtonPressed(_ sender: Any) {
+        guard let classData = classData else {
+            showAlertWithString("오류", message: "클래스 편집 중 오류가 발생하였습니다.", sender: self)
+            return
+        }
+        
+        let newYear = "\(selectedYear)"
+        
+        if selectedName != classData.name || newYear != classData.chatRoomAt.substr(to: 3) {
+            Networking.updateChatRoom(classData.id, newName: selectedName, newYear: newYear) { (id) in
+                if id == nil {
+                    showAlertWithString("오류", message: "클래스 편집 중 오류가 발생하였습니다.", sender: self)
+                } else {
+                    Session.me?.refreshRoom(completion: { (rooms) in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "invite" {
-            let vc = segue.destination as! InviteCodeVC2
-            vc.title = "클래스에 초대하기"
+        if segue.identifier == "edit" {
+            let vc = segue.destination as! EditClassNameVC
+            vc.classData = self.classData
+            vc.handler = { newName in
+                self.selectedName = newName
+                self.tableView.reloadData()
+            }
         }
     }
 }
 
-extension EditClassVC: UITableViewDataSource, UITableViewDelegate {
+extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "option", for: indexPath) as! EditCell
             if indexPath.row == 0 {
                 cell.leftLabel.text = "클래스 이름"
-                cell.rightLabel.text = "서원초 5-1"
+                cell.textField.text = selectedName
+                cell.textField.delegate = self
+                cell.textField.isUserInteractionEnabled = false
+                nameTextField = cell.textField
             } else {
                 cell.leftLabel.text = "학년도"
-                cell.rightLabel.text = "\(selectedYear)"
+                cell.textField.text = "\(selectedYear)"
+                cell.textField.inputView = thePicker
+                cell.textField.inputAccessoryView = toolBar
+                yearTextField = cell.textField
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            let kid = kids[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberCell
+            cell.memberNameLabel.text = kid.name
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 1 {
-                yearField.becomeFirstResponder()
+            if indexPath.row == 0 {
+                performSegue(withIdentifier: "edit", sender: nil)
+            } else {
+                yearTextField?.becomeFirstResponder()
             }
         } else {
             
@@ -77,7 +140,7 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : data.count
+        return section == 0 ? 2 : kids.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,7 +149,7 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
-        header?.label.text = section == 0 ? "클래스 정보" : "클래스 정보"
+        header?.label.text = section == 0 ? "클래스 정보" : "클래스 멤버"
         return header
     }
     
@@ -102,12 +165,31 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             let alert = UIAlertController(title: "클래스 맴버 삭제", message: "이창민 부모님을 클래스에서 삭제하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { action in
-                self.data.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                let kid = self.kids[indexPath.row]
+                
+                guard let roomID = self.classData?.id,
+                    let userID = kid.parents?.first?.fragments.userApolloFragment.userId else {
+                        showAlertWithString("오류", message: "삭제에 실패하였습니다.", sender: self)
+                        return
+                }
+                Networking.withdrawKid(roomID, userID: userID, kidName: kid.name, completion: { (id) in
+                    if id == nil {
+                        showAlertWithString("오류", message: "삭제에 실패하였습니다.", sender: self)
+                        return
+                    } else {
+                        Session.me?.refreshRoom(completion: { (rooms) in
+                            self.tableView.reloadData()
+                        })
+                    }
+                })
             }))
         alert.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
         self.present(alert, animated: true)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
 }
 
@@ -132,5 +214,5 @@ extension EditClassVC: UIPickerViewDelegate, UIPickerViewDataSource{
 
 class EditCell: UITableViewCell {
     @IBOutlet weak var leftLabel: UILabel!
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var textField: UITextField!
 }

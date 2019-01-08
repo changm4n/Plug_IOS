@@ -86,3 +86,14 @@ extension UITableViewCell {
 func PlugLog(string: String) {
     print("[LOG] \(string)")
 }
+
+
+extension String {
+    func substr(to: Int) -> String {
+        if to < self.count {
+            return String(self[...self.index(self.startIndex, offsetBy: to)])
+        } else {
+            return self
+        }
+    }
+}

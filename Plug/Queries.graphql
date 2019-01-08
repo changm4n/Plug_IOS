@@ -4,6 +4,21 @@ mutation SignIn($userId: String!, $password: String!) {
     }
 }
 
+mutation changePW($userId: String!, $old: String!, $new: String!) {
+    updateNewPassword(email:$userId
+                      newPassword:$new,
+                      oldPassword:$old) {
+        name
+    }
+}
+
+mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+    updateUser(where : $where,
+               data : $data) {
+        name
+    }
+}
+
 mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {
     createChatRoom(data :{
                    name : $roomName
@@ -14,11 +29,39 @@ mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {
     }
 }
 
+mutation updateChatRoom($id: ID!, $newName: String!, $newYear: DateTime!) {
+    updateChatRoom(id: $id,
+                   data : {
+                   name : $newName
+                   chatRoomAt: $newYear
+                   }) {
+        id
+    }
+}
+
+mutation withdrawKid($chatroomID: ID!, $userID: ID!, $kidName: String!) {
+    withdrawChatRoomUser(id : $chatroomID,
+                         data : {
+                         userId: $userID
+                         kidName: $kidName
+                         }) {
+        id
+    }
+    
+}
+
+mutation setOffice($crontab: String!) {
+    upsertOfficePeriod(data: {crontab :$crontab}) {
+        crontab
+    }
+}
+
 query MyChatrooms($userId: String) {
     chatRooms(where: { admins_some: { userId: $userId }}) {
         ...ChatRoomApolloFragment
     }
 }
+
 
 query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {
     messageSummaries(
