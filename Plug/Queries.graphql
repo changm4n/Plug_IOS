@@ -56,6 +56,22 @@ mutation setOffice($crontab: String!) {
     }
 }
 
+query getUserInfo($id: ID!, $userId: String) {
+    chatRooms(where: { admins_some: { userId: $userId }}) {
+        ...ChatRoomApolloFragment
+    }
+    
+    officePeriods(where: {user : {id : $id}}) {
+        crontab
+    }
+}
+
+query getCronTab($id: ID!) {
+    officePeriods(where: {user : {id : $id}}) {
+        crontab
+    }
+}
+
 query MyChatrooms($userId: String) {
     chatRooms(where: { admins_some: { userId: $userId }}) {
         ...ChatRoomApolloFragment

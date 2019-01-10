@@ -13,7 +13,12 @@ class ImageCell: UICollectionViewCell {
     @IBOutlet weak var checkImageView: UIImageView!
     
     func configure(row: Int, isSelected: Bool = false) {
-        imageView.image = UIImage(named: "avatar\(row)")
+        if row == 0 {
+            imageView.image = Session.me?.profileImage ?? UIImage(named: "avatar\(row)")
+        } else {
+            imageView.image = UIImage(named: "avatar\(row)")
+        }
+        
         imageView.layer.cornerRadius = 36
         imageView.layer.borderColor = UIColor.plugDarkBlue.cgColor
         imageView.layer.borderWidth = isSelected ? 3 : 0
@@ -47,15 +52,15 @@ class ProfileImageVC: PlugViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "edit" {
-            let vc = segue.destination as! ImageEditVC
-            vc.originalImage = profileImage!
-            vc.handler = { result in
-                self.profileImage = result
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "edit" {
+//            let vc = segue.destination as! ImageEditVC
+//            vc.originalImage = profileImage!
+//            vc.handler = { result in
+//                self.profileImage = result
+//            }
+//        }
+//    }
 }
 
 extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
@@ -113,27 +118,5 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         let ima = UIImageView(frame: CGRect(x: 100, y: 100, width: 200, height: 200 ))
         ima.image = image
         view.addSubview(ima)
-    }
-}
-
-
-class ImageEditVC: PlugViewController {
-    
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
-    
-    var handler: ((UIImage) -> Void)?
-    var originalImage: UIImage!
-    var resultImage: UIImage!
-    @IBAction func confirmButtonPressed(_ sender: Any) {
-        resultImage = originalImage
-        handler?(resultImage)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        imageView.image = originalImage
-        
-        
     }
 }

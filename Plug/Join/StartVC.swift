@@ -31,8 +31,15 @@ class StartVC: PlugViewController {
     fileprivate func show() {
         if Session.fetchToken() != nil {
             print("[token] \(Session.me?.token ?? "")")
-            self.animateSegue("Main", sender: nil)
-            //        self.animateSegue("Login", sender: nil)
+            Session.me?.refreshMe(completion: { (user) in
+                Networking.getUserInfo(completion: { (classData, crontab) in
+                    Session.me?.classData = classData
+                    if let crontab = crontab {
+                        Session.me?.schedule = Schedule(schedule: crontab)
+                        self.animateSegue("Main", sender: nil)
+                    }
+                })
+            })
         } else {
             self.animateSegue("Login", sender: nil)
         }
@@ -49,6 +56,8 @@ class StartVC: PlugViewController {
                     self.logoImage.alpha = 0
                     self.titleImage.alpha = 0
                 }) { (completion) in
+                    
+                    
                     self.performSegue(withIdentifier: identifier, sender: sender)
                 }
             }

@@ -10,7 +10,7 @@ import Foundation
 import Apollo
 
 class Networking: NSObject {
-
+    
     static func getClient() -> ApolloClient {
         let configuration = URLSessionConfiguration.default
         if let token = Session.fetchToken() {
@@ -39,8 +39,6 @@ class Networking: NSObject {
         return ApolloClient(networkTransport: splitNetworkTransport)
     }
     
-    
-    
     static func getMe(completion:@escaping (_ me: UserApolloFragment?) -> Void) {
         let apollo = getClient()
         apollo.fetch(query: MeQuery(), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
@@ -49,6 +47,23 @@ class Networking: NSObject {
             } else {
                 completion(nil)
             }
+        }
+    }
+    
+    static func getUserInfo(completion:@escaping (_ classes: [ChatRoomApolloFragment], _ crontab:String?) -> Void) {
+        let apollo = getClient()
+        if let id = Session.me?.id,
+            let userID = Session.me?.userId {
+            apollo.fetch(query: GetUserInfoQuery(id: id, userId: userID), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
+                if let crontab = result?.data?.officePeriods.first?.crontab ,
+                    let rooms = result?.data?.chatRooms {
+                    completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab)
+                } else {
+                    completion([], nil)
+                }
+            }
+        } else {
+            completion([], nil)
         }
     }
     
@@ -101,6 +116,21 @@ class Networking: NSObject {
         let apollo = getClient()
         apollo.perform(mutation: UpdateChatRoomMutation(id: roomID, newName: newName, newYear: "\(newYear)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
             completion(result?.data?.updateChatRoom.id)
+        }
+    }
+    
+    static func getOffice(completion:@escaping (_ crontab:String?) -> Void) {
+        let apollo = getClient()
+        if let id = Session.me?.id {
+            apollo.fetch(query: GetCronTabQuery(id: id), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
+                if let crontab = result?.data?.officePeriods.first?.crontab{
+                    completion(crontab)
+                } else {
+                    completion(nil)
+                }
+            }
+        } else {
+            completion(nil)
         }
     }
     

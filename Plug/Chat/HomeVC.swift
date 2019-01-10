@@ -46,13 +46,10 @@ class HomeVC: PlugViewController {
     }
     
     func setData() {
-        guard let userId = Session.me?.userId else { return }
-        
-        Networking.getMyClasses { (classData) in
-            Session.me?.classData = classData
-            self.classData = classData
-            self.filterCollectionView?.reloadData()
-        }
+        guard let me = Session.me,
+            let userId = Session.me?.userId else { return }
+        self.classData = me.classData
+        self.filterCollectionView?.reloadData()
         
         Networking.getMessageSummary(userID: userId, start: 10, end: nil) { (summaries) in
             self.summaryData = summaries

@@ -748,6 +748,228 @@ public final class SetOfficeMutation: GraphQLMutation {
   }
 }
 
+public final class GetUserInfoQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query getUserInfo($id: ID!, $userId: String) {\n  chatRooms(where: {admins_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n}"
+
+  public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
+
+  public var id: GraphQLID
+  public var userId: String?
+
+  public init(id: GraphQLID, userId: String? = nil) {
+    self.id = id
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id, "userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("chatRooms", arguments: ["where": ["admins_some": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
+      GraphQLField("officePeriods", arguments: ["where": ["user": ["id": GraphQLVariable("id")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(chatRooms: [ChatRoom], officePeriods: [OfficePeriod]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "chatRooms": chatRooms.map { (value: ChatRoom) -> ResultMap in value.resultMap }, "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }])
+    }
+
+    public var chatRooms: [ChatRoom] {
+      get {
+        return (resultMap["chatRooms"] as! [ResultMap]).map { (value: ResultMap) -> ChatRoom in ChatRoom(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: ChatRoom) -> ResultMap in value.resultMap }, forKey: "chatRooms")
+      }
+    }
+
+    public var officePeriods: [OfficePeriod] {
+      get {
+        return (resultMap["officePeriods"] as! [ResultMap]).map { (value: ResultMap) -> OfficePeriod in OfficePeriod(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, forKey: "officePeriods")
+      }
+    }
+
+    public struct ChatRoom: GraphQLSelectionSet {
+      public static let possibleTypes = ["ChatRoom"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(ChatRoomApolloFragment.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var chatRoomApolloFragment: ChatRoomApolloFragment {
+          get {
+            return ChatRoomApolloFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+
+    public struct OfficePeriod: GraphQLSelectionSet {
+      public static let possibleTypes = ["OfficePeriod"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("crontab", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(crontab: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "OfficePeriod", "crontab": crontab])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var crontab: String? {
+        get {
+          return resultMap["crontab"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "crontab")
+        }
+      }
+    }
+  }
+}
+
+public final class GetCronTabQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query getCronTab($id: ID!) {\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n}"
+
+  public var id: GraphQLID
+
+  public init(id: GraphQLID) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("officePeriods", arguments: ["where": ["user": ["id": GraphQLVariable("id")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(officePeriods: [OfficePeriod]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }])
+    }
+
+    public var officePeriods: [OfficePeriod] {
+      get {
+        return (resultMap["officePeriods"] as! [ResultMap]).map { (value: ResultMap) -> OfficePeriod in OfficePeriod(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, forKey: "officePeriods")
+      }
+    }
+
+    public struct OfficePeriod: GraphQLSelectionSet {
+      public static let possibleTypes = ["OfficePeriod"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("crontab", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(crontab: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "OfficePeriod", "crontab": crontab])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var crontab: String? {
+        get {
+          return resultMap["crontab"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "crontab")
+        }
+      }
+    }
+  }
+}
+
 public final class MyChatroomsQuery: GraphQLQuery {
   public let operationDefinition =
     "query MyChatrooms($userId: String) {\n  chatRooms(where: {admins_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n}"

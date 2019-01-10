@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let kYears = ["2016","2017","2018","2019","2020"]
 let kDidLogoutNotification = "kDidLogoutNotification"
@@ -40,6 +41,7 @@ open class Session : NSObject {
     var schedule: Schedule
     
     var appPushID: String?
+    var profileImage: UIImage?
     
     var classData: [ChatRoomApolloFragment] = []
     
@@ -58,6 +60,16 @@ open class Session : NSObject {
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
         schedule = Schedule(schedule: "0-30 9-18 1,2,3")
+        
+        if let urlStr = profileImageUrl,
+            let url = URL(string: urlStr) {
+            do {
+                let ImageData = try Data(contentsOf: url)
+                profileImage = UIImage(data: ImageData)
+            } catch {
+                profileImage = nil
+            }
+        }
     }
     
     public init (withDic dic: [String : Any]) {

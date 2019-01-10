@@ -15,6 +15,19 @@ extension UIView {
         self.layer.cornerRadius = self.frame.size.width / 2
         self.clipsToBounds = true
     }
+    
+    func takeSnapshot() -> UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        
+        // old style: layer.renderInContext(UIGraphicsGetCurrentContext())
+        
+        let image =  UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
 
 extension UIButton {

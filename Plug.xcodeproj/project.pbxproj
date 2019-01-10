@@ -12,6 +12,7 @@
 		ED1F586321E09A2500126A07 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
 		ED1F586521E1CF5F00126A07 /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586421E1CF5F00126A07 /* SecretVC.swift */; };
 		ED1F586721E4DFC600126A07 /* EditClassNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */; };
+		ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586821E77AB400126A07 /* EditImageVC.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
@@ -93,6 +94,7 @@
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
 		ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassNameVC.swift; sourceTree = "<group>"; };
+		ED1F586821E77AB400126A07 /* EditImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImageVC.swift; sourceTree = "<group>"; };
 		ED1FB5AB217E00880075C4CE /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
 		ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
 		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */,
 				ED3E6A4721CF570400C28403 /* PlugClassCell.xib */,
 				ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */,
+				ED1F586821E77AB400126A07 /* EditImageVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				ED8C47E321DA4D230065EC7E /* PlugCronParser.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */,
+				ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */,
 				ED8C47E921DC8DF20065EC7E /* RegisterPlugIDVC.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
 				ED8C47E521DB832F0065EC7E /* HolidayVC.swift in Sources */,

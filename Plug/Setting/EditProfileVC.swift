@@ -24,6 +24,7 @@ class EditProfileVC: PlugViewController {
     var profileImage: UIImage?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class EditProfileVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setColors()
+        collectionView.reloadData()
         super.viewWillAppear(animated)
     }
     
@@ -56,6 +58,24 @@ class EditProfileVC: PlugViewController {
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "edit" {
+            let vc = segue.destination as! EditImageVC
+            vc.handler = { image in
+                if let image = image {
+                    let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+
+                    Session.me?.profileImage = image
+                    v.image = Session.me?.profileImage
+//                    self.view.addSubview(v)
+                    self.collectionView.reloadData()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
     func setData() {
         guard let me = Session.me else { return }
         isOn = me.userId != nil
@@ -180,13 +200,16 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+        
+//        cell.imageView.image = Session.me?.profileImage
         cell.configure(row: indexPath.row, isSelected: indexPath.row == selectedRow)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+            self.performSegue(withIdentifier: "edit", sender: nil)
+            return
             let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let firstAction: UIAlertAction = UIAlertAction(title: "사진 찍기", style: .default) { action -> Void in
             }
@@ -216,10 +239,8 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         profileImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismiss(animated: true) {
-            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
-            vc.delegate = self
-            self.present(vc, animated: true, completion: nil)
-            //            self.performSegue(withIdentifier: "edit", sender: nil)
+            
+            self.performSegue(withIdentifier: "edit", sender: nil)
         }
     }
     

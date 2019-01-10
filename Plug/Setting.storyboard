@@ -471,11 +471,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="o20-zQ-95r"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="1JT-Z4-AT7" id="EHK-3P-EGb"/>
                         <outlet property="tableView" destination="N6L-S1-Vpt" id="Y6o-ZF-D4i"/>
                         <segue destination="tgE-UJ-8Xg" kind="presentation" identifier="edit" id="2Qg-JC-o4h"/>
                         <segue destination="NMY-se-DPC" kind="show" identifier="register" id="VfR-zn-YD7"/>
                         <segue destination="Jcg-nX-lsQ" kind="show" identifier="changeID" id="yOD-ra-o2U"/>
                         <segue destination="bYi-sD-5nm" kind="show" identifier="changePW" id="J80-uS-8Gi"/>
+                        <segue destination="jbv-ET-C1a" kind="showDetail" identifier="edit" id="d2o-q0-eeB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qh-WS-dz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -610,10 +612,10 @@
             </objects>
             <point key="canvasLocation" x="724" y="645"/>
         </scene>
-        <!--ImageEditVC-->
+        <!--EditImageVC-->
         <scene sceneID="hwl-pK-qhu">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ImageEditVC" id="tgE-UJ-8Xg" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="EditImageVC" id="tgE-UJ-8Xg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1EZ-Z3-552" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2450" y="-503"/>
@@ -638,6 +640,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvC-ds-j3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-140" y="-181.25937031484258"/>
+        </scene>
+        <!--EditImageVC-->
+        <scene sceneID="xLt-27-rZk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="EditImageVC" id="jbv-ET-C1a" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="djI-oZ-4Bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2109" y="22"/>
         </scene>
         <!--플러그 계정 등록-->
         <scene sceneID="VGI-RL-7TO">

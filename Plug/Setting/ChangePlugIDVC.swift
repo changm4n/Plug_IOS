@@ -92,8 +92,7 @@ class ChangePWVC: PlugViewController, UITextFieldDelegate {
                             self.navigationController?.popViewController(animated: true)
                         })
                     }
-                })
-                
+                })   
             }
         }
     }
