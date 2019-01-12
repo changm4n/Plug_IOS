@@ -66,6 +66,10 @@ query getUserInfo($id: ID!, $userId: String) {
     }
 }
 
+mutation uploadFile($file: Upload!) {
+    multipleUpload(files: [$file])
+}
+
 query getCronTab($id: ID!) {
     officePeriods(where: {user : {id : $id}}) {
         crontab

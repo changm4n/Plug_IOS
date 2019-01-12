@@ -64,11 +64,12 @@ class EditProfileVC: PlugViewController {
             let vc = segue.destination as! EditImageVC
             vc.handler = { image in
                 if let image = image {
-                    let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-
+//                    Networking.uploadImage(image: image
+//                        , completion: { (error) in
+//                            print(error)
+//                    })
+//
                     Session.me?.profileImage = image
-                    v.image = Session.me?.profileImage
-//                    self.view.addSubview(v)
                     self.collectionView.reloadData()
                     self.tableView.reloadData()
                 }

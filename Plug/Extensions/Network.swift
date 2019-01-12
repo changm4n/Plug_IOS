@@ -198,4 +198,16 @@ class Networking: NSObject {
             }
         }
     }
+    
+    static func uploadImage(image: UIImage, completion:@escaping (_ error: GraphQLError?) -> Void) {
+        
+        if let data = UIImagePNGRepresentation(image),
+            let dataStr =  String(data: data, encoding: String.Encoding.utf8) {
+            getClient().perform(mutation: UploadFileMutation(file:dataStr), queue: .main)
+            { (result, error) in
+                return error
+            }
+        }
+    }
+    
 }

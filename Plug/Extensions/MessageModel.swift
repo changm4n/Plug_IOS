@@ -27,6 +27,13 @@ struct MessageItem {
         formatter.dateFormat = "hh:mm"
         return formatter.string(from: createAt)
     }
+    
+    var timeStampLong: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yy.MM.dd. (E)"
+        return formatter.string(from: createAt)
+    }
     let kDefault = "default"
     
     init() {

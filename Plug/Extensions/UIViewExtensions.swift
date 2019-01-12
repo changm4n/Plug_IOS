@@ -53,6 +53,10 @@ extension UIButton {
 
 
 extension Date {
+    
+    func isToday() -> Bool {
+        return Calendar.current.isDate(self, inSameDayAs: Date())
+    }
     func isSameDay(rhs: Date) -> Bool {
         return Calendar.current.isDate(self, inSameDayAs: rhs)
     }

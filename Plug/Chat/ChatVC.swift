@@ -29,9 +29,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     var kOriginHeight: CGFloat = 0
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textView: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()

@@ -891,6 +891,48 @@ public final class GetUserInfoQuery: GraphQLQuery {
   }
 }
 
+public final class UploadFileMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation uploadFile($file: Upload!) {\n  multipleUpload(files: [$file])\n}"
+
+  public var file: String
+
+  public init(file: String) {
+    self.file = file
+  }
+
+  public var variables: GraphQLMap? {
+    return ["file": file]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("multipleUpload", arguments: ["files": [GraphQLVariable("file")]], type: .nonNull(.list(.nonNull(.scalar(String.self))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(multipleUpload: [String]) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "multipleUpload": multipleUpload])
+    }
+
+    public var multipleUpload: [String] {
+      get {
+        return resultMap["multipleUpload"]! as! [String]
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "multipleUpload")
+      }
+    }
+  }
+}
+
 public final class GetCronTabQuery: GraphQLQuery {
   public let operationDefinition =
     "query getCronTab($id: ID!) {\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n}"

@@ -177,12 +177,23 @@ class SummaryCell: UITableViewCell {
 
     func configure(item: MessageSummaryApolloFragment) {
         let sender = item.sender.fragments.userApolloFragment
+        let chatroom = item.chatRoom.fragments.chatRoomSummaryApolloFragment
         nameLabel.text = sender.name
-        newBadge.isHidden = item.unReadMessageCount != 0
-        messageLabel.text = item.lastMessage?.fragments.messageApolloFragment.text
-        classLabel.text = item.chatRoom.fragments.chatRoomSummaryApolloFragment.name
+        classLabel.text = chatroom.name
+        
+        
         if let url = sender.profileImageUrl, sender.profileImageUrl != ""{
             profileImage.kf.setImage(with: URL(string: url))
         }
+        
+        if let lastMessage = item.lastMessage?.fragments.messageApolloFragment {
+            let messageItem = MessageItem(with: lastMessage, isMine: true)
+            messageLabel.text = messageItem.text
+            timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
+        }
+        
+        newBadge.isHidden = item.unReadMessageCount == 0
+        
+        
     }
 }

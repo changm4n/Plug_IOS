@@ -13,6 +13,7 @@
 		ED1F586521E1CF5F00126A07 /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586421E1CF5F00126A07 /* SecretVC.swift */; };
 		ED1F586721E4DFC600126A07 /* EditClassNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */; };
 		ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586821E77AB400126A07 /* EditImageVC.swift */; };
+		ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
@@ -95,6 +96,7 @@
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
 		ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassNameVC.swift; sourceTree = "<group>"; };
 		ED1F586821E77AB400126A07 /* EditImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImageVC.swift; sourceTree = "<group>"; };
+		ED1F586A21EA0BF000126A07 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		ED1FB5AB217E00880075C4CE /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
 		ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Additions.swift"; sourceTree = "<group>"; };
 		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				ED7D59CC21B3DCA90029E80A /* Queries.swift */,
 				EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */,
 				EDF609C321BBC2AC00CB3529 /* MessageModel.swift */,
+				ED1F586A21EA0BF000126A07 /* MessageManager.swift */,
 				ED1F586221E09A2500126A07 /* Validator.swift */,
 			);
 			path = Extensions;
@@ -544,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
+				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
 				ED7D59D321B43BBE0029E80A /* Secret.swift in Sources */,
 				ED1F586121DE29C100126A07 /* OutClassVC.swift in Sources */,
 				EDAE3A50217E15BA0015EAF2 /* JoinVC.swift in Sources */,
