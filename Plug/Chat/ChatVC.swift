@@ -30,7 +30,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
-
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var inputField: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
@@ -39,6 +41,12 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         kOriginHeight = self.view.frame.size.height
+        sendButton.makeCircle()
+        textView.layer.cornerRadius = 18
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
+        textView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
         setData()
         setTitle()
     }
@@ -167,14 +175,21 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             }
         }
     }
-    
+    //36.5 57 77 95.5
+    //48   69 89 110
+    //11.5 12  12 14.5
     func textViewDidChange(_ textView: UITextView) {
+        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
+        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
+        let maxHeight: CGFloat = 112
         let fixedWidth = textView.frame.size.width
         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        newSize.height += 15
-        self.textView.isScrollEnabled = newSize.height >= 67 + 15
-        inputViewHeight.constant = min(newSize.height, 67 + 15)
+        
+        newSize.height += 14.5
+        
+        self.textView.isScrollEnabled = newSize.height >= maxHeight
+        inputViewHeight.constant = min(newSize.height, maxHeight)
     }
     
     func resetTextView() {

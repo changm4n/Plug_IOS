@@ -702,6 +702,7 @@
                         <outlet property="nameTextField" destination="8DH-80-pOK" id="dmq-NB-wur"/>
                         <segue destination="YaR-Rc-Dba" kind="show" identifier="next" id="KdC-L9-AZe"/>
                         <segue destination="Zfn-tQ-1cp" kind="presentation" identifier="edit" id="mMl-yr-KKw"/>
+                        <segue destination="zu0-vj-Scu" kind="show" identifier="join" id="DPk-NN-GyJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b57-BG-KVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -963,8 +964,8 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <state key="normal" title="공유하기"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-nU-GaK" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="-1" y="615" width="375" height="52"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-nU-GaK" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="tV7-XX-O8P"/>
                                 </constraints>
@@ -1007,7 +1008,7 @@
                 <viewControllerPlaceholder storyboardName="Chat" id="rKe-Ev-k1c" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y4b-4m-8De" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5348" y="667"/>
+            <point key="canvasLocation" x="5298" y="1030"/>
         </scene>
         <!--비밀번호 찾기-->
         <scene sceneID="lyv-4o-FGx">
@@ -1180,6 +1181,164 @@
             </objects>
             <point key="canvasLocation" x="1454" y="-527"/>
         </scene>
+        <!--회원가입-->
+        <scene sceneID="Z7m-4K-Hep">
+            <objects>
+                <viewController id="zu0-vj-Scu" customClass="JoinRoomVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zUo-SX-dgP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초대코드 6자리를 입력해주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="136-GP-s4H">
+                                <rect key="frame" x="79.5" y="106" width="216" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-ap-kzu" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="42" y="152.5" width="291" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="xUP-wQ-c03"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="초대코드 6자리"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lis-8S-ohO" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="4pe-MY-ON3"/>
+                                </constraints>
+                                <state key="normal" title="다음"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pR9-ap-kzu" firstAttribute="top" secondItem="136-GP-s4H" secondAttribute="bottom" constant="26" id="B5r-L9-LFq"/>
+                            <constraint firstItem="Lis-8S-ohO" firstAttribute="bottom" secondItem="f9k-Pc-uia" secondAttribute="bottom" id="CcV-Rg-Cyb"/>
+                            <constraint firstItem="136-GP-s4H" firstAttribute="top" secondItem="f9k-Pc-uia" secondAttribute="top" constant="42" id="RoW-vw-uxe"/>
+                            <constraint firstItem="pR9-ap-kzu" firstAttribute="leading" secondItem="f9k-Pc-uia" secondAttribute="leading" constant="42" id="XM3-Mg-lwt"/>
+                            <constraint firstItem="f9k-Pc-uia" firstAttribute="trailing" secondItem="pR9-ap-kzu" secondAttribute="trailing" constant="42" id="Xjo-VM-o7u"/>
+                            <constraint firstItem="Lis-8S-ohO" firstAttribute="trailing" secondItem="f9k-Pc-uia" secondAttribute="trailing" id="axE-x5-YC6"/>
+                            <constraint firstItem="Lis-8S-ohO" firstAttribute="leading" secondItem="f9k-Pc-uia" secondAttribute="leading" id="p4j-gV-S8r"/>
+                            <constraint firstItem="136-GP-s4H" firstAttribute="centerX" secondItem="zUo-SX-dgP" secondAttribute="centerX" id="uAJ-Bi-I2i"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="f9k-Pc-uia"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="회원가입" id="M3a-IA-IPO">
+                        <barButtonItem key="backBarButtonItem" title="이전" id="pks-Ac-7yR"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomBtn" destination="Lis-8S-ohO" id="Z23-tZ-hoz"/>
+                        <outlet property="codeTextField" destination="pR9-ap-kzu" id="N3e-5z-CXZ"/>
+                        <segue destination="Svi-Ew-Xj3" kind="show" identifier="next" id="7vg-2B-YlQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0VI-L2-PgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3574" y="1362"/>
+        </scene>
+        <!--회원가입-->
+        <scene sceneID="iBM-vb-c2D">
+            <objects>
+                <viewController id="Svi-Ew-Xj3" customClass="kidVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gwm-cm-Csb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsU-vB-GJy">
+                                <rect key="frame" x="66" y="106" width="243.5" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="zva-l4-Od4"/>
+                                </constraints>
+                                <string key="text">서원초 5-1 클래스(박태준 선생님)에
+가입했습니다.
+
+자녀 이름을 입력해주세요.</string>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-xe-x4H" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="42" y="220" width="291" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2ic-Qd-uAa"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="초대코드 6자리"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDc-nh-FUF" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="fqb-si-FYc"/>
+                                </constraints>
+                                <state key="normal" title="플러그 시작하기"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UsU-vB-GJy" firstAttribute="centerX" secondItem="gwm-cm-Csb" secondAttribute="centerX" id="3b8-ED-fiM"/>
+                            <constraint firstItem="UsU-vB-GJy" firstAttribute="top" secondItem="Vre-Fz-c24" secondAttribute="top" constant="42" id="8uX-Nr-aij"/>
+                            <constraint firstItem="mDc-nh-FUF" firstAttribute="leading" secondItem="Vre-Fz-c24" secondAttribute="leading" id="Bx3-j8-dNQ"/>
+                            <constraint firstItem="Vre-Fz-c24" firstAttribute="trailing" secondItem="ONf-xe-x4H" secondAttribute="trailing" constant="42" id="cKC-0k-8z7"/>
+                            <constraint firstItem="mDc-nh-FUF" firstAttribute="bottom" secondItem="Vre-Fz-c24" secondAttribute="bottom" id="jtl-yP-LvF"/>
+                            <constraint firstItem="mDc-nh-FUF" firstAttribute="trailing" secondItem="Vre-Fz-c24" secondAttribute="trailing" id="lJg-ZD-jll"/>
+                            <constraint firstItem="ONf-xe-x4H" firstAttribute="leading" secondItem="Vre-Fz-c24" secondAttribute="leading" constant="42" id="tH1-hg-L3A"/>
+                            <constraint firstItem="ONf-xe-x4H" firstAttribute="top" secondItem="UsU-vB-GJy" secondAttribute="bottom" constant="26" id="vZO-vr-yYc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Vre-Fz-c24"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="회원가입" id="OGR-Iv-hcl">
+                        <barButtonItem key="backBarButtonItem" title="이전" id="Oeb-IL-0sg"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomBtn" destination="mDc-nh-FUF" id="Osn-vE-lBo"/>
+                        <outlet property="nameTextField" destination="ONf-xe-x4H" id="StU-as-osK"/>
+                        <outlet property="titleLabel" destination="UsU-vB-GJy" id="aXS-oF-O5f"/>
+                        <segue destination="rKe-Ev-k1c" kind="presentation" identifier="next" id="TLB-Hq-zpC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XEj-Je-hHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4289" y="1361"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar_seleted" width="24" height="24"/>
@@ -1187,4 +1346,7 @@
         <image name="icAppIconPrimary" width="147" height="127"/>
         <image name="icTextLogoPrimary" width="44" height="26"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="yRg-fp-Ind"/>
+    </inferredMetricsTieBreakers>
 </document>

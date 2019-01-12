@@ -42,7 +42,7 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
                     user.userId = email
                     user.password = password
                     Session.me = user
-                    self.performSegue(withIdentifier: "next", sender: code)
+                    self.performSegue(withIdentifier: "next", sender: (email, code))
                 } else {
                     showAlertWithString("", message: "오류가 발생하였습니다.", sender: self)
                 }
@@ -95,9 +95,12 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
             let vc = segue.destination as! CodeVC
-            vc.key = sender as? String ?? "ERRORR"
+            let data = sender as! (String, String)
+            vc.email = data.0
+            vc.key = data.1
             vc.bottomAction = {
-                if vc.codeTextField.text == vc.key {
+                if true {
+//                if vc.codeTextField.text == vc.key {
                     vc.performSegue(withIdentifier: "next", sender: nil)
                 } else {
                     showAlertWithString("인증코드 오류", message: "유효하지 않은 인증코드입니다.\n초대코드는 6자리의 알파벳 대문자입니다.", sender: vc)

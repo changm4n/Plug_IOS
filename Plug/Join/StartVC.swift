@@ -36,8 +36,9 @@ class StartVC: PlugViewController {
                     Session.me?.classData = classData
                     if let crontab = crontab {
                         Session.me?.schedule = Schedule(schedule: crontab)
-                        self.animateSegue("Main", sender: nil)
+                        
                     }
+                    self.animateSegue("Main", sender: nil)
                 })
             })
         } else {

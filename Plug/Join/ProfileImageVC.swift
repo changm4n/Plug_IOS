@@ -40,8 +40,44 @@ class ProfileImageVC: PlugViewController {
         self.setKeyboardHide()
         self.setTextFields()
         bottomButton = bottomBtn
+        bottomBtn.isEnabled = false
         self.bottomAction = {
-            self.performSegue(withIdentifier: "next", sender: nil)
+            //TODO : image
+            guard let name = self.nameTextField.text,
+                let me = Session.me,
+            let userId = Session.me?.userId,
+            let pw = Session.me?.password else { return }
+            me.name = name
+            
+            Networking.signUp(user: me, completion: { (name, error) in
+                if name != nil {
+                    Networking.login(userId, password: pw, completion: { (token) in
+                        if let token = token {
+                            let tmp = Session()
+                            Session.me = tmp
+                            tmp.token = token
+                            tmp.save()
+                            Networking.getMe(completion: { (me) in
+                                if let me = me {
+                                    let user = Session(withUser: me)
+                                    user.token = token
+                                    Session.me = user
+                                    user.save()
+                                    if Session.me?.role == .PARENT {
+                                        self.performSegue(withIdentifier: "join", sender: nil)
+                                    } else {
+                                        self.performSegue(withIdentifier: "next", sender: nil)
+                                    }
+                                }
+                            })
+                        } else {
+                            showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
+                        }
+                    })
+                } else {
+                    showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
+                }
+            })
         }
     }
     
@@ -52,15 +88,15 @@ class ProfileImageVC: PlugViewController {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "edit" {
-//            let vc = segue.destination as! ImageEditVC
-//            vc.originalImage = profileImage!
-//            vc.handler = { result in
-//                self.profileImage = result
-//            }
-//        }
-//    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "edit" {
+    //            let vc = segue.destination as! ImageEditVC
+    //            vc.originalImage = profileImage!
+    //            vc.handler = { result in
+    //                self.profileImage = result
+    //            }
+    //        }
+    //    }
 }
 
 extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
@@ -110,7 +146,7 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
             vc.delegate = self
             self.present(vc, animated: true, completion: nil)
-//            self.performSegue(withIdentifier: "edit", sender: nil)
+            //            self.performSegue(withIdentifier: "edit", sender: nil)
         }
     }
     

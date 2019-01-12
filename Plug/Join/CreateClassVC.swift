@@ -18,14 +18,32 @@ class CreateClassVC: PlugViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
+        self.setTextField()
         self.bottomButton = bottomBtn
+        bottomBtn.isEnabled = false
         let thePicker = UIPickerView()
         thePicker.delegate = self
         yearTextField.inputView = thePicker
         yearTextField.text = "2019"
         
         self.bottomAction = {
-            self.performSegue(withIdentifier: "next", sender: nil)
+            guard let userID = Session.me?.userId,
+                let name = self.nameTextField.text,
+                let year = self.yearTextField.text else { return }
+            Networking.createChatRoom(name, userID: userID, year: year, completion: { (code) in
+                if code != nil {
+                    self.performSegue(withIdentifier: "next", sender: nil)
+                } else {
+                    showAlertWithString("오류", message: "클래스 생성 중 오류가 발생하였습니다.", sender: self)
+                }
+            })
+        }
+    }
+    
+    func setTextField() {
+        nameTextField.type = .name
+        nameTextField.changeHandler = { [weak self] text, check in
+            self?.bottomButton?.isEnabled = check
         }
     }
     
@@ -33,7 +51,14 @@ class CreateClassVC: PlugViewController {
         if segue.identifier == "next" {
             let vc = segue.destination as! InviteCodeVC
             vc.bottomAction = {
-                vc.performSegue(withIdentifier: "next", sender: nil)
+                Networking.getUserInfo(completion: { (classData, crontab) in
+                    Session.me?.classData = classData
+                    if let crontab = crontab {
+                        Session.me?.schedule = Schedule(schedule: crontab)
+                        
+                    }
+                    self.performSegue(withIdentifier: "next", sender: nil)
+                })
             }
         }
     }

@@ -67,7 +67,7 @@ class HomeVC: PlugViewController {
             .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
             .kern: 0.0
             ])
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: 10, length: 6))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: name.count + 7, length: 6))
         attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: 21, length: 2))
         mainLabel.attributedText = attributedString
     }

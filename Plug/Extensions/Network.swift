@@ -4,7 +4,7 @@
 //
 //  Created by changmin lee on 02/12/2018.
 //  Copyright © 2018 changmin. All rights reserved.
-//
+//{"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJrb29fbWluaUBuYXZlci5jb20iLCJyb2xlIjoiVEVBQ0hFUiIsImV4cGlyZXNJbiI6IjdkIiwiaWF0IjoxNTQzNzU4MDgwfQ.yvPMNeSFgtdHaN9gOjZLJqmjzFt6LjK49dA_giJkNIE"}
 
 import Foundation
 import Apollo
@@ -55,12 +55,10 @@ class Networking: NSObject {
         if let id = Session.me?.id,
             let userID = Session.me?.userId {
             apollo.fetch(query: GetUserInfoQuery(id: id, userId: userID), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
-                if let crontab = result?.data?.officePeriods.first?.crontab ,
-                    let rooms = result?.data?.chatRooms {
-                    completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab)
-                } else {
-                    completion([], nil)
-                }
+                let crontab = result?.data?.officePeriods.first?.crontab
+                let rooms = result?.data?.chatRooms ?? []
+                completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab)
+                
             }
         } else {
             completion([], nil)
@@ -72,6 +70,21 @@ class Networking: NSObject {
         apollo.perform(mutation: SignInMutation(userId: id, password: password), queue: DispatchQueue.main) { (result, error) in
             completion(result?.data?.signin.token)
         }
+    }
+    
+    static func signUp(user: Session, completion:@escaping (_ name: String?, _ error: Error?) -> Void) {
+        let apollo = getClient()
+        if let role = Role.init(rawValue: user.role.rawValue),
+            let userId = user.userId, let name = user.name, let pw = user.password {
+            
+            let data = UserInput(role: role, userId: userId, name: name, password: pw, profileImageUrl: user.profileImageUrl, phoneNumber: user.phoneNumber)
+            apollo.perform(mutation: SignUpMutation(data: data), queue: DispatchQueue.main) { (result, error) in
+                completion(result?.data?.signup.name, error)
+            }
+        } else {
+            completion(nil, nil)
+        }
+        
     }
     
     static func changePW(_ id:String, old:String, new:String, completion:@escaping (_ name:String?, _ error: GraphQLError?) -> Void) {
@@ -109,6 +122,24 @@ class Networking: NSObject {
         let apollo = getClient()
         apollo.perform(mutation: CreateRoomMutation(roomName: name, userId: userID, year: "\(year)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
             completion(result?.data?.createChatRoom.inviteCode)
+        }
+    }
+    
+    static func getChatroom(byCode code:String, completion:@escaping (_ room: ChatRoomApolloFragment?) -> Void) {
+        let apollo = getClient()
+        apollo.fetch(query: GetChatroomQuery(code: code), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
+            if let room = result?.data?.chatRooms.first?.fragments.chatRoomApolloFragment {
+                completion(room)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    static func applyChatroom(_ id: String, userId: String, kidName: String, completion:@escaping (_ id:String?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: ApplyChatRoomMutation(id: id, userId: userId, kidName: kidName), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.applyChatRoom.id)
         }
     }
     

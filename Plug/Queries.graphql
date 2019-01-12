@@ -4,6 +4,12 @@ mutation SignIn($userId: String!, $password: String!) {
     }
 }
 
+mutation SignUp($data: UserInput!) {
+    signup(data : $data) {
+        name
+    }
+}
+
 mutation changePW($userId: String!, $old: String!, $new: String!) {
     updateNewPassword(email:$userId
                       newPassword:$new,
@@ -57,7 +63,7 @@ mutation setOffice($crontab: String!) {
 }
 
 query getUserInfo($id: ID!, $userId: String) {
-    chatRooms(where: { admins_some: { userId: $userId }}) {
+    chatRooms(where: { users_some: { userId: $userId }}) {
         ...ChatRoomApolloFragment
     }
     
@@ -145,6 +151,20 @@ mutation VerifyEmailResponse($email: String!) {
         verifyCode
     }
 }
+
+query GetChatroom($code: String!) {
+    chatRooms(where: { inviteCode : $code}) {
+        ...ChatRoomApolloFragment
+    }
+}
+
+mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
+    applyChatRoom(id: $id, data : {userId:$userId
+                  kidName :$kidName}) {
+        id
+    }
+}
+
 
 fragment UserApolloFragment on User {
     id

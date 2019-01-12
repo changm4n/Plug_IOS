@@ -37,7 +37,7 @@ open class Session : NSObject {
     open var profileImageUrl: String?
     open var phoneNumber: String?
     open var token: String?
-    open var password = "password"
+    open var password: String?
     var schedule: Schedule
     
     var appPushID: String?
@@ -60,6 +60,7 @@ open class Session : NSObject {
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
         schedule = Schedule(schedule: "0-30 9-18 1,2,3")
+        password = nil
         
         if let urlStr = profileImageUrl,
             let url = URL(string: urlStr) {
