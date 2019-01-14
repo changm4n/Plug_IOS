@@ -89,8 +89,10 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
-            let vc = segue.destination as! HomeVC
-            vc.summaryData = sender as? [MessageSummaryApolloFragment] ?? []
+            let tvc = segue.destination as! UITabBarController
+            let nvc = tvc.viewControllers?[0] as! UINavigationController
+            let vc = nvc.viewControllers[0] as! HomeVC
+            vc.summaryData = sender as? [MessageSummary] ?? []
         }
     }
 }

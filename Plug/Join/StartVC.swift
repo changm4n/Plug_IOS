@@ -12,7 +12,7 @@ class StartVC: PlugViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleImage: UIImageView!
     
-    var summary: [MessageSummaryApolloFragment] = []
+    var summary: [MessageSummary] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(StartVC.appDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)

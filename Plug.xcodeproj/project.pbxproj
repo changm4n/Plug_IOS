@@ -33,6 +33,7 @@
 		ED4750F421EA80190043FD18 /* kidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F321EA80190043FD18 /* kidVC.swift */; };
 		ED4750F621EB16920043FD18 /* JoinRoomVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */; };
 		ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F721EB17370043FD18 /* KidVC2.swift */; };
+		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
@@ -120,6 +121,7 @@
 		ED4750F321EA80190043FD18 /* kidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidVC.swift; sourceTree = "<group>"; };
 		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
 		ED4750F721EB17370043FD18 /* KidVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC2.swift; sourceTree = "<group>"; };
+		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				EDF609C321BBC2AC00CB3529 /* MessageModel.swift */,
 				ED1F586A21EA0BF000126A07 /* MessageManager.swift */,
 				ED1F586221E09A2500126A07 /* Validator.swift */,
+				ED4750F921EC76360043FD18 /* MessageSummary.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */,
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
 				EDD8C398218964CF008DA9E7 /* HomeHeaderView.swift in Sources */,
+				ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */,
 				ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */,
 				ED3E6A4521CF535B00C28403 /* SettingVC.swift in Sources */,
 				EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */,
@@ -776,7 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UZGZ2YCNAM;
+				DEVELOPMENT_TEAM = 47RZ4GF77T;
 				INFOPLIST_FILE = Plug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -796,7 +800,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UZGZ2YCNAM;
+				DEVELOPMENT_TEAM = 47RZ4GF77T;
 				INFOPLIST_FILE = Plug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

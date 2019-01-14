@@ -83,11 +83,9 @@ query getUserInfoInStart($id: ID!, $userId: String!) {
     
     messageSummaries(
                      where: {
-                     receiver : {
-                     userId_in: [ $userId ]
+                     OR: [{ sender: { userId: $userId } },
+                          { receiver: { userId: $userId } }]
                      }
-                     },
-                     first: 20
                      ) {
         ... MessageSummaryApolloFragment
     }

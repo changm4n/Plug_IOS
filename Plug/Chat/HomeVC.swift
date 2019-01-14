@@ -25,11 +25,11 @@ class HomeVC: PlugViewController {
     let maxOffset: CGFloat = 21
     
     var classData: [ChatRoomApolloFragment] = []
-    var summaryData: [MessageSummaryApolloFragment] = []
+    var summaryData: [MessageSummary] = []
     
     var filteredSet: Set<String> = Set<String>()
-    var filteredList: [MessageSummaryApolloFragment] {
-        let list = summaryData.filter({ filteredSet.contains($0.chatRoom.fragments.chatRoomSummaryApolloFragment.name) })
+    var filteredList: [MessageSummary] {
+        let list = summaryData.filter({ filteredSet.contains($0.chatroom.name) })
         return filteredSet.count == 0 ? summaryData : list
     }
     
@@ -50,13 +50,14 @@ class HomeVC: PlugViewController {
             let userId = Session.me?.userId else { return }
         self.classData = me.classData
         self.filterCollectionView?.reloadData()
-        self.messageCount = summaryData.filter({ $0.unReadMessageCount > 0 }).count
+        self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         self.tableView.reloadData()
         self.setUI()
     }
     
     func setUI() {
-        guard let name = Session.me?.name else { return }
+        guard let me = Session.me else { return }
+        guard let name = me.name, me.role == .TEACHER else { return }
         
         let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n플러그 오프 시간에 \(messageCount)명이\n메시지를 보냈습니다.", attributes: [
             .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
@@ -76,10 +77,10 @@ class HomeVC: PlugViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
             let vc = segue.destination as! ChatVC
-            let data = sender as! MessageSummaryApolloFragment
-            vc.receiver = data.receiver.fragments.userApolloFragment
-            vc.sender = data.sender.fragments.userApolloFragment
-            vc.chatroom = data.chatRoom.fragments.chatRoomSummaryApolloFragment
+            let data = sender as! MessageSummary
+            vc.receiver = data.receiver
+            vc.sender = data.sender
+            vc.chatroom = data.chatroom
         }
     }
 }
@@ -177,23 +178,21 @@ class SummaryCell: UITableViewCell {
         profileImage.makeCircle()
     }
 
-    func configure(item: MessageSummaryApolloFragment) {
-        let sender = item.sender.fragments.userApolloFragment
-        let chatroom = item.chatRoom.fragments.chatRoomSummaryApolloFragment
-        nameLabel.text = sender.name
-        classLabel.text = chatroom.name
+    func configure(item: MessageSummary) {
+        let sender = item.sender
+        let chatroom = item.chatroom
         
+        nameLabel.text = item.kidName
+        classLabel.text = chatroom.name
         
         if let url = sender.profileImageUrl, sender.profileImageUrl != ""{
             profileImage.kf.setImage(with: URL(string: url))
         }
         
-        if let lastMessage = item.lastMessage?.fragments.messageApolloFragment {
-            let messageItem = MessageItem(with: lastMessage, isMine: true)
-            messageLabel.text = messageItem.text
-            timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
-        }
+        let messageItem = item.lastMessage
+        messageLabel.text = messageItem.text
+        timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
         
-        newBadge.isHidden = item.unReadMessageCount == 0
+        newBadge.isHidden = item.unreadCount == 0
     }
 }

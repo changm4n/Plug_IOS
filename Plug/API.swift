@@ -1034,7 +1034,7 @@ public final class GetUserInfoQuery: GraphQLQuery {
 
 public final class GetUserInfoInStartQuery: GraphQLQuery {
   public let operationDefinition =
-    "query getUserInfoInStart($id: ID!, $userId: String!) {\n  chatRooms(where: {users_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n  messageSummaries(where: {receiver: {userId_in: [$userId]}}, first: 20) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
+    "query getUserInfoInStart($id: ID!, $userId: String!) {\n  chatRooms(where: {users_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n  messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
 
   public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition).appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
@@ -1056,7 +1056,7 @@ public final class GetUserInfoInStartQuery: GraphQLQuery {
     public static let selections: [GraphQLSelection] = [
       GraphQLField("chatRooms", arguments: ["where": ["users_some": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
       GraphQLField("officePeriods", arguments: ["where": ["user": ["id": GraphQLVariable("id")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
-      GraphQLField("messageSummaries", arguments: ["where": ["receiver": ["userId_in": [GraphQLVariable("userId")]]], "first": 20], type: .nonNull(.list(.object(MessageSummary.selections)))),
+      GraphQLField("messageSummaries", arguments: ["where": ["OR": [["sender": ["userId": GraphQLVariable("userId")]], ["receiver": ["userId": GraphQLVariable("userId")]]]]], type: .nonNull(.list(.object(MessageSummary.selections)))),
     ]
 
     public private(set) var resultMap: ResultMap

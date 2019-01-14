@@ -50,16 +50,50 @@ class Networking: NSObject {
         }
     }
     
-    static func getUserInfoinStart(completion:@escaping (_ classes: [ChatRoomApolloFragment], _ crontab: String?, _ summary: [MessageSummaryApolloFragment]) -> Void) {
+    static func getUserInfoinStart(completion:@escaping (_ classes: [ChatRoomApolloFragment], _ crontab: String?, _ summary: [MessageSummary]) -> Void) {
         let apollo = getClient()
         if let id = Session.me?.id,
             let userID = Session.me?.userId {
             apollo.fetch(query: GetUserInfoInStartQuery(id: id, userId: userID), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
                 let crontab = result?.data?.officePeriods.first?.crontab
                 let rooms = result?.data?.chatRooms ?? []
-                let summary = result?.data?.messageSummaries.compactMap({ $0?.fragments.messageSummaryApolloFragment }) ?? []
-                completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab, summary)
+                let tmp: [MessageSummary] = result?.data?.messageSummaries.compactMap({
+                        return MessageSummary(with: $0!.fragments.messageSummaryApolloFragment)
+                }) ?? []
                 
+                var tmpsummary: [MessageSummary] = []
+                for s in tmp {
+                    if let a = tmp.filter({$0 == s}).sorted(by: { (lhs, rhs) -> Bool in
+                        return lhs.lastMessage.createAt > rhs.lastMessage.createAt
+                    }).first {
+                        if !tmpsummary.contains(where: {$0 == a}) {
+                            tmpsummary.append(a)
+                        }
+                    }
+                }
+                
+                var summary: [MessageSummary] = []
+                for s in tmpsummary {
+                    var s = s
+                    if s.sender.userId == userID {
+                        if let a = tmp.filter({ $0 == s && $0.receiver.userId == userID }).first {
+                            s.unreadCount = a.unreadCount
+                            s.receiver = a.receiver
+                            s.sender = a.sender
+                        }
+                    }
+                    summary.append(s)
+                }
+                
+                summary.sort(by: { (lhs, rhs) -> Bool in
+                    lhs.lastMessage.createAt > rhs.lastMessage.createAt
+                })
+                
+                summary.sort(by: { (lhs, rhs) -> Bool in
+                    return lhs.unreadCount != 0 && rhs.unreadCount == 0
+                })
+                
+                completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab, summary)
             }
         } else {
             completion([], nil, [])
@@ -74,7 +108,6 @@ class Networking: NSObject {
                 let crontab = result?.data?.officePeriods.first?.crontab
                 let rooms = result?.data?.chatRooms ?? []
                 completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab)
-                
             }
         } else {
             completion([], nil)
@@ -195,16 +228,22 @@ class Networking: NSObject {
         }
     }
     
-    static func getMessageSummary(userID: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageSummaryApolloFragment]) -> Void) {
-        let apollo = getClient()
-        apollo.fetch(query: MessageSummariesQuery(myId: userID, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
-            if let summaries = result?.data?.messageSummaries {
-                completion(summaries.compactMap({ $0?.fragments.messageSummaryApolloFragment }))
-            } else {
-                completion([])
-            }
-        }
-    }
+//    static func getMessageSummary(userID: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageSummary]) -> Void) {
+//        let apollo = getClient()
+//        apollo.fetch(query: MessageSummariesQuery(myId: userID, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
+//            if let summaries = result?.data?.messageSummaries {
+//                completion(summaries.compactMap({
+//                    if let item = $0 {
+//                        return MessageSummary(with:  item.fragments.messageSummaryApolloFragment)
+//                    } else {
+//                        return nil
+//                    }
+//                }))
+//            } else {
+//                completion([])
+//            }
+//        }
+//    }
     
     static func getMeassages(chatroomId: String, userId: String, receiverId: String, last: Int = 30, before: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
         getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: last, startCursor: before), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
@@ -226,6 +265,11 @@ class Networking: NSObject {
             }
         }
     }
+    
+    static func readMessage(chatRoomId: String, receiverId: String, senderId: String) {
+        getClient().perform(mutation: ReadMessageMutation(chatroom: chatRoomId, sender: senderId, receiver: receiverId), queue: .main, resultHandler: nil)
+    }
+    
     
     static func subscribeMessage(completion:@escaping (_ message: MessageSubscriptionPayloadApolloFragment) -> Void) {
         getSubscriptClient().subscribe(subscription: MessageSubscriptionSubscription(), queue: DispatchQueue.main) { (result, error) in

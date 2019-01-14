@@ -10,14 +10,15 @@ import UIKit
 
 class ChatVC: PlugViewController, UITextViewDelegate {
     
-    let chatModel = MessageModel()
-    
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
-//    @IBOutlet weak var tableViewBottomLayout: NSLayoutConstraint!
-//    @IBOutlet weak var tableViewTopLayout: NSLayoutConstraint!
-    
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var inputField: UIView!
+    
+    let chatModel = MessageModel()
     var messageData: [MessageApolloFragment] = []
     
     var isLoading: Bool = false
@@ -25,24 +26,19 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     var receiver: UserApolloFragment? = nil
     var sender: UserApolloFragment? = nil
     var chatroom: ChatRoomSummaryApolloFragment? = nil
-    
 
     var kOriginHeight: CGFloat = 0
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var inputField: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
 
-        self.tableView.dataSource = chatModel
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         kOriginHeight = self.view.frame.size.height
         sendButton.makeCircle()
+        
+        tableView.dataSource = chatModel
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
         textView.layer.cornerRadius = 18
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
@@ -57,6 +53,14 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard
+            let chatroomId = chatroom?.id,
+            let receiverId = receiver?.userId,
+            let senderid = sender?.userId else { return }
+        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
+    }
     override func willMove(toParentViewController parent: UIViewController?) {
         if parent == nil {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -75,6 +79,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.navigationController?.navigationBar.isTranslucent = true
         statusbarLight = false
     }
+    
     @IBAction func addSampleMessage(_ sender: Any) {
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
@@ -84,9 +89,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             else { return }
         self.resetTextView()
         Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
-            if let message = result {
+//            if let message = result {
 //                self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
-            }
+//            }
         }
     }
     
@@ -95,6 +100,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let chatroomId = chatroom?.id,
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
+        
+        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
         
         Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
             self.messageData = messages
@@ -116,8 +123,20 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     func setTitle() {
         guard let senderName = sender?.name,
-            let chatroomName = chatroom?.name else { return }
-        let topText = senderName
+            let senderId = sender?.userId,
+            let chatroomName = chatroom?.name,
+            let chatroomId = chatroom?.id,
+        let me = Session.me else { return }
+        
+        var topText: String
+        if me.role == .TEACHER,
+            let kid = me.getKid(chatroomID: chatroomId, parentID: senderId) {
+            topText = "\(kid.name) 부모님"
+        } else {
+            topText = senderName
+        }
+    
+        
         let bottomText = "\(chatroomName) ･ 플러그 오프"
         
         let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.darkGrey,
@@ -132,8 +151,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         title.append(subtitle)
         
         let size = title.size()
-        
         let width = size.width
+        
         guard let height = navigationController?.navigationBar.frame.size.height else {return}
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
@@ -180,8 +199,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     //48   69 89 110
     //11.5 12  12 14.5
     func textViewDidChange(_ textView: UITextView) {
-        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
-        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
+//        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
+//        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
         let maxHeight: CGFloat = 112
         let fixedWidth = textView.frame.size.width
         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -197,7 +216,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.textView.text = ""
         self.inputViewHeight.constant = 50
     }
-    
 }
 
 extension ChatVC: UITableViewDelegate {
@@ -238,15 +256,14 @@ extension ChatVC: UITableViewDelegate {
     }
 }
 
-
-
 class ChatCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bubbleView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
 }
 
-class ChatRCell: ChatCell {    
+class ChatRCell: ChatCell {
+    
     override func awakeFromNib() {
         bubbleView.layer.cornerRadius = 16
         bubbleView.clipsToBounds = true
