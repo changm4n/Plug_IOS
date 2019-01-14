@@ -72,6 +72,27 @@ query getUserInfo($id: ID!, $userId: String) {
     }
 }
 
+query getUserInfoInStart($id: ID!, $userId: String!) {
+    chatRooms(where: { users_some: { userId: $userId }}) {
+        ...ChatRoomApolloFragment
+    }
+    
+    officePeriods(where: {user : {id : $id}}) {
+        crontab
+    }
+    
+    messageSummaries(
+                     where: {
+                     receiver : {
+                     userId_in: [ $userId ]
+                     }
+                     },
+                     first: 20
+                     ) {
+        ... MessageSummaryApolloFragment
+    }
+}
+
 mutation uploadFile($file: Upload!) {
     multipleUpload(files: [$file])
 }
@@ -103,6 +124,16 @@ query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {
     }
 }
 
+mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
+    readMessage(chatRoomId : $chatroom,
+                receiverId : $receiver,
+                senderId : $sender) {
+        lastMessage {
+            text
+        }
+    }
+}
+    
 query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {
     messages(
              where:{
@@ -116,8 +147,8 @@ query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: I
              userId_in : [ $myId, $userId ]
              }
              },
-             first: $pageCount
-             after: $startCursor
+             last: $pageCount
+             before: $startCursor
              ) {
         ... MessageApolloFragment
     }

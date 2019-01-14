@@ -12,6 +12,7 @@ class StartVC: PlugViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleImage: UIImageView!
     
+    var summary: [MessageSummaryApolloFragment] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(StartVC.appDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -32,12 +33,13 @@ class StartVC: PlugViewController {
         if Session.fetchToken() != nil {
             print("[token] \(Session.me?.token ?? "")")
             Session.me?.refreshMe(completion: { (user) in
-                Networking.getUserInfo(completion: { (classData, crontab) in
+                Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
                     Session.me?.classData = classData
                     if let crontab = crontab {
                         Session.me?.schedule = Schedule(schedule: crontab)
                         
                     }
+                    self.summary = summary
                     self.animateSegue("Main", sender: nil)
                 })
             })
@@ -62,6 +64,15 @@ class StartVC: PlugViewController {
                     self.performSegue(withIdentifier: identifier, sender: sender)
                 }
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Main" {
+            let tvc = segue.destination as! UITabBarController
+            let nvc = tvc.viewControllers?[0] as! UINavigationController
+            let vc = nvc.viewControllers[0] as! HomeVC
+            vc.summaryData = self.summary
         }
     }
 }

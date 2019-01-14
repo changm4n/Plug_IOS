@@ -60,8 +60,10 @@ class EditProfileVC: PlugViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "edit" {
+        if segue.identifier == "edit",
+            let image = profileImage {
             let vc = segue.destination as! EditImageVC
+            vc.originalImage = image
             vc.handler = { image in
                 if let image = image {
 //                    Networking.uploadImage(image: image
@@ -209,8 +211,6 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.performSegue(withIdentifier: "edit", sender: nil)
-            return
             let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let firstAction: UIAlertAction = UIAlertAction(title: "사진 찍기", style: .default) { action -> Void in
             }

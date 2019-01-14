@@ -93,7 +93,7 @@
                                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icNewTag" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-t4-yko">
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconsGlyphsIcNewTag" translatesAutoresizingMaskIntoConstraints="NO" id="BV4-t4-yko">
                                                             <rect key="frame" x="10" y="10" width="18" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="98K-f0-FfL"/>
@@ -186,6 +186,7 @@
                     <connections>
                         <outlet property="mainLabel" destination="y7X-aR-eE7" id="mTG-z7-A3D"/>
                         <outlet property="tableView" destination="gP2-er-MZP" id="XcN-Au-cwr"/>
+                        <outlet property="titleView" destination="smm-wR-OrV" id="Zzy-ao-Tgv"/>
                         <segue destination="P94-t1-WDa" kind="presentation" identifier="out" animates="NO" modalPresentationStyle="fullScreen" id="fQG-6H-2do"/>
                         <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="soo-V7-Zx3"/>
                     </connections>
@@ -361,7 +362,7 @@
                                             <constraint firstAttribute="width" constant="39" id="Tli-Th-fsX"/>
                                             <constraint firstAttribute="height" constant="39" id="p6v-Lu-AK9"/>
                                         </constraints>
-                                        <state key="normal">
+                                        <state key="normal" image="iconsGlyphsIcSendWhite">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -680,10 +681,11 @@
         <image name="avatarFull" width="36" height="36"/>
         <image name="berrymelon" width="64.5" height="79.5"/>
         <image name="btnSearchWhite" width="28" height="28"/>
-        <image name="homeActive" width="48" height="32"/>
-        <image name="homeDeactive" width="48" height="32"/>
-        <image name="icNewTag" width="18" height="18"/>
+        <image name="homeActive" width="24" height="24"/>
+        <image name="homeDeactive" width="24" height="24"/>
         <image name="icTextLogoWhite" width="37" height="22"/>
+        <image name="iconsGlyphsIcNewTag" width="18" height="18"/>
+        <image name="iconsGlyphsIcSendWhite" width="20" height="20"/>
         <image name="jake" width="70" height="86"/>
         <image name="logo" width="147" height="127"/>
         <image name="master_close" width="16" height="16"/>

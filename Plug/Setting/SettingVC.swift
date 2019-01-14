@@ -17,7 +17,7 @@ class SettingVC: PlugViewController {
     var teacherTitlesOff: [(String, String)] = [("플러그 오프 설정","plug"),  ("","desc")]
     let shareTitles: [(String, String)] = [("접근 권한 설정","cell"), ("약관 및 개인정보 처리방침","cell"), ("오픈소스 라이선스","cell")]
     
-    var classItems = ["title"]
+    var classItems: [ChatRoomApolloFragment] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -46,7 +46,6 @@ class SettingVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "class")
         self.profileImageView.makeCircle()
         self.setData()
         
@@ -65,6 +64,7 @@ class SettingVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setData()
         self.setUI()
         self.tableView.reloadData()
     }
@@ -76,12 +76,21 @@ class SettingVC: PlugViewController {
             Networking.updateOffice(me.schedule.toString()) { (cron) in
             }
         }
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "out" {
+            let vc = segue.destination as! OutClassVC
+            vc.classID = sender as? String
+        }
     }
     
     func setData() {
         guard let me = Session.me else { return }
         self.role = me.role ?? .NONE
+        if self.role == .PARENT {
+            classItems = me.classData
+        }
     }
     
     func setUI() {
@@ -146,13 +155,13 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                         textfield.becomeFirstResponder()
                     }
                 }
-                
             } else {
             }
             
         } else if self.role == .PARENT {
             if section == 0 {
-                performSegue(withIdentifier: "out", sender: nil)
+                let classData = classItems[row]
+                performSegue(withIdentifier: "out", sender: classData.id)
             } else {
                 
             }
@@ -205,7 +214,11 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         } else if self.role == .PARENT {
             if section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! PlugClassCell
-                cell.configure(title: "창민학교", info: "2018 학년도 ・ 이아린", showArrow: true)
+                let classItem = classItems[indexPath.row]
+                if let kidName = Session.me?.getKid(chatroom: classItem)?.name {
+                    cell.configure(title: classItem.name, year: classItem.chatRoomAt, info: kidName)
+                }
+                
                 if row == classItems.count - 1 {
                     cell.addBottomLine()
                 }

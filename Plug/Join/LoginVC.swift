@@ -47,7 +47,13 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
                             user.token = token
                             Session.me = user
                             user.save()
-                            self.performSegue(withIdentifier: "next", sender: nil)
+                            Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
+                                Session.me?.classData = classData
+                                if let crontab = crontab {
+                                    Session.me?.schedule = Schedule(schedule: crontab)
+                                }
+                                self.performSegue(withIdentifier: "next", sender: summary)
+                            })
                         }
                     })
                 } else {
@@ -79,6 +85,13 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
             view.endEditing(true)
         }
         return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "next" {
+            let vc = segue.destination as! HomeVC
+            vc.summaryData = sender as? [MessageSummaryApolloFragment] ?? []
+        }
     }
 }
 

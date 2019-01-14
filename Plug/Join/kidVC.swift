@@ -21,10 +21,9 @@ class kidVC: PlugViewController {
         super.viewDidLoad()
         self.setKeyboardHide()
         self.setTextFields()
-        
-        
         bottomButton = bottomBtn
         bottomBtn.isEnabled = false
+        
         self.bottomAction = {
             guard let name = self.nameTextField.text,
             let roomId = self.classData?.id,

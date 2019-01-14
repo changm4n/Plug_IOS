@@ -30,6 +30,9 @@ class ViewController: PlugViewController {
         hideNavigationBar()
         self.setStatusBar(isWhite: false)
     }
+    @IBAction func kakaoButtonPressed(_ sender: Any) {
+        showAlertWithString("잠시만요!", message: "개발 중 입니다!", sender: self)
+    }
 }
 
 class LoginSelectVC: PlugViewController {

@@ -183,8 +183,8 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDe
                     }
                 })
             }))
-        alert.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     

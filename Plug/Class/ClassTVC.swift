@@ -13,9 +13,22 @@ class ClassTVC: UITableViewController {
     
     var classData: [ChatRoomApolloFragment] = []
     
-    var items: [(String, String)] =
+    var itemT: [(String, String)] =
         [("classPlus","새로운 클래스 만들기"),
          ("classInvite","기존 클래스에 초대하기")]
+    
+    var itemP: [(String, String)] =
+        [("classJoin","클래스 가입하기")]
+    
+    var items: [(String, String)] {
+        return type == .TEACHER ? itemT : itemP
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.type = Session.me?.role ?? .NONE
+        self.tableView.tableFooterView = UIView()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,18 +75,32 @@ class ClassTVC: UITableViewController {
                 imageView.image = UIImage(named: items[row].0)
                 label.text = items[row].1
             }
+            if row == items.count - 1 {
+                cell.addBottomLine()
+            }
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(indexPath.section + 1)", for: indexPath) as! ClassCell
             let classItem = classData[indexPath.row]
-            cell.configure(title: classItem.name, year: classItem.chatRoomAt, count: classItem.kids?.count ?? 0)
+            if type == .TEACHER {
+                cell.configure(title: classItem.name, year: classItem.chatRoomAt, count: classItem.kids?.count ?? 0)
+            } else {
+                let teacherName = classItem.admins?.first?.fragments.userApolloFragment.name
+                cell.configure(title: classItem.name, year: classItem.chatRoomAt, info: teacherName == nil ? "" : "\(teacherName!) 선생님")
+            }
+            
+            if row == classData.count - 1 {
+                cell.addBottomLine()
+            }
+            
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
-        header?.configure(type: .TEACHER, count: 3)
+        header?.configure(type: type, count: Session.me?.classData.count ?? 0)
         return header
     }
     
@@ -96,7 +123,6 @@ class ClassTVC: UITableViewController {
     }
 }
 
-
 class ClassCell: UITableViewCell {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var classInfoLabel: UILabel!
@@ -109,5 +135,10 @@ class ClassCell: UITableViewCell {
     func configure(title: String, year: String, count: Int) {
         self.classNameLabel.text = title
         self.classInfoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(count)명"
+    }
+    
+    func configure(title: String, year: String, info: String) {
+        self.classNameLabel.text = title
+        self.classInfoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(info)"
     }
 }

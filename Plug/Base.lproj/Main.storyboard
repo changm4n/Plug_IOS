@@ -54,6 +54,9 @@
                                 <state key="normal" title="카카오톡으로 회원가입">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="kakaoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1E0-ll-N15"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWq-ru-Gpe">
                                 <rect key="frame" x="50" y="614" width="275" height="20"/>
@@ -447,7 +450,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="로그인" id="hv6-WF-Mjr">
                         <barButtonItem key="backBarButtonItem" title="이전" id="Ch1-iA-ZC7"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="rcK-FN-obM">
+                        <barButtonItem key="leftBarButtonItem" image="iconIcClose" id="rcK-FN-obM">
+                            <color key="tintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="kak-Iu-pmp" kind="unwind" unwindAction="backWithSegue:" id="ZFd-6u-gHL"/>
                             </connections>
@@ -770,14 +774,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0x-mT-0HA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0x-mT-0HA">
                                 <rect key="frame" x="7" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="3Ln-xA-4OE"/>
                                     <constraint firstAttribute="height" constant="35" id="bW4-XG-ham"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="닫기">
+                                <state key="normal" image="iconIcClose">
                                     <color key="titleColor" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1202,7 +1205,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="one-time-code"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="초대코드 6자리"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
@@ -1286,7 +1289,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="초대코드 6자리"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="자녀 이름"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
                                         <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
@@ -1345,8 +1348,9 @@
         <image name="btnChevronWhite" width="12" height="20"/>
         <image name="icAppIconPrimary" width="147" height="127"/>
         <image name="icTextLogoPrimary" width="44" height="26"/>
+        <image name="iconIcClose" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yRg-fp-Ind"/>
+        <segue reference="TLB-Hq-zpC"/>
     </inferredMetricsTieBreakers>
 </document>

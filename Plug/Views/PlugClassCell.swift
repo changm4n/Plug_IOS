@@ -23,4 +23,9 @@ class PlugClassCell: UITableViewCell {
         self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(count)명"
         self.accessoryType = showArrow ? .disclosureIndicator : .none
     }
+    
+    func configure(title: String, year: String, info: String) {
+        self.nameLabel.text = title
+        self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(info)"
+    }
 }

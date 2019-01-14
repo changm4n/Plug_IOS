@@ -121,6 +121,12 @@ open class Session : NSObject {
         }
     }
     
+    func getKid(chatroom: ChatRoomApolloFragment) -> KidApolloFragment? {
+        let kids = chatroom.kids?.compactMap({ $0.fragments.kidApolloFragment }) ?? []
+        let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.id == id}) ?? []).count > 0}).first
+        return kid
+    }
+    
     fileprivate func saveToken() {
         UserDefaults.standard.set(self.token, forKey: "UserToken")
         UserDefaults.standard.synchronize()

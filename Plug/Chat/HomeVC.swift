@@ -13,6 +13,7 @@ class HomeVC: PlugViewController {
 
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleView: UIView!
     
     var selectedFilter = -1
     
@@ -32,11 +33,10 @@ class HomeVC: PlugViewController {
         return filteredSet.count == 0 ? summaryData : list
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
+        titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: Session.me?.role ?? .NONE == .TEACHER ? 135 : 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,13 +50,9 @@ class HomeVC: PlugViewController {
             let userId = Session.me?.userId else { return }
         self.classData = me.classData
         self.filterCollectionView?.reloadData()
-        
-        Networking.getMessageSummary(userID: userId, start: 10, end: nil) { (summaries) in
-            self.summaryData = summaries
-            self.messageCount = summaries.count
-            self.tableView.reloadData()
-            self.setUI()
-        }
+        self.messageCount = summaryData.filter({ $0.unReadMessageCount > 0 }).count
+        self.tableView.reloadData()
+        self.setUI()
     }
     
     func setUI() {
@@ -87,6 +83,7 @@ class HomeVC: PlugViewController {
         }
     }
 }
+
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = indexPath.row
@@ -113,6 +110,10 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 }
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Session.me?.role ?? .NONE == .TEACHER ? 60 : 0
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredList.count
     }
@@ -129,6 +130,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard Session.me?.role ?? .NONE == .TEACHER else { return nil }
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HomeHeaderView")
         
         let layout = UICollectionViewFlowLayout()
@@ -193,7 +195,5 @@ class SummaryCell: UITableViewCell {
         }
         
         newBadge.isHidden = item.unReadMessageCount == 0
-        
-        
     }
 }

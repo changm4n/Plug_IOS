@@ -50,6 +50,22 @@ class Networking: NSObject {
         }
     }
     
+    static func getUserInfoinStart(completion:@escaping (_ classes: [ChatRoomApolloFragment], _ crontab: String?, _ summary: [MessageSummaryApolloFragment]) -> Void) {
+        let apollo = getClient()
+        if let id = Session.me?.id,
+            let userID = Session.me?.userId {
+            apollo.fetch(query: GetUserInfoInStartQuery(id: id, userId: userID), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
+                let crontab = result?.data?.officePeriods.first?.crontab
+                let rooms = result?.data?.chatRooms ?? []
+                let summary = result?.data?.messageSummaries.compactMap({ $0?.fragments.messageSummaryApolloFragment }) ?? []
+                completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab, summary)
+                
+            }
+        } else {
+            completion([], nil, [])
+        }
+    }
+    
     static func getUserInfo(completion:@escaping (_ classes: [ChatRoomApolloFragment], _ crontab:String?) -> Void) {
         let apollo = getClient()
         if let id = Session.me?.id,
@@ -190,8 +206,8 @@ class Networking: NSObject {
         }
     }
     
-    static func getMeassages(chatroomId: String, userId: String, receiverId: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
-        getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
+    static func getMeassages(chatroomId: String, userId: String, receiverId: String, last: Int = 30, before: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
+        getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: last, startCursor: before), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
             if let messages = result?.data?.messages { completion(messages.compactMap({$0.fragments.messageApolloFragment}))
             } else {
                 completion([])

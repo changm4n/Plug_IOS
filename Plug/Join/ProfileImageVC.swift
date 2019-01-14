@@ -88,15 +88,16 @@ class ProfileImageVC: PlugViewController {
         }
     }
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "edit" {
-    //            let vc = segue.destination as! ImageEditVC
-    //            vc.originalImage = profileImage!
-    //            vc.handler = { result in
-    //                self.profileImage = result
-    //            }
-    //        }
-    //    }
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "edit" {
+                let vc = segue.destination as! EditImageVC
+                vc.originalImage = profileImage!
+                vc.handler = { result in
+                    Session.me?.profileImage = result
+                    self.collectionView.reloadData()
+                }
+            }
+        }
 }
 
 extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
@@ -143,10 +144,10 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         profileImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismiss(animated: true) {
-            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
-            vc.delegate = self
-            self.present(vc, animated: true, completion: nil)
-            //            self.performSegue(withIdentifier: "edit", sender: nil)
+//            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
+//            vc.delegate = self
+//            self.present(vc, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "edit", sender: nil)
         }
     }
     

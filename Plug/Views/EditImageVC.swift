@@ -35,7 +35,7 @@ class EditImageVC: PlugViewController, UIScrollViewDelegate {
     }
     
     override func viewDidLoad() {
-//        imageView.image = originalImage
+        imageView.image = originalImage
         
         scrollView.maximumZoomScale = 6.0
         scrollView.minimumZoomScale = 1.0

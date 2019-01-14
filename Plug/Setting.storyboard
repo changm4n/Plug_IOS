@@ -605,6 +605,8 @@
                         <viewLayoutGuide key="safeArea" id="WkR-DK-vGc"/>
                     </view>
                     <connections>
+                        <outlet property="infoLabel" destination="Y5M-4X-ium" id="0nO-JE-25S"/>
+                        <outlet property="nameLabel" destination="YzF-we-0Np" id="nHp-h2-psd"/>
                         <outlet property="tableView" destination="3GP-p3-xKg" id="j8U-Bt-MKN"/>
                     </connections>
                 </viewController>
@@ -624,7 +626,7 @@
         <scene sceneID="hnD-MW-reF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WcD-YS-SOq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="설정" image="homeDeactive" selectedImage="homeActive" id="cyZ-xM-v8K"/>
+                    <tabBarItem key="tabBarItem" title="설정" image="settingDeactive" selectedImage="settingActive" id="cyZ-xM-v8K"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="N7d-kx-l6v">
@@ -1011,9 +1013,9 @@
     <resources>
         <image name="avatar_seleted" width="24" height="24"/>
         <image name="btnChevronWhite" width="12" height="20"/>
-        <image name="homeActive" width="48" height="32"/>
-        <image name="homeDeactive" width="48" height="32"/>
         <image name="icClassGray" width="28" height="28"/>
+        <image name="settingActive" width="24" height="24"/>
+        <image name="settingDeactive" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uK4-vl-8hE"/>
