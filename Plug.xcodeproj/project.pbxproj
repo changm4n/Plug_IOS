@@ -31,6 +31,8 @@
 		ED3E6A4A21CF57B300C28403 /* PlugClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */; };
 		ED4750F221EA7C0C0043FD18 /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
 		ED4750F421EA80190043FD18 /* kidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F321EA80190043FD18 /* kidVC.swift */; };
+		ED4750F621EB16920043FD18 /* JoinRoomVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */; };
+		ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F721EB17370043FD18 /* KidVC2.swift */; };
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
@@ -116,6 +118,8 @@
 		ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugClassCell.swift; sourceTree = "<group>"; };
 		ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC.swift; sourceTree = "<group>"; };
 		ED4750F321EA80190043FD18 /* kidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidVC.swift; sourceTree = "<group>"; };
+		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
+		ED4750F721EB17370043FD18 /* KidVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC2.swift; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
@@ -307,6 +311,8 @@
 				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
 				ED3D980421A0187200B61748 /* EditClassVC.swift */,
 				ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */,
+				ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */,
+				ED4750F721EB17370043FD18 /* KidVC2.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -575,11 +581,13 @@
 				ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */,
 				EDD8C39E21896F80008DA9E7 /* HomeHeaderCell.swift in Sources */,
 				ED8C47E321DA4D230065EC7E /* PlugCronParser.swift in Sources */,
+				ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */,
 				ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */,
 				ED8C47E921DC8DF20065EC7E /* RegisterPlugIDVC.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
+				ED4750F621EB16920043FD18 /* JoinRoomVC2.swift in Sources */,
 				ED8C47E521DB832F0065EC7E /* HolidayVC.swift in Sources */,
 				EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */,
 				ED1F586321E09A2500126A07 /* Validator.swift in Sources */,
@@ -768,17 +776,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 47RZ4GF77T;
+				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				INFOPLIST_FILE = Plug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Plug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -788,17 +796,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 47RZ4GF77T;
+				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				INFOPLIST_FILE = Plug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Plug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
