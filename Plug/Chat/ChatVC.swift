@@ -20,7 +20,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     var messageData: [MessageApolloFragment] = []
     
-    
+    var isLoading: Bool = false
+    var isEnd: Bool = false
     var receiver: UserApolloFragment? = nil
     var sender: UserApolloFragment? = nil
     var chatroom: ChatRoomSummaryApolloFragment? = nil
@@ -95,7 +96,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
         
-        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, start: 100, end: nil) { (messages) in
+        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
             self.messageData = messages
             self.title = "\(messages.count) 개 수신"
             self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
@@ -200,6 +201,31 @@ class ChatVC: PlugViewController, UITextViewDelegate {
 }
 
 extension ChatVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            guard !self.isLoading,
+                !self.isEnd,
+                let chatroomId = chatroom?.id,
+                let receiverId = receiver?.userId,
+                let senderid = sender?.userId else { return }
+            self.isLoading = true
+            let lastId = self.messageData[0].id
+            Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: lastId) { (messages) in
+                if messages.count == 0 {
+                    self.isEnd = true
+                }
+                self.messageData = messages + self.messageData
+                self.title = "\(messages.count) 개 수신"
+                let lastIndexPath = self.chatModel.addItemsFront(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
+                }))
+                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: lastIndexPath, at: .top, animated: false)
+                self.isLoading = false
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch chatModel.getType(of: indexPath) {
         case .BLANK:

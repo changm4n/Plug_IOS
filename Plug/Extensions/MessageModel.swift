@@ -97,7 +97,6 @@ class MessageModel: NSObject {
                          section: mViewModel.count - 1)
     }
     
-    
     override init() {
         super.init()
         mItems = []
@@ -108,18 +107,40 @@ class MessageModel: NSObject {
         super.init()
         
         self.mItems = messages
-        setViewModel()
+        self.mViewModel = setViewModel(items: messages)
+    }
+    
+    public func getIndexPath(of id:String) -> IndexPath {
+        
+        for (s, i) in mViewModel.enumerated() {
+            for (r, j) in mViewModel[s].enumerated() {
+                if j.message?.id == id {
+                    return IndexPath(row: r, section: s)
+                }
+            }
+        }
+        
+        return IndexPath(row: 0, section: 0)
     }
     
     public func setItems(messages: [MessageItem]) {
         self.mItems = messages
-        setViewModel()
+        self.mViewModel = setViewModel(items: messages)
+    }
+    
+    public func addItemsFront(messages: [MessageItem]) -> IndexPath{
+        self.mItems = messages + self.mItems
+        let newVM = setViewModel(items: messages)
+        mViewModel = newVM + mViewModel
+        
+        if newVM.count > 0 && newVM[newVM.count - 1].count > 0 {
+            return IndexPath(row: newVM[newVM.count - 1].count - 1,
+                             section: newVM.count - 1)
+        }
+        return IndexPath(row: 0, section: 0)
     }
     
     public func addMessage(newMessage: MessageItem) {
-        //Remove last blank
-        print("message added")
-//        mViewModel = self.reverse(array: mViewModel)
         mViewModel[mViewModel.count - 1].removeLast()
         
         let r = mViewModel[mViewModel.count - 1].count - 1
@@ -131,7 +152,6 @@ class MessageModel: NSObject {
             
             if !lastMessage.createAt.isSameDay(rhs: newMessage.createAt) {
                 mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
-//                mViewModel = self.reverse(array: mViewModel)
                 return
             }
             
@@ -144,8 +164,6 @@ class MessageModel: NSObject {
         
             mViewModel[mViewModel.count - 1].append(item)
             mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
-            
-//            mViewModel = self.reverse(array: mViewModel)
         }
     }
     
@@ -153,28 +171,32 @@ class MessageModel: NSObject {
         return mViewModel[indexPath.section][indexPath.row].messageType
     }
     
-    private func setViewModel() {
-        mViewModel.removeAll()
+    private func setViewModel(items: [MessageItem]) -> [[MessageViewItem]] {
+        var result: [[MessageViewItem]] = []
+        if items.count == 0 {
+            return []
+        }
+        
         var tmp: [MessageViewItem] = [MessageViewItem.init(type: .STAMP)]
         
-        for i in 0 ..< mItems.count {
+        for i in 0 ..< items.count {
             
-            let current = mItems[i]
+            let current = items[i]
             var item = MessageViewItem(withMessage: current, type: current.isMine  ? .RCELL : .LCELL)
             
-            if i == mItems.count - 1 {
+            if i == items.count - 1 {
                 item.isShowTime = true
                 tmp.append(item)
                 continue
             }
             
-            let next = mItems[i + 1]
+            let next = items[i + 1]
             
             if !current.createAt.isSameDay(rhs: next.createAt) {
                 item.isShowTime = true
                 tmp.append(item)
                 
-                mViewModel.append(tmp)
+                result.append(tmp)
                 tmp = [MessageViewItem.init(type: .STAMP)]
                 
                 continue
@@ -195,16 +217,7 @@ class MessageModel: NSObject {
         }
         
         tmp.append(MessageViewItem(type: .BLANK))
-        mViewModel.append(tmp)
-//        mViewModel = self.reverse(array: mViewModel)
-    }
-    
-    
-    func reverse(array: [[MessageViewItem]]) -> [[MessageViewItem]] {
-        var result: [[MessageViewItem]] = []
-        for item in array {
-            result.insert(item.reversed(), at: 0)
-        }
+        result.append(tmp)
         return result
     }
 }
@@ -219,13 +232,10 @@ extension MessageModel: UITableViewDataSource {
         } else if item.messageType == .RCELL {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
             cell.configure(viewItem: item)
-//            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
             return cell
             
         } else if item.messageType == .LCELL {
             let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
-//            cell.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
-
             cell.configure(viewItem: item)
             return cell
             
