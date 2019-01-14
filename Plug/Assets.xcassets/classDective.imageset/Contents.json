@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iconIcChattingDefault.png",
+      "filename" : "iconIcMyclassDefault.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iconIcChattingDefault@2x.png",
+      "filename" : "iconIcMyclassDefault@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iconIcChattingDefault@3x.png",
+      "filename" : "iconIcMyclassDefault@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
