@@ -9,6 +9,7 @@ PODS:
   - CropViewController (2.3.4):
     - TOCropViewController
   - Kingfisher (4.3.1)
+  - lottie-ios (2.5.2)
   - SkyFloatingLabelTextField (3.4.0)
   - Starscream (3.0.6)
   - TOCropViewController (2.3.4)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Apollo/WebSocket
   - CropViewController
   - Kingfisher (~> 4.0)
+  - lottie-ios
   - SkyFloatingLabelTextField (~> 3.0)
 
 SPEC REPOS:
@@ -27,6 +29,7 @@ SPEC REPOS:
     - Apollo
     - CropViewController
     - Kingfisher
+    - lottie-ios
     - SkyFloatingLabelTextField
     - Starscream
     - TOCropViewController
@@ -36,10 +39,11 @@ SPEC CHECKSUMS:
   Apollo: 450856adbdebcdf28c3c671f81732ac3f9944065
   CropViewController: b5ecd6625fb6bbefaacc19fe42ecee719f81f75e
   Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   TOCropViewController: 808c9724904be931dd2de5f97fcccf4cc8f8b03f
 
-PODFILE CHECKSUM: 7321c9c26265e5d927dbda458149242ad9bf1f03
+PODFILE CHECKSUM: fa392158403b80856749278c58039e83c090af72
 
 COCOAPODS: 1.5.0

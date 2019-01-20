@@ -34,6 +34,7 @@
 		ED4750F621EB16920043FD18 /* JoinRoomVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */; };
 		ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F721EB17370043FD18 /* KidVC2.swift */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
+		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
@@ -122,6 +123,7 @@
 		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
 		ED4750F721EB17370043FD18 /* KidVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC2.swift; sourceTree = "<group>"; };
 		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
+		ED4750FB21ECB6540043FD18 /* indicator.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = indicator.json; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
 				ED7D59D021B3FEAE0029E80A /* API.swift */,
 				ED7D59D221B43BBE0029E80A /* Secret.swift */,
+				ED4750FB21ECB6540043FD18 /* indicator.json */,
 				EDD8C3932187240D008DA9E7 /* Extensions */,
 				EDD8C39221872405008DA9E7 /* Views */,
 				ED3D980821A05FB300B61748 /* Chat */,
@@ -472,6 +475,7 @@
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
+				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */,
 				ED3E6A4321CF501800C28403 /* Setting.storyboard in Resources */,
@@ -502,6 +506,7 @@
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/TOCropViewController/TOCropViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -512,6 +517,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOCropViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import Lottie
 
 class HomeVC: PlugViewController {
 
@@ -15,10 +16,9 @@ class HomeVC: PlugViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleView: UIView!
     
-    var selectedFilter = -1
-    
     var filterCollectionView: UICollectionView?
     
+    var selectedFilter = 0
     var messageCount = 0
     
     let kLabelY: CGFloat = 85
@@ -27,10 +27,12 @@ class HomeVC: PlugViewController {
     var classData: [ChatRoomApolloFragment] = []
     var summaryData: [MessageSummary] = []
     
-    var filteredSet: Set<String> = Set<String>()
     var filteredList: [MessageSummary] {
-        let list = summaryData.filter({ filteredSet.contains($0.chatroom.name) })
-        return filteredSet.count == 0 ? summaryData : list
+        if selectedFilter == 0 {
+            return summaryData
+        } else {
+            return summaryData.filter({ $0.chatroom.name == classData[selectedFilter - 1].name })
+        }
     }
     
     override func viewDidLoad() {
@@ -70,8 +72,14 @@ class HomeVC: PlugViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        Session.removeSavedUser()
-        self.performSegue(withIdentifier: "out", sender: nil)
+        let animationView = LOTAnimationView(name: "indicator")
+        animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        animationView.center = view.center
+        animationView.loopAnimation = true
+        self.view.addSubview(animationView)
+        animationView.play()
+//        Session.removeSavedUser()
+//        self.performSegue(withIdentifier: "out", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,23 +97,23 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeHeaderCell
-        cell.label.text = "    \(classData[indexPath.row].name)    "
-        cell.setSeleted(selected: filteredSet.contains(classData[row].name))
+        if row == 0 {
+            cell.label.text = "    전체    "
+        } else {
+            cell.label.text = "    \(classData[row - 1].name)    "
+        }
+        
+        cell.setSeleted(selected: selectedFilter == row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return classData.count
+        return classData.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = indexPath.row
+        selectedFilter = indexPath.row
         
-        if filteredSet.contains(classData[row].name) {
-            filteredSet.remove(classData[row].name)
-        } else {
-            filteredSet.insert(classData[row].name)
-        }
         tableView.reloadData()
         collectionView.reloadData()
     }

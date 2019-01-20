@@ -245,7 +245,7 @@ class Networking: NSObject {
 //        }
 //    }
     
-    static func getMeassages(chatroomId: String, userId: String, receiverId: String, last: Int = 30, before: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
+    static func getMeassages(chatroomId: String, userId: String, receiverId: String, last: Int = 50, before: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
         getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: last, startCursor: before), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
             if let messages = result?.data?.messages { completion(messages.compactMap({$0.fragments.messageApolloFragment}))
             } else {
@@ -300,5 +300,4 @@ class Networking: NSObject {
             }
         }
     }
-    
 }

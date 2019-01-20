@@ -10,7 +10,7 @@ target 'Plug' do
     pod 'CropViewController'
     pod 'Apollo'
     pod 'Apollo/WebSocket'
-
+    pod 'lottie-ios'
     # Pods for Plug
     
 end

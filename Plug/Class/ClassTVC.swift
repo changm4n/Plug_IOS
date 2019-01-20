@@ -47,6 +47,7 @@ class ClassTVC: UITableViewController {
             vc.classData = classData
         }
     }
+    
     func setData() {
         self.classData = Session.me?.classData ?? []
         self.tableView.reloadData()
