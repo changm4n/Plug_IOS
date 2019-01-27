@@ -15,13 +15,16 @@ class HomeVC: PlugViewController {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet weak var coldView: UIView!
+    @IBOutlet weak var topView: UIView!
     
     var filterCollectionView: UICollectionView?
     
     var selectedFilter = 0
     var messageCount = 0
     
-    let kLabelY: CGFloat = 85
+    let kLabelY: CGFloat = 21
     let maxOffset: CGFloat = 21
     
     var classData: [ChatRoomApolloFragment] = []
@@ -38,7 +41,6 @@ class HomeVC: PlugViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
-        titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: Session.me?.role ?? .NONE == .TEACHER ? 135 : 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,33 +55,93 @@ class HomeVC: PlugViewController {
         self.classData = me.classData
         self.filterCollectionView?.reloadData()
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
+        if me.role == .TEACHER {
+            
+        } else {
+            for c in classData {
+                if summaryData.filter({$0.chatroom.name == c.name}).count == 0 {
+                    summaryData.append(MessageSummary(with: c))
+                }
+            }
+        }
+        
         self.tableView.reloadData()
         self.setUI()
     }
     
     func setUI() {
         guard let me = Session.me else { return }
-        guard let name = me.name, me.role == .TEACHER else { return }
-        
-        let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n플러그 오프 시간에 \(messageCount)명이\n메시지를 보냈습니다.", attributes: [
-            .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-            .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-            .kern: 0.0
-            ])
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: name.count + 7, length: 6))
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: 21, length: 2))
-        mainLabel.attributedText = attributedString
+        guard let name = me.name else { return }
+        coldView.isHidden = true
+        if me.role == .TEACHER {
+            if classData.filter({$0.kids?.count ?? 0 > 0}).count == 0 {
+                let attributedString = classData.count > 0 ? NSMutableAttributedString(string: "\(name) 선생님, \n\(classData[0].name) 클래스 학부모님들의\n가입을 기다리고있습니다.", attributes: [
+                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                    .kern: 0.0
+                    ]) :
+                    NSMutableAttributedString(string: "\(name) 선생님, \n클래스를 생성해주세요.", attributes: [
+                        .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                        .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                        .kern: 0.0
+                        ])
+                coldView.isHidden = classData.count == 0
+                codeLabel.text = classData.count > 0 ? classData[0].inviteCode : ""
+                mainLabel.attributedText = attributedString
+                titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: 135)
+                topView.backgroundColor = .plugBlue2
+            } else {
+                let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n플러그 오프 시간에 \(messageCount)명이\n메시지를 보냈습니다.", attributes: [
+                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                    .kern: 0.0
+                    ])
+                
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: name.count + 7, length: 6))
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: 21, length: 2))
+                mainLabel.attributedText = messageCount > 0 ? attributedString : NSMutableAttributedString()
+                
+                titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: messageCount > 0 ? 135 : 0)
+                topView.backgroundColor = messageCount > 0 ? .plugBlue2 : .white
+            }
+        } else {
+            let sumOfunreadCount = summaryData.map({$0.unreadCount}).reduce(0){$0 + $1}
+            let attributedString1 = NSMutableAttributedString(string: "\(name) 학부모님,\n", attributes: [
+                .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                .kern: 0.0
+                ])
+            let attributedString2 = NSMutableAttributedString(string: "\(sumOfunreadCount)개", attributes: [
+                .font: UIFont.systemFont(ofSize: 22.0, weight: .bold),
+                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                .kern: 0.0
+                ])
+            let attributedString3 = NSMutableAttributedString(string: "의 메시지를 받았습니다.", attributes: [
+                .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                .kern: 0.0
+                ])
+            let attr = NSMutableAttributedString()
+            attr.append(attributedString1)
+            attr.append(attributedString2)
+            attr.append(attributedString3)
+            
+            mainLabel.attributedText = sumOfunreadCount == 0 ? NSMutableAttributedString() : attr
+            
+            titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: sumOfunreadCount > 0 ? 135 : 0)
+            topView.backgroundColor = sumOfunreadCount > 0 ? .plugBlue2 : .white
+        }
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        let animationView = LOTAnimationView(name: "indicator")
-        animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        animationView.center = view.center
-        animationView.loopAnimation = true
-        self.view.addSubview(animationView)
-        animationView.play()
-//        Session.removeSavedUser()
-//        self.performSegue(withIdentifier: "out", sender: nil)
+//        let animationView = LOTAnimationView(name: "indicator")
+//        animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//        animationView.center = view.center
+//        animationView.loopAnimation = true
+//        self.view.addSubview(animationView)
+//        animationView.play()
+        Session.removeSavedUser()
+        self.performSegue(withIdentifier: "out", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -121,7 +183,11 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Session.me?.role ?? .NONE == .TEACHER ? 60 : 0
+        if Session.me?.role ?? .NONE == .TEACHER {
+            return classData.count < 2 ? 0 : 60
+        } else {
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredList.count

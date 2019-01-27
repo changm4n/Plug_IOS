@@ -4,7 +4,7 @@
 //
 //  Created by changmin lee on 02/12/2018.
 //  Copyright © 2018 changmin. All rights reserved.
-//{"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJrb29fbWluaUBuYXZlci5jb20iLCJyb2xlIjoiVEVBQ0hFUiIsImV4cGlyZXNJbiI6IjdkIiwiaWF0IjoxNTQzNzU4MDgwfQ.yvPMNeSFgtdHaN9gOjZLJqmjzFt6LjK49dA_giJkNIE"}
+//
 
 import Foundation
 import Apollo
@@ -13,6 +13,8 @@ class Networking: NSObject {
     
     static func getClient() -> ApolloClient {
         let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForResource = 5
         if let token = Session.fetchToken() {
             configuration.httpAdditionalHeaders = ["Authorization" : token]
         }
@@ -60,39 +62,7 @@ class Networking: NSObject {
                 let tmp: [MessageSummary] = result?.data?.messageSummaries.compactMap({
                         return MessageSummary(with: $0!.fragments.messageSummaryApolloFragment)
                 }) ?? []
-                
-                var tmpsummary: [MessageSummary] = []
-                for s in tmp {
-                    if let a = tmp.filter({$0 == s}).sorted(by: { (lhs, rhs) -> Bool in
-                        return lhs.lastMessage.createAt > rhs.lastMessage.createAt
-                    }).first {
-                        if !tmpsummary.contains(where: {$0 == a}) {
-                            tmpsummary.append(a)
-                        }
-                    }
-                }
-                
-                var summary: [MessageSummary] = []
-                for s in tmpsummary {
-                    var s = s
-                    if s.sender.userId == userID {
-                        if let a = tmp.filter({ $0 == s && $0.receiver.userId == userID }).first {
-                            s.unreadCount = a.unreadCount
-                            s.receiver = a.receiver
-                            s.sender = a.sender
-                        }
-                    }
-                    summary.append(s)
-                }
-                
-                summary.sort(by: { (lhs, rhs) -> Bool in
-                    lhs.lastMessage.createAt > rhs.lastMessage.createAt
-                })
-                
-                summary.sort(by: { (lhs, rhs) -> Bool in
-                    return lhs.unreadCount != 0 && rhs.unreadCount == 0
-                })
-                
+                let summary = MessageSummary.sortSummary(arr: tmp)
                 completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab, summary)
             }
         } else {
@@ -269,7 +239,6 @@ class Networking: NSObject {
     static func readMessage(chatRoomId: String, receiverId: String, senderId: String) {
         getClient().perform(mutation: ReadMessageMutation(chatroom: chatRoomId, sender: senderId, receiver: receiverId), queue: .main, resultHandler: nil)
     }
-    
     
     static func subscribeMessage(completion:@escaping (_ message: MessageSubscriptionPayloadApolloFragment) -> Void) {
         getSubscriptClient().subscribe(subscription: MessageSubscriptionSubscription(), queue: DispatchQueue.main) { (result, error) in

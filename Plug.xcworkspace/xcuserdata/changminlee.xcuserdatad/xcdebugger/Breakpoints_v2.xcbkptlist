@@ -186,7 +186,7 @@
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/CreateClassVC.swift"
-                  timestampString = "569157627.325227"
+                  timestampString = "570302592.668232"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -201,7 +201,7 @@
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/CreateClassVC.swift"
-                  timestampString = "569157627.3269449"
+                  timestampString = "570302592.671436"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
@@ -209,22 +209,6 @@
                   offsetFromSymbolStart = "31">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/Network.swift"
-            timestampString = "569668933.96096"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "createChatRoom(_:userID:year:completion:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -297,54 +281,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Plug/Extensions/Network.swift"
-            timestampString = "569668933.961839"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "getUserInfo(completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Apollo.GraphQLResult&lt;Plug.GetUserInfoQuery.Data&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static Plug.Networking.getUserInfo(completion: (Swift.Array&lt;Plug.ChatRoomApolloFragment&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Plug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Extensions/Network.swift"
-                  timestampString = "569157627.358866"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
-                  offsetFromSymbolStart = "1168">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Plug.GetUserInfoQuery.Data.ChatRoom) -&gt; Swift.Optional&lt;Plug.ChatRoomApolloFragment&gt; in closure #1 (Swift.Optional&lt;Apollo.GraphQLResult&lt;Plug.GetUserInfoQuery.Data&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static Plug.Networking.getUserInfo(completion: (Swift.Array&lt;Plug.ChatRoomApolloFragment&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Plug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Extensions/Network.swift"
-                  timestampString = "569157627.360531"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Plug/Class/EditClassVC.swift"
             timestampString = "569668933.962321"
             startingColumnNumber = "9223372036854775807"
@@ -378,7 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Extensions/User.swift"
-            timestampString = "569668933.962532"
+            timestampString = "570300479.070105"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
@@ -394,12 +330,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Chat/ChatVC.swift"
-            timestampString = "569668933.962639"
+            timestampString = "570302813.332823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "setData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Plug/Join/LoginVC.swift"
+            timestampString = "570302368.943841"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Plug/Extensions/MessageSummary.swift"
+            timestampString = "570302813.3329591"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "sortSummary(arr:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Plug/Extensions/MessageModel.swift"
+            timestampString = "570302813.33305"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "addMessage(newMessage:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -129,15 +129,15 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         let me = Session.me else { return }
         
         var topText: String
+        var bottomText: String
         if me.role == .TEACHER,
             let kid = me.getKid(chatroomID: chatroomId, parentID: senderId) {
             topText = "\(kid.name) 부모님"
+            bottomText = "\(chatroomName)"
         } else {
             topText = senderName
+            bottomText = "\(chatroomName) ･ 플러그 오프"
         }
-    
-        
-        let bottomText = "\(chatroomName) ･ 플러그 오프"
         
         let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.darkGrey,
                                NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16, weight: .medium)]
@@ -169,7 +169,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     func setTableViewScrollBottom(animated: Bool = false) {
-        self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
+        if self.chatModel.mViewModel.count > 0 {
+            self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
+        }
     }
     
     @objc override func keyboardWillShow(notification: NSNotification) {

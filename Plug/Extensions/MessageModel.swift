@@ -93,8 +93,13 @@ class MessageModel: NSObject {
     var mViewModel: [[MessageViewItem]] = []
     
     var lastIndexPath: IndexPath {
-        return IndexPath(row: mViewModel[mViewModel.count - 1].count - 1,
-                         section: mViewModel.count - 1)
+        if mViewModel.count == 0 {
+            return IndexPath(row: 0, section: 0)
+        } else {
+            return IndexPath(row: mViewModel[mViewModel.count - 1].count - 1,
+                             section: mViewModel.count - 1)
+        }
+        
     }
     
     override init() {
@@ -141,10 +146,14 @@ class MessageModel: NSObject {
     }
     
     public func addMessage(newMessage: MessageItem) {
-        mViewModel[mViewModel.count - 1].removeLast()
+        var r = 0
+        var s = 0
+        if mViewModel.count > 0 {
+            mViewModel[mViewModel.count - 1].removeLast()
+            r = mViewModel[mViewModel.count - 1].count - 1
+            s = mViewModel.count - 1
+        }
         
-        let r = mViewModel[mViewModel.count - 1].count - 1
-        let s = mViewModel.count - 1
         if let lastMessage = mViewModel.last?.last?.message {
             
             var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
@@ -164,6 +173,12 @@ class MessageModel: NSObject {
         
             mViewModel[mViewModel.count - 1].append(item)
             mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
+        } else {
+            var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
+            item.isShowTime = true
+            mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
+            return
+            
         }
     }
     
