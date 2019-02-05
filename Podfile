@@ -11,6 +11,8 @@ target 'Plug' do
     pod 'Apollo'
     pod 'Apollo/WebSocket'
     pod 'lottie-ios'
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
     # Pods for Plug
     
 end

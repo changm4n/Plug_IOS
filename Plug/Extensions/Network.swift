@@ -8,6 +8,7 @@
 
 import Foundation
 import Apollo
+import Alamofire
 
 class Networking: NSObject {
     
@@ -60,7 +61,7 @@ class Networking: NSObject {
                 let crontab = result?.data?.officePeriods.first?.crontab
                 let rooms = result?.data?.chatRooms ?? []
                 let tmp: [MessageSummary] = result?.data?.messageSummaries.compactMap({
-                        return MessageSummary(with: $0!.fragments.messageSummaryApolloFragment)
+                    return MessageSummary(with: $0!.fragments.messageSummaryApolloFragment)
                 }) ?? []
                 let summary = MessageSummary.sortSummary(arr: tmp)
                 completion(rooms.compactMap({$0.fragments.chatRoomApolloFragment}), crontab, summary)
@@ -103,7 +104,6 @@ class Networking: NSObject {
         } else {
             completion(nil, nil)
         }
-        
     }
     
     static func changePW(_ id:String, old:String, new:String, completion:@escaping (_ name:String?, _ error: GraphQLError?) -> Void) {
@@ -198,22 +198,16 @@ class Networking: NSObject {
         }
     }
     
-//    static func getMessageSummary(userID: String, start: Int, end: String?, completion:@escaping (_ lastMessages: [MessageSummary]) -> Void) {
-//        let apollo = getClient()
-//        apollo.fetch(query: MessageSummariesQuery(myId: userID, pageCount: start, startCursor: end), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
-//            if let summaries = result?.data?.messageSummaries {
-//                completion(summaries.compactMap({
-//                    if let item = $0 {
-//                        return MessageSummary(with:  item.fragments.messageSummaryApolloFragment)
-//                    } else {
-//                        return nil
-//                    }
-//                }))
-//            } else {
-//                completion([])
-//            }
-//        }
-//    }
+    static func getMessageSummary(userID: String, completion:@escaping (_ lastMessages: [MessageSummary]) -> Void) {
+        let apollo = getClient()
+        apollo.fetch(query: MessageSummariesQuery(userId: userID), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
+            let tmp: [MessageSummary] = result?.data?.messageSummaries.compactMap({
+                return MessageSummary(with: $0!.fragments.messageSummaryApolloFragment)
+            }) ?? []
+            let summary = MessageSummary.sortSummary(arr: tmp)
+            completion(summary)
+        }
+    }
     
     static func getMeassages(chatroomId: String, userId: String, receiverId: String, last: Int = 50, before: String?, completion:@escaping (_ lastMessages: [MessageApolloFragment]) -> Void) {
         getClient().fetch(query: MessagesQuery(chatRoomId: chatroomId, myId: userId, userId: receiverId, pageCount: last, startCursor: before), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
@@ -240,6 +234,10 @@ class Networking: NSObject {
         getClient().perform(mutation: ReadMessageMutation(chatroom: chatRoomId, sender: senderId, receiver: receiverId), queue: .main, resultHandler: nil)
     }
     
+    static func registerPushKey(pushKey: String) {
+        getClient().perform(mutation: RegisterPushKeyMutation(pushKey: pushKey), queue: .main, resultHandler: nil)
+    }
+    
     static func subscribeMessage(completion:@escaping (_ message: MessageSubscriptionPayloadApolloFragment) -> Void) {
         getSubscriptClient().subscribe(subscription: MessageSubscriptionSubscription(), queue: DispatchQueue.main) { (result, error) in
             if let message = result?.data?.message?.fragments.messageSubscriptionPayloadApolloFragment {
@@ -259,14 +257,42 @@ class Networking: NSObject {
         }
     }
     
-    static func uploadImage(image: UIImage, completion:@escaping (_ error: GraphQLError?) -> Void) {
+    static func uploadImage(image: UIImage, completion:@escaping (_ error: String?) -> Void) {
         
-        if let data = UIImagePNGRepresentation(image),
-            let dataStr =  String(data: data, encoding: String.Encoding.utf8) {
-            getClient().perform(mutation: UploadFileMutation(file:dataStr), queue: .main)
-            { (result, error) in
-                return error
+        if let data = UIImageJPEGRepresentation(image, 1),
+            let token = Session.fetchToken(),
+        let userId = Session.me?.userId{
+            
+            let headers = ["Authorization" : token,
+                           "accept" : "application/json",
+                           "content-type": "application/json"]
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append("""
+            { "query": "mutation(${"$"}files: [Upload!]!) { multipleUpload(files: ${"$"}files) }", "variables": { "files": [null] } }
+            """.data(using: .utf8)!, withName: "operations")
+                
+                multipartFormData.append("""
+            { "0": ["variables.files.0"] }
+            """.data(using: .utf8)!, withName: "map")
+                
+                multipartFormData.append(data, withName: "0", fileName: "\(userId).jpg", mimeType: "image/jpg")
+                
+                
+            }, usingThreshold: UInt64.init(), to: kBaseURL, method: .post, headers: headers) { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.uploadProgress(closure: { (progress) in
+                        PlugLog(string: "Upload Progress: \(progress.fractionCompleted)")
+                    })
+                    
+                    upload.responseJSON(completionHandler: { (json) in
+                        PlugLog(string: String(data: json.data!, encoding: .utf8)!)
+                    })
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
+            
     }
 }

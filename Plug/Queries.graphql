@@ -108,15 +108,12 @@ query MyChatrooms($userId: String) {
 }
 
 
-query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {
+query MessageSummaries($userId: String!) {
     messageSummaries(
                      where: {
-                     receiver : {
-                     userId_in: [ $myId ]
+                     OR: [{ sender: { userId: $userId } },
+                          { receiver: { userId: $userId } }]
                      }
-                     },
-                     first: $pageCount
-                     after: $startCursor
                      ) {
         ... MessageSummaryApolloFragment
     }
@@ -129,6 +126,12 @@ mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
         lastMessage {
             text
         }
+    }
+}
+
+mutation registerPushKey($pushKey: String!) {
+    registerNotification(data : {pushKey : $pushKey}) {
+        pushKey
     }
 }
     

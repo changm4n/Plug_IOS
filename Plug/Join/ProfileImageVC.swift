@@ -48,36 +48,39 @@ class ProfileImageVC: PlugViewController {
             let userId = Session.me?.userId,
             let pw = Session.me?.password else { return }
             me.name = name
-            
-            Networking.signUp(user: me, completion: { (name, error) in
-                if name != nil {
-                    Networking.login(userId, password: pw, completion: { (token) in
-                        if let token = token {
-                            let tmp = Session()
-                            Session.me = tmp
-                            tmp.token = token
-                            tmp.save()
-                            Networking.getMe(completion: { (me) in
-                                if let me = me {
-                                    let user = Session(withUser: me)
-                                    user.token = token
-                                    Session.me = user
-                                    user.save()
-                                    if Session.me?.role == .PARENT {
-                                        self.performSegue(withIdentifier: "join", sender: nil)
-                                    } else {
-                                        self.performSegue(withIdentifier: "next", sender: nil)
+            if me.userType == .EMAIL {
+                Networking.signUp(user: me, completion: { (name, error) in
+                    if name != nil {
+                        Networking.login(userId, password: pw, completion: { (token) in
+                            if let token = token {
+                                let tmp = Session()
+                                Session.me = tmp
+                                tmp.token = token
+                                tmp.save()
+                                Networking.getMe(completion: { (me) in
+                                    if let me = me {
+                                        let user = Session(withUser: me)
+                                        user.token = token
+                                        Session.me = user
+                                        user.save()
+                                        if Session.me?.role == .PARENT {
+                                            self.performSegue(withIdentifier: "join", sender: nil)
+                                        } else {
+                                            self.performSegue(withIdentifier: "next", sender: nil)
+                                        }
                                     }
-                                }
-                            })
-                        } else {
-                            showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
-                        }
-                    })
-                } else {
-                    showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
-                }
-            })
+                                })
+                            } else {
+                                showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
+                            }
+                        })
+                    } else {
+                        showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
+                    }
+                })
+            } else {
+                
+            }
         }
     }
     

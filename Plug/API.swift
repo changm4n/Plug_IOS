@@ -1452,29 +1452,25 @@ public final class MyChatroomsQuery: GraphQLQuery {
 
 public final class MessageSummariesQuery: GraphQLQuery {
   public let operationDefinition =
-    "query MessageSummaries($myId: String!, $pageCount: Int!, $startCursor: String) {\n  messageSummaries(where: {receiver: {userId_in: [$myId]}}, first: $pageCount, after: $startCursor) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
+    "query MessageSummaries($userId: String!) {\n  messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
 
   public var queryDocument: String { return operationDefinition.appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
-  public var myId: String
-  public var pageCount: Int
-  public var startCursor: String?
+  public var userId: String
 
-  public init(myId: String, pageCount: Int, startCursor: String? = nil) {
-    self.myId = myId
-    self.pageCount = pageCount
-    self.startCursor = startCursor
+  public init(userId: String) {
+    self.userId = userId
   }
 
   public var variables: GraphQLMap? {
-    return ["myId": myId, "pageCount": pageCount, "startCursor": startCursor]
+    return ["userId": userId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("messageSummaries", arguments: ["where": ["receiver": ["userId_in": [GraphQLVariable("myId")]]], "first": GraphQLVariable("pageCount"), "after": GraphQLVariable("startCursor")], type: .nonNull(.list(.object(MessageSummary.selections)))),
+      GraphQLField("messageSummaries", arguments: ["where": ["OR": [["sender": ["userId": GraphQLVariable("userId")]], ["receiver": ["userId": GraphQLVariable("userId")]]]]], type: .nonNull(.list(.object(MessageSummary.selections)))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -1662,6 +1658,85 @@ public final class ReadMessageMutation: GraphQLMutation {
           set {
             resultMap.updateValue(newValue, forKey: "text")
           }
+        }
+      }
+    }
+  }
+}
+
+public final class RegisterPushKeyMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation registerPushKey($pushKey: String!) {\n  registerNotification(data: {pushKey: $pushKey}) {\n    __typename\n    pushKey\n  }\n}"
+
+  public var pushKey: String
+
+  public init(pushKey: String) {
+    self.pushKey = pushKey
+  }
+
+  public var variables: GraphQLMap? {
+    return ["pushKey": pushKey]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("registerNotification", arguments: ["data": ["pushKey": GraphQLVariable("pushKey")]], type: .nonNull(.object(RegisterNotification.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(registerNotification: RegisterNotification) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "registerNotification": registerNotification.resultMap])
+    }
+
+    public var registerNotification: RegisterNotification {
+      get {
+        return RegisterNotification(unsafeResultMap: resultMap["registerNotification"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "registerNotification")
+      }
+    }
+
+    public struct RegisterNotification: GraphQLSelectionSet {
+      public static let possibleTypes = ["Notification"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("pushKey", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(pushKey: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Notification", "pushKey": pushKey])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var pushKey: String? {
+        get {
+          return resultMap["pushKey"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "pushKey")
         }
       }
     }

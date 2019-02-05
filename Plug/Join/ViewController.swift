@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KakaoOpenSDK
 
 class ViewController: PlugViewController {
     @IBOutlet weak var titleLabel: UILabel!
@@ -31,7 +32,27 @@ class ViewController: PlugViewController {
         self.setStatusBar(isWhite: false)
     }
     @IBAction func kakaoButtonPressed(_ sender: Any) {
-        showAlertWithString("잠시만요!", message: "개발 중 입니다!", sender: self)
+        KOSession.shared()?.close()
+        
+        KOSession.shared()?.open(completionHandler: { (error) in
+            if KOSession.shared()?.isOpen() ?? false {
+                print("kakao : \(KOSession.shared()!.token.accessToken)")
+                KOSessionTask.userMeTask(completion: { (error, me) in
+                    if let email = me?.account?.email {
+                        let user = Session()
+                        user.userId = email
+                        user.userType = .KAKAO
+                        user.password = "KAKAO"
+                        Session.me = user
+                        self.performSegue(withIdentifier: "kakao", sender: nil)
+                    } else {
+                        showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
+                    }
+                })
+            } else {
+                showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
+            }
+        }, authTypes: [NSNumber(value: KOAuthType.talk.rawValue)])
     }
 }
 

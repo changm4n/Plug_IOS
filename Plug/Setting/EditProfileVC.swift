@@ -66,11 +66,10 @@ class EditProfileVC: PlugViewController {
             vc.originalImage = image
             vc.handler = { image in
                 if let image = image {
-//                    Networking.uploadImage(image: image
-//                        , completion: { (error) in
-//                            print(error)
-//                    })
-//
+                    Networking.uploadImage(image: image
+                        , completion: { (error) in
+                            print(error)
+                    })
                     Session.me?.profileImage = image
                     self.collectionView.reloadData()
                     self.tableView.reloadData()
@@ -153,7 +152,7 @@ extension EditProfileVC: UITableViewDataSource, UITableViewDelegate {
         case "desc":
             cell.textLabel?.text = ""
         case "카카오톡 아이디로 가입":
-            cell.textLabel?.text = item.0
+            cell.textLabel?.text = Session.me?.userType == .KAKAO ? "카카오톡 아이디로 가입" : "이메일로 가입"
             cell.textLabel?.textColor = UIColor.grey
         default:
             break

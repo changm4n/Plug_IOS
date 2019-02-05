@@ -149,6 +149,7 @@
                         <outlet property="emailBtn" destination="BnF-cM-THL" id="GDM-98-Ept"/>
                         <outlet property="kakaoBtn" destination="KjH-hf-XgS" id="HTH-b3-yPb"/>
                         <outlet property="titleLabel" destination="jsf-WB-AXR" id="4nc-PD-nFp"/>
+                        <segue destination="5Ss-Ya-QdL" kind="show" identifier="kakao" id="WZy-2Y-IFP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1352,5 +1353,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TLB-Hq-zpC"/>
+        <segue reference="WZy-2Y-IFP"/>
     </inferredMetricsTieBreakers>
 </document>
