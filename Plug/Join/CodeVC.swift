@@ -10,12 +10,12 @@ import UIKit
 
 class CodeVC: PlugViewController {
     @IBOutlet weak var bottomBtn: WideButton!
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var codeTextField: PlugTextField!
     
     var key = "ERRORR"
     var email = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setKeyboardHide()

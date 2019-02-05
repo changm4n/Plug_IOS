@@ -44,6 +44,7 @@ open class Session : NSObject {
     var profileImage: UIImage?
     
     var classData: [ChatRoomApolloFragment] = []
+    var summaryData: [MessageSummary] = []
     
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
@@ -94,6 +95,17 @@ open class Session : NSObject {
         self.saveMyProfile()
     }
     
+    func refreshSummary(completion:@escaping (_ chatrooms:[MessageSummary]) -> Void) {
+        guard let userId = userId else {
+            completion([])
+            return
+        }
+        Networking.getMessageSummary(userID: userId) { (summary) in
+            self.summaryData = summary
+            completion(summary)
+        }
+    }
+    
     func refreshRoom(completion:@escaping (_ chatrooms:[ChatRoomApolloFragment]) -> Void) {
         Networking.getMyClasses { (classData) in
             Session.me?.classData = classData
@@ -108,6 +120,7 @@ open class Session : NSObject {
                 user.token = self.token
                 Session.me = user
                 user.save()
+                Networking.registerPushKey(pushKey: Session.fetchDeviceKey())
                 completion(user)
             }
         })

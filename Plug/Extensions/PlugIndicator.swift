@@ -7,3 +7,27 @@
 //
 
 import Foundation
+import UIKit
+import Lottie
+
+class PlugIndicator: NSObject {
+    public static let shared = PlugIndicator()
+    
+    var animationView = LOTAnimationView(name: "indicator")
+    
+    override init() {
+        animationView.frame.size = CGSize(width: 100, height: 100)
+        animationView.center = UIApplication.shared.keyWindow?.center ?? CGPoint.zero
+        animationView.loopAnimation = true
+    }
+    
+    func play() {
+        UIApplication.shared.keyWindow?.addSubview(animationView)
+        animationView.play()
+    }
+    
+    func stop() {
+        animationView.stop()
+        animationView.removeFromSuperview()
+    }
+}

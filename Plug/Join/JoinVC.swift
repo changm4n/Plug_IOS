@@ -37,7 +37,7 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
             Networking.verifyEmail(email, completion: { (code) in
-                if true {//let code = code {
+                if let code = code {
                     let user = Session()
                     user.userId = email
                     user.password = password

@@ -101,6 +101,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
         
+        PlugIndicator.shared.play()
         Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
         
         Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
@@ -108,6 +109,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             self.title = "\(messages.count) 개 수신"
             self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
             }))
+            PlugIndicator.shared.stop()
             self.tableView.reloadData()
             self.setTableViewScrollBottom()
         }
@@ -231,7 +233,9 @@ extension ChatVC: UITableViewDelegate {
                 let senderid = sender?.userId else { return }
             self.isLoading = true
             let lastId = self.messageData[0].id
+            PlugIndicator.shared.play()
             Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: lastId) { (messages) in
+                PlugIndicator.shared.stop()
                 if messages.count == 0 {
                     self.isEnd = true
                 }

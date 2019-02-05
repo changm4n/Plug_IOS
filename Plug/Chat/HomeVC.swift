@@ -47,13 +47,23 @@ class HomeVC: PlugViewController {
         hideNavigationBar()
         self.statusbarLight = true
         setData()
+        Session.me?.refreshSummary(completion: { (summary) in
+            self.summaryData = summary
+            self.setTableViewData()
+        })
     }
     
     func setData() {
-        guard let me = Session.me,
-            let userId = Session.me?.userId else { return }
+        guard let me = Session.me else { return }
         self.classData = me.classData
         self.filterCollectionView?.reloadData()
+        self.summaryData = me.summaryData
+        self.setTableViewData()
+        self.setUI()
+    }
+    
+    func setTableViewData() {
+        guard let me = Session.me else { return }
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         if me.role == .TEACHER {
             
@@ -64,9 +74,7 @@ class HomeVC: PlugViewController {
                 }
             }
         }
-        
         self.tableView.reloadData()
-        self.setUI()
     }
     
     func setUI() {
@@ -134,12 +142,6 @@ class HomeVC: PlugViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-//        let animationView = LOTAnimationView(name: "indicator")
-//        animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        animationView.center = view.center
-//        animationView.loopAnimation = true
-//        self.view.addSubview(animationView)
-//        animationView.play()
         Session.removeSavedUser()
         self.performSegue(withIdentifier: "out", sender: nil)
     }
@@ -197,6 +199,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SummaryCell
         let summary = summaryData[indexPath.row]
         cell.configure(item: summary)
+        if indexPath.row == summaryData.count - 1 {
+            cell.addBottomLine()
+        }
         return cell
     }
     

@@ -38,7 +38,7 @@ class StartVC: PlugViewController {
                     if let crontab = crontab {
                         Session.me?.schedule = Schedule(schedule: crontab)
                     }
-                    self.summary = summary
+                    Session.me?.summaryData = summary
                     self.animateSegue("Main", sender: nil)
                 })
             })
@@ -63,15 +63,6 @@ class StartVC: PlugViewController {
                     self.performSegue(withIdentifier: identifier, sender: sender)
                 }
             }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Main" {
-            let tvc = segue.destination as! UITabBarController
-            let nvc = tvc.viewControllers?[0] as! UINavigationController
-            let vc = nvc.viewControllers[0] as! HomeVC
-            vc.summaryData = self.summary
         }
     }
 }
