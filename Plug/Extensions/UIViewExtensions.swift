@@ -100,7 +100,7 @@ extension UITableViewCell {
 }
 
 
-func PlugLog(string: String) {
+func PlugLog(string: String?) {
     print("[LOG] \(string)")
 }
 

@@ -30,7 +30,7 @@ class SelectClassTVC: UITableViewController {
             let vc = segue.destination as! InviteCodeVC2
             vc.title = "클래스에 초대하기"
             vc.code = set.1
-            vc.nameText = "\(set.0) 클래스의 초대코드입니다."
+            vc.desc = "\(set.0) 클래스의 초대코드입니다."
             vc.bottomAction = {
                 vc.dismiss(animated: true, completion: nil)
             }

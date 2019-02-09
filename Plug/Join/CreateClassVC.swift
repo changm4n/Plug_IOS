@@ -13,6 +13,7 @@ class CreateClassVC: PlugViewController {
     @IBOutlet weak var nameTextField: PlugTextField!
     @IBOutlet weak var yearTextField: PlugTextField!
     @IBOutlet weak var bottomBtn: WideButton!
+    @IBOutlet weak var descLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -25,19 +26,23 @@ class CreateClassVC: PlugViewController {
         thePicker.delegate = self
         yearTextField.inputView = thePicker
         yearTextField.text = "2019"
-        
+        setUI()
         self.bottomAction = {
             guard let userID = Session.me?.userId,
                 let name = self.nameTextField.text,
                 let year = self.yearTextField.text else { return }
             Networking.createChatRoom(name, userID: userID, year: year, completion: { (code) in
                 if code != nil {
-                    self.performSegue(withIdentifier: "next", sender: nil)
+                    self.performSegue(withIdentifier: "next", sender: code)
                 } else {
                     showAlertWithString("오류", message: "클래스 생성 중 오류가 발생하였습니다.", sender: self)
                 }
             })
         }
+    }
+    
+    func setUI() {
+        descLabel.text = "\(Session.me?.name ?? "") 선생님,\n클래스를 만들어주세요!"
     }
     
     func setTextField() {
@@ -50,6 +55,8 @@ class CreateClassVC: PlugViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
             let vc = segue.destination as! InviteCodeVC
+            vc.desc = "\(self.nameTextField.text ?? "") 클래스를 만들었습니다."
+            vc.code = sender as? String ?? "-"
             vc.bottomAction = {
                 Networking.getUserInfo(completion: { (classData, crontab) in
                     Session.me?.classData = classData
@@ -57,7 +64,7 @@ class CreateClassVC: PlugViewController {
                         Session.me?.schedule = Schedule(schedule: crontab)
                         
                     }
-                    self.performSegue(withIdentifier: "next", sender: nil)
+                    vc.performSegue(withIdentifier: "next", sender: nil)
                 })
             }
         }

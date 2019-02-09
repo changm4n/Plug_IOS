@@ -15,7 +15,7 @@ class SettingVC: PlugViewController {
     
     var teacherTitlesOn: [(String, String)] = [("플러그 오프 설정","plug"), ("휴일 설정","off"), ("근무 시작시간","start"), ("근무 종료시간","end"), ("","desc")]
     var teacherTitlesOff: [(String, String)] = [("플러그 오프 설정","plug"),  ("","desc")]
-    let shareTitles: [(String, String)] = [("접근 권한 설정","cell"), ("약관 및 개인정보 처리방침","cell"), ("오픈소스 라이선스","cell")]
+    let shareTitles: [(String, String)] = [("접근 권한 설정","cell"), ("약관 및 개인정보 처리방침","cell"), ("오픈소스 라이선스","cell"),("로그아웃","cell")]
     
     var classItems: [ChatRoomApolloFragment] = []
     
@@ -159,14 +159,20 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if self.role == .PARENT {
+            let list = section == 0 ? currentList : shareTitles
+            let item = list[row]
             if section == 0 {
                 let classData = classItems[row]
                 performSegue(withIdentifier: "out", sender: classData.id)
             } else {
-                
+                if item.0 == "로그아웃" {
+                    
+                    showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
+                        Session.removeSavedUser()
+                        self.performSegue(withIdentifier: "logout", sender: nil)
+                    }, type: .destructive)
+                }
             }
-        } else {
-            
         }
     }
     

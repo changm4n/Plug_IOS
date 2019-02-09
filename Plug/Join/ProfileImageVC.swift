@@ -43,10 +43,11 @@ class ProfileImageVC: PlugViewController {
         bottomBtn.isEnabled = false
         self.bottomAction = {
             //TODO : image
+            let url = ""
             guard let name = self.nameTextField.text,
                 let me = Session.me,
-            let userId = Session.me?.userId,
-            let pw = Session.me?.password else { return }
+                let userId = Session.me?.userId,
+                let pw = Session.me?.password else { return }
             me.name = name
             if me.userType == .EMAIL {
                 Networking.signUp(user: me, completion: { (name, error) in
@@ -79,7 +80,48 @@ class ProfileImageVC: PlugViewController {
                     }
                 })
             } else {
-                
+                guard let id = me.id else { return }
+                Networking.kakaoSignUp(userId: id, sessionRole: me.role, completion: { (errors, error) in
+                    if errors == nil {
+                        Networking.kakaoSignIn(userId: id, completion: { (token, message, error) in
+                            if let token = token {
+                                let tmp = Session()
+                                Session.me = tmp
+                                tmp.token = token
+                                tmp.save()
+                                Networking.getMe(completion: { (me) in
+                                    if let me = me {
+                                        let user = Session(withUser: me)
+                                        user.token = token
+                                        Session.me = user
+                                        user.save()
+                                        Networking.updateUser(user: user, name: name, url: url, completion: { (name, error) in
+                                            if name != nil {
+                                                Session.me?.name = name
+                                                Session.me?.profileImageUrl = url
+                                                if Session.me?.role == .PARENT {
+                                                    self.performSegue(withIdentifier: "join", sender: nil)
+                                                } else {
+                                                    self.performSegue(withIdentifier: "next", sender: nil)
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        showNetworkError(sender: self)
+                                    }
+                                })
+                            } else {
+                                showNetworkError(message: message, sender: self)
+                            }
+                        })
+                    } else {
+                        if let message = errors?.first?.message {
+                            showAlertWithString("오류", message: message, sender: self)
+                        } else {
+                            showNetworkError(sender: self)
+                        }
+                    }
+                })
             }
         }
     }
@@ -91,16 +133,16 @@ class ProfileImageVC: PlugViewController {
         }
     }
     
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "edit" {
-                let vc = segue.destination as! EditImageVC
-                vc.originalImage = profileImage!
-                vc.handler = { result in
-                    Session.me?.profileImage = result
-                    self.collectionView.reloadData()
-                }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "edit" {
+            let vc = segue.destination as! EditImageVC
+            vc.originalImage = profileImage!
+            vc.handler = { result in
+                Session.me?.profileImage = result
+                self.collectionView.reloadData()
             }
         }
+    }
 }
 
 extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
@@ -147,9 +189,9 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         profileImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismiss(animated: true) {
-//            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
-//            vc.delegate = self
-//            self.present(vc, animated: true, completion: nil)
+            //            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
+            //            vc.delegate = self
+            //            self.present(vc, animated: true, completion: nil)
             self.performSegue(withIdentifier: "edit", sender: nil)
         }
     }

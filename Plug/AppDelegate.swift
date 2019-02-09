@@ -90,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         let dataDict:[String: String] = ["token": fcmToken]
+        PlugLog(string: "push token [\(dataDict["token"])")
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         Session.saveDeviceKey(fcmToken)
     }

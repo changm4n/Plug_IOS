@@ -233,6 +233,7 @@
                         <segue destination="E1I-vs-IEO" kind="show" identifier="holiday" id="sxh-Wd-sHr"/>
                         <segue destination="hV3-VZ-QPH" kind="show" id="0qc-Ei-UeO"/>
                         <segue destination="55E-FR-l5o" kind="show" identifier="out" id="b0b-6i-bIg"/>
+                        <segue destination="aqb-Wo-A9i" kind="presentation" identifier="logout" id="0UB-9s-eNG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdo-Hm-I28" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1009,6 +1010,14 @@
             </objects>
             <point key="canvasLocation" x="2617" y="1573"/>
         </scene>
+        <!--StartNC-->
+        <scene sceneID="zQd-8I-cXf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="StartNC" id="aqb-Wo-A9i" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VSJ-Vy-FXO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="-863"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar_seleted" width="24" height="24"/>
@@ -1019,6 +1028,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uK4-vl-8hE"/>
-        <segue reference="0qc-Ei-UeO"/>
+        <segue reference="2oq-ZY-DBl"/>
     </inferredMetricsTieBreakers>
 </document>

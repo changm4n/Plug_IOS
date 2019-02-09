@@ -424,6 +424,9 @@
                                 <state key="normal" title="카카오톡으로 로그인">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="kakaoLoginPressed:" destination="ncu-bg-dMf" eventType="touchUpInside" id="6VA-Y2-SiI"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 방법을 선택해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xp-KI-fet">
                                 <rect key="frame" x="50" y="106" width="275" height="21"/>
@@ -461,12 +464,13 @@
                     <connections>
                         <outlet property="emailBtn" destination="GV5-P1-jEB" id="daK-TW-fI0"/>
                         <outlet property="kakaoBtn" destination="7GA-oP-GHj" id="j3M-EX-e5y"/>
+                        <segue destination="V3T-Ga-KoE" kind="presentation" identifier="kakao" id="MTk-vt-CEy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAO-uy-pfB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kak-Iu-pmp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2340" y="-527"/>
+            <point key="canvasLocation" x="2332" y="-528"/>
         </scene>
         <!--로그인-->
         <scene sceneID="6TW-sP-byD">
@@ -578,7 +582,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zai-uU-iYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3022" y="-527"/>
+            <point key="canvasLocation" x="3201" y="-528"/>
         </scene>
         <!--회원가입-->
         <scene sceneID="Vhf-KB-PJJ">
@@ -916,6 +920,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="rLe-dO-X3f" id="RDx-rJ-whI"/>
+                        <outlet property="descLabel" destination="0KJ-iP-Mim" id="edh-WD-t1B"/>
                         <outlet property="nameTextField" destination="76I-oH-vz4" id="kbd-Kk-vue"/>
                         <outlet property="yearTextField" destination="Uzx-gp-634" id="JWj-cb-aed"/>
                         <segue destination="6sn-aG-ct9" kind="show" identifier="next" id="y4B-eD-Vhh"/>
@@ -999,12 +1004,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomBtn" destination="AOR-nU-GaK" id="nkx-ZA-Iv7"/>
+                        <outlet property="codeLabel" destination="vao-lB-qQX" id="ntM-7C-kgI"/>
+                        <outlet property="descLabel" destination="kPv-Ca-2dE" id="5Id-F4-Slp"/>
                         <segue destination="rKe-Ev-k1c" kind="presentation" identifier="next" id="yRg-fp-Ind"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5c-ov-3iQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4288.8000000000002" y="667.91604197901052"/>
+            <point key="canvasLocation" x="4289" y="668"/>
         </scene>
         <!--Chat-->
         <scene sceneID="PYr-UV-wde">
@@ -1096,7 +1103,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRi-hw-5EU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3870" y="-855"/>
+            <point key="canvasLocation" x="3993" y="-741"/>
         </scene>
         <!--StartVC-->
         <scene sceneID="8Ea-2c-hy6">
@@ -1352,7 +1359,8 @@
         <image name="iconIcClose" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TLB-Hq-zpC"/>
+        <segue reference="MTk-vt-CEy"/>
+        <segue reference="yRg-fp-Ind"/>
         <segue reference="WZy-2Y-IFP"/>
     </inferredMetricsTieBreakers>
 </document>

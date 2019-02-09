@@ -1664,6 +1664,176 @@ public final class ReadMessageMutation: GraphQLMutation {
   }
 }
 
+public final class KakaoSignUpMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation kakaoSignUp($role: Role!, $userId: String!) {\n  kakaoSignup(data: {kakaoUserId: $userId, role: $role}) {\n    __typename\n    userId\n    id\n  }\n}"
+
+  public var role: Role
+  public var userId: String
+
+  public init(role: Role, userId: String) {
+    self.role = role
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["role": role, "userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("kakaoSignup", arguments: ["data": ["kakaoUserId": GraphQLVariable("userId"), "role": GraphQLVariable("role")]], type: .nonNull(.object(KakaoSignup.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(kakaoSignup: KakaoSignup) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "kakaoSignup": kakaoSignup.resultMap])
+    }
+
+    public var kakaoSignup: KakaoSignup {
+      get {
+        return KakaoSignup(unsafeResultMap: resultMap["kakaoSignup"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "kakaoSignup")
+      }
+    }
+
+    public struct KakaoSignup: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("userId", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(userId: String, id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "User", "userId": userId, "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var userId: String {
+        get {
+          return resultMap["userId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "userId")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class KakaoSignInMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation kakaoSignIn($userId: String!) {\n  kakaoSignin(kakaoUserId: $userId) {\n    __typename\n    token\n  }\n}"
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("kakaoSignin", arguments: ["kakaoUserId": GraphQLVariable("userId")], type: .nonNull(.object(KakaoSignin.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(kakaoSignin: KakaoSignin) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "kakaoSignin": kakaoSignin.resultMap])
+    }
+
+    public var kakaoSignin: KakaoSignin {
+      get {
+        return KakaoSignin(unsafeResultMap: resultMap["kakaoSignin"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "kakaoSignin")
+      }
+    }
+
+    public struct KakaoSignin: GraphQLSelectionSet {
+      public static let possibleTypes = ["TokenPayload"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("token", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(token: String) {
+        self.init(unsafeResultMap: ["__typename": "TokenPayload", "token": token])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var token: String {
+        get {
+          return resultMap["token"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "token")
+        }
+      }
+    }
+  }
+}
+
 public final class RegisterPushKeyMutation: GraphQLMutation {
   public let operationDefinition =
     "mutation registerPushKey($pushKey: String!) {\n  registerNotification(data: {pushKey: $pushKey}) {\n    __typename\n    pushKey\n  }\n}"
@@ -2373,6 +2543,85 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class GetOfficeTimeQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query getOfficeTime($userId: String!) {\n  officePeriods(where: {user: {userId: $userId}}) {\n    __typename\n    crontab\n  }\n}"
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("officePeriods", arguments: ["where": ["user": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(officePeriods: [OfficePeriod]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }])
+    }
+
+    public var officePeriods: [OfficePeriod] {
+      get {
+        return (resultMap["officePeriods"] as! [ResultMap]).map { (value: ResultMap) -> OfficePeriod in OfficePeriod(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, forKey: "officePeriods")
+      }
+    }
+
+    public struct OfficePeriod: GraphQLSelectionSet {
+      public static let possibleTypes = ["OfficePeriod"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("crontab", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(crontab: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "OfficePeriod", "crontab": crontab])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var crontab: String? {
+        get {
+          return resultMap["crontab"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "crontab")
         }
       }
     }

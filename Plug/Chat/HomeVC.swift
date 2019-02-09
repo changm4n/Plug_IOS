@@ -66,11 +66,22 @@ class HomeVC: PlugViewController {
         guard let me = Session.me else { return }
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         if me.role == .TEACHER {
-            
+            for c in classData {
+                for user in c.users ?? [] {
+                    if user.fragments.userApolloFragment.userId == me.userId {
+                        continue
+                    }
+                    
+                    if summaryData.filter({$0.sender.name == user.fragments.userApolloFragment.name}).count == 0 {
+                        summaryData.append(MessageSummary(with: user.fragments.userApolloFragment, classData: c, myType: .TEACHER))
+                    }
+                }
+            }
         } else {
             for c in classData {
                 if summaryData.filter({$0.chatroom.name == c.name}).count == 0 {
-                    summaryData.append(MessageSummary(with: c))
+                    let admin = c.admins!.first!.fragments.userApolloFragment
+                    summaryData.append(MessageSummary(with: admin, classData: c, myType: .PARENT))
                 }
             }
         }
@@ -142,8 +153,7 @@ class HomeVC: PlugViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        Session.removeSavedUser()
-        self.performSegue(withIdentifier: "out", sender: nil)
+        showAlertWithString("알림", message: "검색 기능은 개발 중 입니다.", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -261,7 +271,7 @@ class SummaryCell: UITableViewCell {
         let sender = item.sender
         let chatroom = item.chatroom
         
-        nameLabel.text = item.kidName
+        nameLabel.text = item.displayName
         classLabel.text = chatroom.name
         
         if let url = sender.profileImageUrl, sender.profileImageUrl != ""{

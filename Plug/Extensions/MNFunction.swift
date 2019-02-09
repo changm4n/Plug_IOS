@@ -74,9 +74,24 @@ func getUserDefaultIntValue(_ key: String) -> Int {
     return value
 }
 
-func showAlertWithString(_ title: String , message: String, sender:UIViewController, handler: ((UIAlertAction)->())? = nil) {
+func showAlertWithString(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())? = nil) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
     alert.addAction(UIAlertAction(title: "닫기", style: UIAlertActionStyle.cancel, handler: handler))
+    sender.view.endEditing(true)
+    sender.present(alert, animated: true, completion: nil)
+}
+
+func showAlertWithSelect(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())?, type: UIAlertActionStyle = .default) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "닫기", style: UIAlertActionStyle.cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "확인", style: type, handler: handler))
+    sender.view.endEditing(true)
+    sender.present(alert, animated: true, completion: nil)
+}
+
+func showNetworkError(message: String? = nil, sender: UIViewController) {
+    let alert = UIAlertController(title: "오류", message: message ?? kNetworkError, preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "닫기", style: UIAlertActionStyle.cancel, handler: nil))
     sender.view.endEditing(true)
     sender.present(alert, animated: true, completion: nil)
 }

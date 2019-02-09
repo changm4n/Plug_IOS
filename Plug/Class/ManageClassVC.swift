@@ -14,7 +14,6 @@ class ManageClassVC: PlugViewController {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var classInfoLabel: UILabel!
     
-    
     var classID: String?
     var classData: ChatRoomApolloFragment? {
         return Session.me?.getChatroomBy(id: classID)
@@ -31,7 +30,7 @@ class ManageClassVC: PlugViewController {
             let vc = nvc.viewControllers[0] as! InviteCodeVC2
             vc.title = "클래스에 초대하기"
             vc.code = classData?.inviteCode ?? "-"
-            vc.nameText = "\(classData?.name ?? "") 클래스의 초대코드입니다."
+            vc.desc = "\(classData?.name ?? "") 클래스의 초대코드입니다."
             vc.bottomAction = {
                 vc.dismiss(animated: true, completion: nil)
             }
@@ -40,7 +39,6 @@ class ManageClassVC: PlugViewController {
             let vc = nvc.viewControllers[0] as! EditClassVC
             vc.classID = self.classID
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -23,6 +23,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     var isLoading: Bool = false
     var isEnd: Bool = false
+    var isPlugOn: Bool = true
     var receiver: UserApolloFragment? = nil
     var sender: UserApolloFragment? = nil
     var chatroom: ChatRoomSummaryApolloFragment? = nil
@@ -87,12 +88,20 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderId = self.sender?.userId,
             let chatRoomId = self.chatroom?.id
             else { return }
-        self.resetTextView()
-        Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
-//            if let message = result {
-//                self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
-//            }
+        
+        if isPlugOn {
+            self.resetTextView()
+            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
+            }
+        } else {
+            showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
+                self.resetTextView()
+                Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
+                }
+            }, type: .default)
         }
+        
+        
     }
     
     func setData() {
@@ -112,6 +121,16 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             PlugIndicator.shared.stop()
             self.tableView.reloadData()
             self.setTableViewScrollBottom()
+        }
+        
+        if Session.me?.role == .PARENT {
+            Networking.getOfficeTime(senderid) { (crontab) in
+                if let crontab = crontab {
+                    let schedule = Schedule(schedule: crontab)
+                    self.isPlugOn = schedule.isPlugOn()
+                    //표시
+                }
+            }
         }
         
         Networking.subscribeMessage { (message) in
@@ -230,7 +249,8 @@ extension ChatVC: UITableViewDelegate {
                 !self.isEnd,
                 let chatroomId = chatroom?.id,
                 let receiverId = receiver?.userId,
-                let senderid = sender?.userId else { return }
+                let senderid = sender?.userId ,
+            self.messageData.count != 0 else { return }
             self.isLoading = true
             let lastId = self.messageData[0].id
             PlugIndicator.shared.play()

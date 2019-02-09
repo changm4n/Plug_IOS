@@ -101,6 +101,3 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
         }
     }
 }
-
-
-

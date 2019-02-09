@@ -39,7 +39,7 @@ class CreateClassVC2: CreateClassVC {
             if let set = sender as? (String, String) {
                 let vc = segue.destination as! InviteCodeVC2
                 vc.code = set.1
-                vc.nameText = "\(set.0) 클래스를 만들었습니다."
+                vc.desc = "\(set.0) 클래스를 만들었습니다."
                 vc.bottomAction = {
                     vc.dismiss(animated: true, completion: nil)
                 }

@@ -64,4 +64,8 @@ class Schedule: NSObject {
     func setDaysby(arr: [Int]) {
         self.days = arr.map({ "\($0)" }).joined(separator: ",")
     }
+    
+    func isPlugOn() -> Bool {
+        return false//지금 온인지?
+    }
 }

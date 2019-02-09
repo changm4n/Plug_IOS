@@ -25,13 +25,13 @@ struct MessageSummary {
     var lastMessage: MessageItem
     var createAt: Date
     
-    var kidName: String {
+    var displayName: String {
         if let me = Session.me,
             me.role == .TEACHER,
             let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
             return "\(kid.name) 부모님"
         } else {
-            return sender.name
+            return "\(sender.name) 선생님"
         }
     }
     public init(with classData: ChatRoomApolloFragment) {
@@ -52,6 +52,18 @@ struct MessageSummary {
         createAt = Date()
     }
     
+    public init(with user: UserApolloFragment, classData: ChatRoomApolloFragment, myType: SessionRole) {
+        id = "id"
+        chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
+        unreadCount = 0
+        lastMessage = MessageItem()
+        lastMessage.text = myType == .TEACHER ? "\(user.name) 부모님이 \(classData.name) 클래스에 가입했습니다." : "\(user.name) 선생님과 대화를 시작해보세요."
+        
+        sender = user
+        receiver = classData.users!.filter({$0.fragments.userApolloFragment.userId == Session.me!.userId}).first!.fragments.userApolloFragment
+        
+        createAt = Date()
+    }
     
     public init(with summary: MessageSummaryApolloFragment) {
         id = summary.id
@@ -115,6 +127,5 @@ struct MessageSummary {
             return lhs.unreadCount != 0 && rhs.unreadCount == 0
         })
         return summary
-        
     }
 }

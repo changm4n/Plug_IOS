@@ -106,6 +106,24 @@ class Networking: NSObject {
         }
     }
     
+    static func kakaoSignUp(userId: String, sessionRole: SessionRole, completion:@escaping (_ error: [GraphQLError]?, _ error: Error?) -> Void) {
+        let apollo = getClient()
+        if let role = Role.init(rawValue: sessionRole.rawValue) {
+            apollo.perform(mutation: KakaoSignUpMutation(role: role, userId: userId), queue: DispatchQueue.main) { (result, error) in
+                completion(result?.errors, error)
+            }
+        } else {
+            completion(nil, nil)
+        }
+    }
+    
+    static func kakaoSignIn(userId: String, completion:@escaping (_ token: String?, _ message: String?, _ error: Error?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: KakaoSignInMutation(userId: userId), queue: DispatchQueue.main) { (result, error) in
+            completion(result?.data?.kakaoSignin.token, result?.errors?.first?.message, error)
+        }
+    }
+    
     static func changePW(_ id:String, old:String, new:String, completion:@escaping (_ name:String?, _ error: GraphQLError?) -> Void) {
         let apollo = getClient()
         apollo.perform(mutation: ChangePwMutation(userId: id, old: old, new: new), queue: DispatchQueue.main) { (result, error) in
@@ -155,6 +173,17 @@ class Networking: NSObject {
         }
     }
     
+    static func getOfficeTime(_ userId:String, completion:@escaping (_ crontab: String?) -> Void) {
+        let apollo = getClient()
+        apollo.fetch(query: GetOfficeTimeQuery(userId: userId), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
+            if let crontab = result?.data?.officePeriods.first?.crontab {
+                completion(crontab)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     static func applyChatroom(_ id: String, userId: String, kidName: String, completion:@escaping (_ id:String?) -> Void) {
         let apollo = getClient()
         apollo.perform(mutation: ApplyChatRoomMutation(id: id, userId: userId, kidName: kidName), queue: DispatchQueue.main) { (result, error) in
@@ -166,21 +195,6 @@ class Networking: NSObject {
         let apollo = getClient()
         apollo.perform(mutation: UpdateChatRoomMutation(id: roomID, newName: newName, newYear: "\(newYear)-12-02T14:07:13.995Z"), queue: DispatchQueue.main) { (result, error) in
             completion(result?.data?.updateChatRoom.id)
-        }
-    }
-    
-    static func getOffice(completion:@escaping (_ crontab:String?) -> Void) {
-        let apollo = getClient()
-        if let id = Session.me?.id {
-            apollo.fetch(query: GetCronTabQuery(id: id), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: DispatchQueue.main) { (result, error) in
-                if let crontab = result?.data?.officePeriods.first?.crontab{
-                    completion(crontab)
-                } else {
-                    completion(nil)
-                }
-            }
-        } else {
-            completion(nil)
         }
     }
     
@@ -261,12 +275,13 @@ class Networking: NSObject {
         
         if let data = UIImageJPEGRepresentation(image, 1),
             let token = Session.fetchToken(),
-        let userId = Session.me?.userId{
+            let userId = Session.me?.userId{
             
             let headers = ["Authorization" : token,
                            "accept" : "application/json",
                            "content-type": "application/json"]
             Alamofire.upload(multipartFormData: { (multipartFormData) in
+                
                 multipartFormData.append("""
             { "query": "mutation(${"$"}files: [Upload!]!) { multipleUpload(files: ${"$"}files) }", "variables": { "files": [null] } }
             """.data(using: .utf8)!, withName: "operations")
@@ -276,7 +291,6 @@ class Networking: NSObject {
             """.data(using: .utf8)!, withName: "map")
                 
                 multipartFormData.append(data, withName: "0", fileName: "\(userId).jpg", mimeType: "image/jpg")
-                
                 
             }, usingThreshold: UInt64.init(), to: kBaseURL, method: .post, headers: headers) { (result) in
                 switch result {
@@ -293,6 +307,6 @@ class Networking: NSObject {
                 }
             }
         }
-            
+        
     }
 }

@@ -595,8 +595,8 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PLUGKR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Q2-Nc-bma">
-                                <rect key="frame" x="118.5" y="204" width="138" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLUGKR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Q2-Nc-bma">
+                                <rect key="frame" x="118.5" y="206" width="138" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <color key="textColor" red="0.3294117647" green="0.40000000000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -650,7 +650,7 @@
                     <connections>
                         <outlet property="bottomBtn" destination="ftH-YV-PJv" id="cD4-cw-37O"/>
                         <outlet property="codeLabel" destination="8Q2-Nc-bma" id="f3g-H1-JXv"/>
-                        <outlet property="nameLabel" destination="Uuk-sj-Adq" id="4xc-HS-cG9"/>
+                        <outlet property="descLabel" destination="Uuk-sj-Adq" id="oiA-aS-oAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoR-d9-avq" userLabel="First Responder" sceneMemberID="firstResponder"/>

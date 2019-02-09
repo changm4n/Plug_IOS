@@ -21,6 +21,7 @@
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
 		ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5B1217E06650075C4CE /* LoginVC.swift */; };
 		ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
+		ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED3CF408220A96F100356230 /* GoogleService-Info.plist */; };
 		ED3D980521A0187200B61748 /* EditClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980421A0187200B61748 /* EditClassVC.swift */; };
 		ED3D980721A05E6300B61748 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3D980621A05E6300B61748 /* Note.storyboard */; };
 		ED3D980A21A05FE100B61748 /* NoteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980921A05FE100B61748 /* NoteMainVC.swift */; };
@@ -112,6 +113,7 @@
 		ED1FB5AF217E05240075C4CE /* MNFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNFunction.swift; sourceTree = "<group>"; };
 		ED1FB5B1217E06650075C4CE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		ED3CF408220A96F100356230 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED3D980421A0187200B61748 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
 		ED3D980621A05E6300B61748 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
 		ED3D980921A05FE100B61748 /* NoteMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMainVC.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 		EDE731D8217B4E7000D302DF /* Plug */ = {
 			isa = PBXGroup;
 			children = (
+				ED3CF408220A96F100356230 /* GoogleService-Info.plist */,
 				EDF609BB21BA468400CB3529 /* schema.json */,
 				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
@@ -480,6 +483,7 @@
 				ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */,
 				EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */,
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
+				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,

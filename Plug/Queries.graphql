@@ -129,6 +129,20 @@ mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
     }
 }
 
+mutation kakaoSignUp($role: Role!, $userId: String!) {
+    kakaoSignup(data: {kakaoUserId: $userId,
+                role : $role }) {
+        userId
+        id
+    }
+}
+
+mutation kakaoSignIn($userId: String!) {
+    kakaoSignin(kakaoUserId : $userId) {
+        token
+    }
+}
+
 mutation registerPushKey($pushKey: String!) {
     registerNotification(data : {pushKey : $pushKey}) {
         pushKey
@@ -194,6 +208,12 @@ mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
     applyChatRoom(id: $id, data : {userId:$userId
                   kidName :$kidName}) {
         id
+    }
+}
+
+query getOfficeTime($userId: String!) {
+    officePeriods(where :{user :{userId :$userId}}) {
+        crontab
     }
 }
 
