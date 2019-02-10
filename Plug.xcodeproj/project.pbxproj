@@ -39,6 +39,8 @@
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
+		ED71B6AF220FE35A00AC21FF /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
+		ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B02210219400AC21FF /* ParentClassVC.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
 		ED7D59D121B3FEAE0029E80A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
@@ -131,6 +133,9 @@
 		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
 		ED4750FB21ECB6540043FD18 /* indicator.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = indicator.json; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		ED71B6AE220FE35A00AC21FF /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
+		ED71B6B02210219400AC21FF /* ParentClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentClassVC.swift; sourceTree = "<group>"; };
+		ED71B6B2221029E400AC21FF /* Plug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plug.entitlements; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
 		ED7D59D021B3FEAE0029E80A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -249,6 +254,7 @@
 				ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */,
 				ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */,
 				ED1F586021DE29C100126A07 /* OutClassVC.swift */,
+				ED71B6AE220FE35A00AC21FF /* WebVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -323,6 +329,7 @@
 				EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */,
 				EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */,
 				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
+				ED71B6B02210219400AC21FF /* ParentClassVC.swift */,
 				ED3D980421A0187200B61748 /* EditClassVC.swift */,
 				ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */,
 				ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */,
@@ -354,6 +361,7 @@
 		EDE731D8217B4E7000D302DF /* Plug */ = {
 			isa = PBXGroup;
 			children = (
+				ED71B6B2221029E400AC21FF /* Plug.entitlements */,
 				ED3CF408220A96F100356230 /* GoogleService-Info.plist */,
 				EDF609BB21BA468400CB3529 /* schema.json */,
 				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
@@ -443,6 +451,14 @@
 				TargetAttributes = {
 					EDE731D5217B4E7000D302DF = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					EDF609C821BBDD7100CB3529 = {
 						CreatedOnToolsVersion = 10.1;
@@ -605,6 +621,7 @@
 				EDF609BA21B7915500CB3529 /* ChatVC.swift in Sources */,
 				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
 				ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */,
+				ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */,
 				EDD8C39E21896F80008DA9E7 /* HomeHeaderCell.swift in Sources */,
 				ED8C47E321DA4D230065EC7E /* PlugCronParser.swift in Sources */,
 				ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */,
@@ -641,6 +658,7 @@
 				ED8C47E721DBAC840065EC7E /* EditProfileVC.swift in Sources */,
 				EDD8C3A2218D77CC008DA9E7 /* ClassTVC.swift in Sources */,
 				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
+				ED71B6AF220FE35A00AC21FF /* WebVC.swift in Sources */,
 				ED7D59D121B3FEAE0029E80A /* API.swift in Sources */,
 				EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */,
 			);
@@ -803,6 +821,7 @@
 			baseConfigurationReference = 1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -847,6 +866,7 @@
 			baseConfigurationReference = F64DDDE6650DF586CD6AFD19 /* Pods-Plug.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				FRAMEWORK_SEARCH_PATHS = (

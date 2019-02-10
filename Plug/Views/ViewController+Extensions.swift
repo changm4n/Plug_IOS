@@ -35,12 +35,7 @@ class PlugViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
     }
     
-    func resetNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.isTranslucent = true
-    }
+    
     
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -112,5 +107,12 @@ extension UIViewController {
         } else {
             self.navigationController?.navigationBar.shadowImage = nil
         }
+    }
+    
+    func resetNavigationBar() {
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.isTranslucent = true
     }
 }

@@ -20,8 +20,14 @@ class EditProfileVC: PlugViewController {
     }
     
     var isOn: Bool = false
-    var selectedRow = 0
+    var selectedRow = 0 {
+        didSet {
+            selectedURL = selectedRow == 0 ? "" : profileUrls[selectedRow - 1]
+        }
+    }
     var profileImage: UIImage?
+    
+    var selectedURL = ""
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -48,15 +54,12 @@ class EditProfileVC: PlugViewController {
         if let newField = tableView.cellForRow(at: IndexPath(item: 0, section: 0))?.viewWithTag(1) as? UITextField,
             let newName = newField.text,
         let me = Session.me{
-            if me.name != newName {
-                Networking.updateUser(user: me, name: newName, url: "") { (name, error) in
-                    if error == nil {
-                        Session.me?.refreshMe(completion: { (me) in})
-                    }
-                }
+            if me.name != newName || me.profileImageUrl != selectedURL {
+                Session.me?.profileImageUrl = self.selectedURL
+                Session.me?.name = newName
+                Networking.updateUser(user: me, name: newName, url: selectedURL) { (name, error) in}
             }
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,6 +84,12 @@ class EditProfileVC: PlugViewController {
     func setData() {
         guard let me = Session.me else { return }
         isOn = me.userId != nil
+        for (index, url) in profileUrls.enumerated() {
+            if url == me.profileImageUrl {
+                selectedRow = index + 1
+            }
+        }
+        collectionView.reloadData()
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {

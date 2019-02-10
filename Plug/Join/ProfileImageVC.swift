@@ -14,7 +14,11 @@ class ImageCell: UICollectionViewCell {
     
     func configure(row: Int, isSelected: Bool = false) {
         if row == 0 {
-            imageView.image = Session.me?.profileImage ?? UIImage(named: "avatar\(row)")
+            if isSelected {
+                imageView.image = Session.me?.profileImage
+            } else {
+                imageView.image = UIImage(named: "avatar\(row)")
+            }
         } else {
             imageView.image = UIImage(named: "avatar\(row)")
         }
@@ -43,7 +47,7 @@ class ProfileImageVC: PlugViewController {
         bottomBtn.isEnabled = false
         self.bottomAction = {
             //TODO : image
-            let url = ""
+            let url = self.selectedRow == 0 ? "" : profileUrls[self.selectedRow - 1]
             guard let name = self.nameTextField.text,
                 let me = Session.me,
                 let userId = Session.me?.userId,

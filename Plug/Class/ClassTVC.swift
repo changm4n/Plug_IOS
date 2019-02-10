@@ -45,6 +45,9 @@ class ClassTVC: UITableViewController {
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! SelectClassTVC
             vc.classData = classData
+        } else if segue.identifier == "list_parent" {
+            let vc = segue.destination as! ParentClassVC
+            vc.classID = (sender as! ChatRoomApolloFragment).id
         }
     }
     
@@ -119,7 +122,7 @@ class ClassTVC: UITableViewController {
                 self.performSegue(withIdentifier: "join", sender: nil)
             }
         } else {
-            self.performSegue(withIdentifier: "list", sender: classData[indexPath.row])
+            self.performSegue(withIdentifier: type == .TEACHER ? "list" : "list_parent", sender: classData[indexPath.row])
         }
     }
 }

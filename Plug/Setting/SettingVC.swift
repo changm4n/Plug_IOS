@@ -82,6 +82,10 @@ class SettingVC: PlugViewController {
         if segue.identifier == "out" {
             let vc = segue.destination as! OutClassVC
             vc.classID = sender as? String
+        } else if segue.identifier == "web" {
+            let vc = segue.destination as! WebVC
+            vc.urlStr = sender as? String
+            vc.title = "이용약관 및 개인정보 처리방침"
         }
     }
     
@@ -91,6 +95,7 @@ class SettingVC: PlugViewController {
         if self.role == .PARENT {
             classItems = me.classData
         }
+        profileImageView.image = Session.me?.profileImage
     }
     
     func setUI() {
@@ -159,19 +164,22 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if self.role == .PARENT {
-            let list = section == 0 ? currentList : shareTitles
-            let item = list[row]
             if section == 0 {
                 let classData = classItems[row]
                 performSegue(withIdentifier: "out", sender: classData.id)
-            } else {
-                if item.0 == "로그아웃" {
-                    
-                    showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
-                        Session.removeSavedUser()
-                        self.performSegue(withIdentifier: "logout", sender: nil)
-                    }, type: .destructive)
-                }
+            }
+        }
+        
+        if section == 1 {
+            let item = shareTitles[row]
+            
+            if item.0 == "로그아웃" {
+                showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
+                    Session.removeSavedUser()
+                    self.performSegue(withIdentifier: "logout", sender: nil)
+                }, type: .destructive)
+            } else if item.0 == "약관 및 개인정보 처리방침" {
+                performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
             }
         }
     }

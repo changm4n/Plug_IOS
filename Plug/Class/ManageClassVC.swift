@@ -19,6 +19,7 @@ class ManageClassVC: PlugViewController {
         return Session.me?.getChatroomBy(id: classID)
     }
     var members: [UserApolloFragment] = []
+    var meUser: UserApolloFragment?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class ManageClassVC: PlugViewController {
             vc.bottomAction = {
                 vc.dismiss(animated: true, completion: nil)
             }
+        } else if segue.identifier == "chat" {
+            let vc = segue.destination as! ChatVC
+            vc.receiver = meUser
+            vc.sender = sender as? UserApolloFragment
+            vc.chatroom = ChatRoomSummaryApolloFragment(id: classData!.id, name: classData!.name, chatRoomAt: classData!.chatRoomAt, createdAt: classData!.createdAt)
         } else {
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! EditClassVC
@@ -49,6 +55,7 @@ class ManageClassVC: PlugViewController {
     
     override func willMove(toParentViewController parent: UIViewController?) {
         if parent == nil {
+            parent?.resetNavigationBar()
             navigationController?.navigationBar.barTintColor = UIColor.plugBlue
             navigationController?.navigationBar.tintColor = .white
             self.navigationController?.navigationBar.shadowImage = nil
@@ -67,6 +74,7 @@ class ManageClassVC: PlugViewController {
     func setData() {
         guard let me = Session.me , let userId = me.userId , let classData = classData else { return }
         members = classData.users?.map({$0.fragments.userApolloFragment}) ?? []
+        meUser = members.filter({ $0.userId == userId }).first
         members = members.filter{ $0.userId != userId }
        
         tableView.reloadData()
@@ -86,7 +94,12 @@ extension ManageClassVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberCell
         let member = members[indexPath.row]
-        cell.memberNameLabel.text = member.name
+        if let kidName = Session.me?.getKid(chatroomID: classID ?? "", parentID: member.userId)?.name {
+            cell.memberNameLabel.text = "\(kidName) 부모님"
+        } else {
+            cell.memberNameLabel.text = member.name
+        }
+        cell.setProfile(with: member.profileImageUrl)
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -100,10 +113,27 @@ extension ManageClassVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 48
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let member = members[indexPath.row]
+        performSegue(withIdentifier: "chat", sender: member)
+    }
 }
 
 
 class MemberCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var memberNameLabel: UILabel!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        profileImage.makeCircle()
+    }
+    
+    func setProfile(with urlString: String?) {
+        if let urlStr = urlString {
+            profileImage.kf.setImage(with: URL(string: urlStr))
+        }
+    }
 }

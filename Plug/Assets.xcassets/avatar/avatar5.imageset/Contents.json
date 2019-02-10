@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "avatarFull.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "avatarFull@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "avatarFull@3x.png",
+      "filename" : "img_avatar_male_a.png",
       "scale" : "3x"
     }
   ],
