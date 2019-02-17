@@ -52,7 +52,10 @@ class ProfileImageVC: PlugViewController {
                 let me = Session.me,
                 let userId = Session.me?.userId,
                 let pw = Session.me?.password else { return }
+            self.play()
             me.name = name
+            me.profileImageUrl = url
+            
             if me.userType == .EMAIL {
                 Networking.signUp(user: me, completion: { (name, error) in
                     if name != nil {
@@ -63,6 +66,7 @@ class ProfileImageVC: PlugViewController {
                                 tmp.token = token
                                 tmp.save()
                                 Networking.getMe(completion: { (me) in
+                                    self.stop()
                                     if let me = me {
                                         let user = Session(withUser: me)
                                         user.token = token
@@ -76,10 +80,12 @@ class ProfileImageVC: PlugViewController {
                                     }
                                 })
                             } else {
+                                self.stop()
                                 showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
                             }
                         })
                     } else {
+                        self.stop()
                         showAlertWithString("오류", message: "회원가입 중 오류가 발생하였습니다.", sender: self)
                     }
                 })

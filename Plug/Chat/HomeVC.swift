@@ -86,6 +86,7 @@ class HomeVC: PlugViewController {
             }
         }
         self.tableView.reloadData()
+        self.tableView.isScrollEnabled = summaryData.count != 0
     }
     
     func setUI() {

@@ -83,6 +83,16 @@ class PlugViewController: UIViewController {
             }
         }
     }
+    
+    func play() {
+        PlugIndicator.shared.play()
+        self.view.isUserInteractionEnabled = false
+    }
+    
+    func stop() {
+        PlugIndicator.shared.stop()
+        self.view.isUserInteractionEnabled = true
+    }
 }
 
 

@@ -21,7 +21,9 @@ class JoinRoomVC: PlugViewController {
         setTextFields()
         bottomAction = {
             guard let code = self.codeTextField.text else { return }
+            self.play()
             Networking.getChatroom(byCode: code, completion: { (room) in
+                self.stop()
                 if room != nil {
                     self.performSegue(withIdentifier: "next", sender: room)
                 } else {

@@ -31,7 +31,9 @@ class CreateClassVC: PlugViewController {
             guard let userID = Session.me?.userId,
                 let name = self.nameTextField.text,
                 let year = self.yearTextField.text else { return }
+            self.play()
             Networking.createChatRoom(name, userID: userID, year: year, completion: { (code) in
+                self.stop()
                 if code != nil {
                     self.performSegue(withIdentifier: "next", sender: code)
                 } else {
@@ -58,7 +60,9 @@ class CreateClassVC: PlugViewController {
             vc.desc = "\(self.nameTextField.text ?? "") 클래스를 만들었습니다."
             vc.code = sender as? String ?? "-"
             vc.bottomAction = {
+                vc.play()
                 Networking.getUserInfo(completion: { (classData, crontab) in
+                    vc.stop()
                     Session.me?.classData = classData
                     if let crontab = crontab {
                         Session.me?.schedule = Schedule(schedule: crontab)

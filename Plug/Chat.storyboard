@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="136" width="375" height="418"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHt-7w-OUp">
-                                                <rect key="frame" x="37.5" y="33" width="300" height="200"/>
+                                                <rect key="frame" x="37.5" y="60" width="300" height="200"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초대코드" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9Z-OZ-Xry">
                                                         <rect key="frame" x="120.5" y="20" width="59" height="20.5"/>
@@ -68,7 +68,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="BHt-7w-OUp" firstAttribute="centerX" secondItem="GNY-kd-7k4" secondAttribute="centerX" id="K4B-JH-8mb"/>
-                                            <constraint firstItem="BHt-7w-OUp" firstAttribute="top" secondItem="GNY-kd-7k4" secondAttribute="top" constant="33" id="OV1-DW-bLF"/>
+                                            <constraint firstItem="BHt-7w-OUp" firstAttribute="top" secondItem="GNY-kd-7k4" secondAttribute="top" constant="60" id="OV1-DW-bLF"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7X-aR-eE7">
@@ -230,15 +230,6 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="6CJ-Lg-bdl"/>
                         <barButtonItem key="leftBarButtonItem" image="icTextLogoWhite" id="ncC-bu-loY">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="fxr-s9-LVj" kind="presentation" identifier="secret" id="xZN-6b-TKA"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="btnSearchWhite" id="ynm-e5-PGO">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="searchButtonPressed:" destination="ZvS-fR-AMx" id="J8j-Dx-otO"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -455,16 +446,30 @@
                                     <constraint firstAttribute="trailing" secondItem="3ps-Pw-GYd" secondAttribute="trailing" id="zJj-M5-eLv"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지금은 선생님의 근무시간이 아닙니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMu-4U-O1W">
+                                <rect key="frame" x="0.0" y="34" width="375" height="30"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PEV-61-zFM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="5"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="trailing" secondItem="6Kn-LC-c09" secondAttribute="trailing" id="AvT-yD-0Qr"/>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="bottom" secondItem="JQV-VV-BPb" secondAttribute="bottom" constant="48" id="AyJ-d5-hYT"/>
+                            <constraint firstItem="nMu-4U-O1W" firstAttribute="top" secondItem="c4C-OJ-6Ra" secondAttribute="top" constant="-30" id="Z3k-Ni-LmG"/>
                             <constraint firstItem="JQV-VV-BPb" firstAttribute="leading" secondItem="c4C-OJ-6Ra" secondAttribute="leading" id="czf-Le-FRS"/>
-                            <constraint firstItem="JQV-VV-BPb" firstAttribute="height" secondItem="c4C-OJ-6Ra" secondAttribute="height" constant="-48" id="eYS-GW-f2I"/>
+                            <constraint firstItem="JQV-VV-BPb" firstAttribute="top" secondItem="nMu-4U-O1W" secondAttribute="bottom" id="egw-wc-5mP"/>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="trailing" secondItem="JQV-VV-BPb" secondAttribute="trailing" id="kRV-cJ-qCV"/>
+                            <constraint firstItem="c4C-OJ-6Ra" firstAttribute="trailing" secondItem="nMu-4U-O1W" secondAttribute="trailing" id="s3F-qr-4RS"/>
                             <constraint firstItem="6Kn-LC-c09" firstAttribute="leading" secondItem="c4C-OJ-6Ra" secondAttribute="leading" id="sia-9s-s3l"/>
                             <constraint firstItem="c4C-OJ-6Ra" firstAttribute="bottom" secondItem="6Kn-LC-c09" secondAttribute="bottom" id="u1f-fc-paS"/>
+                            <constraint firstItem="nMu-4U-O1W" firstAttribute="leading" secondItem="c4C-OJ-6Ra" secondAttribute="leading" id="vuS-XA-qiY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c4C-OJ-6Ra"/>
                     </view>
@@ -472,6 +477,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="ZMi-WL-fLT"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="banner" destination="nMu-4U-O1W" id="bKo-gS-wpU"/>
+                        <outlet property="bannerYOffset" destination="Z3k-Ni-LmG" id="ZlK-Oi-9NP"/>
                         <outlet property="inputField" destination="6Kn-LC-c09" id="6lh-TW-Q4o"/>
                         <outlet property="inputViewHeight" destination="Yk9-uu-Mfm" id="Zfl-DE-9KC"/>
                         <outlet property="sendButton" destination="eUN-Jf-0h7" id="JSR-KW-cIa"/>
@@ -742,7 +749,6 @@
     <resources>
         <image name="avatarFull" width="36" height="36"/>
         <image name="berrymelon" width="64.5" height="79.5"/>
-        <image name="btnSearchWhite" width="28" height="28"/>
         <image name="homeActive" width="24" height="24"/>
         <image name="homeDeactive" width="24" height="24"/>
         <image name="icTextLogoWhite" width="37" height="22"/>

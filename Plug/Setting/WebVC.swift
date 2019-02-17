@@ -16,8 +16,6 @@ class WebVC: PlugViewController, WKUIDelegate, WKNavigationDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        self.navigationController?.navigationBar.tintColor = .white
         webView = WKWebView(frame: self.view.frame)
         webView?.uiDelegate = self
         webView?.navigationDelegate = self
@@ -26,9 +24,25 @@ class WebVC: PlugViewController, WKUIDelegate, WKNavigationDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setColors()
         if let urlString = urlStr,
             let url = URL(string: urlString) {
             webView?.load(URLRequest(url: url))
         }
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        if parent == nil {
+            statusbarLight = true
+        }
+        super.willMove(toParentViewController: parent)
+    }
+    
+    private func setColors() {
+        statusbarLight = false
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

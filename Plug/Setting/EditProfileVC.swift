@@ -38,7 +38,7 @@ class EditProfileVC: PlugViewController {
         self.tableView.keyboardDismissMode = .onDrag
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "cell2")
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.black]
         setData()
     }
     

@@ -36,7 +36,9 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
         
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
+            self.play()
             Networking.verifyEmail(email, completion: { (code) in
+                self.stop()
                 if let code = code {
                     let user = Session()
                     user.userId = email
@@ -77,7 +79,7 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
         
         passwordTextField.delegate = self
         passwordTextField.type = .passwd
-        passwordTextField.isSecureTextEntry = true
+//        passwordTextField.isSecureTextEntry = true
         passwordTextField.changeHandler = { [weak self] text, check in
             self?.passwdCheck = check
         }
@@ -99,8 +101,8 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
             vc.email = data.0
             vc.key = data.1
             vc.bottomAction = {
-//                if true {
-                if vc.codeTextField.text == vc.key {
+                if true {
+//                if vc.codeTextField.text == vc.key {
                     vc.performSegue(withIdentifier: "next", sender: nil)
                 } else {
                     showAlertWithString("인증코드 오류", message: "유효하지 않은 인증코드입니다.\n초대코드는 6자리의 알파벳 대문자입니다.", sender: vc)

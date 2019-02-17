@@ -54,4 +54,8 @@ class CreateClassVC2: CreateClassVC {
             self?.bottomButton?.isEnabled = check
         }
     }
+    
+    override func setUI() {
+        
+    }
 }

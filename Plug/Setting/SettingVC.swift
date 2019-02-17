@@ -64,6 +64,7 @@ class SettingVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        statusbarLight = true
         self.setData()
         self.setUI()
         self.tableView.reloadData()
@@ -73,7 +74,7 @@ class SettingVC: PlugViewController {
         super.viewWillDisappear(animated)
         guard let me = Session.me, let type = Session.me?.role else { return }
         if type == .TEACHER {
-            Networking.updateOffice(me.schedule.toString()) { (cron) in
+            Networking.updateOffice(isplugOn ? me.schedule.toString() : "") { (cron) in
             }
         }
     }
@@ -83,7 +84,8 @@ class SettingVC: PlugViewController {
             let vc = segue.destination as! OutClassVC
             vc.classID = sender as? String
         } else if segue.identifier == "web" {
-            let vc = segue.destination as! WebVC
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! WebVC
             vc.urlStr = sender as? String
             vc.title = "이용약관 및 개인정보 처리방침"
         }
@@ -91,7 +93,7 @@ class SettingVC: PlugViewController {
     
     func setData() {
         guard let me = Session.me else { return }
-        self.role = me.role ?? .NONE
+        self.role = me.role
         if self.role == .PARENT {
             classItems = me.classData
         }
@@ -101,6 +103,7 @@ class SettingVC: PlugViewController {
     func setUI() {
         guard let me = Session.me else { return }
         
+        self.isplugOn = me.schedule.isOn
         self.nameLabel.text = me.name
         self.ruleLabel.text = me.role == .TEACHER ? "선생님" : "학부모님"
     }
@@ -180,6 +183,8 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 }, type: .destructive)
             } else if item.0 == "약관 및 개인정보 처리방침" {
                 performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
+            } else if item.0 == "오픈소스 라이선스" {
+                performSegue(withIdentifier: "license", sender: nil)
             }
         }
     }

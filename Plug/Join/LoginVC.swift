@@ -35,7 +35,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
         
         self.bottomAction = {
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
-            PlugIndicator.shared.play()
+            self.play()
             Networking.login(email, password: password, completion: { (token) in
                 if let token = token {
                     let tmp = Session()
@@ -49,19 +49,19 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
                             Session.me = user
                             user.save()
                             Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
+                                self.stop()
                                 Session.me?.classData = classData
                                 if let crontab = crontab {
                                     Session.me?.schedule = Schedule(schedule: crontab)
                                 }
-                                PlugIndicator.shared.stop()
                                 self.performSegue(withIdentifier: "next", sender: summary)
                             })
                         } else {
-                            PlugIndicator.shared.stop()
+                            self.stop()
                         }
                     })
                 } else {
-                    PlugIndicator.shared.stop()
+                    self.stop()
                     showAlertWithString("", message: "이메일 또는 비밀번호가 틀렸습니다.", sender: self)
                 }
             })
@@ -77,7 +77,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
         
         passwordTextField.delegate = self
         passwordTextField.type = .passwd
-        passwordTextField.isSecureTextEntry = true
+//        passwordTextField.isSecureTextEntry = true
         passwordTextField.changeHandler = { [weak self] text, check in
             self?.passwdCheck = check
         }

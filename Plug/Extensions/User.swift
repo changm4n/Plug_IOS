@@ -34,7 +34,20 @@ open class Session : NSObject {
     open var role: SessionRole = .NONE
     open var userType: SessionType?
     open var userId: String?
-    open var profileImageUrl: String?
+    open var profileImageUrl: String? {
+        didSet {
+            if let urlStr = profileImageUrl,
+                let url = URL(string: urlStr) {
+                do {
+                    let ImageData = try Data(contentsOf: url)
+                    profileImage = UIImage(data: ImageData)
+                } catch {
+                    profileImage = nil
+                }
+            }
+        }
+    }
+    
     open var phoneNumber: String?
     open var token: String?
     open var password: String?

@@ -19,22 +19,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-WB-AXR">
-                                <rect key="frame" x="187.5" y="136" width="0.0" height="50"/>
+                                <rect key="frame" x="50" y="97" width="0.0" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="DIU-Xw-1fH"/>
+                                    <constraint firstAttribute="height" constant="90" id="DIU-Xw-1fH"/>
                                 </constraints>
                                 <attributedString key="attributedText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAppIconPrimary" translatesAutoresizingMaskIntoConstraints="NO" id="i47-aJ-x7c">
-                                <rect key="frame" x="114" y="270" width="147" height="127"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAppIconWhite" translatesAutoresizingMaskIntoConstraints="NO" id="i47-aJ-x7c">
+                                <rect key="frame" x="114" y="250" width="147" height="127"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="147" id="EW6-NU-zhA"/>
                                     <constraint firstAttribute="height" constant="127" id="LRG-cB-8So"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnF-cM-THL">
-                                <rect key="frame" x="50" y="540" width="275" height="46"/>
+                                <rect key="frame" x="50" y="498" width="275" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="pFI-cJ-84A"/>
                                 </constraints>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjH-hf-XgS">
-                                <rect key="frame" x="50" y="486" width="275" height="46"/>
+                                <rect key="frame" x="50" y="444" width="275" height="46"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="cBT-Hv-YfP"/>
@@ -59,7 +59,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWq-ru-Gpe">
-                                <rect key="frame" x="50" y="614" width="275" height="20"/>
+                                <rect key="frame" x="50" y="564" width="275" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CaJ-xk-gSK"/>
                                 </constraints>
@@ -123,19 +123,31 @@
                                     <segue destination="PAA-OB-hXT" kind="presentation" id="XyM-Fe-aMe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0C-JG-Wdi">
+                                <rect key="frame" x="40" y="612" width="295" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bhx-IS-BcI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BnF-cM-THL" secondAttribute="bottom" constant="81" id="3vP-S0-hBE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B0C-JG-Wdi" secondAttribute="trailing" constant="40" id="8r6-BN-vpX"/>
                             <constraint firstItem="BnF-cM-THL" firstAttribute="top" secondItem="KjH-hf-XgS" secondAttribute="bottom" constant="8" id="9Sx-Rf-YX1"/>
+                            <constraint firstItem="B0C-JG-Wdi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="BHf-lW-Ikj"/>
                             <constraint firstItem="ZWq-ru-Gpe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="MLf-aK-8vu"/>
-                            <constraint firstItem="i47-aJ-x7c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OfX-wD-PB5"/>
+                            <constraint firstItem="i47-aJ-x7c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-20" id="OfX-wD-PB5"/>
+                            <constraint firstItem="jsf-WB-AXR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Tii-Cx-Qzg"/>
                             <constraint firstItem="i47-aJ-x7c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YmD-YL-wql"/>
-                            <constraint firstItem="jsf-WB-AXR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="136" id="fvs-P4-cxr"/>
+                            <constraint firstItem="B0C-JG-Wdi" firstAttribute="top" secondItem="ZWq-ru-Gpe" secondAttribute="bottom" constant="28" id="bgl-WI-gek"/>
+                            <constraint firstItem="ZWq-ru-Gpe" firstAttribute="top" secondItem="BnF-cM-THL" secondAttribute="bottom" constant="20" id="fgW-tj-BJW"/>
+                            <constraint firstItem="jsf-WB-AXR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="97" id="fvs-P4-cxr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="B0C-JG-Wdi" secondAttribute="bottom" constant="25" id="jV4-NT-ayP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KjH-hf-XgS" secondAttribute="trailing" constant="50" id="knZ-xU-ozt"/>
                             <constraint firstItem="KjH-hf-XgS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="lsr-bV-1rO"/>
-                            <constraint firstItem="jsf-WB-AXR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s5E-jm-eOM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZWq-ru-Gpe" secondAttribute="bottom" constant="33" id="tWq-Jy-hei"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZWq-ru-Gpe" secondAttribute="trailing" constant="50" id="uir-Y9-fKx"/>
                             <constraint firstItem="BnF-cM-THL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="xBB-nx-ZeG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BnF-cM-THL" secondAttribute="trailing" constant="50" id="zUz-sG-Efw"/>
@@ -146,10 +158,12 @@
                         <barButtonItem key="backBarButtonItem" title="이전" id="nfn-XE-nCr"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="descLabel" destination="B0C-JG-Wdi" id="qZG-l4-rTX"/>
                         <outlet property="emailBtn" destination="BnF-cM-THL" id="GDM-98-Ept"/>
                         <outlet property="kakaoBtn" destination="KjH-hf-XgS" id="HTH-b3-yPb"/>
                         <outlet property="titleLabel" destination="jsf-WB-AXR" id="4nc-PD-nFp"/>
                         <segue destination="5Ss-Ya-QdL" kind="show" identifier="kakao" id="WZy-2Y-IFP"/>
+                        <segue destination="7Q8-oC-ki3" kind="showDetail" identifier="web" id="0rj-2a-fzk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -164,12 +178,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-xN-Bdf" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-xN-Bdf" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Mxx-lF-zfr"/>
                                 </constraints>
-                                <state key="normal" title="다음"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c89-ph-cK9" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="104" width="291" height="50"/>
@@ -297,12 +311,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4M-bc-CHs" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4M-bc-CHs" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="NWJ-4e-sek"/>
                                 </constraints>
-                                <state key="normal" title="다음"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -680,12 +694,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsb-Ed-yGY" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsb-Ed-yGY" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="tdZ-MG-4Un"/>
                                 </constraints>
-                                <state key="normal" title="다음" image="btnChevronWhite"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -891,12 +905,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-dO-X3f" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-dO-X3f" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="sgt-fs-njL"/>
                                 </constraints>
-                                <state key="normal" title="다음" image="btnChevronWhite"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1029,13 +1043,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eq8-fc-46G" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eq8-fc-46G" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="vpy-q9-pGm"/>
                                 </constraints>
-                                <state key="normal" title="다음" image="btnChevronWhite"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97h-xA-jNf">
                                 <rect key="frame" x="85" y="106" width="205" height="41"/>
@@ -1192,6 +1206,14 @@
             </objects>
             <point key="canvasLocation" x="1454" y="-527"/>
         </scene>
+        <!--WebVC-->
+        <scene sceneID="ToR-sY-tmr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="WebVC" id="7Q8-oC-ki3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ddj-zL-fMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="-138"/>
+        </scene>
         <!--회원가입-->
         <scene sceneID="Z7m-4K-Hep">
             <objects>
@@ -1233,12 +1255,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lis-8S-ohO" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lis-8S-ohO" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="4pe-MY-ON3"/>
                                 </constraints>
-                                <state key="normal" title="다음"/>
+                                <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1350,17 +1372,59 @@
             </objects>
             <point key="canvasLocation" x="4289" y="1361"/>
         </scene>
+        <!--StartVC-->
+        <scene sceneID="nla-fG-JzN">
+            <objects>
+                <viewController id="RyY-El-3as" customClass="StartVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MHi-AM-HpR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAppIconPrimary" translatesAutoresizingMaskIntoConstraints="NO" id="aqk-1R-wpZ">
+                                <rect key="frame" x="114" y="270" width="147" height="127"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="127" id="5LF-N6-aBx"/>
+                                    <constraint firstAttribute="width" constant="147" id="kCw-D5-MKx"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icTextLogoPrimary" translatesAutoresizingMaskIntoConstraints="NO" id="uZD-Ro-2kU">
+                                <rect key="frame" x="165.5" y="591" width="44" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="K2b-bc-jMj"/>
+                                    <constraint firstAttribute="height" constant="26" id="zTm-LA-kMQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ehz-Ae-t01" firstAttribute="bottom" secondItem="uZD-Ro-2kU" secondAttribute="bottom" constant="50" id="Fy0-aO-bz7"/>
+                            <constraint firstItem="uZD-Ro-2kU" firstAttribute="centerX" secondItem="MHi-AM-HpR" secondAttribute="centerX" id="Tl7-kp-cni"/>
+                            <constraint firstItem="aqk-1R-wpZ" firstAttribute="centerY" secondItem="MHi-AM-HpR" secondAttribute="centerY" id="oi4-WV-T2x"/>
+                            <constraint firstItem="aqk-1R-wpZ" firstAttribute="centerX" secondItem="MHi-AM-HpR" secondAttribute="centerX" id="pKc-fU-Cbq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ehz-Ae-t01"/>
+                    </view>
+                    <connections>
+                        <outlet property="logoImage" destination="aqk-1R-wpZ" id="gzJ-O4-Rbp"/>
+                        <outlet property="titleImage" destination="uZD-Ro-2kU" id="xh4-61-fYa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FtH-hK-UAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-950" y="-528"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar_seleted" width="24" height="24"/>
-        <image name="btnChevronWhite" width="12" height="20"/>
+        <image name="btnChevronDisabled" width="12" height="20"/>
         <image name="icAppIconPrimary" width="147" height="127"/>
+        <image name="icAppIconWhite" width="147" height="127"/>
         <image name="icTextLogoPrimary" width="44" height="26"/>
         <image name="iconIcClose" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MTk-vt-CEy"/>
-        <segue reference="yRg-fp-Ind"/>
-        <segue reference="WZy-2Y-IFP"/>
+        <segue reference="zV1-f5-B7X"/>
+        <segue reference="TLB-Hq-zpC"/>
+        <segue reference="OEX-KR-GYl"/>
     </inferredMetricsTieBreakers>
 </document>

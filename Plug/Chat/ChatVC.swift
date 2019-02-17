@@ -13,17 +13,25 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var bannerYOffset: NSLayoutConstraint!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var inputField: UIView!
+    @IBOutlet weak var banner: UILabel!
     
     let chatModel = MessageModel()
     var messageData: [MessageApolloFragment] = []
     
     var isLoading: Bool = false
     var isEnd: Bool = false
-    var isPlugOn: Bool = true
+    var isPlugOn: Bool = true {
+        didSet {
+            setTitle()
+        }
+    }
+    
     var receiver: UserApolloFragment? = nil
     var sender: UserApolloFragment? = nil
     var chatroom: ChatRoomSummaryApolloFragment? = nil
@@ -46,6 +54,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         textView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         
         setData()
+        setUI()
         setTitle()
     }
     
@@ -77,7 +86,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.isTranslucent = true
         statusbarLight = false
     }
     
@@ -100,8 +108,13 @@ class ChatVC: PlugViewController, UITextViewDelegate {
                 }
             }, type: .default)
         }
-        
-        
+    }
+    
+    func setUI() {
+        banner.layer.shadowColor = UIColor(r: 155, g: 156, b: 156, a: 0.5).cgColor
+        banner.layer.shadowOffset = CGSize(width: 0, height: 2)
+        banner.layer.shadowOpacity = 1
+        banner.layer.masksToBounds = false
     }
     
     func setData() {
@@ -130,6 +143,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
                     self.isPlugOn = schedule.isPlugOn()
                     //표시
                 }
+                
             }
         }
         
@@ -157,7 +171,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             bottomText = "\(chatroomName)"
         } else {
             topText = senderName
-            bottomText = "\(chatroomName) ･ 플러그 오프"
+            bottomText = "\(chatroomName) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
         }
         
         let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.darkGrey,
@@ -182,6 +196,14 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         titleLabel.textAlignment = .center
         
         navigationItem.titleView = titleLabel
+        
+        if !isPlugOn {
+            banner.isHidden = false
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.bannerYOffset.constant = 0
+                self?.view.layoutIfNeeded()
+            }
+        }
     }
     
     func addMessage(newMessage: MessageItem) {

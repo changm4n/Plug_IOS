@@ -100,14 +100,14 @@ class ChangePWVC: PlugViewController, UITextFieldDelegate {
     func setTextFields() {
         oldPasswdTextFIeld.delegate = self
         oldPasswdTextFIeld.type = .passwd
-        oldPasswdTextFIeld.isSecureTextEntry = true
+//        oldPasswdTextFIeld.isSecureTextEntry = true
         oldPasswdTextFIeld.changeHandler = { [weak self] text, check in
             self?.oldCheck = check
         }
         
         newPasswdTextFIeld.delegate = self
         newPasswdTextFIeld.type = .passwd
-        newPasswdTextFIeld.isSecureTextEntry = true
+//        newPasswdTextFIeld.isSecureTextEntry = true
         newPasswdTextFIeld.changeHandler = { [weak self] text, check in
             self?.newCheck = check
         }

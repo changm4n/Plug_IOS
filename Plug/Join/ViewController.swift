@@ -14,14 +14,23 @@ class ViewController: PlugViewController {
     
     @IBOutlet weak var kakaoBtn: UIButton!
     @IBOutlet weak var emailBtn: UIButton!
+    @IBOutlet weak var descLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        let recog = UITapGestureRecognizer(target: self, action: #selector(ViewController.descPressed))
+        descLabel.addGestureRecognizer(recog)
+    }
+    
+    @objc func descPressed() {
+        performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
     }
     
     func setUI() {
-        titleLabel.attributedText = kP01Str
+        titleLabel.attributedText = kLaunchTitleString
+        descLabel.attributedText = kLaunchDescString
         kakaoBtn.setPlugBlue()
         emailBtn.setPlugWhite()
     }
@@ -55,6 +64,15 @@ class ViewController: PlugViewController {
                 showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
             }
         }, authTypes: [NSNumber(value: KOAuthType.talk.rawValue)])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "web" {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! WebVC
+            vc.urlStr = sender as? String
+            vc.title = "이용약관 및 개인정보 처리방침"
+        }
     }
 }
 

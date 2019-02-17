@@ -13,6 +13,7 @@ class ManageClassVC: PlugViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var classInfoLabel: UILabel!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     var classID: String?
     var classData: ChatRoomApolloFragment? {
@@ -23,6 +24,7 @@ class ManageClassVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,6 +51,7 @@ class ManageClassVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setData()
+        self.setUI()
         setColors()
         super.viewWillAppear(animated)
     }
@@ -78,10 +81,16 @@ class ManageClassVC: PlugViewController {
         members = members.filter{ $0.userId != userId }
        
         tableView.reloadData()
+    }
+    
+    func setUI() {
+        guard let me = Session.me , let userId = me.userId , let classData = classData else { return }
         
         let year = classData.chatRoomAt
         classNameLabel.text = classData.name
         classInfoLabel.text = "\(members.count) ・ \(year[...year.index(year.startIndex, offsetBy: 3)]) 학년도"
+        
+        emptyLabel.isHidden = !(members.count == 0)
     }
 }
 

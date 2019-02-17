@@ -41,6 +41,8 @@
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		ED71B6AF220FE35A00AC21FF /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
 		ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B02210219400AC21FF /* ParentClassVC.swift */; };
+		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
+		ED71B6B62219391E00AC21FF /* LicenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B52219391E00AC21FF /* LicenseVC.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
 		ED7D59D121B3FEAE0029E80A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
@@ -136,6 +138,8 @@
 		ED71B6AE220FE35A00AC21FF /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		ED71B6B02210219400AC21FF /* ParentClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentClassVC.swift; sourceTree = "<group>"; };
 		ED71B6B2221029E400AC21FF /* Plug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plug.entitlements; sourceTree = "<group>"; };
+		ED71B6B32219359400AC21FF /* licenses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = licenses.json; sourceTree = "<group>"; };
+		ED71B6B52219391E00AC21FF /* LicenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVC.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
 		ED7D59D021B3FEAE0029E80A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */,
 				ED1F586021DE29C100126A07 /* OutClassVC.swift */,
 				ED71B6AE220FE35A00AC21FF /* WebVC.swift */,
+				ED71B6B52219391E00AC21FF /* LicenseVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -368,7 +373,9 @@
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
 				ED7D59D021B3FEAE0029E80A /* API.swift */,
 				ED7D59D221B43BBE0029E80A /* Secret.swift */,
+				EDE731ED217C1D3E00D302DF /* Strings.swift */,
 				ED4750FB21ECB6540043FD18 /* indicator.json */,
+				ED71B6B32219359400AC21FF /* licenses.json */,
 				EDD8C3932187240D008DA9E7 /* Extensions */,
 				EDD8C39221872405008DA9E7 /* Views */,
 				ED3D980821A05FB300B61748 /* Chat */,
@@ -384,7 +391,6 @@
 				EDE731E0217B4E7100D302DF /* Assets.xcassets */,
 				EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */,
 				EDE731E5217B4E7100D302DF /* Info.plist */,
-				EDE731ED217C1D3E00D302DF /* Strings.swift */,
 			);
 			path = Plug;
 			sourceTree = "<group>";
@@ -502,6 +508,7 @@
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
+				ED71B6B42219359400AC21FF /* licenses.json in Resources */,
 				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */,
@@ -646,6 +653,7 @@
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */,
 				EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */,
+				ED71B6B62219391E00AC21FF /* LicenseVC.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,

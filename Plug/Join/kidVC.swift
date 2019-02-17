@@ -28,8 +28,9 @@ class kidVC: PlugViewController {
             guard let name = self.nameTextField.text,
             let roomId = self.classData?.id,
                 let userId = Session.me?.userId else { return }
-            
+            self.play()
             Networking.applyChatroom(roomId, userId: userId, kidName: name, completion: { (id) in
+                self.stop()
                 if id != nil {
                     Networking.getUserInfo(completion: { (classData, crontab) in
                         Session.me?.classData = classData
