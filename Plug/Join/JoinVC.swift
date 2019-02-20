@@ -101,8 +101,8 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
             vc.email = data.0
             vc.key = data.1
             vc.bottomAction = {
-                if true {
-//                if vc.codeTextField.text == vc.key {
+//                if true {
+                if vc.codeTextField.text == vc.key {
                     vc.performSegue(withIdentifier: "next", sender: nil)
                 } else {
                     showAlertWithString("인증코드 오류", message: "유효하지 않은 인증코드입니다.\n초대코드는 6자리의 알파벳 대문자입니다.", sender: vc)

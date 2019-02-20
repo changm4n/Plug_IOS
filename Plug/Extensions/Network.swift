@@ -271,26 +271,27 @@ class Networking: NSObject {
         }
     }
     
-    static func uploadImage(image: UIImage, completion:@escaping (_ error: String?) -> Void) {
+    static func uploadImage(image: UIImage, completion:@escaping (_ url: String?) -> Void) {
         
-        if let data = UIImageJPEGRepresentation(image, 1),
+//        if let data = UIImagePNGRepresentation(image),
+                    if let data = UIImageJPEGRepresentation(image, 1),
             let token = Session.fetchToken(),
             let userId = Session.me?.userId{
             
             let headers = ["Authorization" : token,
                            "accept" : "application/json",
-                           "content-type": "application/json"]
+                           "content-type": "multipart/form-data"]
+            
             Alamofire.upload(multipartFormData: { (multipartFormData) in
-                
-                multipartFormData.append("""
-            { "query": "mutation(${"$"}files: [Upload!]!) { multipleUpload(files: ${"$"}files) }", "variables": { "files": [null] } }
-            """.data(using: .utf8)!, withName: "operations")
-                
-                multipartFormData.append("""
+                let q1 = stringToData(str: """
+            { "query":"mutation ($files: [Upload!]!) { multipleUpload(files: $files) }","variables": { "files": [null]}}
+            """)
+                let q2 = stringToData(str: """
             { "0": ["variables.files.0"] }
-            """.data(using: .utf8)!, withName: "map")
-                
-                multipartFormData.append(data, withName: "0", fileName: "\(userId).jpg", mimeType: "image/jpg")
+            """)
+                multipartFormData.append(q1, withName: "operations")
+                multipartFormData.append(q2, withName: "map")
+                multipartFormData.append(data, withName: "0", fileName: "\(userId).jpeg", mimeType: "image/jpeg")
                 
             }, usingThreshold: UInt64.init(), to: kBaseURL, method: .post, headers: headers) { (result) in
                 switch result {
@@ -299,11 +300,23 @@ class Networking: NSObject {
                         PlugLog(string: "Upload Progress: \(progress.fractionCompleted)")
                     })
                     
-                    upload.responseJSON(completionHandler: { (json) in
-                        PlugLog(string: String(data: json.data!, encoding: .utf8)!)
+                    upload.responseJSON(completionHandler: { (jsonData) in
+                        switch jsonData.result {
+                        case .success(let data):
+                            if let json = data as? [String : AnyObject],
+                                let urls = json["data"]?["multipleUpload"] as? [String],
+                            let url = urls.first {
+                                print(url)
+                            } else {
+                                completion(nil)
+                            }
+                        case .failure(let error):
+                            print(error)
+                            completion(nil)
+                        }
                     })
-                case .failure(let error):
-                    print(error)
+                case .failure(_):
+                    completion(nil)
                 }
             }
         }

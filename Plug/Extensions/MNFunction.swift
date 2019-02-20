@@ -144,6 +144,9 @@ extension String {
     }
 }
 
+func stringToData(str: String) -> Data {
+    return str.trimmingCharacters(in: .whitespacesAndNewlines).data(using: .utf8, allowLossyConversion: false)!
+}
 public extension UIDevice {
     
     static let modelName: String = {

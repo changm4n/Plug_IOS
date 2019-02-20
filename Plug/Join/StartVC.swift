@@ -43,6 +43,7 @@ class StartVC: PlugViewController {
                 })
             })
         } else {
+            
             self.animateSegue("Login", sender: nil)
         }
     }
