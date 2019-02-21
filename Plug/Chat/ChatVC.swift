@@ -140,8 +140,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             Networking.getOfficeTime(senderid) { (crontab) in
                 if let crontab = crontab {
                     let schedule = Schedule(schedule: crontab)
-                    self.isPlugOn = schedule.isPlugOn()
-                    //표시
+                    self.isPlugOn = crontab == "" ? true : schedule.isPlugOn()
                 }
                 
             }

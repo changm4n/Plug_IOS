@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="136" width="375" height="418"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHt-7w-OUp">
-                                                <rect key="frame" x="37.5" y="60" width="300" height="200"/>
+                                                <rect key="frame" x="37.5" y="60" width="300" height="250"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초대코드" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9Z-OZ-Xry">
                                                         <rect key="frame" x="120.5" y="20" width="59" height="20.5"/>
@@ -51,16 +51,30 @@
                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWO-oM-ukO">
+                                                        <rect key="frame" x="100" y="210" width="100" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="4bc-1Z-7k2"/>
+                                                            <constraint firstAttribute="width" constant="100" id="RZG-5t-Vap"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                                        <state key="normal" title="초대 방법 보기"/>
+                                                        <connections>
+                                                            <action selector="shareButtonPressed:" destination="ZvS-fR-AMx" eventType="touchUpInside" id="sLl-MF-NSw"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="5Ia-cm-1bZ"/>
+                                                    <constraint firstAttribute="height" constant="250" id="5Ia-cm-1bZ"/>
                                                     <constraint firstItem="azL-rz-Ik3" firstAttribute="top" secondItem="rax-ux-8X3" secondAttribute="bottom" constant="35" id="6eU-aE-JKj"/>
                                                     <constraint firstItem="rax-ux-8X3" firstAttribute="centerX" secondItem="BHt-7w-OUp" secondAttribute="centerX" id="76j-z8-xa8"/>
                                                     <constraint firstItem="W9Z-OZ-Xry" firstAttribute="centerX" secondItem="BHt-7w-OUp" secondAttribute="centerX" id="RJh-Fe-UR0"/>
                                                     <constraint firstItem="W9Z-OZ-Xry" firstAttribute="top" secondItem="BHt-7w-OUp" secondAttribute="top" constant="20" id="U1P-P3-B7n"/>
                                                     <constraint firstAttribute="width" constant="300" id="XED-yJ-QYo"/>
                                                     <constraint firstItem="azL-rz-Ik3" firstAttribute="centerX" secondItem="BHt-7w-OUp" secondAttribute="centerX" id="eH2-Oc-Cfh"/>
+                                                    <constraint firstItem="EWO-oM-ukO" firstAttribute="top" secondItem="azL-rz-Ik3" secondAttribute="bottom" constant="40" id="fR7-ff-0KR"/>
+                                                    <constraint firstItem="EWO-oM-ukO" firstAttribute="centerX" secondItem="BHt-7w-OUp" secondAttribute="centerX" id="xt9-fd-lAz"/>
                                                     <constraint firstItem="rax-ux-8X3" firstAttribute="top" secondItem="W9Z-OZ-Xry" secondAttribute="bottom" constant="14" id="zh9-yc-KQt"/>
                                                 </constraints>
                                             </view>
@@ -242,11 +256,20 @@
                         <outlet property="topView" destination="vaC-2G-dkD" id="HlX-W3-0dJ"/>
                         <segue destination="P94-t1-WDa" kind="presentation" identifier="out" animates="NO" modalPresentationStyle="fullScreen" id="fQG-6H-2do"/>
                         <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="soo-V7-Zx3"/>
+                        <segue destination="Azx-jK-vBQ" kind="presentation" identifier="share" id="Wjc-Oi-lvb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glY-t9-dMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1453.5999999999999" y="53.523238380809602"/>
+        </scene>
+        <!--WebVC-->
+        <scene sceneID="RLE-O3-ksl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="WebVC" id="Azx-jK-vBQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fex-4j-qAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1453" y="506"/>
         </scene>
         <!--StartNC-->
         <scene sceneID="IFe-2q-GVL">

@@ -37,6 +37,7 @@ class ProfileImageVC: PlugViewController {
     @IBOutlet weak var nameTextField: PlugTextField!
     
     var selectedRow = 1
+    var selectedURL = profileUrls[0]
     var profileImage: UIImage?
     
     override func viewDidLoad() {
@@ -47,14 +48,13 @@ class ProfileImageVC: PlugViewController {
         bottomBtn.isEnabled = false
         self.bottomAction = {
             //TODO : image
-            let url = self.selectedRow == 0 ? "" : profileUrls[self.selectedRow - 1]
             guard let name = self.nameTextField.text,
                 let me = Session.me,
                 let userId = Session.me?.userId,
                 let pw = Session.me?.password else { return }
             self.play()
             me.name = name
-            me.profileImageUrl = url
+            me.profileImageUrl = self.selectedURL
             
             if me.userType == .EMAIL {
                 Networking.signUp(user: me, completion: { (name, error) in
@@ -105,10 +105,10 @@ class ProfileImageVC: PlugViewController {
                                         user.token = token
                                         Session.me = user
                                         user.save()
-                                        Networking.updateUser(user: user, name: name, url: url, completion: { (name, error) in
+                                        Networking.updateUser(user: user, name: name, url: self.selectedURL, completion: { (name, error) in
                                             if name != nil {
                                                 Session.me?.name = name
-                                                Session.me?.profileImageUrl = url
+                                                Session.me?.profileImageUrl = self.selectedURL
                                                 if Session.me?.role == .PARENT {
                                                     self.performSegue(withIdentifier: "join", sender: nil)
                                                 } else {
@@ -147,9 +147,20 @@ class ProfileImageVC: PlugViewController {
         if segue.identifier == "edit" {
             let vc = segue.destination as! EditImageVC
             vc.originalImage = profileImage!
-            vc.handler = { result in
-                Session.me?.profileImage = result
-                self.collectionView.reloadData()
+            vc.handler = { image in
+                if let image = image {
+                    Networking.uploadImage(image: image
+                        , completion: { (url) in
+                            if let url = url {
+                                print(url)
+                                Session.me?.profileImage = image
+                                self.selectedRow = 0
+                                self.selectedURL = url
+                                self.collectionView.reloadData()
+                            }
+                    })
+                    
+                }
             }
         }
     }
@@ -191,6 +202,7 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             collectionView.reloadData()
         } else {
             selectedRow = indexPath.row
+            selectedURL = profileUrls[indexPath.row - 1]
             collectionView.reloadData()
         }
     }

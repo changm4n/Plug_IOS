@@ -28,4 +28,13 @@ class InviteCodeVC: PlugViewController {
             codeLabel.text = code
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "share" {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! WebVC
+            vc.urlStr = "http://www.plugapp.me/manual/teacher/?id=2"
+            vc.title = "초대 방법"
+        }
+    }
 }

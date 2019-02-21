@@ -630,15 +630,6 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yg-hl-5JN">
-                                <rect key="frame" x="137.5" y="331" width="100" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="5NE-kA-rz3"/>
-                                    <constraint firstAttribute="width" constant="100" id="CGl-F0-Mgx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <state key="normal" title="공유하기"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftH-YV-PJv" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <constraints>
@@ -646,20 +637,32 @@
                                 </constraints>
                                 <state key="normal" title="완료"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXA-Qb-7V3">
+                                <rect key="frame" x="137.5" y="339.5" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="82A-yJ-fAi"/>
+                                    <constraint firstAttribute="height" constant="50" id="lyJ-n3-jVV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <state key="normal" title="초대 방법 보기"/>
+                                <connections>
+                                    <segue destination="EaC-vS-nyo" kind="presentation" identifier="share" id="cQA-D0-SVH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3yg-hl-5JN" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="0YY-7h-3pO"/>
                             <constraint firstItem="8Q2-Nc-bma" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="62B-1Y-eTl"/>
                             <constraint firstItem="ftH-YV-PJv" firstAttribute="leading" secondItem="khf-B0-NFy" secondAttribute="leading" id="ALu-rj-lZx"/>
+                            <constraint firstItem="bXA-Qb-7V3" firstAttribute="top" secondItem="0pc-HT-oJs" secondAttribute="bottom" constant="40" id="BVi-jl-Rpe"/>
                             <constraint firstItem="Uuk-sj-Adq" firstAttribute="top" secondItem="khf-B0-NFy" secondAttribute="top" constant="42" id="KCi-RZ-kcZ"/>
-                            <constraint firstItem="3yg-hl-5JN" firstAttribute="top" secondItem="0pc-HT-oJs" secondAttribute="bottom" constant="31.5" id="Sex-bV-GNv"/>
                             <constraint firstItem="Uuk-sj-Adq" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="Vmi-SV-mD7"/>
                             <constraint firstItem="0pc-HT-oJs" firstAttribute="top" secondItem="8Q2-Nc-bma" secondAttribute="bottom" constant="20" id="WKO-Ft-gsE"/>
                             <constraint firstItem="0pc-HT-oJs" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="cRE-MS-6YB"/>
                             <constraint firstAttribute="trailing" secondItem="ftH-YV-PJv" secondAttribute="trailing" id="cTe-OB-Ijm"/>
                             <constraint firstItem="khf-B0-NFy" firstAttribute="bottom" secondItem="ftH-YV-PJv" secondAttribute="bottom" id="d2f-T7-u8k"/>
                             <constraint firstItem="Tk3-oq-YsP" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="jUw-9k-y7s"/>
+                            <constraint firstItem="bXA-Qb-7V3" firstAttribute="centerX" secondItem="bzB-c0-V4n" secondAttribute="centerX" id="lMt-Z3-P3h"/>
                             <constraint firstItem="8Q2-Nc-bma" firstAttribute="top" secondItem="Tk3-oq-YsP" secondAttribute="bottom" constant="11.5" id="otP-Iz-CXn"/>
                             <constraint firstItem="Tk3-oq-YsP" firstAttribute="top" secondItem="Uuk-sj-Adq" secondAttribute="bottom" constant="47.5" id="wqZ-1n-iL0"/>
                         </constraints>
@@ -677,6 +680,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoR-d9-avq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2655" y="549"/>
+        </scene>
+        <!--WebVC-->
+        <scene sceneID="Ljg-Hj-I3P">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="WebVC" id="EaC-vS-nyo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y4I-Ye-pNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3282" y="577"/>
         </scene>
         <!--Parent ClassVC-->
         <scene sceneID="TS0-hB-eVG">
@@ -809,6 +820,7 @@
                         <outlet property="classNameLabel" destination="yQ4-eS-Hdu" id="Sat-12-3fg"/>
                         <outlet property="classYearLabel" destination="You-TD-YfT" id="9YZ-dv-CXZ"/>
                         <outlet property="tableView" destination="hYC-X7-Mfa" id="51I-eF-zvZ"/>
+                        <segue destination="7Is-iE-Uqp" kind="show" identifier="chat" id="SGm-n0-mTP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aiS-9G-gCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -885,7 +897,7 @@
                 <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="ChatVC" id="7Is-iE-Uqp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wui-U5-l6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="836" y="1653"/>
+            <point key="canvasLocation" x="698" y="1648"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6ti-d7-WFt">
@@ -1095,6 +1107,7 @@
         <image name="myClassActive" width="48" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aEt-nn-Sr1"/>
+        <segue reference="SGm-n0-mTP"/>
+        <segue reference="ABZ-cE-bXh"/>
     </inferredMetricsTieBreakers>
 </document>

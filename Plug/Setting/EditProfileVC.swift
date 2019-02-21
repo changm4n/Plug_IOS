@@ -70,12 +70,17 @@ class EditProfileVC: PlugViewController {
             vc.handler = { image in
                 if let image = image {
                     Networking.uploadImage(image: image
-                        , completion: { (error) in
-                            print(error)
+                        , completion: { (url) in
+                            if let url = url {
+                                print(url)
+                                Session.me?.profileImage = image
+                                self.selectedRow = 0
+                                self.selectedURL = url
+                                self.collectionView.reloadData()
+                                self.tableView.reloadData()
+                            }
                     })
-                    Session.me?.profileImage = image
-                    self.collectionView.reloadData()
-                    self.tableView.reloadData()
+                    
                 }
             }
         }
@@ -221,7 +226,17 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         if indexPath.row == 0 {
             let actionSheetController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let firstAction: UIAlertAction = UIAlertAction(title: "사진 찍기", style: .default) { action -> Void in
+                let imagePicker = UIImagePickerController()
+                if UIImagePickerController.isSourceTypeAvailable(.camera){
+                    
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = .camera
+                    imagePicker.allowsEditing = false
+                    
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
             }
+            
             let secondAction: UIAlertAction = UIAlertAction(title: "사진 선택", style: .default) { action -> Void in
                 let imagePicker = UIImagePickerController()
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){

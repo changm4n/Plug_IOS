@@ -274,7 +274,7 @@ class Networking: NSObject {
     static func uploadImage(image: UIImage, completion:@escaping (_ url: String?) -> Void) {
         
 //        if let data = UIImagePNGRepresentation(image),
-                    if let data = UIImageJPEGRepresentation(image, 1),
+        if let data = UIImageJPEGRepresentation(image, 1),
             let token = Session.fetchToken(),
             let userId = Session.me?.userId{
             
@@ -296,17 +296,13 @@ class Networking: NSObject {
             }, usingThreshold: UInt64.init(), to: kBaseURL, method: .post, headers: headers) { (result) in
                 switch result {
                 case .success(let upload, _, _):
-                    upload.uploadProgress(closure: { (progress) in
-                        PlugLog(string: "Upload Progress: \(progress.fractionCompleted)")
-                    })
-                    
                     upload.responseJSON(completionHandler: { (jsonData) in
                         switch jsonData.result {
                         case .success(let data):
                             if let json = data as? [String : AnyObject],
                                 let urls = json["data"]?["multipleUpload"] as? [String],
                             let url = urls.first {
-                                print(url)
+                                completion(url)
                             } else {
                                 completion(nil)
                             }

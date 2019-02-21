@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>5</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>efcb862abc346662203d10c6d51ae3e8</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -47,8 +47,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>프로필 사진 촬영</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Safe</string>
+	<string>프로필 사진 선택</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

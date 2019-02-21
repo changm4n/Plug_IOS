@@ -985,7 +985,11 @@
                                     <constraint firstAttribute="width" constant="100" id="3Qb-70-zNC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <state key="normal" title="공유하기"/>
+                                <state key="normal" title="초대 방법 보기"/>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="6sn-aG-ct9" eventType="touchUpInside" id="Pdy-sb-DNp"/>
+                                    <segue destination="feD-gv-xhF" kind="presentation" identifier="share" id="YSh-r6-1He"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-nU-GaK" customClass="WideButton" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
@@ -1026,6 +1030,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5c-ov-3iQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4289" y="668"/>
+        </scene>
+        <!--WebVC-->
+        <scene sceneID="hXX-g6-eSn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="WebVC" id="feD-gv-xhF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BpX-Wv-P3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4909" y="649"/>
         </scene>
         <!--Chat-->
         <scene sceneID="PYr-UV-wde">
@@ -1424,7 +1436,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zV1-f5-B7X"/>
-        <segue reference="TLB-Hq-zpC"/>
+        <segue reference="yRg-fp-Ind"/>
         <segue reference="OEX-KR-GYl"/>
     </inferredMetricsTieBreakers>
 </document>

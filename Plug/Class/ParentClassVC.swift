@@ -65,6 +65,15 @@ class ParentClassVC: PlugViewController {
         classYearLabel.text = "\(year[...year.index(year.startIndex, offsetBy: 3)]) 학년도"
         classCountLabel.text = "\(members.count + 1)"
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chat" {
+            let vc = segue.destination as! ChatVC
+            vc.receiver = members.filter({ $0.userId ==  Session.me!.userId! }).first
+            vc.sender = sender as? UserApolloFragment
+            vc.chatroom = ChatRoomSummaryApolloFragment(id: classData!.id, name: classData!.name, chatRoomAt: classData!.chatRoomAt, createdAt: classData!.createdAt)
+        }
+    }
 }
 
 extension ParentClassVC: UITableViewDataSource, UITableViewDelegate {
@@ -107,8 +116,10 @@ extension ParentClassVC: UITableViewDataSource, UITableViewDelegate {
         return 48
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let member = members[indexPath.row]
-//        performSegue(withIdentifier: "chat", sender: member)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 0 else { return }
+
+        let member = admins[indexPath.row]
+        performSegue(withIdentifier: "chat", sender: member)
+    }
 }

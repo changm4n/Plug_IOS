@@ -45,7 +45,7 @@ class Schedule: NSObject {
     }()
     
     public init(schedule: String) {
-        guard schedule.split(separator: " ").count ==  3 else {
+        guard schedule.split(separator: " ").count >=  2 else {
             sMin = ""
             sHour = ""
             eMin = ""
@@ -57,7 +57,12 @@ class Schedule: NSObject {
         self.sHour = String(schedule.split(separator: " ")[1].split(separator: "-")[0])
         self.eMin = String(schedule.split(separator: " ")[0].split(separator: "-")[1])
         self.eHour = String(schedule.split(separator: " ")[1].split(separator: "-")[1])
-        self.days = String(schedule.split(separator: " ")[2])
+        if schedule.split(separator: " ").count >=  3 {
+            self.days = String(schedule.split(separator: " ")[2])
+        } else {
+            self.days = ""
+        }
+        
     }
     
     func toString() -> String {
@@ -106,7 +111,7 @@ class Schedule: NSObject {
         day = day - 1
         day = day == 0 ? 7 : day
         
-        if !getDaysInt().contains(day) {
+        if getDaysInt().contains(day) {
             return false
         }
         
@@ -114,7 +119,7 @@ class Schedule: NSObject {
             return false
         }
         
-        if !(sMinInt ... eMinInt ~= min) {
+        if (sHourInt == hour && min < sMinInt) || (eHourInt == hour && min > eMinInt) {
             return false
         }
         

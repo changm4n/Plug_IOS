@@ -157,6 +157,10 @@ class HomeVC: PlugViewController {
         showAlertWithString("알림", message: "검색 기능은 개발 중 입니다.", sender: self)
     }
     
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "share", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
             let vc = segue.destination as! ChatVC
@@ -164,6 +168,11 @@ class HomeVC: PlugViewController {
             vc.receiver = data.receiver
             vc.sender = data.sender
             vc.chatroom = data.chatroom
+        } else if segue.identifier == "share" {
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! WebVC
+            vc.urlStr = "http://www.plugapp.me/manual/teacher/?id=2"
+            vc.title = "초대 방법"
         }
     }
 }
@@ -275,7 +284,7 @@ class SummaryCell: UITableViewCell {
         nameLabel.text = item.displayName
         classLabel.text = chatroom.name
         
-        if let url = sender.profileImageUrl, sender.profileImageUrl != ""{
+        if let url = sender.profileImageUrl, sender.profileImageUrl != "" {
             profileImage.kf.setImage(with: URL(string: url))
         }
         
