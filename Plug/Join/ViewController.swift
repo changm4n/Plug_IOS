@@ -47,11 +47,10 @@ class ViewController: PlugViewController {
             if KOSession.shared()?.isOpen() ?? false {
                 print("kakao : \(KOSession.shared()!.token.accessToken)")
                 KOSessionTask.userMeTask(completion: { (error, me) in
-                    if let email = me?.account?.email,
-                        let id = me?.id {
+                    if let id = me?.id {
                         let user = Session()
                         user.id = id
-                        user.userId = email
+                        user.userId = "KAKAO"
                         user.userType = .KAKAO
                         user.password = "KAKAO"
                         Session.me = user

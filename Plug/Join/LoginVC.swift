@@ -77,7 +77,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
         
         passwordTextField.delegate = self
         passwordTextField.type = .passwd
-//        passwordTextField.isSecureTextEntry = true
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.changeHandler = { [weak self] text, check in
             self?.passwdCheck = check
         }

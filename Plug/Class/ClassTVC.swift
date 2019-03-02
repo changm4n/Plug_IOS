@@ -52,8 +52,12 @@ class ClassTVC: UITableViewController {
     }
     
     func setData() {
-        self.classData = Session.me?.classData ?? []
-        self.tableView.reloadData()
+        guard let me = Session.me else { return }
+        me.refreshRoom(completion: { (classData) in
+            self.classData = me.classData
+            self.tableView.reloadData()
+        })
+        
     }
    
     override func numberOfSections(in tableView: UITableView) -> Int {

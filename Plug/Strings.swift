@@ -29,4 +29,4 @@ let kLaunchTitleString: NSMutableAttributedString = { () -> NSMutableAttributedS
     return attributedString
 }()
 
-let kTeacherSettingDesk = "근무 종료시간 이후 메시지를 받지 않습니다. 메시지를 발송한 학부모님께는 예약 전송 안내를 해드립니다. 예약된 메시지는 근무 시작시간에 선생님에게 전달됩니다."
+let kTeacherSettingDesk = "근무 시간을 설정하게 되면, 근무 종료시간 이후에는 선생님께서 메시지를 바로 확인하실 수 없다는 안내를 해드립니다."

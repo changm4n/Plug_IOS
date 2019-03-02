@@ -57,7 +57,15 @@ struct MessageSummary {
         chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
         unreadCount = 0
         lastMessage = MessageItem()
-        lastMessage.text = myType == .TEACHER ? "\(user.name) 부모님이 \(classData.name) 클래스에 가입했습니다." : "\(user.name) 선생님과 대화를 시작해보세요."
+        
+        if myType == .TEACHER {
+            if let kidName = Session.me?.getKid(chatroomID: classData.id ?? "", parentID: user.userId)?.name {
+                lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
+            }
+        } else {
+            lastMessage.text = "\(user.name) 선생님과 대화를 시작해보세요."
+        }
+        
         
         sender = user
         receiver = classData.users!.filter({$0.fragments.userApolloFragment.userId == Session.me!.userId}).first!.fragments.userApolloFragment

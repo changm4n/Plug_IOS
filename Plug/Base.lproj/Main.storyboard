@@ -192,7 +192,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="이메일"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
@@ -501,7 +501,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="이메일"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
@@ -987,7 +987,6 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <state key="normal" title="초대 방법 보기"/>
                                 <connections>
-                                    <action selector="shareButtonPressed:" destination="6sn-aG-ct9" eventType="touchUpInside" id="Pdy-sb-DNp"/>
                                     <segue destination="feD-gv-xhF" kind="presentation" identifier="share" id="YSh-r6-1He"/>
                                 </connections>
                             </button>
@@ -1078,7 +1077,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="이메일"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">

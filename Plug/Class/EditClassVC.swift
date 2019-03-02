@@ -122,7 +122,9 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDe
         } else {
             let kid = kids[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberCell
-            cell.memberNameLabel.text = kid.name
+            
+            cell.setProfile(with: kid.parents?.first?.fragments.userApolloFragment.profileImageUrl)
+            cell.memberNameLabel.text = "\(kid.name) 부모님"
             return cell
         }
     }
@@ -163,7 +165,8 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDe
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: "클래스 맴버 삭제", message: "이창민 부모님을 클래스에서 삭제하시겠습니까?", preferredStyle: .alert)
+            let kid = kids[indexPath.row]
+            let alert = UIAlertController(title: "클래스 맴버 삭제", message: "\(kid.name) 부모님을 클래스에서 삭제하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { action in
                 let kid = self.kids[indexPath.row]
                 

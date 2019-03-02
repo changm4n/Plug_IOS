@@ -75,6 +75,7 @@ class SettingVC: PlugViewController {
         guard let me = Session.me, let type = Session.me?.role else { return }
         if type == .TEACHER {
             Networking.updateOffice(isplugOn ? me.schedule.toString() : "") { (cron) in
+                me.schedule = Schedule(schedule: cron ?? "")
             }
         }
     }
@@ -119,6 +120,9 @@ class SettingVC: PlugViewController {
     
     @objc func switchChanged(switch: UISwitch) {
         isplugOn = !isplugOn
+        if isplugOn {
+            Session.me?.schedule = Schedule(schedule: "0-30 9-18 6,7")
+        }
         self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
@@ -180,7 +184,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
                     Session.removeSavedUser()
                     self.performSegue(withIdentifier: "logout", sender: nil)
-                }, type: .destructive)
+                }, canceltype: .default, confirmtype: .destructive)
             } else if item.0 == "약관 및 개인정보 처리방침" {
                 performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
             } else if item.0 == "오픈소스 라이선스" {

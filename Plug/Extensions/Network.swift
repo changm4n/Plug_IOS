@@ -273,13 +273,10 @@ class Networking: NSObject {
     
     static func uploadImage(image: UIImage, completion:@escaping (_ url: String?) -> Void) {
         
-//        if let data = UIImagePNGRepresentation(image),
         if let data = UIImageJPEGRepresentation(image, 1),
-            let token = Session.fetchToken(),
-            let userId = Session.me?.userId{
+            let userId = Session.me?.userId {
             
-            let headers = ["Authorization" : token,
-                           "accept" : "application/json",
+            let headers = ["accept" : "application/json",
                            "content-type": "multipart/form-data"]
             
             Alamofire.upload(multipartFormData: { (multipartFormData) in

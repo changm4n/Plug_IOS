@@ -62,7 +62,7 @@ open class Session : NSObject {
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
-         schedule = Schedule(schedule: "0-30 9-18 1,2,3")
+         schedule = Schedule(schedule: "0-30 9-18 6,7")
     }
     
     public init (withUser data: UserApolloFragment) {
@@ -73,7 +73,7 @@ open class Session : NSObject {
         userId = data.userId
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
-        schedule = Schedule(schedule: "0-30 9-18 1,2,3")
+        schedule = Schedule(schedule: "0-30 9-18 6,7")
         password = nil
         
         if let urlStr = profileImageUrl,
@@ -99,7 +99,7 @@ open class Session : NSObject {
         
         appPushID = dic["appPushId"] as? String
         
-        schedule = Schedule(schedule: "0-30 9-18 1,2,3")
+        schedule = Schedule(schedule: "0-30 9-18 6,7")
     }
     
     func save() {
@@ -120,9 +120,16 @@ open class Session : NSObject {
     }
     
     func refreshRoom(completion:@escaping (_ chatrooms:[ChatRoomApolloFragment]) -> Void) {
-        Networking.getMyClasses { (classData) in
-            Session.me?.classData = classData
-            completion(classData)
+        if role == .TEACHER {
+            Networking.getMyClasses { (classData) in
+                Session.me?.classData = classData
+                completion(classData)
+            }
+        } else {
+            Networking.getUserInfo { (classData, crontab) in
+                Session.me?.classData = classData
+                completion(classData)
+            }
         }
     }
     

@@ -45,6 +45,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         kOriginHeight = self.view.frame.size.height
         sendButton.makeCircle()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+
         tableView.dataSource = chatModel
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
@@ -62,9 +64,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         setColors()
         super.viewWillAppear(animated)
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.view.endEditing(true)
         guard
             let chatroomId = chatroom?.id,
             let receiverId = receiver?.userId,
@@ -99,14 +101,14 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         if isPlugOn {
             self.resetTextView()
-            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
+            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
             }
         } else {
             showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
                 self.resetTextView()
-                Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { [weak self] (result) in
+                Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
                 }
-            }, type: .default)
+            }, canceltype: .destructive)
         }
     }
     
@@ -148,6 +150,9 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
+                guard newMessage.sender.userId == receiverId || newMessage.receivers?.first?.userId == receiverId else {
+                    return
+                }
                 self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
                 self.tableView.reloadData()
                 self.setTableViewScrollBottom()
@@ -239,6 +244,20 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             }
         }
     }
+    
+    @objc func keyboardChanged(notification: NSNotification) {
+        guard isKeyboardShow else { return }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            self.view.frame.origin.y = -keyboardHeight
+            self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            
+        }
+        
+    }
+    
+    
     //36.5 57 77 95.5
     //48   69 89 110
     //11.5 12  12 14.5

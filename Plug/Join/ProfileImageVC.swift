@@ -107,6 +107,7 @@ class ProfileImageVC: PlugViewController {
                                         user.save()
                                         Networking.updateUser(user: user, name: name, url: self.selectedURL, completion: { (name, error) in
                                             if name != nil {
+                                                self.stop()
                                                 Session.me?.name = name
                                                 Session.me?.profileImageUrl = self.selectedURL
                                                 if Session.me?.role == .PARENT {
@@ -118,13 +119,16 @@ class ProfileImageVC: PlugViewController {
                                         })
                                     } else {
                                         showNetworkError(sender: self)
+                                        self.stop()
                                     }
                                 })
                             } else {
+                                self.stop()
                                 showNetworkError(message: message, sender: self)
                             }
                         })
                     } else {
+                        self.stop()
                         if let message = errors?.first?.message {
                             showAlertWithString("오류", message: message, sender: self)
                         } else {
@@ -136,13 +140,22 @@ class ProfileImageVC: PlugViewController {
         }
     }
     
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: collectionView) == true {
+            return false
+        }
+        
+        return true
+    }
+    
     func setTextFields() {
         nameTextField.type = .name
         nameTextField.changeHandler = { [weak self] text, check in
             self?.bottomButton?.isEnabled = check
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "edit" {
             let vc = segue.destination as! EditImageVC
@@ -159,7 +172,6 @@ class ProfileImageVC: PlugViewController {
                                 self.collectionView.reloadData()
                             }
                     })
-                    
                 }
             }
         }
@@ -207,20 +219,10 @@ extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         profileImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismiss(animated: true) {
-            //            let vc = TOCropViewController(croppingStyle: .circular, image: self.profileImage!)
-            //            vc.delegate = self
-            //            self.present(vc, animated: true, completion: nil)
             self.performSegue(withIdentifier: "edit", sender: nil)
         }
-    }
-    
-    func cropViewController(_ cropViewController: TOCropViewController, didCropToCircleImage image: UIImage, rect cropRect: CGRect, angle: Int) {
-        let ima = UIImageView(frame: CGRect(x: 100, y: 100, width: 200, height: 200 ))
-        ima.image = image
-        view.addSubview(ima)
     }
 }

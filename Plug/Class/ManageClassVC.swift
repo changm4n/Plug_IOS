@@ -79,7 +79,14 @@ class ManageClassVC: PlugViewController {
         members = classData.users?.map({$0.fragments.userApolloFragment}) ?? []
         meUser = members.filter({ $0.userId == userId }).first
         members = members.filter{ $0.userId != userId }
-       
+        members.sort { (user1, user2) -> Bool in
+            if let kidName1 = Session.me?.getKid(chatroomID: classID ?? "", parentID: user1.userId)?.name,
+                let kidName2 = Session.me?.getKid(chatroomID: classID ?? "", parentID: user2.userId)?.name {
+               return kidName1 < kidName2
+            } else {
+               return true
+            }
+        }
         tableView.reloadData()
     }
     

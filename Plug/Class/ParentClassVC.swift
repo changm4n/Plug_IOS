@@ -58,6 +58,15 @@ class ParentClassVC: PlugViewController {
             admins.filter({$0.userId == member.userId}).count == 0
         })
         
+        members.sort { (user1, user2) -> Bool in
+            if let kidName1 = Session.me?.getKid(chatroomID: classID ?? "", parentID: user1.userId)?.name,
+                let kidName2 = Session.me?.getKid(chatroomID: classID ?? "", parentID: user2.userId)?.name {
+                return kidName1 < kidName2
+            } else {
+                return true
+            }
+        }
+        
         tableView.reloadData()
         
         let year = classData.chatRoomAt

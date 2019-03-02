@@ -23,8 +23,10 @@ class CreateClassVC2: CreateClassVC {
             guard let name = self.nameTextField.text ,
                 let me = Session.me?.userId,
                 let year = self.yearTextField.text else { return }
+            self.play()
             self.view.endEditing(true)
             Networking.createChatRoom(name, userID: me, year: year, completion: { (code) in
+                self.stop()
                 if let code = code {
                     Session.me?.refreshRoom(completion: { (rooms) in
                         self.performSegue(withIdentifier: "next", sender: (name,code))

@@ -47,19 +47,19 @@ class HomeVC: PlugViewController {
         hideNavigationBar()
         self.statusbarLight = true
         setData()
-        Session.me?.refreshSummary(completion: { (summary) in
-            self.summaryData = summary
-            self.setTableViewData()
-        })
     }
     
     func setData() {
         guard let me = Session.me else { return }
-        self.classData = me.classData
-        self.filterCollectionView?.reloadData()
-        self.summaryData = me.summaryData
-        self.setTableViewData()
-        self.setUI()
+        me.refreshRoom(completion: { (classData) in
+            self.classData = me.classData
+            Session.me?.refreshSummary(completion: { (summary) in
+                self.summaryData = summary
+                self.setTableViewData()
+                self.setUI()
+            })
+            self.filterCollectionView?.reloadData()
+        })
     }
     
     func setTableViewData() {
@@ -86,7 +86,7 @@ class HomeVC: PlugViewController {
             }
         }
         self.tableView.reloadData()
-        self.tableView.isScrollEnabled = summaryData.count != 0
+        self.tableView.isScrollEnabled = summaryData.count > 1
     }
     
     func setUI() {
@@ -111,14 +111,26 @@ class HomeVC: PlugViewController {
                 titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: 135)
                 topView.backgroundColor = .plugBlue2
             } else {
-                let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n플러그 오프 시간에 \(messageCount)명이\n메시지를 보냈습니다.", attributes: [
+                let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n", attributes: [
                     .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
                     .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
                     .kern: 0.0
                     ])
                 
-                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: name.count + 7, length: 6))
-                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 22.0, weight: .bold), range: NSRange(location: 21, length: 2))
+                let attributedString1 = NSMutableAttributedString(string: "\(messageCount)명", attributes: [
+                    .font: UIFont.systemFont(ofSize: 22.0, weight: .bold),
+                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                    .kern: 0.0
+                    ])
+                
+                let attributedString2 = NSMutableAttributedString(string: "이 메시지를 보냈습니다.", attributes: [
+                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
+                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
+                    .kern: 0.0
+                    ])
+                
+                attributedString.append(attributedString1)
+                attributedString.append(attributedString2)
                 mainLabel.attributedText = messageCount > 0 ? attributedString : NSMutableAttributedString()
                 
                 titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: messageCount > 0 ? 135 : 0)
@@ -258,6 +270,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 extension HomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y / 3
+        if offset < 0 {
+            return
+        }
         mainLabel.frame = CGRect(x: mainLabel.frame.origin.x, y: kLabelY - offset, width: mainLabel.frame.width, height: mainLabel.frame.height)
         mainLabel.alpha = 1 - offset / maxOffset
         

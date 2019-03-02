@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SkyFloatingLabelTextField
 
-class PlugViewController: UIViewController {
+class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var bottomButton : UIButton? = nil {
         didSet {
@@ -49,6 +49,7 @@ class PlugViewController: UIViewController {
     
     func setKeyboardHide() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PlugViewController.dismissKeyboard))
+        tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
     
