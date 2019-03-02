@@ -64,6 +64,7 @@ class ManageClassVC: PlugViewController {
             self.navigationController?.navigationBar.shadowImage = nil
             statusbarLight = true
         }
+        
         super.willMove(toParentViewController: parent)
     }
     
@@ -71,6 +72,7 @@ class ManageClassVC: PlugViewController {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
         statusbarLight = false
     }
     

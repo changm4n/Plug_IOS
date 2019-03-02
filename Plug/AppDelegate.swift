@@ -10,15 +10,14 @@ import UIKit
 import KakaoOpenSDK
 import Firebase
 import UserNotifications
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    var gcmMessageIDKey = "test"
-    var state:[AnyHashable: Any] = [:]
     
+    var state:[AnyHashable: Any] = [:]
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -76,6 +75,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        guard let me = Session.me else { return }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
+        
+        application.applicationIconBadgeNumber += 1
+        var text = ""
+        var sender = ""
+        if me.role == .TEACHER {
+            print(userInfo)
+            let data = userInfo["data"] as! String
+            
+            let d = data.data(using: String.Encoding.utf8)!
+            let json = try! JSON(data: d)
+            let senderName = json["sender"]["name"].stringValue
+            let kids = json["lastMessage"]["chatRoom"]["kids"].arrayValue
+            for kid in kids {
+                for parent in kid["parents"].arrayValue {
+                    if parent["name"].stringValue == senderName {
+                        sender = "\(kid["name"].stringValue) 부모님"
+                    }
+                }
+            }
+            text = json["lastMessage"]["text"].stringValue
+        } else {
+            let data = userInfo["data"] as! String
+            
+            let d = data.data(using: String.Encoding.utf8)!
+            let json = try! JSON(data: d)
+            let senderName = json["sender"]["name"].stringValue
+            text = json["lastMessage"]["text"].stringValue
+            sender = "\(senderName) 선생님"
+        }
+        
+        let noti = UNMutableNotificationContent()
+        noti.title = sender
+        noti.body = text
+        let request = UNNotificationRequest(identifier: "noti", content: noti, trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
@@ -84,6 +120,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
     }
 }
 
@@ -108,12 +152,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
+        print("message")
         completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-
     }
 }

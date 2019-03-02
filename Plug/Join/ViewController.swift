@@ -25,7 +25,7 @@ class ViewController: PlugViewController {
     }
     
     @objc func descPressed() {
-        performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
+        performSegue(withIdentifier: "web", sender: kUserDesc)
     }
     
     func setUI() {
@@ -42,11 +42,12 @@ class ViewController: PlugViewController {
     }
     @IBAction func kakaoButtonPressed(_ sender: Any) {
         KOSession.shared()?.close()
-        
+        self.play()
         KOSession.shared()?.open(completionHandler: { (error) in
             if KOSession.shared()?.isOpen() ?? false {
                 print("kakao : \(KOSession.shared()!.token.accessToken)")
                 KOSessionTask.userMeTask(completion: { (error, me) in
+                    self.stop()
                     if let id = me?.id {
                         let user = Session()
                         user.id = id
@@ -60,6 +61,7 @@ class ViewController: PlugViewController {
                     }
                 })
             } else {
+                self.stop()
                 showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
             }
         }, authTypes: [NSNumber(value: KOAuthType.talk.rawValue)])

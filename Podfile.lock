@@ -6,8 +6,6 @@ PODS:
   - Apollo/WebSocket (0.9.4):
     - Apollo/Core
     - Starscream (~> 3.0.2)
-  - CropViewController (2.3.4):
-    - TOCropViewController
   - Firebase/Core (5.10.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.2.0)
@@ -71,24 +69,23 @@ PODS:
   - Protobuf (3.6.1)
   - SkyFloatingLabelTextField (3.4.0)
   - Starscream (3.0.6)
-  - TOCropViewController (2.3.4)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - Apollo
   - Apollo/WebSocket
-  - CropViewController
   - Firebase/Core
   - Firebase/Messaging
   - Kingfisher (~> 4.0)
   - lottie-ios
   - SkyFloatingLabelTextField (~> 3.0)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Apollo
-    - CropViewController
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -102,12 +99,11 @@ SPEC REPOS:
     - Protobuf
     - SkyFloatingLabelTextField
     - Starscream
-    - TOCropViewController
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Apollo: 450856adbdebcdf28c3c671f81732ac3f9944065
-  CropViewController: b5ecd6625fb6bbefaacc19fe42ecee719f81f75e
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseCore: c6079de64c1a87000e52e9b408dddcadc901177f
@@ -121,8 +117,8 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  TOCropViewController: 808c9724904be931dd2de5f97fcccf4cc8f8b03f
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 88a33cfe53dafe63183d5ad6eb8434bab224ef04
+PODFILE CHECKSUM: 4b08c154a695fd8753be10a6598995415021b346
 
 COCOAPODS: 1.5.0

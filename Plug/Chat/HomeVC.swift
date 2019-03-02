@@ -44,8 +44,14 @@ class HomeVC: PlugViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: NSNotification.Name(rawValue: "newMessage"), object: nil)
         hideNavigationBar()
         self.statusbarLight = true
+        setData()
+    }
+    
+    @objc func didReceiveMessage() {
+        print("message")
         setData()
     }
     
@@ -183,7 +189,7 @@ class HomeVC: PlugViewController {
         } else if segue.identifier == "share" {
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! WebVC
-            vc.urlStr = "http://www.plugapp.me/manual/teacher/?id=2"
+            vc.urlStr = kUserTip
             vc.title = "초대 방법"
         }
     }
@@ -238,6 +244,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
         performSegue(withIdentifier: "chat", sender: summaryData[indexPath.row])
     }
     

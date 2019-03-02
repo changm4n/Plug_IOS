@@ -186,7 +186,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                     self.performSegue(withIdentifier: "logout", sender: nil)
                 }, canceltype: .default, confirmtype: .destructive)
             } else if item.0 == "약관 및 개인정보 처리방침" {
-                performSegue(withIdentifier: "web", sender: "http://www.plugapp.me/privateTerm/")
+                performSegue(withIdentifier: "web", sender: kUserDesc)
             } else if item.0 == "오픈소스 라이선스" {
                 performSegue(withIdentifier: "license", sender: nil)
             }

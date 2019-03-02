@@ -78,6 +78,10 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             statusbarLight = true
+            
+            if self.navigationController?.viewControllers.count ?? 0 == 3 {
+                self.navigationController?.navigationBar.isTranslucent = false
+            }
         }
         
         super.willMove(toParentViewController: parent)
@@ -88,6 +92,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
         statusbarLight = false
     }
     

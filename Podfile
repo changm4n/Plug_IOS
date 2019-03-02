@@ -11,4 +11,5 @@ target 'Plug' do
     pod 'lottie-ios'
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
+    pod 'SwiftyJSON', '~> 4.0'
 end

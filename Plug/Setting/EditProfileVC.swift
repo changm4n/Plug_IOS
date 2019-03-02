@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import TOCropViewController
 
 class EditProfileVC: PlugViewController {
     
@@ -209,7 +208,7 @@ extension EditProfileVC: UITextFieldDelegate {
 }
 
 
-extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
+extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8
     }
@@ -268,9 +267,4 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
     }
     
-    func cropViewController(_ cropViewController: TOCropViewController, didCropToCircleImage image: UIImage, rect cropRect: CGRect, angle: Int) {
-        let ima = UIImageView(frame: CGRect(x: 100, y: 100, width: 200, height: 200 ))
-        ima.image = image
-        view.addSubview(ima)
-    }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TOCropViewController
+
 class ImageCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var checkImageView: UIImageView!
@@ -48,6 +48,10 @@ class ProfileImageVC: PlugViewController {
         bottomBtn.isEnabled = false
         self.bottomAction = {
             //TODO : image
+            if Session.me?.password == nil {//선생님이 클래스 입력하다 뒤로 -> 다시 가입 시
+                showAlertWithString("오류", message: "이미 사용자가 존재합니다.", sender: self)
+            }
+            
             guard let name = self.nameTextField.text,
                 let me = Session.me,
                 let userId = Session.me?.userId,
@@ -178,7 +182,7 @@ class ProfileImageVC: PlugViewController {
     }
 }
 
-extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
+extension ProfileImageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8
     }
