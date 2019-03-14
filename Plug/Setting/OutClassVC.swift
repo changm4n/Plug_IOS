@@ -83,6 +83,7 @@ extension OutClassVC: UITableViewDelegate, UITableViewDataSource {
                         showAlertWithString("오류", message: "나가기에 실패하였습니다.", sender: self)
                         return
                     } else {
+                        FBLogger.log(id: "settingParentsClass_dropOut_to")
                         Session.me?.refreshRoom(completion: { (rooms) in
                             self.navigationController?.popViewController(animated: true)
                         })

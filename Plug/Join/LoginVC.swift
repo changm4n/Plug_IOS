@@ -34,6 +34,9 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
         bottomBtn.isEnabled = false
         
         self.bottomAction = {
+            FBLogger.log(id: "signInWays_Kakao_toChatMain")
+            FBLogger.log(id: "signInEmailPw_emailInput")
+            FBLogger.log(id: "signInEmailPw_pwInput")
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
             self.play()
             Networking.login(email, password: password, completion: { (token) in
@@ -90,6 +93,10 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
             view.endEditing(true)
         }
         return true
+    }
+    
+    @IBAction func findPWButtonPressed(_ sender: Any) {
+        FBLogger.log(id: "signInEmailPw_findPw_to")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

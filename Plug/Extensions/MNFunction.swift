@@ -81,9 +81,9 @@ func showAlertWithString(_ title: String , message: String, sender: UIViewContro
     sender.present(alert, animated: true, completion: nil)
 }
 
-func showAlertWithSelect(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())?, canceltype: UIAlertActionStyle = .default, confirmtype: UIAlertActionStyle = .default) {
+func showAlertWithSelect(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())?, canceltype: UIAlertActionStyle = .default, confirmtype: UIAlertActionStyle = .default, cancelHandler: ((UIAlertAction)->())? = nil) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "닫기", style: canceltype, handler: nil))
+    alert.addAction(UIAlertAction(title: "닫기", style: canceltype, handler: cancelHandler))
     alert.addAction(UIAlertAction(title: "확인", style: confirmtype, handler: handler))
     sender.view.endEditing(true)
     sender.present(alert, animated: true, completion: nil)

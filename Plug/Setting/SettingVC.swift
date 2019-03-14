@@ -119,6 +119,7 @@ class SettingVC: PlugViewController {
     }
     
     @objc func switchChanged(switch: UISwitch) {
+        FBLogger.log(id: "edit_onoff")
         isplugOn = !isplugOn
         if isplugOn {
             Session.me?.schedule = Schedule(schedule: "0-30 9-18 6,7")
@@ -144,6 +145,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 } else if item.1 == "off" {
                     performSegue(withIdentifier: "holiday", sender: nil)
                 } else if item.1 == "start" {
+                    FBLogger.log(id: "edit_on_time_start")
                     if currentShowing == 1 {
                         currentShowing = 0
                         view.endEditing(true)
@@ -156,6 +158,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                 } else if item.1 == "end" {
+                    FBLogger.log(id: "edit_on_time_end")
                     if currentShowing == 2 {
                         currentShowing = 0
                         view.endEditing(true)

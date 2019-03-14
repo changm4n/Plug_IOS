@@ -44,8 +44,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
 
         kOriginHeight = self.view.frame.size.height
         sendButton.makeCircle()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
 
         tableView.dataSource = chatModel
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -105,15 +103,19 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             else { return }
         
         if isPlugOn {
+            FBLogger.log(id: "chatEach_sendBtn")
             self.resetTextView()
             Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
             }
         } else {
             showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
+                FBLogger.log(id: "chatEach_PlugOffAlert_sendBtn")
                 self.resetTextView()
                 Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
                 }
-            }, canceltype: .destructive)
+            }, canceltype: .destructive) { (action) in
+                FBLogger.log(id: "chatEach_PlugOffAlert_cancelBtn")
+            }
         }
     }
     
@@ -149,13 +151,13 @@ class ChatVC: PlugViewController, UITextViewDelegate {
                     let schedule = Schedule(schedule: crontab)
                     self.isPlugOn = crontab == "" ? true : schedule.isPlugOn()
                 }
-                
             }
         }
         
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
-                guard newMessage.sender.userId == receiverId || newMessage.receivers?.first?.userId == receiverId else {
+                guard (newMessage.sender.userId == receiverId && newMessage.receivers?.first?.userId == senderid) || (newMessage.receivers?.first?.userId == receiverId &&
+                    newMessage.sender.userId == senderid) else {
                     return
                 }
                 self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
@@ -179,7 +181,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             topText = "\(kid.name) 부모님"
             bottomText = "\(chatroomName)"
         } else {
-            topText = senderName
+            topText = "\(senderName) 선생님"
             bottomText = "\(chatroomName) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
         }
         
@@ -250,7 +252,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         }
     }
     
-    @objc func keyboardChanged(notification: NSNotification) {
+    @objc override func keyboardChanged(notification: NSNotification) {
         guard isKeyboardShow else { return }
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height

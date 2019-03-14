@@ -95,7 +95,7 @@ class Schedule: NSObject {
     
     func getDaysInt() -> [Int] {
         let arr = days.split(separator: ",")
-        return arr.map({ (Int($0) ?? 0) - 1 })
+        return arr.map({ (Int($0) ?? 0)})
     }
     
     func setDaysby(arr: [Int]) {

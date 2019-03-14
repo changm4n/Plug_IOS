@@ -1913,6 +1913,48 @@ public final class RegisterPushKeyMutation: GraphQLMutation {
   }
 }
 
+public final class RefreshEmailMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation refreshEmail($email: String!) {\n  sendNewPasswordByEmail(email: $email)\n}"
+
+  public var email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var variables: GraphQLMap? {
+    return ["email": email]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("sendNewPasswordByEmail", arguments: ["email": GraphQLVariable("email")], type: .nonNull(.scalar(String.self))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(sendNewPasswordByEmail: String) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "sendNewPasswordByEmail": sendNewPasswordByEmail])
+    }
+
+    public var sendNewPasswordByEmail: String {
+      get {
+        return resultMap["sendNewPasswordByEmail"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "sendNewPasswordByEmail")
+      }
+    }
+  }
+}
+
 public final class MessagesQuery: GraphQLQuery {
   public let operationDefinition =
     "query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {\n  messages(where: {chatRoom: {id: $chatRoomId}, receivers_some: {userId_in: [$myId, $userId]}, sender: {userId_in: [$myId, $userId]}}, last: $pageCount, before: $startCursor) {\n    __typename\n    ...MessageApolloFragment\n  }\n}"

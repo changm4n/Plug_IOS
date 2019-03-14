@@ -28,6 +28,8 @@ class kidVC: PlugViewController {
             guard let name = self.nameTextField.text,
             let roomId = self.classData?.id,
                 let userId = Session.me?.userId else { return }
+            FBLogger.log(id: "signUpInputChildName_childNameInput", param: ["name" : name])
+            FBLogger.log(id: "signUpInputChildName_nextBtn_toChatMain")
             self.play()
             Networking.applyChatroom(roomId, userId: userId, kidName: name, completion: { (id) in
                 self.stop()

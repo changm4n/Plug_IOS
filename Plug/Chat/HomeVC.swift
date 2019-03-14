@@ -51,7 +51,6 @@ class HomeVC: PlugViewController {
     }
     
     @objc func didReceiveMessage() {
-        print("message")
         setData()
     }
     
@@ -181,12 +180,14 @@ class HomeVC: PlugViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
+            FBLogger.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             let data = sender as! MessageSummary
             vc.receiver = data.receiver
             vc.sender = data.sender
             vc.chatroom = data.chatroom
         } else if segue.identifier == "share" {
+            FBLogger.log(id: "chatMain_invitIntro_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! WebVC
             vc.urlStr = kUserTip
@@ -244,7 +245,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
+//        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
         performSegue(withIdentifier: "chat", sender: summaryData[indexPath.row])
     }
     
@@ -313,6 +314,9 @@ class SummaryCell: UITableViewCell {
         let messageItem = item.lastMessage
         messageLabel.text = messageItem.text
         timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
+        if messageItem.id == "default" {
+            timeLabel.text = ""
+        }
         
         newBadge.isHidden = item.unreadCount == 0
     }

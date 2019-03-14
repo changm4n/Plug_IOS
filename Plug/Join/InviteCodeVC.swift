@@ -31,6 +31,7 @@ class InviteCodeVC: PlugViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "share" {
+            FBLogger.log(id: "signUpCreateInvitCode_invitIntro_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! WebVC
             vc.urlStr = kUserTip

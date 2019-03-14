@@ -8,6 +8,7 @@
 
 import UIKit
 import KakaoOpenSDK
+import Firebase
 
 class ViewController: PlugViewController {
     @IBOutlet weak var titleLabel: UILabel!
@@ -40,7 +41,19 @@ class ViewController: PlugViewController {
         hideNavigationBar()
         self.setStatusBar(isWhite: false)
     }
+    
+    
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        FBLogger.log(id: "signHome_signInWays_to")
+    }
+    
+    @IBAction func emailButtonPressed(_ sender: Any) {
+        FBLogger.log(id: "signHome_signUpEmail_to")
+        performSegue(withIdentifier: "email", sender: nil)
+    }
+    
     @IBAction func kakaoButtonPressed(_ sender: Any) {
+        FBLogger.log(id: "signHome_signUpKakao_to")
         KOSession.shared()?.close()
         self.play()
         KOSession.shared()?.open(completionHandler: { (error) in
@@ -94,7 +107,12 @@ class LoginSelectVC: PlugViewController {
         emailBtn.setPlugWhite()
     }
     
+    @IBAction func emailLoginPressed(_ sender: Any) {
+        FBLogger.log(id: "signInWays_SignInEmailPw_to")
+    }
+    
     @IBAction func kakaoLoginPressed(_ sender: Any) {
+        FBLogger.log(id: "signInWays_Kakao_toChatMain")
         KOSession.shared()?.close()
         
         KOSession.shared()?.open(completionHandler: { (error) in

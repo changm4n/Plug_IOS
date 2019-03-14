@@ -40,6 +40,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
       
     }
     
@@ -73,6 +74,19 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
                 bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
             }
         }
+    }
+    
+    
+    @objc func keyboardChanged(notification: NSNotification) {
+        guard isKeyboardShow else { return }
+        guard let bottomButton = bottomButton else { return }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
+                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
+            }
+        }
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {

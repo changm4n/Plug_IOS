@@ -41,7 +41,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <state key="normal" title="이메일로 회원가입"/>
                                 <connections>
-                                    <segue destination="oRu-8y-0U3" kind="show" id="dwL-0c-tYJ"/>
+                                    <action selector="emailButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r3e-Ff-oHF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjH-hf-XgS">
@@ -120,6 +120,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8s4-Fm-MSv"/>
                                     <segue destination="PAA-OB-hXT" kind="presentation" id="XyM-Fe-aMe"/>
                                 </connections>
                             </button>
@@ -164,6 +165,7 @@
                         <outlet property="titleLabel" destination="jsf-WB-AXR" id="4nc-PD-nFp"/>
                         <segue destination="5Ss-Ya-QdL" kind="show" identifier="kakao" id="WZy-2Y-IFP"/>
                         <segue destination="7Q8-oC-ki3" kind="showDetail" identifier="web" id="0rj-2a-fzk"/>
+                        <segue destination="oRu-8y-0U3" kind="show" identifier="email" id="7aL-AO-iGQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -266,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIx-Yt-hvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="625" y="1142"/>
+            <point key="canvasLocation" x="625" y="343"/>
         </scene>
         <!--회원가입-->
         <scene sceneID="NUv-Ja-61W">
@@ -425,6 +427,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <state key="normal" title="이메일로 로그인"/>
                                 <connections>
+                                    <action selector="emailLoginPressed:" destination="ncu-bg-dMf" eventType="touchUpInside" id="Vx1-Eu-4g0"/>
                                     <segue destination="43r-q4-fWt" kind="show" id="iwY-b9-Tib"/>
                                 </connections>
                             </button>
@@ -564,6 +567,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
                                 <state key="normal" title="비밀번호 찾기"/>
                                 <connections>
+                                    <action selector="findPWButtonPressed:" destination="43r-q4-fWt" eventType="touchUpInside" id="q2P-xi-3fS"/>
                                     <segue destination="OOl-Om-eAj" kind="show" id="7dc-1c-chA"/>
                                 </connections>
                             </button>
@@ -1070,7 +1074,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cea-tL-1lm" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cea-tL-1lm" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
                                 <rect key="frame" x="42" y="176" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tWC-UT-IIf"/>
@@ -1114,6 +1118,7 @@
                     <navigationItem key="navigationItem" title="비밀번호 찾기" id="XFk-oZ-UHb"/>
                     <connections>
                         <outlet property="bottomBtn" destination="Eq8-fc-46G" id="Ir7-oN-EQz"/>
+                        <outlet property="emailTextField" destination="Cea-tL-1lm" id="5t4-AJ-eyb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bq-GC-ntK" userLabel="First Responder" sceneMemberID="firstResponder"/>

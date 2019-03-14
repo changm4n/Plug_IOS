@@ -71,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print(#function)
         state = userInfo
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -78,41 +79,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let me = Session.me else { return }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
         
-        application.applicationIconBadgeNumber += 1
-        var text = ""
-        var sender = ""
-        if me.role == .TEACHER {
-            print(userInfo)
-            let data = userInfo["data"] as! String
-            
-            let d = data.data(using: String.Encoding.utf8)!
-            let json = try! JSON(data: d)
-            let senderName = json["sender"]["name"].stringValue
-            let kids = json["lastMessage"]["chatRoom"]["kids"].arrayValue
-            for kid in kids {
-                for parent in kid["parents"].arrayValue {
-                    if parent["name"].stringValue == senderName {
-                        sender = "\(kid["name"].stringValue) 부모님"
-                    }
-                }
-            }
-            text = json["lastMessage"]["text"].stringValue
-        } else {
-            let data = userInfo["data"] as! String
-            
-            let d = data.data(using: String.Encoding.utf8)!
-            let json = try! JSON(data: d)
-            let senderName = json["sender"]["name"].stringValue
-            text = json["lastMessage"]["text"].stringValue
-            sender = "\(senderName) 선생님"
-        }
-        
-        let noti = UNMutableNotificationContent()
-        noti.title = sender
-        noti.body = text
-        let request = UNNotificationRequest(identifier: "noti", content: noti, trigger: nil)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        completionHandler(UIBackgroundFetchResult.newData)
+//        application.applicationIconBadgeNumber += 1
+//        var text = ""
+//        var sender = ""
+//        if me.role == .TEACHER {
+//            print(userInfo)
+//            let data = userInfo["data"] as! String
+//
+//            let d = data.data(using: String.Encoding.utf8)!
+//            let json = try! JSON(data: d)
+//            let senderName = json["sender"]["name"].stringValue
+//            let kids = json["lastMessage"]["chatRoom"]["kids"].arrayValue
+//            for kid in kids {
+//                for parent in kid["parents"].arrayValue {
+//                    if parent["name"].stringValue == senderName {
+//                        sender = "\(kid["name"].stringValue) 부모님"
+//                    }
+//                }
+//            }
+//            text = json["lastMessage"]["text"].stringValue
+//        } else {
+//            let data = userInfo["data"] as! String
+//
+//            let d = data.data(using: String.Encoding.utf8)!
+//            let json = try! JSON(data: d)
+//            let senderName = json["sender"]["name"].stringValue
+//            text = json["lastMessage"]["text"].stringValue
+//            sender = "\(senderName) 선생님"
+//        }
+//
+//        let noti = UNMutableNotificationContent()
+////        noti.title = sender
+//        noti.body = "\(sender) : \(text)"
+//        let request = UNNotificationRequest(identifier: "noti", content: noti, trigger: nil)
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

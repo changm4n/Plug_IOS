@@ -27,9 +27,13 @@ struct MessageSummary {
     
     var displayName: String {
         if let me = Session.me,
-            me.role == .TEACHER,
-            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
-            return "\(kid.name) 부모님"
+            me.role == .TEACHER {
+            if let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
+                return "\(kid.name) 부모님"
+            } else {
+                return "\(sender.name)"
+            }
+            
         } else {
             return "\(sender.name) 선생님"
         }
@@ -59,7 +63,7 @@ struct MessageSummary {
         lastMessage = MessageItem()
         
         if myType == .TEACHER {
-            if let kidName = Session.me?.getKid(chatroomID: classData.id ?? "", parentID: user.userId)?.name {
+            if let kidName = Session.me?.getKid(chatroomID: classData.id , parentID: user.userId)?.name {
                 lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
             }
         } else {
@@ -97,7 +101,8 @@ struct MessageSummary {
     }
     
     static func sortSummary(arr: [MessageSummary]) -> [MessageSummary] {
-        guard let userID = Session.me?.userId else { return [] }
+        guard let userID = Session.me?.userId ,
+        let me = Session.me else { return [] }
         
         var tmpsummary: [MessageSummary] = []
         for s in arr {
@@ -122,6 +127,7 @@ struct MessageSummary {
                     let tmp = s.sender
                     ss.sender = s.receiver
                     ss.receiver = tmp
+                    ss.unreadCount = 0;
                 }
             }
             summary.append(ss)
@@ -134,6 +140,18 @@ struct MessageSummary {
         summary.sort(by: { (lhs, rhs) -> Bool in
             return lhs.unreadCount != 0 && rhs.unreadCount == 0
         })
+        
+        if Session.me?.role ?? .NONE == .TEACHER {//탈퇴한 부모의 서머리 삭제
+            summary = summary.filter { (summary) -> Bool in
+                return me.getKid(chatroomID: summary.chatroom.id, parentID: summary.sender.userId) != nil
+            }
+        } else {//탈퇴한 클래스 선생님 삭제
+            summary = summary.filter({ (summary) -> Bool in
+                me.classData.filter({ (chatroom) -> Bool in
+                    return chatroom.id == summary.chatroom.id
+                }).count > 0
+            })
+        }
         return summary
     }
 }

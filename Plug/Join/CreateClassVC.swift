@@ -31,6 +31,9 @@ class CreateClassVC: PlugViewController {
             guard let userID = Session.me?.userId,
                 let name = self.nameTextField.text,
                 let year = self.yearTextField.text else { return }
+            FBLogger.log(id: "signUpClassname_classNameInput", param: ["name" : name])
+            FBLogger.log(id: "signUpClassname_classYearInput", param: ["year" : year])
+            FBLogger.log(id: "signUpClassname_nextBtn_toSignUpInvitCode")
             self.play()
             Networking.createChatRoom(name, userID: userID, year: year, completion: { (code) in
                 self.stop()
@@ -60,6 +63,7 @@ class CreateClassVC: PlugViewController {
             vc.desc = "\(self.nameTextField.text ?? "") 클래스를 만들었습니다."
             vc.code = sender as? String ?? "-"
             vc.bottomAction = {
+                FBLogger.log(id: "signUpCreateInvitCode_nextBtn_toChatMain")
                 vc.play()
                 Networking.getUserInfo(completion: { (classData, crontab) in
                     vc.stop()

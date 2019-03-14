@@ -148,6 +148,10 @@ mutation registerPushKey($pushKey: String!) {
         pushKey
     }
 }
+
+mutation refreshEmail($email: String!) {
+    sendNewPasswordByEmail(email : $email)
+}
     
 query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {
     messages(

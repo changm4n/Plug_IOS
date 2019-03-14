@@ -16,7 +16,7 @@ class KidVC2: kidVC {
             guard let name = self.nameTextField.text,
                 let roomId = self.classData?.id,
                 let userId = Session.me?.userId else { return }
-            
+            FBLogger.log(id: "myclassInputChildname_completeBtn")
             Networking.applyChatroom(roomId, userId: userId, kidName: name, completion: { (id) in
                 if id != nil {
                     Networking.getUserInfo(completion: { (classData, crontab) in

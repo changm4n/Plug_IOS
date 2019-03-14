@@ -77,6 +77,7 @@ class ParentClassVC: PlugViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
+            FBLogger.log(id: "myclassEach_chatEach_to")
             let vc = segue.destination as! ChatVC
             vc.receiver = members.filter({ $0.userId ==  Session.me!.userId! }).first
             vc.sender = sender as? UserApolloFragment

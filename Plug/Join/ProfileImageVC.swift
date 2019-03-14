@@ -56,6 +56,9 @@ class ProfileImageVC: PlugViewController {
                 let me = Session.me,
                 let userId = Session.me?.userId,
                 let pw = Session.me?.password else { return }
+            
+            FBLogger.log(id: "signUpUsername_userNameInput", param: ["data" : "name"])
+            
             self.play()
             me.name = name
             me.profileImageUrl = self.selectedURL
@@ -77,8 +80,10 @@ class ProfileImageVC: PlugViewController {
                                         Session.me = user
                                         user.save()
                                         if Session.me?.role == .PARENT {
+                                            FBLogger.log(id: "signUpUsername_nextBtn_toSignUpInputInvitCode")
                                             self.performSegue(withIdentifier: "join", sender: nil)
                                         } else {
+                                            FBLogger.log(id: "signUpUsername_nextBtn_toSignUpClassname")
                                             self.performSegue(withIdentifier: "next", sender: nil)
                                         }
                                     }
@@ -115,8 +120,10 @@ class ProfileImageVC: PlugViewController {
                                                 Session.me?.name = name
                                                 Session.me?.profileImageUrl = self.selectedURL
                                                 if Session.me?.role == .PARENT {
+                                                    FBLogger.log(id: "signUpUsername_nextBtn_toSignUpInputInvitCode")
                                                     self.performSegue(withIdentifier: "join", sender: nil)
                                                 } else {
+                                                    FBLogger.log(id: "signUpUsername_nextBtn_toSignUpClassname")
                                                     self.performSegue(withIdentifier: "next", sender: nil)
                                                 }
                                             }

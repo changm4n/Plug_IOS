@@ -85,6 +85,13 @@ class Networking: NSObject {
         }
     }
     
+    static func refreshPassword(_ email: String, completion:@escaping (_ message: String?, _ error: Error?) -> Void) {
+        let apollo = getClient()
+        apollo.perform(mutation: RefreshEmailMutation(email: email), queue: .main) { (result, error) in
+            completion(result?.errors?.first?.message, error)
+        }
+    }
+    
     static func login(_ id:String, password:String, completion:@escaping (_ token:String?) -> Void) {
         let apollo = getClient()
         apollo.perform(mutation: SignInMutation(userId: id, password: password), queue: DispatchQueue.main) { (result, error) in

@@ -71,7 +71,7 @@ class EditClassVC: PlugViewController {
             showAlertWithString("오류", message: "클래스 편집 중 오류가 발생하였습니다.", sender: self)
             return
         }
-        
+        FBLogger.log(id: "myclassEdit_SaveBtn_toMyClassEach")
         let newYear = "\(selectedYear)"
         
         if selectedName != classData.name || newYear != classData.chatRoomAt.substr(to: 3) {
@@ -163,7 +163,12 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDe
         return indexPath.section == 0 ? 50 : 70
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 1
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else { return }
         if editingStyle == .delete {
             let kid = kids[indexPath.row]
             let alert = UIAlertController(title: "클래스 맴버 삭제", message: "\(kid.name) 부모님을 클래스에서 삭제하시겠습니까?", preferredStyle: .alert)

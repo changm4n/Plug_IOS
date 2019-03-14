@@ -29,6 +29,7 @@ class HolidayVC: PlugViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        FBLogger.log(id: "edit_on_day")
         setColors()
         super.viewWillAppear(animated)
     }
@@ -49,7 +50,6 @@ class HolidayVC: PlugViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.saveSchedule()
     }
     
