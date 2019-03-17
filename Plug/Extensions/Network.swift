@@ -17,7 +17,8 @@ class Networking: NSObject {
         configuration.timeoutIntervalForRequest = 5
         configuration.timeoutIntervalForResource = 5
         if let token = Session.fetchToken() {
-            configuration.httpAdditionalHeaders = ["Authorization" : token]
+            configuration.httpAdditionalHeaders = ["Authorization" : token,
+                                                   "Platform" : "IOS"]
         }
         let url = URL(string: kBaseURL)!
         return ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
@@ -27,7 +28,8 @@ class Networking: NSObject {
         let token = Session.fetchToken() ?? ""
         let configuration = URLSessionConfiguration.default
         let map: GraphQLMap = ["Authorization" : token]
-        configuration.httpAdditionalHeaders = ["Authorization" : token]
+        configuration.httpAdditionalHeaders = ["Authorization" : token,
+                                               "Platform" : "IOS"]
         
         let wsEndpointURL = URL(string: kBaseURL)!
         let endpointURL = URL(string: kBaseURL)!
