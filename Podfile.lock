@@ -67,6 +67,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.6.1)
+  - Siren (3.4.3)
   - SkyFloatingLabelTextField (3.4.0)
   - Starscream (3.0.6)
   - SwiftyJSON (4.2.0)
@@ -79,6 +80,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Kingfisher (~> 4.0)
   - lottie-ios
+  - Siren (from `https://github.com/ArtSabintsev/Siren.git`, branch `swift4.1`)
   - SkyFloatingLabelTextField (~> 3.0)
   - SwiftyJSON (~> 4.0)
 
@@ -101,6 +103,16 @@ SPEC REPOS:
     - Starscream
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  Siren:
+    :branch: swift4.1
+    :git: https://github.com/ArtSabintsev/Siren.git
+
+CHECKOUT OPTIONS:
+  Siren:
+    :commit: 94b319573e876597668eab7a4ed87e3add8bf4a5
+    :git: https://github.com/ArtSabintsev/Siren.git
+
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Apollo: 450856adbdebcdf28c3c671f81732ac3f9944065
@@ -115,10 +127,11 @@ SPEC CHECKSUMS:
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 4b08c154a695fd8753be10a6598995415021b346
+PODFILE CHECKSUM: 492d274b4286b3a4a3b554515a5a9190219c0fd9
 
 COCOAPODS: 1.5.0

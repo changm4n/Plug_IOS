@@ -152,7 +152,14 @@ mutation registerPushKey($pushKey: String!) {
 mutation refreshEmail($email: String!) {
     sendNewPasswordByEmail(email : $email)
 }
-    
+
+query version {
+    appVersions(where :{platform : IOS}) {
+        platform,
+        version
+    }
+}
+
 query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {
     messages(
              where:{

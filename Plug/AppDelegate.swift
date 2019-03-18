@@ -5,7 +5,7 @@
 //  Created by changmin lee on 2018. 10. 20..
 //  Copyright © 2018년 changmin. All rights reserved.
 //
-
+import Siren
 import UIKit
 import KakaoOpenSDK
 import Firebase
@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        print("log didfinish")
+        Siren.shared.forceLanguageLocalization = .korean
+        Siren.shared.checkVersion(checkType: .immediately)
+        
         Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -65,12 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        Siren.shared.forceLanguageLocalization = .korean
+        Siren.shared.checkVersion(checkType: .weekly)
         KOSession.handleDidBecomeActive()
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print(#function)
         state = userInfo
+        application.applicationIconBadgeNumber += 1
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
     }
     
@@ -78,7 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         guard let me = Session.me else { return }
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
-        
+        application.applicationIconBadgeNumber += 1
+        completionHandler(UIBackgroundFetchResult.newData)
 //        application.applicationIconBadgeNumber += 1
 //        var text = ""
 //        var sender = ""

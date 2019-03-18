@@ -167,6 +167,39 @@ public struct UserWhereUniqueInput: GraphQLMapConvertible {
   }
 }
 
+public enum Platform: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  case ios
+  case android
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "IOS": self = .ios
+      case "ANDROID": self = .android
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .ios: return "IOS"
+      case .android: return "ANDROID"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: Platform, rhs: Platform) -> Bool {
+    switch (lhs, rhs) {
+      case (.ios, .ios): return true
+      case (.android, .android): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+}
+
 public enum UserType: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case kakao
@@ -1950,6 +1983,88 @@ public final class RefreshEmailMutation: GraphQLMutation {
       }
       set {
         resultMap.updateValue(newValue, forKey: "sendNewPasswordByEmail")
+      }
+    }
+  }
+}
+
+public final class VersionQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query version {\n  appVersions(where: {platform: IOS}) {\n    __typename\n    platform\n    version\n  }\n}"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("appVersions", arguments: ["where": ["platform": "IOS"]], type: .nonNull(.list(.object(AppVersion.selections)))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(appVersions: [AppVersion?]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "appVersions": appVersions.map { (value: AppVersion?) -> ResultMap? in value.flatMap { (value: AppVersion) -> ResultMap in value.resultMap } }])
+    }
+
+    public var appVersions: [AppVersion?] {
+      get {
+        return (resultMap["appVersions"] as! [ResultMap?]).map { (value: ResultMap?) -> AppVersion? in value.flatMap { (value: ResultMap) -> AppVersion in AppVersion(unsafeResultMap: value) } }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: AppVersion?) -> ResultMap? in value.flatMap { (value: AppVersion) -> ResultMap in value.resultMap } }, forKey: "appVersions")
+      }
+    }
+
+    public struct AppVersion: GraphQLSelectionSet {
+      public static let possibleTypes = ["AppVersion"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("platform", type: .nonNull(.scalar(Platform.self))),
+        GraphQLField("version", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(platform: Platform, version: String) {
+        self.init(unsafeResultMap: ["__typename": "AppVersion", "platform": platform, "version": version])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var platform: Platform {
+        get {
+          return resultMap["platform"]! as! Platform
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "platform")
+        }
+      }
+
+      public var version: String {
+        get {
+          return resultMap["version"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "version")
+        }
       }
     }
   }

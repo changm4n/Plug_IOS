@@ -261,6 +261,12 @@ class Networking: NSObject {
         getClient().perform(mutation: RegisterPushKeyMutation(pushKey: pushKey), queue: .main, resultHandler: nil)
     }
     
+    static func getVersion(completion:@escaping (_ version: String?) -> Void) {
+        getClient().fetch(query: VersionQuery(), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in
+             completion(result?.data?.appVersions.first??.version)
+        }
+    }
+    
     static func subscribeMessage(completion:@escaping (_ message: MessageSubscriptionPayloadApolloFragment) -> Void) {
         getSubscriptClient().subscribe(subscription: MessageSubscriptionSubscription(), queue: DispatchQueue.main) { (result, error) in
             if let message = result?.data?.message?.fragments.messageSubscriptionPayloadApolloFragment {

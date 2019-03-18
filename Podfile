@@ -12,4 +12,5 @@ target 'Plug' do
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
     pod 'SwiftyJSON', '~> 4.0'
+    pod 'Siren', :git => 'https://github.com/ArtSabintsev/Siren.git', :branch => 'swift4.1'
 end
