@@ -12,6 +12,7 @@ class KidVC2: kidVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.bottomAction = {
             guard let name = self.nameTextField.text,
                 let roomId = self.classData?.id,

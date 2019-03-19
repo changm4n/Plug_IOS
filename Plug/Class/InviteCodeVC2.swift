@@ -9,8 +9,9 @@
 import UIKit
 
 class InviteCodeVC2: InviteCodeVC {
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()    
         self.bottomButton = self.bottomBtn
     }
     

@@ -103,8 +103,8 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
             vc.email = data.0
             vc.key = data.1
             vc.bottomAction = {
-                if true {
-//                if vc.codeTextField.text == vc.key {
+//                if true {
+                if vc.codeTextField.text == vc.key {
                     FBLogger.log(id: "signUpValidation_validationInput")
                     FBLogger.log(id: "signUpValidation_nextBtn_toSignUpRole")
                     vc.performSegue(withIdentifier: "next", sender: nil)

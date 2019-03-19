@@ -11,11 +11,9 @@ import UIKit
 class SelectClassTVC: UITableViewController {
 
     var type = SessionRole.TEACHER
-    var classData: [ChatRoomApolloFragment] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.tableFooterView = UIView()
         self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "classCell")
     }
@@ -40,12 +38,16 @@ class SelectClassTVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return classData.count
+        return Session.me?.classData.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let classItem = classData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! PlugClassCell
+        
+        guard let classItem = Session.me?.classData[indexPath.row] else {
+            return cell
+        }
+        
         cell.configure(title: classItem.name, year: classItem.chatRoomAt, count: classItem.kids?.count ?? 0, showArrow: true)
         
         return cell
@@ -53,7 +55,7 @@ class SelectClassTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
-        header?.configure(type: .TEACHER, count: classData.count)
+        header?.configure(type: .TEACHER, count: Session.me?.classData.count ?? 0)
         return header
     }
     
@@ -62,7 +64,7 @@ class SelectClassTVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let classItem = classData[indexPath.row]
+        guard let classItem = Session.me?.classData[indexPath.row] else { return }
         self.performSegue(withIdentifier: "next", sender: (classItem.name,classItem.inviteCode))
     }
 }

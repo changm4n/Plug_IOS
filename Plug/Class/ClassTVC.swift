@@ -11,8 +11,6 @@ import UIKit
 class ClassTVC: UITableViewController {
     var type = SessionRole.TEACHER
     
-    var classData: [ChatRoomApolloFragment] = []
-    
     var itemT: [(String, String)] =
         [("classPlus","새로운 클래스 만들기"),
          ("classInvite","기존 클래스에 초대하기")]
@@ -44,9 +42,6 @@ class ClassTVC: UITableViewController {
             vc.classID = (sender as! ChatRoomApolloFragment).id
         } else if segue.identifier == "invite" {
             FBLogger.log(id: "myClassMain_invitMembers_to")
-            let nvc = segue.destination as! UINavigationController
-            let vc = nvc.viewControllers[0] as! SelectClassTVC
-            vc.classData = classData
         } else if segue.identifier == "list_parent" {
             let vc = segue.destination as! ParentClassVC
             vc.classID = (sender as! ChatRoomApolloFragment).id
@@ -60,7 +55,6 @@ class ClassTVC: UITableViewController {
     func setData() {
         guard let me = Session.me else { return }
         me.refreshRoom(completion: { (classData) in
-            self.classData = me.classData
             self.tableView.reloadData()
         })
         
@@ -74,7 +68,7 @@ class ClassTVC: UITableViewController {
         if section == 0 {
             return type == .TEACHER ? 2 : 1
         } else {
-            return classData.count
+            return Session.me?.classData.count ?? 0
         }
     }
     
@@ -96,7 +90,13 @@ class ClassTVC: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell\(indexPath.section + 1)", for: indexPath) as! ClassCell
-            let classItem = classData[indexPath.row]
+            
+            
+            guard let classData = Session.me?.classData,
+                let classItem = Session.me?.classData[indexPath.row] else {
+                return cell
+            }
+            
             if type == .TEACHER {
                 cell.configure(title: classItem.name, year: classItem.chatRoomAt, count: classItem.kids?.count ?? 0)
             } else {
@@ -132,7 +132,8 @@ class ClassTVC: UITableViewController {
                 self.performSegue(withIdentifier: "join", sender: nil)
             }
         } else {
-            self.performSegue(withIdentifier: type == .TEACHER ? "list" : "list_parent", sender: classData[indexPath.row])
+            guard let classItem = Session.me?.classData[indexPath.row] else { return }
+            self.performSegue(withIdentifier: type == .TEACHER ? "list" : "list_parent", sender: classItem)
         }
     }
 }

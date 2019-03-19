@@ -1869,7 +1869,7 @@ public final class KakaoSignInMutation: GraphQLMutation {
 
 public final class RegisterPushKeyMutation: GraphQLMutation {
   public let operationDefinition =
-    "mutation registerPushKey($pushKey: String!) {\n  registerNotification(data: {pushKey: $pushKey}) {\n    __typename\n    pushKey\n  }\n}"
+    "mutation registerPushKey($pushKey: String!) {\n  registerNotification(data: {pushKey: $pushKey, platform: IOS}) {\n    __typename\n    pushKey\n  }\n}"
 
   public var pushKey: String
 
@@ -1885,7 +1885,7 @@ public final class RegisterPushKeyMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("registerNotification", arguments: ["data": ["pushKey": GraphQLVariable("pushKey")]], type: .nonNull(.object(RegisterNotification.selections))),
+      GraphQLField("registerNotification", arguments: ["data": ["pushKey": GraphQLVariable("pushKey"), "platform": "IOS"]], type: .nonNull(.object(RegisterNotification.selections))),
     ]
 
     public private(set) var resultMap: ResultMap

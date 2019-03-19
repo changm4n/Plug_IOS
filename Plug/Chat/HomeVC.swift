@@ -40,6 +40,7 @@ class HomeVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
     }
     
@@ -48,6 +49,11 @@ class HomeVC: PlugViewController {
         hideNavigationBar()
         self.statusbarLight = true
         setData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "newMessage"), object: nil)
     }
     
     @objc func didReceiveMessage() {

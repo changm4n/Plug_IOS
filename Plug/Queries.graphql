@@ -144,7 +144,9 @@ mutation kakaoSignIn($userId: String!) {
 }
 
 mutation registerPushKey($pushKey: String!) {
-    registerNotification(data : {pushKey : $pushKey}) {
+    registerNotification(data : {pushKey : $pushKey,
+                         platform: IOS
+                         }) {
         pushKey
     }
 }

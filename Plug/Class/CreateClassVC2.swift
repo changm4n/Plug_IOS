@@ -23,6 +23,7 @@ class CreateClassVC2: CreateClassVC {
             guard let name = self.nameTextField.text ,
                 let me = Session.me?.userId,
                 let year = self.yearTextField.text else { return }
+            
             FBLogger.log(id: "myclassCreateClass_nextBtn_toMyClassShareInvitCode")
             self.play()
             self.view.endEditing(true)
