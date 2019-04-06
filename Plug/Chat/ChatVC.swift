@@ -46,12 +46,15 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         sendButton.makeCircle()
 
         tableView.dataSource = chatModel
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         textView.layer.cornerRadius = 18
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
-        textView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        textView.contentInset = UIEdgeInsets.zero
+        
+        textView.textContainerInset.left = 8
+        textView.textContainerInset.right = 8
         
         setData()
         setUI()
@@ -71,7 +74,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderid = sender?.userId else { return }
         Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
     }
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -82,7 +85,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             }
         }
         
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {
@@ -185,10 +188,10 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             bottomText = "\(chatroomName) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
         }
         
-        let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.darkGrey,
-                               NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16, weight: .medium)]
-        let subtitleParameters = [NSAttributedStringKey.foregroundColor : UIColor.grey,
-                                  NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12, weight: .regular)]
+        let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey,
+                               NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: .medium)]
+        let subtitleParameters = [NSAttributedString.Key.foregroundColor : UIColor.grey,
+                                  NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .regular)]
         
         let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
         let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
@@ -230,7 +233,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @objc override func keyboardWillShow(notification: NSNotification) {
         isKeyboardShow = true
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             
             if self.view.frame.origin.y == 0  {
@@ -243,7 +246,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @objc override func keyboardWillHide(notification: NSNotification) {
         isKeyboardShow = false
-        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0  {
                 self.view.frame.origin.y = 0
                 self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -254,7 +257,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @objc override func keyboardChanged(notification: NSNotification) {
         guard isKeyboardShow else { return }
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             self.view.frame.origin.y = -keyboardHeight
             self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
@@ -322,7 +325,7 @@ extension ChatVC: UITableViewDelegate {
         case .BLANK:
             return 4
         case .LCELL, .RCELL:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         case .STAMP:
             return 30
         }

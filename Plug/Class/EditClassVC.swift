@@ -167,7 +167,7 @@ extension EditClassVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDe
         return indexPath.section == 1
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard indexPath.section == 1 else { return }
         if editingStyle == .delete {
             let kid = kids[indexPath.row]

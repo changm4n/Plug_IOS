@@ -63,7 +63,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
             
             let star = UIImageView(frame: CGRect(x: x, y: y, width: 20, height: 20))
             star.image = UIImage(named: "star_small")!
-            star.contentMode = UIViewContentMode.center
+            star.contentMode = UIView.ContentMode.center
             star.backgroundColor = UIColor.clear
             self.twinkle(star)
             starView.addSubview(star)
@@ -104,7 +104,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
             
             let planet = UIImageView(frame: CGRect(x: x, y: y, width: 100, height: 100))
             planet.image = UIImage(named: "planet_\(planetNum)")!
-            planet.contentMode = UIViewContentMode.center
+            planet.contentMode = UIView.ContentMode.center
             planet.backgroundColor = UIColor.clear
             self.glide(planet)
             planetView.addSubview(planet)
@@ -129,7 +129,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 
                 let planetNum = Int(arc4random_uniform(5)) + 1
                 planet.image = UIImage(named: "planet_\(planetNum)")!
-                planet.contentMode = UIViewContentMode.center
+                planet.contentMode = UIView.ContentMode.center
                 planet.backgroundColor = UIColor.clear
                 planetView.addSubview(planet)
             }
@@ -140,7 +140,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let madebyPlanet = UIImageView(frame: CGRect(x: 0, y: 8, width: 30, height: 30))
         madebyPlanet.center.x = madebyView.center.x
         madebyPlanet.image = UIImage(named: "moon")
-        madebyPlanet.contentMode = UIViewContentMode.center
+        madebyPlanet.contentMode = UIView.ContentMode.center
         madebyView.addSubview(madebyPlanet)
         
         let madebyLabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.planetScrollView.frame.size.width, height: 100))
@@ -163,7 +163,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         var berrymelonFrame = self.berrymelon.frame
         var jakeFrame = self.jake.frame
         
-        UIView.animate(withDuration: 4.0, delay: 0.0, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 4.0, delay: 0.0, options: UIView.AnimationOptions(), animations: {
             self.starScrollView.contentOffset = CGPoint(x: 0.0, y: 0)
             self.planetScrollView.contentOffset = CGPoint(x: 0.0, y: 0)
         }, completion: {(complete) in
@@ -172,17 +172,17 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         self.tableView.alpha = 1.0
         self.tableView.contentInset = UIEdgeInsets(top: -self.tableView.frame.size.height * 5, left: 0, bottom: 0, right: 0)
-        UIView.animate(withDuration: 2.0, delay: 2.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 2.0, delay: 2.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIView.AnimationOptions(), animations: {
             self.tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 120, right: 0)
             self.tableView.contentOffset = CGPoint(x: 0.0, y: 0.0)
         }, completion: {(complete) in
             
             berrymelonFrame.origin.y -= self.jake.frame.size.height
             jakeFrame.origin.y -= self.jake.frame.size.height
-            UIView.animate(withDuration: 1.0, delay: 0.3, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.3, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.8, options: UIView.AnimationOptions(), animations: {
                 self.berrymelon.frame = berrymelonFrame
             }, completion: nil)
-            UIView.animate(withDuration: 1.0, delay: 0.5, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.5, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.8, options: UIView.AnimationOptions(), animations: {
                 self.jake.frame = jakeFrame
             }, completion: {(complete) in
                 self.berrymelon.isUserInteractionEnabled = true
@@ -225,18 +225,18 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let location = gesture.location(in: self.view);
         let touchLocation = gesture.location(in: gesture.view!);
         
-        if gesture.state == UIGestureRecognizerState.began {
+        if gesture.state == UIGestureRecognizer.State.began {
             // Do some initial setup here
             // Will set the box's center to the location value stored above
             //self.animator?.removeAllBehaviors()
             
-            let offset = UIOffsetMake(touchLocation.x - gesture.view!.bounds.midX, touchLocation.y - gesture.view!.bounds.midY)
+            let offset = UIOffset.init(horizontal: touchLocation.x - gesture.view!.bounds.midX, vertical: touchLocation.y - gesture.view!.bounds.midY)
             self.attach = UIAttachmentBehavior(item: gesture.view!, offsetFromCenter: offset, attachedToAnchor: location)
             self.animator!.addBehavior(self.attach!);
         }
-        else if gesture.state == UIGestureRecognizerState.changed {
+        else if gesture.state == UIGestureRecognizer.State.changed {
             self.attach!.anchorPoint = location;
-        } else if gesture.state == UIGestureRecognizerState.ended {
+        } else if gesture.state == UIGestureRecognizer.State.ended {
             
             self.animator!.removeBehavior(self.attach!)
             
@@ -287,7 +287,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == numberOfMembers+1 {
             self.isAnimating = true
-            UIView.animate(withDuration: 4.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            UIView.animate(withDuration: 4.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 self.starScrollView.contentOffset = CGPoint(x: 0.0, y: self.starScrollView.frame.size.height * 10)
                 self.planetScrollView.contentOffset = CGPoint(x: 0.0, y: self.planetScrollView.frame.size.height * 10)
             }, completion: {(complete) in
@@ -295,7 +295,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 self.dismiss(animated: true, completion: nil)
             })
             
-            UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions(), animations: {
                 self.tableView.alpha = 0.0
             }, completion: {(complete) in
                 
@@ -303,7 +303,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
             
             self.animator?.removeAllBehaviors()
             
-            UIView.animate(withDuration: 2.0, delay: 0.0, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: 2.0, delay: 0.0, options: UIView.AnimationOptions(), animations: {
                 self.berrymelon.center = CGPoint(x: self.berrymelon.center.x, y: -100)
                 self.jake.center = CGPoint(x: self.jake.center.x, y: -100)
             }, completion: {(complete) in
@@ -338,7 +338,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         let delay = Double(arc4random_uniform(10)) + 3
         
-        UIView.animateKeyframes(withDuration: 3.0, delay: delay, options: [UIViewKeyframeAnimationOptions.autoreverse,UIViewKeyframeAnimationOptions.repeat], animations: {
+        UIView.animateKeyframes(withDuration: 3.0, delay: delay, options: [UIView.KeyframeAnimationOptions.autoreverse,UIView.KeyframeAnimationOptions.repeat], animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
                 view.alpha = 0.0
@@ -357,7 +357,7 @@ class SecretViewController: UIViewController,UITableViewDataSource,UITableViewDe
         movingFrame.origin.x += randomX * direction
         
         let randomDuration = Double(arc4random_uniform(10) + 5)
-        UIView.animateKeyframes(withDuration: randomDuration, delay: 0, options: [UIViewKeyframeAnimationOptions.autoreverse,UIViewKeyframeAnimationOptions.repeat], animations: {
+        UIView.animateKeyframes(withDuration: randomDuration, delay: 0, options: [UIView.KeyframeAnimationOptions.autoreverse,UIView.KeyframeAnimationOptions.repeat], animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0, animations: {
                 view.frame = movingFrame

@@ -15,13 +15,13 @@ class StartVC: PlugViewController {
     var summary: [MessageSummary] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(StartVC.appDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StartVC.appDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(StartVC.didLogout), name: NSNotification.Name(rawValue: kDidLogoutNotification), object: nil)
         
     }
     
     @objc func appDidBecomeActive() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         self.show()
     }
     

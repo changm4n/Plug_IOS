@@ -59,12 +59,12 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
         super.viewWillAppear(animated)
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
         }
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {

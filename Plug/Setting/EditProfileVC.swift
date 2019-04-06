@@ -37,7 +37,7 @@ class EditProfileVC: PlugViewController {
         self.tableView.keyboardDismissMode = .onDrag
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "cell2")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         setData()
     }
     
@@ -96,12 +96,12 @@ class EditProfileVC: PlugViewController {
         collectionView.reloadData()
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             navigationController?.navigationBar.barTintColor = UIColor.plugBlue
             statusbarLight = true
         }
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {
@@ -259,12 +259,25 @@ extension EditProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        profileImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        profileImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
         self.dismiss(animated: true) {
             
             self.performSegue(withIdentifier: "edit", sender: nil)
         }
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

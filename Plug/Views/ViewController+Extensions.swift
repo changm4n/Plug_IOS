@@ -38,9 +38,9 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
       
     }
     
@@ -68,7 +68,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func keyboardWillShow(notification: NSNotification) {
         isKeyboardShow = true
         guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             if bottomButton.frame.origin.y == view.frame.size.height - bottomButton.frame.size.height {
                 bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
@@ -80,7 +80,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func keyboardChanged(notification: NSNotification) {
         guard isKeyboardShow else { return }
         guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
                 bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
@@ -92,7 +92,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func keyboardWillHide(notification: NSNotification) {
         isKeyboardShow = false
         guard let bottomButton = bottomButton else { return }
-        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
                 bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height
             }

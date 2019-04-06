@@ -34,12 +34,12 @@ class HolidayVC: PlugViewController {
         super.viewWillAppear(animated)
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             navigationController?.navigationBar.barTintColor = UIColor.plugBlue
             statusbarLight = true
         }
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {

@@ -40,7 +40,7 @@ class HomeVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: UIApplication.didBecomeActiveNotification, object: nil)
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
     }
     

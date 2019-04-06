@@ -28,11 +28,11 @@ class JoinRoomVC2: JoinRoomVC {
         setColors()
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             statusbarLight = true
         }
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {

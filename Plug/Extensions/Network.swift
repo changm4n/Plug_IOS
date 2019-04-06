@@ -288,7 +288,7 @@ class Networking: NSObject {
     
     static func uploadImage(image: UIImage, completion:@escaping (_ url: String?) -> Void) {
         
-        if let data = UIImageJPEGRepresentation(image, 1),
+        if let data = image.jpegData(compressionQuality: 1),
             let userId = Session.me?.userId {
             
             let headers = ["accept" : "application/json",

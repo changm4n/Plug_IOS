@@ -25,7 +25,7 @@ class NoteMainVC: PlugViewController {
 //        arr.append(Note(title: "titel", cname: "cname", tname: "tname", type: .image))
         
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }
 

@@ -52,7 +52,7 @@ class EditImageVC: PlugViewController, UIScrollViewDelegate {
         
         
         fillLayer.path = path.cgPath
-        fillLayer.fillRule = kCAFillRuleEvenOdd
+        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
         fillLayer.fillColor = UIColor(r: 4, g: 4, b: 15, a: 1).cgColor
         fillLayer.opacity = 0.4
         

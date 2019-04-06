@@ -45,7 +45,7 @@ class OutClassVC: PlugViewController {
         super.viewWillAppear(animated)
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             navigationController?.navigationBar.barTintColor = UIColor.plugBlue
             self.navigationController?.navigationBar.shadowImage = nil
@@ -53,7 +53,7 @@ class OutClassVC: PlugViewController {
             
         }
         
-        super.willMove(toParentViewController: parent)
+        super.willMove(toParent: parent)
     }
     
     private func setColors() {

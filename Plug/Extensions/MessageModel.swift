@@ -24,7 +24,8 @@ struct MessageItem {
     var isMine: Bool
     var timeStamp: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "a hh:mm"
         return formatter.string(from: createAt)
     }
     
