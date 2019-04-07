@@ -65,6 +65,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         setColors()
         super.viewWillAppear(animated)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
@@ -74,6 +75,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderid = sender?.userId else { return }
         Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
     }
+    
     override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -106,18 +108,18 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             else { return }
         
         if isPlugOn {
-            FBLogger.log(id: "chatEach_sendBtn")
+            FBLogger.shared.log(id: "chatEach_sendBtn")
             self.resetTextView()
             Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
             }
         } else {
             showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
-                FBLogger.log(id: "chatEach_PlugOffAlert_sendBtn")
+                FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
                 self.resetTextView()
                 Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
                 }
             }, canceltype: .destructive) { (action) in
-                FBLogger.log(id: "chatEach_PlugOffAlert_cancelBtn")
+                FBLogger.shared.log(id: "chatEach_PlugOffAlert_cancelBtn")
             }
         }
     }
@@ -262,9 +264,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             self.view.frame.origin.y = -keyboardHeight
             self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
             self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-            
         }
-        
     }
     
     
@@ -333,6 +333,7 @@ extension ChatVC: UITableViewDelegate {
 }
 
 class ChatCell: UITableViewCell {
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bubbleView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -356,6 +357,7 @@ class ChatRCell: ChatCell {
 }
 
 class StampCell: UITableViewCell {
+    
     @IBOutlet weak var timeLabel: UILabel!
     
     func setTimeStamp(date: Date) {

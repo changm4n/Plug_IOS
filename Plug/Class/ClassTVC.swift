@@ -37,18 +37,18 @@ class ClassTVC: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "list" {
-            FBLogger.log(id: "myClassMain_eachClass_to")
+            FBLogger.shared.log(id: "myClassMain_eachClass_to")
             let vc = segue.destination as! ManageClassVC
             vc.classID = (sender as! ChatRoomApolloFragment).id
         } else if segue.identifier == "invite" {
-            FBLogger.log(id: "myClassMain_invitMembers_to")
+            FBLogger.shared.log(id: "myClassMain_invitMembers_to")
         } else if segue.identifier == "list_parent" {
             let vc = segue.destination as! ParentClassVC
             vc.classID = (sender as! ChatRoomApolloFragment).id
         } else if segue.identifier == "create" {
-            FBLogger.log(id: "myClassMain_createClass_to")
+            FBLogger.shared.log(id: "myClassMain_createClass_to")
         } else if segue.identifier == "join" {
-            FBLogger.log(id: "myClassMain_signUpClass_to")
+            FBLogger.shared.log(id: "myClassMain_signUpClass_to")
         }
     }
     

@@ -29,7 +29,7 @@ class ManageClassVC: PlugViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "invite" {
-            FBLogger.log(id: "myclassEach_invitMembers_to")
+            FBLogger.shared.log(id: "myclassEach_invitMembers_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! InviteCodeVC2
             vc.title = "클래스에 초대하기"
@@ -39,13 +39,13 @@ class ManageClassVC: PlugViewController {
                 vc.dismiss(animated: true, completion: nil)
             }
         } else if segue.identifier == "chat" {
-            FBLogger.log(id: "myclassEach_chatEach_to")
+            FBLogger.shared.log(id: "myclassEach_chatEach_to")
             let vc = segue.destination as! ChatVC
             vc.receiver = meUser
             vc.sender = sender as? UserApolloFragment
             vc.chatroom = ChatRoomSummaryApolloFragment(id: classData!.id, name: classData!.name, chatRoomAt: classData!.chatRoomAt, createdAt: classData!.createdAt)
         } else {
-            FBLogger.log(id: "myclassEach_editClass_to")
+            FBLogger.shared.log(id: "myclassEach_editClass_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! EditClassVC
             vc.classID = self.classID

@@ -9,12 +9,22 @@
 import Foundation
 import Firebase
 
-class FBLogger {
-    static func log(id: String) {
+class FBLogger: NSObject {
+    
+    static let shared = FBLogger()
+    
+    func log(id: String) {
         Analytics.logEvent(id, parameters: nil)
     }
     
-    static func log(id: String, param:[String : String]) {
+    func log(id: String, param:[String : String]) {
         Analytics.logEvent(id, parameters: param)
+    }
+    
+    private override init() {
+        super.init()
+        
+        let key = Session.me?.role == .TEACHER ? kTeacherKey : kParentKey
+        Analytics.setUserProperty(key, forName: "userType")
     }
 }

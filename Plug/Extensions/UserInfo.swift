@@ -13,12 +13,12 @@ class UserInfo: NSObject {
     
     public static var myClasses: [ChatRoomApolloFragment]? = nil
     
-    open var id: String?
-    open var name: String?
-    open var role: Role?
-    open var userId: String?
-    open var profileImageUrl: String?
-    open var phoneNumber: String?
+    public var id: String?
+    public var name: String?
+    public var role: Role?
+    public var userId: String?
+    public var profileImageUrl: String?
+    public var phoneNumber: String?
     
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,

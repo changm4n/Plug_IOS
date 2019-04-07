@@ -21,7 +21,7 @@ class JoinRoomVC: PlugViewController {
         setTextFields()
         bottomAction = {
             guard let code = self.codeTextField.text else { return }
-            FBLogger.log(id: "signUpInputInvitCode_nextBtn_toSignUpInputChildName")
+            FBLogger.shared.log(id: "signUpInputInvitCode_nextBtn_toSignUpInputChildName")
             self.play()
             Networking.getChatroom(byCode: code, completion: { (room) in
                 self.stop()

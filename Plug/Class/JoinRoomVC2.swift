@@ -18,7 +18,7 @@ class JoinRoomVC2: JoinRoomVC {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        FBLogger.log(id: "myclassInputInvitCode_nextBtn_toMyClassInputChildname")
+        FBLogger.shared.log(id: "myclassInputInvitCode_nextBtn_toMyClassInputChildname")
         let vc = segue.destination as! KidVC2
         vc.classData = sender as? ChatRoomApolloFragment
     }

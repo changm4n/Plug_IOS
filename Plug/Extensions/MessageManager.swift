@@ -14,7 +14,6 @@ class MessageManager: NSObject {
         if false {
             return []
         } else {
-            
             return []
         }
     }

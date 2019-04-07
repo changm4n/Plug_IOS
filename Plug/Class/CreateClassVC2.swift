@@ -24,7 +24,7 @@ class CreateClassVC2: CreateClassVC {
                 let me = Session.me?.userId,
                 let year = self.yearTextField.text else { return }
             
-            FBLogger.log(id: "myclassCreateClass_nextBtn_toMyClassShareInvitCode")
+            FBLogger.shared.log(id: "myclassCreateClass_nextBtn_toMyClassShareInvitCode")
             self.play()
             self.view.endEditing(true)
             Networking.createChatRoom(name, userID: me, year: year, completion: { (code) in
@@ -45,7 +45,7 @@ class CreateClassVC2: CreateClassVC {
                 vc.code = set.1
                 vc.desc = "\(set.0) 클래스를 만들었습니다."
                 vc.bottomAction = {
-                    FBLogger.log(id: "myClassShareInvitCode_completeBtn_toChatMain")
+                    FBLogger.shared.log(id: "myClassShareInvitCode_completeBtn_toChatMain")
                     vc.dismiss(animated: true, completion: nil)
                 }
             }

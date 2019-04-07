@@ -186,14 +186,14 @@ class HomeVC: PlugViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
-            FBLogger.log(id: "chatMain_userListItem")
+            FBLogger.shared.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             let data = sender as! MessageSummary
             vc.receiver = data.receiver
             vc.sender = data.sender
             vc.chatroom = data.chatroom
         } else if segue.identifier == "share" {
-            FBLogger.log(id: "chatMain_invitIntro_to")
+            FBLogger.shared.log(id: "chatMain_invitIntro_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! WebVC
             vc.urlStr = kUserTip

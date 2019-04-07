@@ -50,7 +50,7 @@ class ChioceVC: PlugViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         let logId = sender.tag == 0 ? "signUpRole_teacher_toSignUpUsername" : "signUpRole_parents_toSignUpUsername"
-        FBLogger.log(id: logId)
+        FBLogger.shared.log(id: logId)
         Session.me?.role = sender.tag == 0 ? .TEACHER : .PARENT
         self.performSegue(withIdentifier: "next", sender: nil)
     }

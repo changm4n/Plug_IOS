@@ -27,8 +27,8 @@ class PasswdVC: PlugViewController {
         self.bottomBtn.isEnabled = false
         self.bottomAction = {
             guard let email = self.emailTextField.text else { return }
-            FBLogger.log(id: "signFindPw_nextBtn_toSignInTempPw")
-            FBLogger.log(id: "signFindPw_emailInput")
+            FBLogger.shared.log(id: "signFindPw_nextBtn_toSignInTempPw")
+            FBLogger.shared.log(id: "signFindPw_emailInput")
             self.play()
             
             Networking.refreshPassword(email, completion: { (message, error) in

@@ -44,16 +44,16 @@ class ViewController: PlugViewController {
     
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        FBLogger.log(id: "signHome_signInWays_to")
+        FBLogger.shared.log(id: "signHome_signInWays_to")
     }
     
     @IBAction func emailButtonPressed(_ sender: Any) {
-        FBLogger.log(id: "signHome_signUpEmail_to")
+        FBLogger.shared.log(id: "signHome_signUpEmail_to")
         performSegue(withIdentifier: "email", sender: nil)
     }
     
     @IBAction func kakaoButtonPressed(_ sender: Any) {
-        FBLogger.log(id: "signHome_signUpKakao_to")
+        FBLogger.shared.log(id: "signHome_signUpKakao_to")
         KOSession.shared()?.close()
         self.play()
         KOSession.shared()?.open(completionHandler: { (error) in
@@ -108,11 +108,11 @@ class LoginSelectVC: PlugViewController {
     }
     
     @IBAction func emailLoginPressed(_ sender: Any) {
-        FBLogger.log(id: "signInWays_SignInEmailPw_to")
+        FBLogger.shared.log(id: "signInWays_SignInEmailPw_to")
     }
     
     @IBAction func kakaoLoginPressed(_ sender: Any) {
-        FBLogger.log(id: "signInWays_Kakao_toChatMain")
+        FBLogger.shared.log(id: "signInWays_Kakao_toChatMain")
         KOSession.shared()?.close()
         
         KOSession.shared()?.open(completionHandler: { (error) in

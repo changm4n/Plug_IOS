@@ -29,7 +29,7 @@ class HolidayVC: PlugViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FBLogger.log(id: "edit_on_day")
+        FBLogger.shared.log(id: "edit_on_day")
         setColors()
         super.viewWillAppear(animated)
     }

@@ -25,16 +25,16 @@ public enum SessionRole: String {
     , NONE = "NONE"
 }
 
-open class Session : NSObject {
+public class Session : NSObject {
     
-    open static var me: Session? = nil
+    public static var me: Session? = nil
     
-    open var id: String?
-    open var name: String?
-    open var role: SessionRole = .NONE
-    open var userType: SessionType?
-    open var userId: String?
-    open var profileImageUrl: String? {
+    public var id: String?
+    public var name: String?
+    public var role: SessionRole = .NONE
+    public var userType: SessionType?
+    public var userId: String?
+    public var profileImageUrl: String? {
         didSet {
             if let urlStr = profileImageUrl,
                 let url = URL(string: urlStr) {
@@ -48,9 +48,9 @@ open class Session : NSObject {
         }
     }
     
-    open var phoneNumber: String?
-    open var token: String?
-    open var password: String?
+    public var phoneNumber: String?
+    public var token: String?
+    public var password: String?
     var schedule: Schedule
     
     var appPushID: String?
@@ -175,7 +175,7 @@ open class Session : NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    open static func fetchUserFromSavedData() -> Session? {
+    public static func fetchUserFromSavedData() -> Session? {
         guard let savedDic = UserDefaults.standard.object(forKey: kSavedUserData) as? [String:AnyObject] else {
             return nil
         }
@@ -183,7 +183,7 @@ open class Session : NSObject {
         return Session(withDic: savedDic)
     }
     
-    open static func removeSavedUser() {
+    public static func removeSavedUser() {
         Session.me = nil
         UserDefaults.standard.removeObject(forKey: "UserToken")
         UserDefaults.standard.removeObject(forKey: "DeviceKey")
@@ -191,7 +191,7 @@ open class Session : NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    open static func fetchToken() -> String? {
+    public static func fetchToken() -> String? {
         if let token = UserDefaults.standard.object(forKey: "UserToken") as? String {
             return token
         } else {
@@ -199,7 +199,7 @@ open class Session : NSObject {
         }
     }
     
-    open static func fetchDeviceKey() -> String {
+    public static func fetchDeviceKey() -> String {
         if let deviceKey = UserDefaults.standard.object(forKey: "DeviceKey") as? String {
             return deviceKey
         } else {
@@ -207,7 +207,7 @@ open class Session : NSObject {
         }
     }
     
-    open static func saveDeviceKey(_ key:String) {
+    public static func saveDeviceKey(_ key:String) {
         UserDefaults.standard.set(key, forKey: "DeviceKey")
         UserDefaults.standard.synchronize()
     }
@@ -232,7 +232,7 @@ open class Session : NSObject {
     }
     
     //MARK: UserProtocol
-    open func httpHeaders() -> [String:String] {
+    public func httpHeaders() -> [String:String] {
         var defaultHeaders = [String:String]()
         
         if let token = Session.fetchToken() {

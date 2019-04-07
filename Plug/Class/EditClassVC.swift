@@ -71,7 +71,7 @@ class EditClassVC: PlugViewController {
             showAlertWithString("오류", message: "클래스 편집 중 오류가 발생하였습니다.", sender: self)
             return
         }
-        FBLogger.log(id: "myclassEdit_SaveBtn_toMyClassEach")
+        FBLogger.shared.log(id: "myclassEdit_SaveBtn_toMyClassEach")
         let newYear = "\(selectedYear)"
         
         if selectedName != classData.name || newYear != classData.chatRoomAt.substr(to: 3) {

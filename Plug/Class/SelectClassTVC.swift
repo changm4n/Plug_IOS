@@ -25,13 +25,13 @@ class SelectClassTVC: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let set = sender as? (String, String) {
-            FBLogger.log(id: "myclassChooseClass_classItemBtn_toMyClassShareInvitCode")
+            FBLogger.shared.log(id: "myclassChooseClass_classItemBtn_toMyClassShareInvitCode")
             let vc = segue.destination as! InviteCodeVC2
             vc.title = "클래스에 초대하기"
             vc.code = set.1
             vc.desc = "\(set.0) 클래스의 초대코드입니다."
             vc.bottomAction = {
-                FBLogger.log(id: "myclassShareInvitCode_completeBtn")
+                FBLogger.shared.log(id: "myclassShareInvitCode_completeBtn")
                 vc.dismiss(animated: true, completion: nil)
             }
         }

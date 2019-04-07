@@ -35,9 +35,9 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
         bottomBtn.isEnabled = false
         
         self.bottomAction = {
-            FBLogger.log(id: "signUpEmail_nextBtn_toSignUpValidation")
-            FBLogger.log(id: "signUpEmail_emailInput")
-            FBLogger.log(id: "signUpEmail_pwInput")
+            FBLogger.shared.log(id: "signUpEmail_nextBtn_toSignUpValidation")
+            FBLogger.shared.log(id: "signUpEmail_emailInput")
+            FBLogger.shared.log(id: "signUpEmail_pwInput")
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
             self.play()
             Networking.verifyEmail(email, completion: { (code) in
@@ -105,8 +105,8 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
             vc.bottomAction = {
 //                if true {
                 if vc.codeTextField.text == vc.key {
-                    FBLogger.log(id: "signUpValidation_validationInput")
-                    FBLogger.log(id: "signUpValidation_nextBtn_toSignUpRole")
+                    FBLogger.shared.log(id: "signUpValidation_validationInput")
+                    FBLogger.shared.log(id: "signUpValidation_nextBtn_toSignUpRole")
                     vc.performSegue(withIdentifier: "next", sender: nil)
                 } else {
                     showAlertWithString("인증코드 오류", message: "유효하지 않은 인증코드입니다.\n초대코드는 6자리의 알파벳 대문자입니다.", sender: vc)
