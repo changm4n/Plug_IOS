@@ -10,6 +10,7 @@
 		56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
 		ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2CC5220717F50035B887 /* PlugIndicator.swift */; };
 		ED0A2CC8220730600035B887 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
+		ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
 		ED1F586121DE29C100126A07 /* OutClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586021DE29C100126A07 /* OutClassVC.swift */; };
 		ED1F586321E09A2500126A07 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
 		ED1F586521E1CF5F00126A07 /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586421E1CF5F00126A07 /* SecretVC.swift */; };
@@ -107,6 +108,7 @@
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0A2CC5220717F50035B887 /* PlugIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugIndicator.swift; sourceTree = "<group>"; };
 		ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		ED0E65DA225CAE3500D25E0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED1F586021DE29C100126A07 /* OutClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutClassVC.swift; sourceTree = "<group>"; };
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				EDE731ED217C1D3E00D302DF /* Strings.swift */,
 				ED4750FB21ECB6540043FD18 /* indicator.json */,
 				ED71B6B32219359400AC21FF /* licenses.json */,
+				ED0E65DA225CAE3500D25E0D /* Constants.swift */,
 				EDD8C3932187240D008DA9E7 /* Extensions */,
 				EDD8C39221872405008DA9E7 /* Views */,
 				ED3D980821A05FB300B61748 /* Chat */,
@@ -650,6 +653,7 @@
 				EDD8C398218964CF008DA9E7 /* HomeHeaderView.swift in Sources */,
 				ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */,
 				ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */,
+				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
 				ED3E6A4521CF535B00C28403 /* SettingVC.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */,

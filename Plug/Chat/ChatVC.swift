@@ -12,7 +12,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var bannerYOffset: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: UITableView!
@@ -64,16 +63,27 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         setColors()
         super.viewWillAppear(animated)
+        
+        readMessage()
+        
+        guard
+            let chatroomId = chatroom?.id,
+            let senderid = sender?.userId else { return }
+        
+        let hash = "\(senderid)_\(chatroomId)"
+        if let text = getUserDefaultStringValue(hash) {
+            textView.text = text
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
-        guard
-            let chatroomId = chatroom?.id,
-            let receiverId = receiver?.userId,
-            let senderid = sender?.userId else { return }
-        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
+        
+        saveTextViewText()
+        readMessage()
+        
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -100,6 +110,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     @IBAction func addSampleMessage(_ sender: Any) {
+        
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
             text.count > 0,
@@ -110,9 +121,15 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         if isPlugOn {
             FBLogger.shared.log(id: "chatEach_sendBtn")
             self.resetTextView()
-            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
+            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (newMessage) in
+                
+                guard let newMessage = newMessage else { return }
+                self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
+                self.tableView.reloadData()
+                self.setTableViewScrollBottom()
             }
         } else {
+            
             showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
                 FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
                 self.resetTextView()
@@ -137,8 +154,10 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
+        
         PlugIndicator.shared.play()
-        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
         
         Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
             self.messageData = messages
@@ -161,14 +180,40 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         Networking.subscribeMessage { (message) in
             if let newMessage = message.node?.fragments.messageApolloFragment {
-                guard (newMessage.sender.userId == receiverId && newMessage.receivers?.first?.userId == senderid) || (newMessage.receivers?.first?.userId == receiverId &&
-                    newMessage.sender.userId == senderid) else {
+                guard  newMessage.receivers?.first?.userId == receiverId &&
+                    newMessage.sender.userId == senderid else {
                     return
                 }
                 self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
                 self.tableView.reloadData()
                 self.setTableViewScrollBottom()
             }
+        }
+    }
+    
+    @objc func enterBackgound() {
+        
+        readMessage()
+        saveTextViewText()
+    }
+    
+    func readMessage() {
+        guard
+            let chatroomId = chatroom?.id,
+            let receiverId = receiver?.userId,
+            let senderid = sender?.userId else { return }
+        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
+    }
+    
+    func saveTextViewText() {
+        
+        guard
+            let chatroomId = chatroom?.id,
+            let senderid = sender?.userId else { return }
+        
+        let hash = "\(senderid)_\(chatroomId)"
+        if textView.text != "" {
+            setUserDefaultWithString(textView.text, forKey: hash)
         }
     }
     
