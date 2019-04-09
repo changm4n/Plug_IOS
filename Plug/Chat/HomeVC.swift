@@ -39,12 +39,14 @@ class HomeVC: PlugViewController {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: UIApplication.didBecomeActiveNotification, object: nil)
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: NSNotification.Name(rawValue: "newMessage"), object: nil)
         hideNavigationBar()
         self.statusbarLight = true
@@ -52,6 +54,7 @@ class HomeVC: PlugViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "newMessage"), object: nil)
     }
@@ -61,6 +64,7 @@ class HomeVC: PlugViewController {
     }
     
     func setData() {
+        
         guard let me = Session.me else { return }
         me.refreshRoom(completion: { (classData) in
             self.classData = me.classData
@@ -74,9 +78,11 @@ class HomeVC: PlugViewController {
     }
     
     func setTableViewData() {
+        
         guard let me = Session.me else { return }
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         if me.role == .TEACHER {
+            
             for c in classData {
                 for user in c.users ?? [] {
                     if user.fragments.userApolloFragment.userId == me.userId {
@@ -89,6 +95,7 @@ class HomeVC: PlugViewController {
                 }
             }
         } else {
+            
             for c in classData {
                 if summaryData.filter({$0.chatroom.name == c.name}).count == 0 {
                     let admin = c.admins!.first!.fragments.userApolloFragment
@@ -101,11 +108,13 @@ class HomeVC: PlugViewController {
     }
     
     func setUI() {
+        
         guard let me = Session.me else { return }
         guard let name = me.name else { return }
         coldView.isHidden = true
         if me.role == .TEACHER {
             if classData.filter({$0.kids?.count ?? 0 > 0}).count == 0 {
+                
                 let attributedString = classData.count > 0 ? NSMutableAttributedString(string: "\(name) 선생님, \n\(classData[0].name) 클래스 학부모님들의\n가입을 기다리고있습니다.", attributes: [
                     .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
                     .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
@@ -119,9 +128,11 @@ class HomeVC: PlugViewController {
                 coldView.isHidden = classData.count == 0
                 codeLabel.text = classData.count > 0 ? classData[0].inviteCode : ""
                 mainLabel.attributedText = attributedString
-                titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: 135)
                 topView.backgroundColor = .plugBlue2
+                
+                updateTitleViewHeight(height: 135)
             } else {
+                
                 let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n", attributes: [
                     .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
                     .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
@@ -143,11 +154,12 @@ class HomeVC: PlugViewController {
                 attributedString.append(attributedString1)
                 attributedString.append(attributedString2)
                 mainLabel.attributedText = messageCount > 0 ? attributedString : NSMutableAttributedString()
+                self.topView.backgroundColor = self.messageCount > 0 ? .plugBlue2 : .white
                 
-                titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: messageCount > 0 ? 135 : 0)
-                topView.backgroundColor = messageCount > 0 ? .plugBlue2 : .white
+                updateTitleViewHeight(height: messageCount > 0 ? 135 : 0)
             }
         } else {
+            
             let sumOfunreadCount = summaryData.map({$0.unreadCount}).reduce(0){$0 + $1}
             let attributedString1 = NSMutableAttributedString(string: "\(name) 학부모님,\n", attributes: [
                 .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
@@ -170,10 +182,14 @@ class HomeVC: PlugViewController {
             attr.append(attributedString3)
             
             mainLabel.attributedText = sumOfunreadCount == 0 ? NSMutableAttributedString() : attr
+            self.topView.backgroundColor = sumOfunreadCount > 0 ? .plugBlue2 : .white
             
-            titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: sumOfunreadCount > 0 ? 135 : 0)
-            topView.backgroundColor = sumOfunreadCount > 0 ? .plugBlue2 : .white
+            updateTitleViewHeight(height: sumOfunreadCount > 0 ? 135 : 0)
         }
+    }
+    
+    func updateTitleViewHeight(height: CGFloat) {
+        self.titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: height)
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
@@ -185,7 +201,9 @@ class HomeVC: PlugViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "chat" {
+            
             FBLogger.shared.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             let data = sender as! MessageSummary
@@ -193,6 +211,7 @@ class HomeVC: PlugViewController {
             vc.sender = data.sender
             vc.chatroom = data.chatroom
         } else if segue.identifier == "share" {
+            
             FBLogger.shared.log(id: "chatMain_invitIntro_to")
             let nvc = segue.destination as! UINavigationController
             let vc = nvc.viewControllers[0] as! WebVC
@@ -203,7 +222,9 @@ class HomeVC: PlugViewController {
 }
 
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeHeaderCell
         if row == 0 {
@@ -221,6 +242,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         selectedFilter = indexPath.row
         
         tableView.reloadData()
@@ -230,6 +252,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         if Session.me?.role ?? .NONE == .TEACHER {
             return classData.count < 2 ? 0 : 60
         } else {
@@ -241,6 +264,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SummaryCell
         let summary = summaryData[indexPath.row]
         cell.configure(item: summary)
@@ -256,6 +280,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         guard Session.me?.role ?? .NONE == .TEACHER else { return nil }
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HomeHeaderView")
         
@@ -282,7 +307,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeVC: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let offset = scrollView.contentOffset.y / 3
         if offset < 0 {
             return
@@ -294,6 +321,7 @@ extension HomeVC: UIScrollViewDelegate {
 }
 
 class SummaryCell: UITableViewCell {
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
@@ -307,6 +335,7 @@ class SummaryCell: UITableViewCell {
     }
 
     func configure(item: MessageSummary) {
+        
         let sender = item.sender
         let chatroom = item.chatroom
         

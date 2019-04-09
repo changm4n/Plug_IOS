@@ -74,6 +74,10 @@ func getUserDefaultIntValue(_ key: String) -> Int {
     return value
 }
 
+func getUserDefaultStringValue(_ key: String) -> String? {
+    return UserDefaults.standard.string(forKey: key)
+}
+
 func showAlertWithString(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())? = nil) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: handler))
