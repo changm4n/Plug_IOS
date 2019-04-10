@@ -154,7 +154,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
         
         PlugIndicator.shared.play()
@@ -212,12 +211,11 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderid = sender?.userId else { return }
         
         let hash = "\(senderid)_\(chatroomId)"
-        if textView.text != "" {
-            setUserDefaultWithString(textView.text, forKey: hash)
-        }
+        setUserDefaultWithString(textView.text, forKey: hash)
     }
     
     func setTitle() {
+        
         guard let senderName = sender?.name,
             let senderId = sender?.userId,
             let chatroomName = chatroom?.name,
@@ -311,7 +309,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         }
     }
-    
     
     //36.5 57 77 95.5
     //48   69 89 110
