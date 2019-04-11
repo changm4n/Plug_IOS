@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Join/ViewController.swift"
-            timestampString = "576503535.963641"
+            timestampString = "576677709.417478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Join/ViewController.swift"
-            timestampString = "576503535.963747"
+            timestampString = "576677709.4175529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -42,12 +42,12 @@
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
-                  timestampString = "576502788.74972"
+                  timestampString = "576677709.632839"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
                   endingLineNumber = "59"
-                  offsetFromSymbolStart = "284">
+                  offsetFromSymbolStart = "296">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +57,12 @@
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
-                  timestampString = "576502788.7520911"
+                  timestampString = "576677709.635211"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "60"
                   endingLineNumber = "60"
-                  offsetFromSymbolStart = "37">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Join/ViewController.swift"
-            timestampString = "576503535.9638129"
+            timestampString = "576677709.417609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -90,28 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Plug/Join/ViewController.swift"
-            timestampString = "576503535.963873"
+            timestampString = "576677709.417661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "kakaoButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Plug/Chat/ChatVC.swift"
-            timestampString = "576503535.963936"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "readMessage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

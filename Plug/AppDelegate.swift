@@ -94,11 +94,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
     }
-    
+   */
     func applicationDidEnterBackground(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
+//        let count = Session.me?.summaryData.reduce(0) {$0 + $1.unreadCount} ?? 0
     }
- */
 }
 
 extension AppDelegate : MessagingDelegate {
@@ -121,9 +120,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
-//        UIApplication.shared.applicationIconBadgeNumber += 1
+//        let userInfo = notification.request.content.userInfo
         completionHandler([])
     }
     

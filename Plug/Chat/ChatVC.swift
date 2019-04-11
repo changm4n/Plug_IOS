@@ -84,6 +84,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         readMessage()
         
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -141,6 +142,84 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         }
     }
     
+    @objc func receiveMessage(_ notification: NSNotification) {
+        
+        print(Session.me?.summaryData.reduce(0, { (result, message) -> Int in
+            return result + message.unreadCount
+        }))
+        
+        guard
+            let chatroomId = chatroom?.id,
+            let receiverId = receiver?.userId,
+            let senderid = sender?.userId else { return }
+        
+        if let newMessage = notification.userInfo?["message"] as? MessageApolloFragment {
+            guard  newMessage.receivers?.first?.userId == receiverId &&
+                newMessage.sender.userId == senderid &&
+            newMessage.chatRoom.id == chatroomId else {
+                    return
+            }
+            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
+            self.tableView.reloadData()
+            self.setTableViewScrollBottom()
+        }
+    }
+
+    @objc override func keyboardWillShow(notification: NSNotification) {
+        isKeyboardShow = true
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            
+            if self.view.frame.origin.y == 0  {
+                self.view.frame.origin.y -= keyboardHeight
+                self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }
+        }
+    }
+    
+    @objc override func keyboardWillHide(notification: NSNotification) {
+        isKeyboardShow = false
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0  {
+                self.view.frame.origin.y = 0
+                self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }
+        }
+    }
+    
+    @objc override func keyboardChanged(notification: NSNotification) {
+        guard isKeyboardShow else { return }
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            self.view.frame.origin.y = -keyboardHeight
+            self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+//        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
+//        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
+        let maxHeight: CGFloat = 112
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        newSize.height += 14.5
+        
+        self.textView.isScrollEnabled = newSize.height >= maxHeight
+        inputViewHeight.constant = min(newSize.height, maxHeight)
+    }
+    
+    func resetTextView() {
+        self.textView.text = ""
+        self.inputViewHeight.constant = 50
+    }
+}
+
+extension ChatVC {
     func setUI() {
         banner.layer.shadowColor = UIColor(r: 155, g: 156, b: 156, a: 0.5).cgColor
         banner.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -155,6 +234,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderid = sender?.userId else { return }
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.receiveMessage(_:)), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
         
         PlugIndicator.shared.play()
         
@@ -174,18 +254,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
                     let schedule = Schedule(schedule: crontab)
                     self.isPlugOn = crontab == "" ? true : schedule.isPlugOn()
                 }
-            }
-        }
-        
-        Networking.subscribeMessage { (message) in
-            if let newMessage = message.node?.fragments.messageApolloFragment {
-                guard  newMessage.receivers?.first?.userId == receiverId &&
-                    newMessage.sender.userId == senderid else {
-                    return
-                }
-                self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
-                self.tableView.reloadData()
-                self.setTableViewScrollBottom()
             }
         }
     }
@@ -220,7 +288,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
             let senderId = sender?.userId,
             let chatroomName = chatroom?.name,
             let chatroomId = chatroom?.id,
-        let me = Session.me else { return }
+            let me = Session.me else { return }
         
         var topText: String
         var bottomText: String
@@ -274,62 +342,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         if self.chatModel.mViewModel.count > 0 {
             self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
         }
-    }
-    
-    @objc override func keyboardWillShow(notification: NSNotification) {
-        isKeyboardShow = true
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            
-            if self.view.frame.origin.y == 0  {
-                self.view.frame.origin.y -= keyboardHeight
-                self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
-                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-            }
-        }
-    }
-    
-    @objc override func keyboardWillHide(notification: NSNotification) {
-        isKeyboardShow = false
-        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0  {
-                self.view.frame.origin.y = 0
-                self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-            }
-        }
-    }
-    
-    @objc override func keyboardChanged(notification: NSNotification) {
-        guard isKeyboardShow else { return }
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            self.view.frame.origin.y = -keyboardHeight
-            self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
-            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-        }
-    }
-    
-    //36.5 57 77 95.5
-    //48   69 89 110
-    //11.5 12  12 14.5
-    func textViewDidChange(_ textView: UITextView) {
-//        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
-//        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
-        let maxHeight: CGFloat = 112
-        let fixedWidth = textView.frame.size.width
-        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        
-        newSize.height += 14.5
-        
-        self.textView.isScrollEnabled = newSize.height >= maxHeight
-        inputViewHeight.constant = min(newSize.height, maxHeight)
-    }
-    
-    func resetTextView() {
-        self.textView.text = ""
-        self.inputViewHeight.constant = 50
     }
 }
 

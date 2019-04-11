@@ -9,3 +9,4 @@
 import Foundation
 
 let kAppEnterBackGround = "kAppEnterBackGround"
+let kMessageReceived = "kMessageReceived"
