@@ -29,7 +29,6 @@ class HomeVC: PlugViewController {
     
     var classData: [ChatRoomApolloFragment] = []
     var summaryData: [MessageSummary] = []
-    
     var filteredList: [MessageSummary] {
         if selectedFilter == 0 {
             return summaryData
@@ -41,13 +40,21 @@ class HomeVC: PlugViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: UIApplication.didBecomeActiveNotification, object: nil)
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
+        
+        Networking.subscribeMessage { (message) in
+            if let newMessage = message.node?.fragments.messageApolloFragment {
+                guard  newMessage.receivers?.first?.userId == Session.me?.userId else {
+                        return
+                }
+                self.setData()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
+            }
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.didReceiveMessage), name: NSNotification.Name(rawValue: "newMessage"), object: nil)
         hideNavigationBar()
         self.statusbarLight = true
         setData()
@@ -58,10 +65,36 @@ class HomeVC: PlugViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "newMessage"), object: nil)
     }
-    
-    @objc func didReceiveMessage() {
-        setData()
+   
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        showAlertWithString("알림", message: "검색 기능은 개발 중 입니다.", sender: self)
     }
+    
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "share", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "chat" {
+            
+            FBLogger.shared.log(id: "chatMain_userListItem")
+            let vc = segue.destination as! ChatVC
+            let data = sender as! MessageSummary
+            vc.receiver = data.receiver
+            vc.sender = data.sender
+            vc.chatroom = data.chatroom
+        } else if segue.identifier == "share" {
+            
+            FBLogger.shared.log(id: "chatMain_invitIntro_to")
+            let nvc = segue.destination as! UINavigationController
+            let vc = nvc.viewControllers[0] as! WebVC
+            vc.urlStr = kUserTip
+            vc.title = "초대 방법"
+        }
+    }
+}
+extension HomeVC {
     
     func setData() {
         
@@ -111,6 +144,7 @@ class HomeVC: PlugViewController {
         
         guard let me = Session.me else { return }
         guard let name = me.name else { return }
+        
         coldView.isHidden = true
         if me.role == .TEACHER {
             if classData.filter({$0.kids?.count ?? 0 > 0}).count == 0 {
@@ -192,35 +226,7 @@ class HomeVC: PlugViewController {
         self.titleView.frame.size = CGSize(width: SCREEN_WIDTH, height: height)
     }
     
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        showAlertWithString("알림", message: "검색 기능은 개발 중 입니다.", sender: self)
-    }
-    
-    @IBAction func shareButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "share", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "chat" {
-            
-            FBLogger.shared.log(id: "chatMain_userListItem")
-            let vc = segue.destination as! ChatVC
-            let data = sender as! MessageSummary
-            vc.receiver = data.receiver
-            vc.sender = data.sender
-            vc.chatroom = data.chatroom
-        } else if segue.identifier == "share" {
-            
-            FBLogger.shared.log(id: "chatMain_invitIntro_to")
-            let nvc = segue.destination as! UINavigationController
-            let vc = nvc.viewControllers[0] as! WebVC
-            vc.urlStr = kUserTip
-            vc.title = "초대 방법"
-        }
-    }
 }
-
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -275,7 +281,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
+        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
         performSegue(withIdentifier: "chat", sender: summaryData[indexPath.row])
     }
     
