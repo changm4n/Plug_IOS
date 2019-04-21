@@ -19,6 +19,15 @@ let kLaunchDescString: NSMutableAttributedString = { () -> NSMutableAttributedSt
     return attributedString
 }()
 
+let kLaunchTestDescString: NSMutableAttributedString = { () -> NSMutableAttributedString in
+    let attributedString = NSMutableAttributedString(string: "Plug Test Build", attributes: [
+        .font: UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)!,
+        .foregroundColor: UIColor.grey,
+        .kern: -0.24
+        ])
+    return attributedString
+}()
+
 let kLaunchTitleString: NSMutableAttributedString = { () -> NSMutableAttributedString in
     let attributedString = NSMutableAttributedString(string: "플러그, \n학부모와 교사를 \n새롭게 연결합니다.", attributes: [
         .font: UIFont(name: "AppleSDGothicNeo-Bold", size: 24.0)!,
