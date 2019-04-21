@@ -64,6 +64,89 @@
 		EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */; };
 		EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */; };
 		EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */; };
+		EDD3A851226C869B006E342A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
+		EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
+		EDD3A853226C869B006E342A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
+		EDD3A854226C869B006E342A /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D221B43BBE0029E80A /* Secret.swift */; };
+		EDD3A855226C869B006E342A /* OutClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586021DE29C100126A07 /* OutClassVC.swift */; };
+		EDD3A856226C869B006E342A /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */; };
+		EDD3A857226C869B006E342A /* SecretVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586421E1CF5F00126A07 /* SecretVC.swift */; };
+		EDD3A858226C869B006E342A /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */; };
+		EDD3A859226C869B006E342A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731D9217B4E7000D302DF /* AppDelegate.swift */; };
+		EDD3A85A226C869B006E342A /* CreateClassVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373E6218ED85100F4A8BF /* CreateClassVC2.swift */; };
+		EDD3A85B226C869B006E342A /* PlugClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */; };
+		EDD3A85C226C869B006E342A /* kidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F321EA80190043FD18 /* kidVC.swift */; };
+		EDD3A85D226C869B006E342A /* ProfileImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A53217E37B60015EAF2 /* ProfileImageVC.swift */; };
+		EDD3A85E226C869B006E342A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
+		EDD3A85F226C869B006E342A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731ED217C1D3E00D302DF /* Strings.swift */; };
+		EDD3A860226C869B006E342A /* NoteMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980921A05FE100B61748 /* NoteMainVC.swift */; };
+		EDD3A861226C869B006E342A /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */; };
+		EDD3A862226C869B006E342A /* EditClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980421A0187200B61748 /* EditClassVC.swift */; };
+		EDD3A863226C869B006E342A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609B921B7915500CB3529 /* ChatVC.swift */; };
+		EDD3A864226C869B006E342A /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
+		EDD3A865226C869B006E342A /* NotePlainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980E21A0695B00B61748 /* NotePlainCell.swift */; };
+		EDD3A866226C869B006E342A /* ParentClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B02210219400AC21FF /* ParentClassVC.swift */; };
+		EDD3A867226C869B006E342A /* HomeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C39D21896F80008DA9E7 /* HomeHeaderCell.swift */; };
+		EDD3A868226C869B006E342A /* PlugCronParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E221DA4D230065EC7E /* PlugCronParser.swift */; };
+		EDD3A869226C869B006E342A /* KidVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F721EB17370043FD18 /* KidVC2.swift */; };
+		EDD3A86A226C869B006E342A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A3218ED036008DA9E7 /* User.swift */; };
+		EDD3A86B226C869B006E342A /* InviteCodeVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */; };
+		EDD3A86C226C869B006E342A /* EditImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586821E77AB400126A07 /* EditImageVC.swift */; };
+		EDD3A86D226C869B006E342A /* RegisterPlugIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */; };
+		EDD3A86E226C869B006E342A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D421B6985D0029E80A /* UserInfo.swift */; };
+		EDD3A86F226C869B006E342A /* JoinRoomVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */; };
+		EDD3A870226C869B006E342A /* HolidayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E421DB832F0065EC7E /* HolidayVC.swift */; };
+		EDD3A871226C869B006E342A /* SelectClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */; };
+		EDD3A872226C869B006E342A /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
+		EDD3A873226C869B006E342A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5B1217E06650075C4CE /* LoginVC.swift */; };
+		EDD3A874226C869B006E342A /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
+		EDD3A875226C869B006E342A /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C397218964CF008DA9E7 /* HomeHeaderView.swift */; };
+		EDD3A876226C869B006E342A /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
+		EDD3A877226C869B006E342A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
+		EDD3A878226C869B006E342A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
+		EDD3A879226C869B006E342A /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4421CF535B00C28403 /* SettingVC.swift */; };
+		EDD3A87A226C869B006E342A /* PlugIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2CC5220717F50035B887 /* PlugIndicator.swift */; };
+		EDD3A87B226C869B006E342A /* ClassHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */; };
+		EDD3A87C226C869B006E342A /* ChangePlugIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */; };
+		EDD3A87D226C869B006E342A /* PlugTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C390218715FC008DA9E7 /* PlugTextField.swift */; };
+		EDD3A87E226C869B006E342A /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3952187243C008DA9E7 /* HomeVC.swift */; };
+		EDD3A87F226C869B006E342A /* InviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */; };
+		EDD3A880226C869B006E342A /* LicenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B52219391E00AC21FF /* LicenseVC.swift */; };
+		EDD3A881226C869B006E342A /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
+		EDD3A882226C869B006E342A /* ChatDataHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */; };
+		EDD3A883226C869B006E342A /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731EB217C1D1100D302DF /* UIColor+Additions.swift */; };
+		EDD3A884226C869B006E342A /* PasswdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */; };
+		EDD3A885226C869B006E342A /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */; };
+		EDD3A886226C869B006E342A /* EditClassNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */; };
+		EDD3A887226C869B006E342A /* ManageClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */; };
+		EDD3A888226C869B006E342A /* FBLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA29FF3223A750700C1EA1E /* FBLogger.swift */; };
+		EDD3A889226C869B006E342A /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980C21A060E000B61748 /* NoteModel.swift */; };
+		EDD3A88A226C869B006E342A /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
+		EDD3A88B226C869B006E342A /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E621DBAC840065EC7E /* EditProfileVC.swift */; };
+		EDD3A88C226C869B006E342A /* ClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A1218D77CC008DA9E7 /* ClassTVC.swift */; };
+		EDD3A88D226C869B006E342A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
+		EDD3A88E226C869B006E342A /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
+		EDD3A88F226C869B006E342A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
+		EDD3A890226C869B006E342A /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A51217E175A0015EAF2 /* CodeVC.swift */; };
+		EDD3A892226C869B006E342A /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
+		EDD3A893226C869B006E342A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
+		EDD3A895226C869B006E342A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */; };
+		EDD3A896226C869B006E342A /* Class.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C39F218D7765008DA9E7 /* Class.storyboard */; };
+		EDD3A897226C869B006E342A /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3D980621A05E6300B61748 /* Note.storyboard */; };
+		EDD3A898226C869B006E342A /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C399218964E5008DA9E7 /* HomeHeaderView.xib */; };
+		EDD3A899226C869B006E342A /* PlugClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4721CF570400C28403 /* PlugClassCell.xib */; };
+		EDD3A89A226C869B006E342A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE731E0217B4E7100D302DF /* Assets.xcassets */; };
+		EDD3A89B226C869B006E342A /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
+		EDD3A89C226C869B006E342A /* ChatDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */; };
+		EDD3A89D226C869B006E342A /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = EDF609BB21BA468400CB3529 /* schema.json */; };
+		EDD3A89E226C869B006E342A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED3CF408220A96F100356230 /* GoogleService-Info.plist */; };
+		EDD3A89F226C869B006E342A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
+		EDD3A8A0226C869B006E342A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731DD217B4E7000D302DF /* Main.storyboard */; };
+		EDD3A8A1226C869B006E342A /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
+		EDD3A8A2226C869B006E342A /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
+		EDD3A8A3226C869B006E342A /* HomeHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C39B2189693D008DA9E7 /* HomeHeaderCell.xib */; };
+		EDD3A8A4226C869B006E342A /* ClassHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C3A5218ED1CB008DA9E7 /* ClassHeader.xib */; };
+		EDD3A8A5226C869B006E342A /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4221CF501800C28403 /* Setting.storyboard */; };
 		EDD8C38F218710A3008DA9E7 /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */; };
 		EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C390218715FC008DA9E7 /* PlugTextField.swift */; };
 		EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3952187243C008DA9E7 /* HomeVC.swift */; };
@@ -91,6 +174,7 @@
 		EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */; };
 		EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
 		EDF609CC21BBDD7100CB3529 /* PlugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609CB21BBDD7100CB3529 /* PlugTests.swift */; };
+		F27D6A07028D6262F3EAB34C /* Pods_Plug_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +189,9 @@
 
 /* Begin PBXFileReference section */
 		1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.debug.xcconfig"; sourceTree = "<group>"; };
+		21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test.debug.xcconfig"; sourceTree = "<group>"; };
+		715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test.release.xcconfig"; sourceTree = "<group>"; };
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0A2CC5220717F50035B887 /* PlugIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugIndicator.swift; sourceTree = "<group>"; };
 		ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -163,6 +250,8 @@
 		EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeVC.swift; sourceTree = "<group>"; };
 		EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectClassTVC.swift; sourceTree = "<group>"; };
 		EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageClassVC.swift; sourceTree = "<group>"; };
+		EDD3A8AA226C869B006E342A /* Plug Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plug Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Plug Test-Info.plist"; path = "/Users/changminlee/Documents/IOS/Projects/Plug/Plug Test-Info.plist"; sourceTree = "<absolute>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
 		EDD8C390218715FC008DA9E7 /* PlugTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugTextField.swift; sourceTree = "<group>"; };
 		EDD8C3952187243C008DA9E7 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -198,6 +287,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EDD3A891226C869B006E342A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDD3A892226C869B006E342A /* Pods_Plug.framework in Frameworks */,
+				EDD3A893226C869B006E342A /* KakaoOpenSDK.framework in Frameworks */,
+				F27D6A07028D6262F3EAB34C /* Pods_Plug_Test.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDE731D3217B4E7000D302DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,6 +321,8 @@
 			children = (
 				1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */,
 				F64DDDE6650DF586CD6AFD19 /* Pods-Plug.release.xcconfig */,
+				21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */,
+				8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -231,6 +332,7 @@
 			children = (
 				ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */,
 				C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */,
+				715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -356,6 +458,7 @@
 				EDE731D7217B4E7000D302DF /* Products */,
 				30E4AA3D87D91C47FE7F7BCC /* Pods */,
 				E99EA7AB4A5EC20FCF99424D /* Frameworks */,
+				EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -364,6 +467,7 @@
 			children = (
 				EDE731D6217B4E7000D302DF /* Plug.app */,
 				EDF609C921BBDD7100CB3529 /* PlugTests.xctest */,
+				EDD3A8AA226C869B006E342A /* Plug Test.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -413,6 +517,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EDD3A84D226C869B006E342A /* Plug Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDD3A8A7226C869B006E342A /* Build configuration list for PBXNativeTarget "Plug Test" */;
+			buildPhases = (
+				EDD3A84E226C869B006E342A /* [CP] Check Pods Manifest.lock */,
+				EDD3A84F226C869B006E342A /* Generate Apollo GraphQL API */,
+				EDD3A850226C869B006E342A /* Sources */,
+				EDD3A891226C869B006E342A /* Frameworks */,
+				EDD3A894226C869B006E342A /* Resources */,
+				EDD3A8A6226C869B006E342A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Plug Test";
+			productName = Plug;
+			productReference = EDD3A8AA226C869B006E342A /* Plug Test.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EDE731D5217B4E7000D302DF /* Plug */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDE731E8217B4E7100D302DF /* Build configuration list for PBXNativeTarget "Plug" */;
@@ -493,12 +617,37 @@
 			projectRoot = "";
 			targets = (
 				EDE731D5217B4E7000D302DF /* Plug */,
+				EDD3A84D226C869B006E342A /* Plug Test */,
 				EDF609C821BBDD7100CB3529 /* PlugTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EDD3A894226C869B006E342A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDD3A895226C869B006E342A /* LaunchScreen.storyboard in Resources */,
+				EDD3A896226C869B006E342A /* Class.storyboard in Resources */,
+				EDD3A897226C869B006E342A /* Note.storyboard in Resources */,
+				EDD3A898226C869B006E342A /* HomeHeaderView.xib in Resources */,
+				EDD3A899226C869B006E342A /* PlugClassCell.xib in Resources */,
+				EDD3A89A226C869B006E342A /* Assets.xcassets in Resources */,
+				EDD3A89B226C869B006E342A /* Chat.storyboard in Resources */,
+				EDD3A89C226C869B006E342A /* ChatDateHeader.xib in Resources */,
+				EDD3A89D226C869B006E342A /* schema.json in Resources */,
+				EDD3A89E226C869B006E342A /* GoogleService-Info.plist in Resources */,
+				EDD3A89F226C869B006E342A /* Queries.graphql in Resources */,
+				EDD3A8A0226C869B006E342A /* Main.storyboard in Resources */,
+				EDD3A8A1226C869B006E342A /* licenses.json in Resources */,
+				EDD3A8A2226C869B006E342A /* indicator.json in Resources */,
+				EDD3A8A3226C869B006E342A /* HomeHeaderCell.xib in Resources */,
+				EDD3A8A4226C869B006E342A /* ClassHeader.xib in Resources */,
+				EDD3A8A5226C869B006E342A /* Setting.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDE731D4217B4E7000D302DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,9 +756,154 @@
 			shellPath = /bin/sh;
 			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
 		};
+		EDD3A84E226C869B006E342A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Plug Test-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDD3A84F226C869B006E342A /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/Plug\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
+		};
+		EDD3A8A6226C869B006E342A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Siren/Siren.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Siren.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EDD3A850226C869B006E342A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDD3A851226C869B006E342A /* ViewController.swift in Sources */,
+				EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */,
+				EDD3A853226C869B006E342A /* MessageManager.swift in Sources */,
+				EDD3A854226C869B006E342A /* Secret.swift in Sources */,
+				EDD3A855226C869B006E342A /* OutClassVC.swift in Sources */,
+				EDD3A856226C869B006E342A /* JoinVC.swift in Sources */,
+				EDD3A857226C869B006E342A /* SecretVC.swift in Sources */,
+				EDD3A858226C869B006E342A /* ViewController+Extensions.swift in Sources */,
+				EDD3A859226C869B006E342A /* AppDelegate.swift in Sources */,
+				EDD3A85A226C869B006E342A /* CreateClassVC2.swift in Sources */,
+				EDD3A85B226C869B006E342A /* PlugClassCell.swift in Sources */,
+				EDD3A85C226C869B006E342A /* kidVC.swift in Sources */,
+				EDD3A85D226C869B006E342A /* ProfileImageVC.swift in Sources */,
+				EDD3A85E226C869B006E342A /* Queries.swift in Sources */,
+				EDD3A85F226C869B006E342A /* Strings.swift in Sources */,
+				EDD3A860226C869B006E342A /* NoteMainVC.swift in Sources */,
+				EDD3A861226C869B006E342A /* UIViewExtensions.swift in Sources */,
+				EDD3A862226C869B006E342A /* EditClassVC.swift in Sources */,
+				EDD3A863226C869B006E342A /* ChatVC.swift in Sources */,
+				EDD3A864226C869B006E342A /* MNFunction.swift in Sources */,
+				EDD3A865226C869B006E342A /* NotePlainCell.swift in Sources */,
+				EDD3A866226C869B006E342A /* ParentClassVC.swift in Sources */,
+				EDD3A867226C869B006E342A /* HomeHeaderCell.swift in Sources */,
+				EDD3A868226C869B006E342A /* PlugCronParser.swift in Sources */,
+				EDD3A869226C869B006E342A /* KidVC2.swift in Sources */,
+				EDD3A86A226C869B006E342A /* User.swift in Sources */,
+				EDD3A86B226C869B006E342A /* InviteCodeVC2.swift in Sources */,
+				EDD3A86C226C869B006E342A /* EditImageVC.swift in Sources */,
+				EDD3A86D226C869B006E342A /* RegisterPlugIDVC.swift in Sources */,
+				EDD3A86E226C869B006E342A /* UserInfo.swift in Sources */,
+				EDD3A86F226C869B006E342A /* JoinRoomVC2.swift in Sources */,
+				EDD3A870226C869B006E342A /* HolidayVC.swift in Sources */,
+				EDD3A871226C869B006E342A /* SelectClassTVC.swift in Sources */,
+				EDD3A872226C869B006E342A /* Validator.swift in Sources */,
+				EDD3A873226C869B006E342A /* LoginVC.swift in Sources */,
+				EDD3A874226C869B006E342A /* StartVC.swift in Sources */,
+				EDD3A875226C869B006E342A /* HomeHeaderView.swift in Sources */,
+				EDD3A876226C869B006E342A /* MessageSummary.swift in Sources */,
+				EDD3A877226C869B006E342A /* Network.swift in Sources */,
+				EDD3A878226C869B006E342A /* Constants.swift in Sources */,
+				EDD3A879226C869B006E342A /* SettingVC.swift in Sources */,
+				EDD3A87A226C869B006E342A /* PlugIndicator.swift in Sources */,
+				EDD3A87B226C869B006E342A /* ClassHeader.swift in Sources */,
+				EDD3A87C226C869B006E342A /* ChangePlugIDVC.swift in Sources */,
+				EDD3A87D226C869B006E342A /* PlugTextField.swift in Sources */,
+				EDD3A87E226C869B006E342A /* HomeVC.swift in Sources */,
+				EDD3A87F226C869B006E342A /* InviteCodeVC.swift in Sources */,
+				EDD3A880226C869B006E342A /* LicenseVC.swift in Sources */,
+				EDD3A881226C869B006E342A /* WideButton.swift in Sources */,
+				EDD3A882226C869B006E342A /* ChatDataHeader.swift in Sources */,
+				EDD3A883226C869B006E342A /* UIColor+Additions.swift in Sources */,
+				EDD3A884226C869B006E342A /* PasswdVC.swift in Sources */,
+				EDD3A885226C869B006E342A /* CreateClassVC.swift in Sources */,
+				EDD3A886226C869B006E342A /* EditClassNameVC.swift in Sources */,
+				EDD3A887226C869B006E342A /* ManageClassVC.swift in Sources */,
+				EDD3A888226C869B006E342A /* FBLogger.swift in Sources */,
+				EDD3A889226C869B006E342A /* NoteModel.swift in Sources */,
+				EDD3A88A226C869B006E342A /* UIFont+Additions.swift in Sources */,
+				EDD3A88B226C869B006E342A /* EditProfileVC.swift in Sources */,
+				EDD3A88C226C869B006E342A /* ClassTVC.swift in Sources */,
+				EDD3A88D226C869B006E342A /* MessageModel.swift in Sources */,
+				EDD3A88E226C869B006E342A /* WebVC.swift in Sources */,
+				EDD3A88F226C869B006E342A /* API.swift in Sources */,
+				EDD3A890226C869B006E342A /* CodeVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDE731D2217B4E7000D302DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,6 +1013,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EDD3A8A8226C869B006E342A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UZGZ2YCNAM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Plug Test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Apollo\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Lottie\"",
+					"-framework",
+					"\"SkyFloatingLabelTextField\"",
+					"-framework",
+					"\"Starscream\"",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EDD3A8A9226C869B006E342A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UZGZ2YCNAM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Plug Test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Apollo\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"Lottie\"",
+					"-framework",
+					"\"SkyFloatingLabelTextField\"",
+					"-framework",
+					"\"Starscream\"",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		EDE731E6217B4E7100D302DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -762,7 +1140,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"$(inherited)",
+					"RELEASE=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -818,6 +1196,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -965,6 +1344,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EDD3A8A7226C869B006E342A /* Build configuration list for PBXNativeTarget "Plug Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDD3A8A8226C869B006E342A /* Debug */,
+				EDD3A8A9226C869B006E342A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDE731D1217B4E7000D302DF /* Build configuration list for PBXProject "Plug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
