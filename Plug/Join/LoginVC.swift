@@ -57,7 +57,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
                                 if let crontab = crontab {
                                     Session.me?.schedule = Schedule(schedule: crontab)
                                 }
-                                self.performSegue(withIdentifier: "next", sender: summary)
+                                self.performSegue(withIdentifier: "next", sender: nil)
                             })
                         } else {
                             self.stop()
@@ -97,14 +97,5 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
     
     @IBAction func findPWButtonPressed(_ sender: Any) {
         FBLogger.shared.log(id: "signInEmailPw_findPw_to")
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "next" {
-            let tvc = segue.destination as! UITabBarController
-            let nvc = tvc.viewControllers?[0] as! UINavigationController
-            let vc = nvc.viewControllers[0] as! HomeVC
-            vc.summaryData = sender as? [MessageSummary] ?? []
-        }
     }
 }

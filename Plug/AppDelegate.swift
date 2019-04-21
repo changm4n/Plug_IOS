@@ -96,7 +96,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
    */
     func applicationDidEnterBackground(_ application: UIApplication) {
-//        let count = Session.me?.summaryData.reduce(0) {$0 + $1.unreadCount} ?? 0
+        guard let me = Session.me else {
+            application.applicationIconBadgeNumber = 0
+            return
+        }
+        let badgeCount = me.summaryData.reduce(0) { (result, summary) -> Int in
+            return result + summary.unreadCount
+        }
+        
+        application.applicationIconBadgeNumber = badgeCount
     }
 }
 
