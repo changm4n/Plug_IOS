@@ -146,6 +146,16 @@ public class Session : NSObject {
         })
     }
     
+    func readChat(chatRoomId: String, senderId: String) {
+        for index in 0..<summaryData.count {
+            if summaryData[index].chatroom.id == chatRoomId &&
+                summaryData[index].sender.userId == senderId {
+                summaryData[index].unreadCount = 0
+                return
+            }
+        }
+    }
+    
     func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
         if let id = id {
             return Session.me?.classData.filter({$0.id == id}).first ?? nil

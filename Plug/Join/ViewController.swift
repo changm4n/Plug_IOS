@@ -30,8 +30,13 @@ class ViewController: PlugViewController {
     }
     
     func setUI() {
+        #if DEBUG
+            descLabel.attributedText = kLaunchTestDescString
+        #else
+            descLabel.attributedText = kLaunchDescString
+        #endif
         titleLabel.attributedText = kLaunchTitleString
-        descLabel.attributedText = kLaunchDescString
+        
         kakaoBtn.setPlugBlue()
         emailBtn.setPlugWhite()
     }

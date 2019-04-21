@@ -27,8 +27,12 @@ class HomeVC: PlugViewController {
     let kLabelY: CGFloat = 21
     let maxOffset: CGFloat = 21
     
-    var classData: [ChatRoomApolloFragment] = []
-    var summaryData: [MessageSummary] = []
+    var classData: [ChatRoomApolloFragment] {
+        return Session.me?.classData ?? []
+    }
+    var summaryData: [MessageSummary] {
+        return Session.me?.summaryData ?? []
+    }
     var filteredList: [MessageSummary] {
         if selectedFilter == 0 {
             return summaryData
@@ -99,10 +103,10 @@ extension HomeVC {
     func setData() {
         
         guard let me = Session.me else { return }
+        self.setTableViewData()
+        self.setUI()
         me.refreshRoom(completion: { (classData) in
-            self.classData = me.classData
             Session.me?.refreshSummary(completion: { (summary) in
-                self.summaryData = summary
                 self.setTableViewData()
                 self.setUI()
             })
@@ -123,7 +127,7 @@ extension HomeVC {
                     }
                     
                     if summaryData.filter({$0.sender.name == user.fragments.userApolloFragment.name}).count == 0 {
-                        summaryData.append(MessageSummary(with: user.fragments.userApolloFragment, classData: c, myType: .TEACHER))
+                        Session.me?.summaryData.append(MessageSummary(with: user.fragments.userApolloFragment, classData: c, myType: .TEACHER))
                     }
                 }
             }
@@ -132,7 +136,7 @@ extension HomeVC {
             for c in classData {
                 if summaryData.filter({$0.chatroom.name == c.name}).count == 0 {
                     let admin = c.admins!.first!.fragments.userApolloFragment
-                    summaryData.append(MessageSummary(with: admin, classData: c, myType: .PARENT))
+                    Session.me?.summaryData.append(MessageSummary(with: admin, classData: c, myType: .PARENT))
                 }
             }
         }
@@ -281,7 +285,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
+//        UIApplication.shared.applicationIconBadgeNumber -= summaryData[indexPath.row].unreadCount
         performSegue(withIdentifier: "chat", sender: summaryData[indexPath.row])
     }
     

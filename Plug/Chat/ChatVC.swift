@@ -84,6 +84,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         readMessage()
         
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
     }
     
@@ -228,25 +229,20 @@ extension ChatVC {
     }
     
     func setData() {
-        guard
-            let chatroomId = chatroom?.id,
-            let receiverId = receiver?.userId,
-            let senderid = sender?.userId else { return }
+        guard let senderid = sender?.userId else { return }
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.receiveMessage(_:)), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
         
         PlugIndicator.shared.play()
         
-        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
-            self.messageData = messages
-            self.title = "\(messages.count) 개 수신"
-            self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
-            }))
+        loadMessage {
             PlugIndicator.shared.stop()
-            self.tableView.reloadData()
-            self.setTableViewScrollBottom()
         }
+        
+
         
         if Session.me?.role == .PARENT {
             Networking.getOfficeTime(senderid) { (crontab) in
@@ -256,6 +252,29 @@ extension ChatVC {
                 }
             }
         }
+    }
+    
+    
+    func loadMessage(completion: (() -> Void)?) {
+        guard
+            let chatroomId = chatroom?.id,
+            let receiverId = receiver?.userId,
+            let senderid = sender?.userId else { return }
+        
+        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
+            self.messageData = messages
+            self.title = "\(messages.count) 개 수신"
+            self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
+            }))
+            self.tableView.reloadData()
+            self.setTableViewScrollBottom()
+            completion?()
+        }
+    }
+    
+    @objc func enterForeground() {
+        
+        loadMessage(completion: nil)
     }
     
     @objc func enterBackgound() {
@@ -269,6 +288,7 @@ extension ChatVC {
             let chatroomId = chatroom?.id,
             let receiverId = receiver?.userId,
             let senderid = sender?.userId else { return }
+        Session.me?.readChat(chatRoomId: chatroomId, senderId: senderid)
         Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
     }
     
