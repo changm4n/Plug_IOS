@@ -123,23 +123,27 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         if isPlugOn {
             FBLogger.shared.log(id: "chatEach_sendBtn")
             self.resetTextView()
-            Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (newMessage) in
-                
-                guard let newMessage = newMessage else { return }
-                self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
-                self.tableView.reloadData()
-                self.setTableViewScrollBottom()
-            }
+            self.sendMessage(text: text, chatroomID: chatRoomId, receiverId: senderId)
         } else {
             
             showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
                 FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
                 self.resetTextView()
-                Networking.sendMessage(text: text, chatRoomId: chatRoomId, receiverId: senderId) { (result) in
-                }
+                self.sendMessage(text: text, chatroomID: chatRoomId, receiverId: senderId)
             }, canceltype: .destructive) { (action) in
                 FBLogger.shared.log(id: "chatEach_PlugOffAlert_cancelBtn")
             }
+        }
+    }
+    
+    func sendMessage(text: String, chatroomID: String, receiverId: String) {
+        
+        Networking.sendMessage(text: text, chatRoomId: chatroomID, receiverId: receiverId) { (newMessage) in
+            
+            guard let newMessage = newMessage else { return }
+            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
+            self.tableView.reloadData()
+            self.setTableViewScrollBottom()
         }
     }
     

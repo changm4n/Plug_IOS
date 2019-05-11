@@ -33,6 +33,10 @@ class StartVC: PlugViewController {
         if Session.fetchToken() != nil {
             print("[token] \(Session.me?.token ?? "")")
             Session.me?.refreshMe(completion: { (user) in
+                guard user != nil else {
+                    self.animateSegue("Login", sender: nil)
+                    return
+                }
                 Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
                     Session.me?.classData = classData
                     if let crontab = crontab {
@@ -43,7 +47,6 @@ class StartVC: PlugViewController {
                 })
             })
         } else {
-            
             self.animateSegue("Login", sender: nil)
         }
     }
