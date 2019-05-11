@@ -128,7 +128,6 @@
 		EDD3A88E226C869B006E342A /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
 		EDD3A88F226C869B006E342A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
 		EDD3A890226C869B006E342A /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A51217E175A0015EAF2 /* CodeVC.swift */; };
-		EDD3A892226C869B006E342A /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
 		EDD3A893226C869B006E342A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
 		EDD3A895226C869B006E342A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */; };
 		EDD3A896226C869B006E342A /* Class.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C39F218D7765008DA9E7 /* Class.storyboard */; };
@@ -174,7 +173,6 @@
 		EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */; };
 		EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
 		EDF609CC21BBDD7100CB3529 /* PlugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609CB21BBDD7100CB3529 /* PlugTests.swift */; };
-		F27D6A07028D6262F3EAB34C /* Pods_Plug_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,9 +187,7 @@
 
 /* Begin PBXFileReference section */
 		1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.debug.xcconfig"; sourceTree = "<group>"; };
-		21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test.debug.xcconfig"; sourceTree = "<group>"; };
 		715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test.release.xcconfig"; sourceTree = "<group>"; };
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0A2CC5220717F50035B887 /* PlugIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugIndicator.swift; sourceTree = "<group>"; };
 		ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -291,9 +287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDD3A892226C869B006E342A /* Pods_Plug.framework in Frameworks */,
 				EDD3A893226C869B006E342A /* KakaoOpenSDK.framework in Frameworks */,
-				F27D6A07028D6262F3EAB34C /* Pods_Plug_Test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,8 +315,6 @@
 			children = (
 				1E7000862644967775012EAA /* Pods-Plug.debug.xcconfig */,
 				F64DDDE6650DF586CD6AFD19 /* Pods-Plug.release.xcconfig */,
-				21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */,
-				8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -521,12 +513,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDD3A8A7226C869B006E342A /* Build configuration list for PBXNativeTarget "Plug Test" */;
 			buildPhases = (
-				EDD3A84E226C869B006E342A /* [CP] Check Pods Manifest.lock */,
 				EDD3A84F226C869B006E342A /* Generate Apollo GraphQL API */,
 				EDD3A850226C869B006E342A /* Sources */,
 				EDD3A891226C869B006E342A /* Frameworks */,
 				EDD3A894226C869B006E342A /* Resources */,
-				EDD3A8A6226C869B006E342A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -582,7 +572,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = changmin;
 				TargetAttributes = {
 					EDE731D5217B4E7000D302DF = {
@@ -756,24 +746,6 @@
 			shellPath = /bin/sh;
 			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
 		};
-		EDD3A84E226C869B006E342A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Plug Test-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EDD3A84F226C869B006E342A /* Generate Apollo GraphQL API */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -791,44 +763,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/Plug\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
-		};
-		EDD3A8A6226C869B006E342A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Siren/Siren.framework",
-				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Siren.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Plug Test/Pods-Plug Test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1015,7 +949,6 @@
 /* Begin XCBuildConfiguration section */
 		EDD3A8A8226C869B006E342A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21D5AFFC5C9A74CE1CFA6C86 /* Pods-Plug Test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
@@ -1057,7 +990,6 @@
 		};
 		EDD3A8A9226C869B006E342A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FCB046CF56AF5767AC35C8D /* Pods-Plug Test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
@@ -1154,6 +1086,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1208,6 +1141,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
