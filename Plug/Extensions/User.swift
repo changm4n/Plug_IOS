@@ -133,7 +133,7 @@ public class Session : NSObject {
         }
     }
     
-    func refreshMe(completion:@escaping (_ m: Session) -> Void) {
+    func refreshMe(completion:@escaping (_ m: Session?) -> Void) {
         Networking.getMe(completion: { (me) in
             if let me = me {
                 let user = Session(withUser: me)
@@ -142,6 +142,8 @@ public class Session : NSObject {
                 user.save()
                 Networking.registerPushKey(pushKey: Session.fetchDeviceKey())
                 completion(user)
+            } else {
+                completion(nil)
             }
         })
     }
@@ -196,7 +198,6 @@ public class Session : NSObject {
     public static func removeSavedUser() {
         Session.me = nil
         UserDefaults.standard.removeObject(forKey: "UserToken")
-        UserDefaults.standard.removeObject(forKey: "DeviceKey")
         UserDefaults.standard.removeObject(forKey: kSavedUserData)
         UserDefaults.standard.synchronize()
     }

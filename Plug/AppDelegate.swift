@@ -22,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        Siren.shared.forceLanguageLocalization = .korean
-        Siren.shared.checkVersion(checkType: .immediately)
+        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
+        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
+        Siren.shared.wail()
         
         Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {
@@ -67,8 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        Siren.shared.forceLanguageLocalization = .korean
-        Siren.shared.checkVersion(checkType: .weekly)
         KOSession.handleDidBecomeActive()
     }
     

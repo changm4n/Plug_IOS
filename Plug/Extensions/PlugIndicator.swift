@@ -13,12 +13,11 @@ import Lottie
 class PlugIndicator: NSObject {
     public static let shared = PlugIndicator()
     
-    var animationView = LOTAnimationView(name: "indicator")
-    
+    var animationView = AnimationView(name: "indicator")
     override init() {
         animationView.frame.size = CGSize(width: 100, height: 100)
         animationView.center = UIApplication.shared.keyWindow?.center ?? CGPoint.zero
-        animationView.loopAnimation = true
+        animationView.loopMode = .loop
     }
     
     func play() {

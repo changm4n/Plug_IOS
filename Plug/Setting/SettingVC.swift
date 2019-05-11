@@ -68,16 +68,15 @@ class SettingVC: PlugViewController {
         self.setData()
         self.setUI()
         self.tableView.reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SettingVC.updateOffice), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        guard let me = Session.me, let type = Session.me?.role else { return }
-        if type == .TEACHER {
-            Networking.updateOffice(isplugOn ? me.schedule.toString() : "") { (cron) in
-                me.schedule = Schedule(schedule: cron ?? "")
-            }
-        }
+        updateOffice()
+        
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,6 +88,14 @@ class SettingVC: PlugViewController {
             let vc = nvc.viewControllers[0] as! WebVC
             vc.urlStr = sender as? String
             vc.title = "이용약관 및 개인정보 처리방침"
+        }
+    }
+    
+    @objc func updateOffice() {
+        guard let me = Session.me, let type = Session.me?.role , type == .TEACHER else { return }
+        
+        Networking.updateOffice(isplugOn ? me.schedule.toString() : "") { (cron) in
+            me.schedule = Schedule(schedule: cron ?? "")
         }
     }
     
