@@ -55,19 +55,19 @@ class HomeVC: PlugViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
             }
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         hideNavigationBar()
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeVC.setData), name: UIApplication.willEnterForegroundNotification, object: nil)
         self.statusbarLight = true
         setData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "newMessage"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
    
     @IBAction func searchButtonPressed(_ sender: Any) {
@@ -100,7 +100,7 @@ class HomeVC: PlugViewController {
 }
 extension HomeVC {
     
-    func setData() {
+    @objc func setData() {
         
         guard let me = Session.me else { return }
         self.setTableViewData()

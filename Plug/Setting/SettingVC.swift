@@ -192,6 +192,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             
             if item.0 == "로그아웃" {
                 showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
+                    Networking.removePushKey()
                     Session.removeSavedUser()
                     self.performSegue(withIdentifier: "logout", sender: nil)
                 }, canceltype: .default, confirmtype: .destructive)

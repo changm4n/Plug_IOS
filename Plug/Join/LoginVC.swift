@@ -51,6 +51,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
                             user.token = token
                             Session.me = user
                             user.save()
+                            Networking.registerPushKey()
                             Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
                                 self.stop()
                                 Session.me?.classData = classData
