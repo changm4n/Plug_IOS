@@ -147,6 +147,7 @@ class LoginSelectVC: PlugViewController {
                                             if let crontab = crontab {
                                                 Session.me?.schedule = Schedule(schedule: crontab)
                                             }
+                                            Networking.registerPushKey()
                                             PlugIndicator.shared.stop()
                                             self.performSegue(withIdentifier: "kakao", sender: nil)
                                         })

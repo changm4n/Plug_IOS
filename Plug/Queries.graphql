@@ -151,6 +151,12 @@ mutation registerPushKey($pushKey: String!) {
     }
 }
 
+mutation removePushKey {
+    removeNotification {
+        pushKey
+    }
+}
+
 mutation refreshEmail($email: String!) {
     sendNewPasswordByEmail(email : $email)
 }

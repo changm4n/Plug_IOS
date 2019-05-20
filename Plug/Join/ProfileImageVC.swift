@@ -79,6 +79,7 @@ class ProfileImageVC: PlugViewController {
                                         user.token = token
                                         Session.me = user
                                         user.save()
+                                        Networking.registerPushKey()
                                         if Session.me?.role == .PARENT {
                                             FBLogger.shared.log(id: "signUpUsername_nextBtn_toSignUpInputInvitCode")
                                             self.performSegue(withIdentifier: "join", sender: nil)

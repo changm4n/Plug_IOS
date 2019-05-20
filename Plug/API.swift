@@ -1946,6 +1946,78 @@ public final class RegisterPushKeyMutation: GraphQLMutation {
   }
 }
 
+public final class RemovePushKeyMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation removePushKey {\n  removeNotification {\n    __typename\n    pushKey\n  }\n}"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("removeNotification", type: .nonNull(.object(RemoveNotification.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(removeNotification: RemoveNotification) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "removeNotification": removeNotification.resultMap])
+    }
+
+    public var removeNotification: RemoveNotification {
+      get {
+        return RemoveNotification(unsafeResultMap: resultMap["removeNotification"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "removeNotification")
+      }
+    }
+
+    public struct RemoveNotification: GraphQLSelectionSet {
+      public static let possibleTypes = ["Notification"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("pushKey", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(pushKey: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Notification", "pushKey": pushKey])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var pushKey: String? {
+        get {
+          return resultMap["pushKey"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "pushKey")
+        }
+      }
+    }
+  }
+}
+
 public final class RefreshEmailMutation: GraphQLMutation {
   public let operationDefinition =
     "mutation refreshEmail($email: String!) {\n  sendNewPasswordByEmail(email: $email)\n}"

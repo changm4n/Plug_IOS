@@ -9,6 +9,7 @@
 import Foundation
 import Apollo
 import Alamofire
+import Firebase
 
 class Networking: NSObject {
     
@@ -257,9 +258,20 @@ class Networking: NSObject {
         getClient().perform(mutation: ReadMessageMutation(chatroom: chatRoomId, sender: senderId, receiver: receiverId), queue: .main, resultHandler: nil)
     }
     
-    static func registerPushKey(pushKey: String) {
-        getClient().perform(mutation: RegisterPushKeyMutation(pushKey: pushKey), queue: .main, resultHandler: nil)
+    static func registerPushKey() {
+        if let token = Messaging.messaging().fcmToken {
+            getClient().perform(mutation: RegisterPushKeyMutation(pushKey: token), queue: .main, resultHandler: nil)
+        } else {
+            let alert = UIAlertController(title: "알림 설정 오류", message:"알림 설정 중 오류가 발생하였습니다.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: nil))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
     }
+    
+    static func removePushKey() {
+        getClient().perform(mutation: RemovePushKeyMutation(), queue: .main, resultHandler: nil)
+    }
+        
     
     static func getVersion(completion:@escaping (_ version: String?) -> Void) {
         getClient().fetch(query: VersionQuery(), cachePolicy: CachePolicy.fetchIgnoringCacheData, queue: .main) { (result, error) in

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 import UIKit
 
 let kYears = ["2016","2017","2018","2019","2020"]
@@ -140,7 +141,8 @@ public class Session : NSObject {
                 user.token = self.token
                 Session.me = user
                 user.save()
-                Networking.registerPushKey(pushKey: Session.fetchDeviceKey())
+                Networking.registerPushKey()
+                
                 completion(user)
             } else {
                 completion(nil)
