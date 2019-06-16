@@ -13,6 +13,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
     @IBOutlet weak var bannerYOffset: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomInset: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
@@ -36,12 +37,18 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     var chatroom: ChatRoomSummaryApolloFragment? = nil
 
     var kOriginHeight: CGFloat = 0
+    var kSafeAreaInset: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
 
         kOriginHeight = self.view.frame.size.height
+        
+        if #available(iOS 11.0, *) {
+            kSafeAreaInset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        }
+        
         sendButton.makeCircle()
 
         tableView.dataSource = chatModel
@@ -149,10 +156,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     
     @objc func receiveMessage(_ notification: NSNotification) {
         
-        print(Session.me?.summaryData.reduce(0, { (result, message) -> Int in
-            return result + message.unreadCount
-        }))
-        
         guard
             let chatroomId = chatroom?.id,
             let receiverId = receiver?.userId,
@@ -174,10 +177,11 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         isKeyboardShow = true
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
+            let bottomOffset = keyboardHeight - kSafeAreaInset
             
             if self.view.frame.origin.y == 0  {
-                self.view.frame.origin.y -= keyboardHeight
-                self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
+                self.view.frame.origin.y -= bottomOffset
+                self.tableView.contentInset = UIEdgeInsets(top: bottomOffset, left: 0, bottom: 0, right: 0)
                 self.tableView.scrollIndicatorInsets = self.tableView.contentInset
             }
         }
