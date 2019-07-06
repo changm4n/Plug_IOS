@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="myb-nQ-tHY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="myb-nQ-tHY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1119,6 +1119,7 @@
                     <connections>
                         <outlet property="bottomBtn" destination="Eq8-fc-46G" id="Ir7-oN-EQz"/>
                         <outlet property="emailTextField" destination="Cea-tL-1lm" id="5t4-AJ-eyb"/>
+                        <segue destination="NpS-mw-8yf" kind="show" identifier="login" id="xRx-ri-rSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bq-GC-ntK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1429,6 +1430,116 @@
             </objects>
             <point key="canvasLocation" x="-950" y="-528"/>
         </scene>
+        <!--로그인-->
+        <scene sceneID="tjc-ae-6Ts">
+            <objects>
+                <viewController id="NpS-mw-8yf" customClass="Login2VC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QxR-Nb-421">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-oA-UOc" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="42" y="246" width="291" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uxV-VI-8po"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="비밀번호"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3e-Hb-nm0" customClass="WideButton" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="oyC-q6-BtY"/>
+                                </constraints>
+                                <state key="normal" title="로그인"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전송받은 임시 비밀번호로 로그인해주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9v-Te-chu">
+                                <rect key="frame" x="37.5" y="106" width="300" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="Liw-gc-BVx"/>
+                                    <constraint firstAttribute="width" constant="300" id="rK5-6r-Ahd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LVD-U8-0A0" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
+                                <rect key="frame" x="42" y="176" width="291" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zo5-E5-sE4"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="이메일"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HzR-2w-r3o" firstAttribute="trailing" secondItem="Gam-oA-UOc" secondAttribute="trailing" constant="42" id="8Ca-y9-qlI"/>
+                            <constraint firstItem="w3e-Hb-nm0" firstAttribute="leading" secondItem="HzR-2w-r3o" secondAttribute="leading" id="8wf-66-SXk"/>
+                            <constraint firstItem="LVD-U8-0A0" firstAttribute="top" secondItem="j9v-Te-chu" secondAttribute="bottom" constant="29" id="Gud-9q-ha9"/>
+                            <constraint firstItem="HzR-2w-r3o" firstAttribute="trailing" secondItem="w3e-Hb-nm0" secondAttribute="trailing" id="JtB-v8-MP1"/>
+                            <constraint firstItem="j9v-Te-chu" firstAttribute="centerX" secondItem="QxR-Nb-421" secondAttribute="centerX" id="RVX-Na-MN1"/>
+                            <constraint firstItem="LVD-U8-0A0" firstAttribute="leading" secondItem="HzR-2w-r3o" secondAttribute="leading" constant="42" id="TcA-gD-aJN"/>
+                            <constraint firstItem="Gam-oA-UOc" firstAttribute="top" secondItem="LVD-U8-0A0" secondAttribute="bottom" constant="20" id="Uxp-ki-sIT"/>
+                            <constraint firstItem="j9v-Te-chu" firstAttribute="top" secondItem="HzR-2w-r3o" secondAttribute="top" constant="42" id="Zo6-p4-igI"/>
+                            <constraint firstItem="HzR-2w-r3o" firstAttribute="trailing" secondItem="LVD-U8-0A0" secondAttribute="trailing" constant="42" id="pS9-e0-irE"/>
+                            <constraint firstItem="Gam-oA-UOc" firstAttribute="leading" secondItem="HzR-2w-r3o" secondAttribute="leading" constant="42" id="yJP-Gj-plV"/>
+                            <constraint firstItem="HzR-2w-r3o" firstAttribute="bottom" secondItem="w3e-Hb-nm0" secondAttribute="bottom" id="zyM-Om-YpL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HzR-2w-r3o"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="로그인" id="4iG-VY-lmb">
+                        <barButtonItem key="backBarButtonItem" title="이전" id="RR8-K1-U3i"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomBtn" destination="w3e-Hb-nm0" id="Ak4-Od-RqQ"/>
+                        <outlet property="emailTextField" destination="LVD-U8-0A0" id="eYS-2Y-sJJ"/>
+                        <outlet property="passwordTextField" destination="Gam-oA-UOc" id="E0m-Jh-p6c"/>
+                        <segue destination="V3T-Ga-KoE" kind="presentation" identifier="next" id="FFu-av-bAO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vuG-MG-6RB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4734" y="-152"/>
+        </scene>
     </scenes>
     <resources>
         <image name="avatar_seleted" width="24" height="24"/>
@@ -1439,7 +1550,7 @@
         <image name="iconIcClose" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zV1-f5-B7X"/>
+        <segue reference="FFu-av-bAO"/>
         <segue reference="yRg-fp-Ind"/>
         <segue reference="OEX-KR-GYl"/>
     </inferredMetricsTieBreakers>

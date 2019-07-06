@@ -44,6 +44,7 @@
 		ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B02210219400AC21FF /* ParentClassVC.swift */; };
 		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
 		ED71B6B62219391E00AC21FF /* LicenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B52219391E00AC21FF /* LicenseVC.swift */; };
+		ED77192322D0CEA7002896F2 /* Login2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED77192222D0CEA7002896F2 /* Login2VC.swift */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
 		ED7D59D121B3FEAE0029E80A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
@@ -226,6 +227,7 @@
 		ED71B6B2221029E400AC21FF /* Plug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plug.entitlements; sourceTree = "<group>"; };
 		ED71B6B32219359400AC21FF /* licenses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = licenses.json; sourceTree = "<group>"; };
 		ED71B6B52219391E00AC21FF /* LicenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVC.swift; sourceTree = "<group>"; };
+		ED77192222D0CEA7002896F2 /* Login2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login2VC.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
 		ED7D59D021B3FEAE0029E80A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 			children = (
 				EDE731DB217B4E7000D302DF /* ViewController.swift */,
 				ED1FB5B1217E06650075C4CE /* LoginVC.swift */,
+				ED77192222D0CEA7002896F2 /* Login2VC.swift */,
 				EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */,
 				EDAE3A4F217E15BA0015EAF2 /* JoinVC.swift */,
 				EDAE3A51217E175A0015EAF2 /* CodeVC.swift */,
@@ -867,6 +870,7 @@
 				EDD8C39E21896F80008DA9E7 /* HomeHeaderCell.swift in Sources */,
 				ED8C47E321DA4D230065EC7E /* PlugCronParser.swift in Sources */,
 				ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */,
+				ED77192322D0CEA7002896F2 /* Login2VC.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */,
 				ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */,
