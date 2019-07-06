@@ -74,6 +74,8 @@ class JoinVC: PlugViewController ,UITextFieldDelegate {
     }
     
     func setTextFields() {
+        firstResponder = emailTextField
+        
         emailTextField.delegate = self
         emailTextField.type = .email
         emailTextField.changeHandler = { [weak self] text, check in

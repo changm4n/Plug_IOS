@@ -54,6 +54,8 @@ class CreateClassVC2: CreateClassVC {
     
     
     func setTextFields() {
+        firstResponder = nameTextField
+        
         nameTextField.type = .name
         nameTextField.changeHandler = { [weak self] text, check in
             self?.bottomButton?.isEnabled = check

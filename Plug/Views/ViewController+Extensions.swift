@@ -17,6 +17,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
              bottomButton?.addTarget(self, action: #selector(PlugViewController.bottomButtonPressed), for: .touchUpInside)
         }
     }
+    var firstResponder: UITextField?
     var bottomAction: (() -> Void)?
     var keyboardHeight: CGFloat = 0
     var isKeyboardShow: Bool = false
@@ -41,7 +42,11 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-      
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        firstResponder?.becomeFirstResponder()
     }
     
     @objc func bottomButtonPressed() {
@@ -139,5 +144,17 @@ extension UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+}
+
+class PlugBarbuttonItem: UIBarButtonItem {
+    override init() {
+        super.init()
+        self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)], for: .normal)
     }
 }

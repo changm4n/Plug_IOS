@@ -99,7 +99,7 @@
                     <tabBarItem key="tabBarItem" title="내 클래스" image="classActive" selectedImage="myClassActive" id="A4Y-oE-Z3M"/>
                     <navigationItem key="navigationItem" id="w9D-zc-fai">
                         <barButtonItem key="backBarButtonItem" title=" " id="VAb-1D-TgQ"/>
-                        <barButtonItem key="leftBarButtonItem" title="내 클래스" id="3oj-aH-ngl">
+                        <barButtonItem key="leftBarButtonItem" title="내 클래스" id="3oj-aH-ngl" customClass="PlugBarbuttonItem" customModule="Plug" customModuleProvider="target">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
@@ -132,7 +132,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-LJ-abP">
-                                            <rect key="frame" x="0.0" y="121.5" width="375" height="0.5"/>
+                                            <rect key="frame" x="0.0" y="121.5" width="414" height="0.5"/>
                                             <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="H6W-dP-qWN"/>
@@ -164,7 +164,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THp-xb-2ZI">
-                                            <rect key="frame" x="308" y="63" width="52" height="30"/>
+                                            <rect key="frame" x="347" y="63" width="52" height="30"/>
                                             <state key="normal" title="초대하기"/>
                                             <connections>
                                                 <segue destination="mOK-Cf-VtW" kind="presentation" identifier="invite" id="O9o-VH-v2l"/>
@@ -296,7 +296,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ME-ys-5zz">
-                                                    <rect key="frame" x="260" y="10" width="100" height="30"/>
+                                                    <rect key="frame" x="299" y="10" width="100" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="3KJ-it-3Ow"/>
                                                         <constraint firstAttribute="height" constant="30" id="8a6-ka-QiY"/>
@@ -715,7 +715,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kkv-eT-1rQ">
-                                            <rect key="frame" x="0.0" y="139.5" width="375" height="0.5"/>
+                                            <rect key="frame" x="0.0" y="139.5" width="414" height="0.5"/>
                                             <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="aEk-Y9-1Zz"/>
