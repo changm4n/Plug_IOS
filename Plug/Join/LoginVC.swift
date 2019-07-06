@@ -37,7 +37,9 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
             FBLogger.shared.log(id: "signInWays_Kakao_toChatMain")
             FBLogger.shared.log(id: "signInEmailPw_emailInput")
             FBLogger.shared.log(id: "signInEmailPw_pwInput")
+            
             guard let email = self.emailTextField.text, let password = self.passwordTextField.text else { return }
+            
             self.play()
             Networking.login(email, password: password, completion: { (token) in
                 if let token = token {
@@ -45,6 +47,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
                     Session.me = tmp
                     tmp.token = token
                     tmp.save()
+                    
                     Networking.getMe(completion: { (me) in
                         if let me = me {
                             let user = Session(withUser: me)
@@ -73,6 +76,7 @@ class LoginVC: PlugViewController ,UITextFieldDelegate {
     }
     
     func setTextFields() {
+        firstResponder = emailTextField
         emailTextField.delegate = self
         emailTextField.type = .email
         emailTextField.changeHandler = { [weak self] text, check in

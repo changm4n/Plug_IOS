@@ -27,8 +27,10 @@ class PasswdVC: PlugViewController {
         self.bottomBtn.isEnabled = false
         self.bottomAction = {
             guard let email = self.emailTextField.text else { return }
+            
             FBLogger.shared.log(id: "signFindPw_nextBtn_toSignInTempPw")
             FBLogger.shared.log(id: "signFindPw_emailInput")
+            
             self.play()
             
             Networking.refreshPassword(email, completion: { (message, error) in
@@ -36,16 +38,28 @@ class PasswdVC: PlugViewController {
                 if let message = message {
                     showNetworkError(message: message, sender: self)
                 } else {
-                    showAlertWithString("비밀번호 초기화", message: "입력하신 메일로 임시 비밀번호가 전송되었습니다.", sender: self)
+                    showAlertWithString("비밀번호 초기화", message: "입력하신 메일로 임시 비밀번호가 전송되었습니다.", sender: self, handler: { (aciton) in
+                        self.performSegue(withIdentifier: "login", sender: email)
+                    })
                 }
             })
         }
     }
     
     func setTextFields() {
+        firstResponder = emailTextField
+        
         emailTextField.type = .email
         emailTextField.changeHandler = { [weak self] text, check in
             self?.emailCheck = check
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "login" {
+            let email = sender as? String ?? ""
+            let vc = segue.destination as! Login2VC
+            vc.emailVal = email
         }
     }
 }

@@ -51,6 +51,8 @@ class CreateClassVC: PlugViewController {
     }
     
     func setTextField() {
+        firstResponder = nameTextField
+        
         nameTextField.type = .name
         nameTextField.changeHandler = { [weak self] text, check in
             self?.bottomButton?.isEnabled = check

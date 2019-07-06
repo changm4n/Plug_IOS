@@ -38,6 +38,8 @@ class JoinRoomVC: PlugViewController {
     }
     
     func setTextFields() {
+        firstResponder = codeTextField
+        
         codeTextField.type = .code
         codeTextField.changeHandler = { [weak self] text, check in
             self?.bottomBtn.isEnabled = check

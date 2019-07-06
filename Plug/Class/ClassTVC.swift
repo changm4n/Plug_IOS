@@ -60,6 +60,12 @@ class ClassTVC: UITableViewController {
         
     }
    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            scrollView.contentOffset = CGPoint.zero
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }

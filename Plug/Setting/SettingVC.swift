@@ -137,6 +137,12 @@ class SettingVC: PlugViewController {
 
 extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            scrollView.contentOffset = CGPoint.zero
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         let row = indexPath.row
