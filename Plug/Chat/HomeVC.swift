@@ -24,6 +24,7 @@ class HomeVC: PlugViewController {
     var selectedFilter = 0
     var messageCount = 0
     
+    let kTitleViewHeight: CGFloat = 135
     let kLabelY: CGFloat = 21
     let maxOffset: CGFloat = 21
     
@@ -42,8 +43,8 @@ class HomeVC: PlugViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
         
         Networking.subscribeMessage { (message) in
@@ -79,7 +80,6 @@ class HomeVC: PlugViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "chat" {
             
             FBLogger.shared.log(id: "chatMain_userListItem")
@@ -101,7 +101,6 @@ class HomeVC: PlugViewController {
 extension HomeVC {
     
     @objc func setData() {
-        
         guard let me = Session.me else { return }
         self.setTableViewData()
         self.setUI()
@@ -115,7 +114,6 @@ extension HomeVC {
     }
     
     func setTableViewData() {
-        
         guard let me = Session.me else { return }
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         if me.role == .TEACHER {
@@ -145,7 +143,6 @@ extension HomeVC {
     }
     
     func setUI() {
-        
         guard let me = Session.me else { return }
         guard let name = me.name else { return }
         
@@ -153,76 +150,31 @@ extension HomeVC {
         if me.role == .TEACHER {
             if classData.filter({$0.kids?.count ?? 0 > 0}).count == 0 {
                 
-                let attributedString = classData.count > 0 ? NSMutableAttributedString(string: "\(name) 선생님, \n\(classData[0].name) 클래스 학부모님들의\n가입을 기다리고있습니다.", attributes: [
-                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                    .kern: 0.0
-                    ]) :
-                    NSMutableAttributedString(string: "\(name) 선생님, \n클래스를 생성해주세요.", attributes: [
-                        .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                        .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                        .kern: 0.0
-                        ])
+                let attributedString = classData.count > 0 ? getTneedToJoin(tName: name, cName: classData[0].name) :
+                    getTneedToCreate(tName: name)
                 coldView.isHidden = classData.count == 0
                 codeLabel.text = classData.count > 0 ? classData[0].inviteCode : ""
                 mainLabel.attributedText = attributedString
                 topView.backgroundColor = .plugBlue2
                 
-                updateTitleViewHeight(height: 135)
+                updateTitleViewHeight(height: kTitleViewHeight)
+                
             } else {
-                
-                let attributedString = NSMutableAttributedString(string: "\(name) 선생님, \n", attributes: [
-                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                    .kern: 0.0
-                    ])
-                
-                let attributedString1 = NSMutableAttributedString(string: "\(messageCount)명", attributes: [
-                    .font: UIFont.systemFont(ofSize: 22.0, weight: .bold),
-                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                    .kern: 0.0
-                    ])
-                
-                let attributedString2 = NSMutableAttributedString(string: "이 메시지를 보냈습니다.", attributes: [
-                    .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                    .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                    .kern: 0.0
-                    ])
-                
-                attributedString.append(attributedString1)
-                attributedString.append(attributedString2)
+                let attributedString = getTMessageCount(tName: name, count: messageCount)
                 mainLabel.attributedText = messageCount > 0 ? attributedString : NSMutableAttributedString()
                 self.topView.backgroundColor = self.messageCount > 0 ? .plugBlue2 : .white
                 
-                updateTitleViewHeight(height: messageCount > 0 ? 135 : 0)
+                updateTitleViewHeight(height: messageCount > 0 ? kTitleViewHeight : 0)
             }
         } else {
             
             let sumOfunreadCount = summaryData.map({$0.unreadCount}).reduce(0){$0 + $1}
-            let attributedString1 = NSMutableAttributedString(string: "\(name) 학부모님,\n", attributes: [
-                .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                .kern: 0.0
-                ])
-            let attributedString2 = NSMutableAttributedString(string: "\(sumOfunreadCount)개", attributes: [
-                .font: UIFont.systemFont(ofSize: 22.0, weight: .bold),
-                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                .kern: 0.0
-                ])
-            let attributedString3 = NSMutableAttributedString(string: "의 메시지를 받았습니다.", attributes: [
-                .font: UIFont.systemFont(ofSize: 22.0, weight: .regular),
-                .foregroundColor: UIColor(white: 1.0, alpha: 1.0),
-                .kern: 0.0
-                ])
-            let attr = NSMutableAttributedString()
-            attr.append(attributedString1)
-            attr.append(attributedString2)
-            attr.append(attributedString3)
+            let attr = getPMessageCount(pName: name, count: sumOfunreadCount)
             
             mainLabel.attributedText = sumOfunreadCount == 0 ? NSMutableAttributedString() : attr
             self.topView.backgroundColor = sumOfunreadCount > 0 ? .plugBlue2 : .white
             
-            updateTitleViewHeight(height: sumOfunreadCount > 0 ? 135 : 0)
+            updateTitleViewHeight(height: sumOfunreadCount > 0 ? kTitleViewHeight : 0)
         }
     }
     
@@ -234,7 +186,6 @@ extension HomeVC {
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let row = indexPath.row
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeHeaderCell
         if row == 0 {
@@ -252,7 +203,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         selectedFilter = indexPath.row
         
         tableView.reloadData()
@@ -262,19 +212,18 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         if Session.me?.role ?? .NONE == .TEACHER {
             return classData.count < 2 ? 0 : 60
         } else {
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SummaryCell
         let summary = summaryData[indexPath.row]
         cell.configure(item: summary)
@@ -290,7 +239,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         guard Session.me?.role ?? .NONE == .TEACHER else { return nil }
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HomeHeaderView")
         
@@ -319,7 +267,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 extension HomeVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         let offset = scrollView.contentOffset.y / 3
         if offset < 0 {
             return
@@ -345,7 +292,6 @@ class SummaryCell: UITableViewCell {
     }
 
     func configure(item: MessageSummary) {
-        
         let sender = item.sender
         let chatroom = item.chatroom
         
