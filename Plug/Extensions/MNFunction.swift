@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 let SCREEN_WIDTH  = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
@@ -105,6 +106,12 @@ var isBlockUserInteract: Bool = false {
         if isBlockUserInteract != oldValue {
             isBlockUserInteract ? UIApplication.shared.beginIgnoringInteractionEvents() : UIApplication.shared.endIgnoringInteractionEvents()
         }
+    }
+}
+
+func checkPermission(completion: @escaping (_ authorized: Bool) -> Void) {
+    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+        completion(settings.authorizationStatus == .authorized)
     }
 }
 

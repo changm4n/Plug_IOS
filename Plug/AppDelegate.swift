@@ -32,9 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (garanted, error) in
+            }
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -50,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let user = Session.fetchUserFromSavedData() {
             Session.me = user
         }
+        
         return true
     }
     
