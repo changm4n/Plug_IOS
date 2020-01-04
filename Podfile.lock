@@ -6,6 +6,7 @@ PODS:
   - Apollo/WebSocket (0.10.0):
     - Apollo/Core
     - Starscream (~> 3.1.0)
+  - Differentiator (4.0.1)
   - Firebase/Core (6.0.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.0.0)
@@ -72,6 +73,16 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - RxCocoa (5.0.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
   - Siren (5.0.1)
   - SkyFloatingLabelTextField (3.7.0)
   - Starscream (3.1.0)
@@ -85,6 +96,9 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Kingfisher
   - lottie-ios
+  - RxCocoa (~> 5)
+  - RxDataSources (~> 4.0)
+  - RxSwift (~> 5)
   - Siren
   - SkyFloatingLabelTextField
   - SwiftyJSON
@@ -109,10 +123,17 @@ SPEC REPOS:
     - SkyFloatingLabelTextField
     - Starscream
     - SwiftyJSON
+  trunk:
+    - Differentiator
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Apollo: aa9b870203900b9526332ea3d12c37b4dc6ce1b9
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
@@ -125,11 +146,15 @@ SPEC CHECKSUMS:
   lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   Siren: 7ebe56fbd69b335cbe4329bcde985253be0e2d61
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 13dd358fe68683d2ed2d2e0eb4410b9d14d6c964
+PODFILE CHECKSUM: 8204699e2499cec41504e869968e21b6ef20d774
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.8.4

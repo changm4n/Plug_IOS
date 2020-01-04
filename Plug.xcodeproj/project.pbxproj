@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -166,6 +166,7 @@
 		EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD8C3A5218ED1CB008DA9E7 /* ClassHeader.xib */; };
 		EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */; };
 		EDE6089B239BFDB200F91EB4 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6089A239BFDB200F91EB4 /* ChatListCell.swift */; };
+		EDE6089D23C0640E00F91EB4 /* ChatSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE6089C23C0640E00F91EB4 /* ChatSummaryViewModel.swift */; };
 		EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731D9217B4E7000D302DF /* AppDelegate.swift */; };
 		EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731DD217B4E7000D302DF /* Main.storyboard */; };
@@ -276,6 +277,7 @@
 		EDD8C3A5218ED1CB008DA9E7 /* ClassHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassHeader.xib; sourceTree = "<group>"; };
 		EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassHeader.swift; sourceTree = "<group>"; };
 		EDE6089A239BFDB200F91EB4 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
+		EDE6089C23C0640E00F91EB4 /* ChatSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSummaryViewModel.swift; sourceTree = "<group>"; };
 		EDE731D6217B4E7000D302DF /* Plug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE731D9217B4E7000D302DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDE731DB217B4E7000D302DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				ED1F586421E1CF5F00126A07 /* SecretVC.swift */,
 				ED2108DC2353753F00E38493 /* ChatListVC.swift */,
 				EDE6089A239BFDB200F91EB4 /* ChatListCell.swift */,
+				EDE6089C23C0640E00F91EB4 /* ChatSummaryViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -714,37 +717,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Siren/Siren.framework",
-				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Siren.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A1C3FC55F00CF14CF8FC5B9D /* [CP] Check Pods Manifest.lock */ = {
@@ -901,6 +883,7 @@
 				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
 				ED3D980F21A0695B00B61748 /* NotePlainCell.swift in Sources */,
 				ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */,
+				EDE6089D23C0640E00F91EB4 /* ChatSummaryViewModel.swift in Sources */,
 				EDD8C39E21896F80008DA9E7 /* HomeHeaderCell.swift in Sources */,
 				ED8C47E321DA4D230065EC7E /* PlugCronParser.swift in Sources */,
 				ED4750F821EB17370043FD18 /* KidVC2.swift in Sources */,

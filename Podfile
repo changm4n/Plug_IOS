@@ -13,6 +13,9 @@ target 'Plug' do
     pod 'Firebase/Messaging'
     pod 'SwiftyJSON'
     pod 'Siren'
+    pod 'RxSwift', '~> 5'
+    pod 'RxCocoa', '~> 5'
+    pod 'RxDataSources', '~> 4.0'
 end
 
 #

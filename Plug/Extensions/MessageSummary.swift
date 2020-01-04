@@ -38,6 +38,7 @@ struct MessageSummary {
             return "\(sender.name) 선생님"
         }
     }
+    
     public init(with classData: ChatRoomApolloFragment) {
         id = "id"
         chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)

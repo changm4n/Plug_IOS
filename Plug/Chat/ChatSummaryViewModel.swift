@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
+
+struct ChatSummaryViewModel {
+    
+//    var summaryObservable: Observable<MessageSummary> = Observable.of(MessageSummary())
+    var summaryObservable: Observable<[Int]> = Observable.of([1,2,3])
+}
