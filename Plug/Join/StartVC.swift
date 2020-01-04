@@ -30,6 +30,10 @@ class StartVC: PlugViewController {
     }
     
     fileprivate func show() {
+        //For UI2.0
+        self.animateSegue("Main", sender: nil)
+        return
+        ////
         if Session.fetchToken() != nil {
             print("[token] \(Session.me?.token ?? "")")
             Session.me?.refreshMe(completion: { (user) in

@@ -119,7 +119,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     @IBAction func addSampleMessage(_ sender: Any) {
-        
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
             text.count > 0,
@@ -144,7 +143,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     func sendMessage(text: String, chatroomID: String, receiverId: String) {
-        
         Networking.sendMessage(text: text, chatRoomId: chatroomID, receiverId: receiverId) { (newMessage) in
             
             guard let newMessage = newMessage else { return }
@@ -155,7 +153,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     @objc func receiveMessage(_ notification: NSNotification) {
-        
         guard
             let chatroomId = chatroom?.id,
             let receiverId = receiver?.userId,
@@ -239,7 +236,6 @@ extension ChatVC {
     func setData() {
         guard let senderid = sender?.userId else { return }
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.receiveMessage(_:)), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
@@ -249,8 +245,6 @@ extension ChatVC {
         loadMessage {
             PlugIndicator.shared.stop()
         }
-        
-
         
         if Session.me?.role == .PARENT {
             Networking.getOfficeTime(senderid) { (crontab) in
@@ -281,12 +275,10 @@ extension ChatVC {
     }
     
     @objc func enterForeground() {
-        
         loadMessage(completion: nil)
     }
     
     @objc func enterBackgound() {
-        
         readMessage()
         saveTextViewText()
     }
@@ -301,7 +293,6 @@ extension ChatVC {
     }
     
     func saveTextViewText() {
-        
         guard
             let chatroomId = chatroom?.id,
             let senderid = sender?.userId else { return }
@@ -311,7 +302,6 @@ extension ChatVC {
     }
     
     func setTitle() {
-        
         guard let senderName = sender?.name,
             let senderId = sender?.userId,
             let chatroomName = chatroom?.name,
@@ -343,7 +333,7 @@ extension ChatVC {
         let size = title.size()
         let width = size.width
         
-        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+        guard let height = navigationController?.navigationBar.frame.size.height else { return }
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
         titleLabel.attributedText = title
@@ -374,7 +364,7 @@ extension ChatVC {
 }
 
 extension ChatVC: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             guard !self.isLoading,

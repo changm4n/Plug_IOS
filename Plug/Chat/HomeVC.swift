@@ -18,6 +18,7 @@ class HomeVC: PlugViewController {
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var coldView: UIView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var topViewTopInset: NSLayoutConstraint!
     
     var filterCollectionView: UICollectionView?
     
@@ -29,9 +30,11 @@ class HomeVC: PlugViewController {
     let maxOffset: CGFloat = 21
     
     var classData: [ChatRoomApolloFragment] {
+        //        return []
         return Session.me?.classData ?? []
     }
     var summaryData: [MessageSummary] {
+//        return []
         return Session.me?.summaryData ?? []
     }
     var filteredList: [MessageSummary] {
@@ -268,6 +271,8 @@ extension HomeVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y / 3
+//        topViewTopInset.constant -= scrollView.contentOffset.y
+//        PlugLog(string: scrollView.contentOffset.y)
         if offset < 0 {
             return
         }

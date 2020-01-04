@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="myb-nQ-tHY">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="myb-nQ-tHY">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +12,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-WB-AXR">
@@ -27,14 +24,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAppIconWhite" translatesAutoresizingMaskIntoConstraints="NO" id="i47-aJ-x7c">
-                                <rect key="frame" x="114" y="250" width="147" height="127"/>
+                                <rect key="frame" x="114" y="240" width="147" height="127"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="147" id="EW6-NU-zhA"/>
                                     <constraint firstAttribute="height" constant="127" id="LRG-cB-8So"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnF-cM-THL">
-                                <rect key="frame" x="50" y="498" width="275" height="46"/>
+                                <rect key="frame" x="50" y="478" width="275" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="pFI-cJ-84A"/>
                                 </constraints>
@@ -45,7 +42,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjH-hf-XgS">
-                                <rect key="frame" x="50" y="444" width="275" height="46"/>
+                                <rect key="frame" x="50" y="424" width="275" height="46"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="cBT-Hv-YfP"/>
@@ -59,51 +56,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWq-ru-Gpe">
-                                <rect key="frame" x="50" y="564" width="275" height="20"/>
+                                <rect key="frame" x="50" y="544" width="275" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CaJ-xk-gSK"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="이미">
+                                        <fragment content="이미 가입 하셨나요?">
                                             <attributes>
                                                 <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSDGothicNeoI-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content=" ">
                                             <attributes>
                                                 <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="가입">
-                                            <attributes>
-                                                <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSDGothicNeoI-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
-                                            <attributes>
-                                                <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="하셨나요?">
-                                            <attributes>
-                                                <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSDGothicNeoI-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
-                                            <attributes>
-                                                <color key="NSColor" red="0.2196078431372549" green="0.40784313725490196" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 <color key="NSUnderlineColor" red="0.050979999999999998" green="0.81176000000000004" blue="0.85489999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </attributes>
@@ -125,7 +94,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0C-JG-Wdi">
-                                <rect key="frame" x="40" y="612" width="295" height="30"/>
+                                <rect key="frame" x="40" y="592" width="295" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bhx-IS-BcI"/>
                                 </constraints>
@@ -177,22 +146,21 @@
             <objects>
                 <viewController id="oRu-8y-0U3" customClass="JoinVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s7U-PC-Fxs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-xN-Bdf" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Mxx-lF-zfr"/>
                                 </constraints>
                                 <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c89-ph-cK9" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="104" width="291" height="50"/>
+                                <rect key="frame" x="42" y="96" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yza-2E-eUB"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
@@ -215,11 +183,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-qw-YdY" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="174" width="291" height="50"/>
+                                <rect key="frame" x="42" y="166" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="C4a-K6-BbR"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -275,11 +242,11 @@
             <objects>
                 <viewController id="ujq-Fv-7Na" customClass="CodeVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dWc-hI-OMN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4GW-79-0kq">
-                                <rect key="frame" x="79.5" y="106" width="216" height="41"/>
+                                <rect key="frame" x="79.5" y="98" width="216" height="41"/>
                                 <string key="text">plug@plug.com으로 전송된
 인증번호 6자리를 입력해주세요.</string>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -287,11 +254,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yDn-yB-b33" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="173" width="291" height="50"/>
+                                <rect key="frame" x="42" y="165" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Eg7-n5-2yk"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -314,7 +280,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4M-bc-CHs" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="NWJ-4e-sek"/>
                                 </constraints>
@@ -353,17 +319,17 @@
             <objects>
                 <viewController id="5Ss-Ya-QdL" customClass="ChioceVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zth-KC-psL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 유형을 선택해 주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shM-Cg-m6f">
-                                <rect key="frame" x="90.5" y="106" width="194.5" height="20.5"/>
+                                <rect key="frame" x="90.5" y="98" width="194.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0H-0h-jCv">
-                                <rect key="frame" x="48" y="165" width="279" height="46"/>
+                                <rect key="frame" x="48" y="157" width="279" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="TYa-Mz-BKC"/>
                                 </constraints>
@@ -374,7 +340,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fk1-Ah-he1">
-                                <rect key="frame" x="48" y="219" width="279" height="46"/>
+                                <rect key="frame" x="48" y="211" width="279" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="JY5-gs-r36"/>
                                 </constraints>
@@ -416,11 +382,11 @@
             <objects>
                 <viewController id="ncu-bg-dMf" customClass="LoginSelectVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LZd-3h-ZKT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GV5-P1-jEB">
-                                <rect key="frame" x="50" y="219" width="275" height="46"/>
+                                <rect key="frame" x="50" y="211" width="275" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="aa4-Cd-HFg"/>
                                 </constraints>
@@ -432,7 +398,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GA-oP-GHj">
-                                <rect key="frame" x="50" y="165" width="275" height="46"/>
+                                <rect key="frame" x="50" y="157" width="275" height="46"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.40784313729999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="Svb-HE-TzI"/>
@@ -446,7 +412,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 방법을 선택해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xp-KI-fet">
-                                <rect key="frame" x="50" y="106" width="275" height="21"/>
+                                <rect key="frame" x="50" y="98" width="275" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Bc9-K0-AfU"/>
                                 </constraints>
@@ -494,15 +460,14 @@
             <objects>
                 <viewController id="43r-q4-fWt" customClass="LoginVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ie-HV-Jkf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hEk-rZ-Zhb" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="104" width="291" height="50"/>
+                                <rect key="frame" x="42" y="96" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZgK-ZF-Lke"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
@@ -525,11 +490,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-f4-jOm" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="174" width="291" height="50"/>
+                                <rect key="frame" x="42" y="166" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Bgh-jC-hD6"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -552,14 +516,14 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJ4-kH-NzR" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="Umv-gV-WSI"/>
                                 </constraints>
                                 <state key="normal" title="로그인"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="is8-fU-RlL">
-                                <rect key="frame" x="137.5" y="277" width="100" height="40"/>
+                                <rect key="frame" x="137.5" y="269" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="WfG-08-Bmj"/>
                                     <constraint firstAttribute="width" constant="100" id="fkJ-9H-jVc"/>
@@ -607,11 +571,11 @@
             <objects>
                 <viewController id="AeG-ow-CPm" customClass="ProfileImageVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DUu-Ph-B5d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ogn-m8-74C">
-                                <rect key="frame" x="0.0" y="90" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="82" width="375" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="E9a-v9-lbs"/>
@@ -672,11 +636,10 @@
                                 </connections>
                             </collectionView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8DH-80-pOK" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="206" width="291" height="50"/>
+                                <rect key="frame" x="42" y="198" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="knd-gY-0Rd"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -699,7 +662,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsb-Ed-yGY" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="tdZ-MG-4Un"/>
                                 </constraints>
@@ -741,11 +704,11 @@
             <objects>
                 <viewController restorationIdentifier="EditImageVC" storyboardIdentifier="EditImageVC" id="Zfn-tQ-1cp" customClass="EditImageVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qcb-tr-T1u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJf-Db-Qfs">
-                                <rect key="frame" x="333" y="24" width="35" height="35"/>
+                                <rect key="frame" x="333" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="Tvw-xx-GHl"/>
                                     <constraint firstAttribute="height" constant="35" id="unu-pH-vb6"/>
@@ -759,7 +722,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-kf-iou">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="603"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qrg-TU-EFQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -792,13 +755,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진편집" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ue-mD-haE">
-                                <rect key="frame" x="158" y="31" width="59" height="21"/>
+                                <rect key="frame" x="158" y="11" width="59" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0x-mT-0HA">
-                                <rect key="frame" x="7" y="24" width="35" height="35"/>
+                                <rect key="frame" x="7" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="3Ln-xA-4OE"/>
                                     <constraint firstAttribute="height" constant="35" id="bW4-XG-ham"/>
@@ -842,11 +805,11 @@
             <objects>
                 <viewController storyboardIdentifier="CreateClassVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YaR-Rc-Dba" customClass="CreateClassVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2vH-bt-NUr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KJ-iP-Mim">
-                                <rect key="frame" x="90.5" y="106" width="194.5" height="41"/>
+                                <rect key="frame" x="90.5" y="98" width="194.5" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="194.5" id="ICc-B4-g1T"/>
                                 </constraints>
@@ -857,11 +820,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76I-oH-vz4" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="206" width="291" height="50"/>
+                                <rect key="frame" x="42" y="198" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="eXQ-2M-REK"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -884,11 +846,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uzx-gp-634" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="276" width="291" height="50"/>
+                                <rect key="frame" x="42" y="268" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="OIu-PV-8Ts"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -910,7 +871,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-dO-X3f" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="sgt-fs-njL"/>
                                 </constraints>
@@ -953,29 +914,29 @@
             <objects>
                 <viewController id="6sn-aG-ct9" customClass="InviteCodeVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ccB-AB-Hxr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서원초 5-1 클래스를 만들었습니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPv-Ca-2dE">
-                                <rect key="frame" x="70" y="106" width="235.5" height="20.5"/>
+                                <rect key="frame" x="70" y="98" width="235.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초대코드" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFu-1e-35H">
-                                <rect key="frame" x="158" y="174" width="59" height="20.5"/>
+                                <rect key="frame" x="158" y="166" width="59" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLUGKR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vao-lB-qQX">
-                                <rect key="frame" x="118.5" y="206" width="138" height="42"/>
+                                <rect key="frame" x="118.5" y="198" width="138" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <color key="textColor" red="0.3294117647" green="0.40000000000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VG9-f5-teC">
-                                <rect key="frame" x="77.5" y="268" width="220.5" height="31.5"/>
+                                <rect key="frame" x="77.5" y="260" width="220.5" height="31.5"/>
                                 <string key="text">학부모님들이 이 클래스에 가입할 수 있도록
 초대코드를 안내해주세요.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -983,7 +944,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJD-ag-oTE">
-                                <rect key="frame" x="137.5" y="331" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="323" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2zC-x6-tB8"/>
                                     <constraint firstAttribute="width" constant="100" id="3Qb-70-zNC"/>
@@ -995,7 +956,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-nU-GaK" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="tV7-XX-O8P"/>
                                 </constraints>
@@ -1055,11 +1016,11 @@
             <objects>
                 <viewController id="OOl-Om-eAj" customClass="PasswdVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i7M-x1-qyg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eq8-fc-46G" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="vpy-q9-pGm"/>
@@ -1067,7 +1028,7 @@
                                 <state key="normal" title="다음" image="btnChevronDisabled"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97h-xA-jNf">
-                                <rect key="frame" x="85" y="106" width="205" height="41"/>
+                                <rect key="frame" x="85" y="98" width="205" height="41"/>
                                 <string key="text">가입하신 이메일 주소로
 임시 비밀번호를 보내드립니다.</string>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -1075,11 +1036,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cea-tL-1lm" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="176" width="291" height="50"/>
+                                <rect key="frame" x="42" y="168" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tWC-UT-IIf"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
@@ -1139,7 +1099,7 @@
         <!--StartVC-->
         <scene sceneID="8Ea-2c-hy6">
             <objects>
-                <viewController id="myb-nQ-tHY" customClass="StartVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="myb-nQ-tHY" customClass="StartVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8KK-Ts-Wui">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1190,10 +1150,10 @@
         <!--Navigation Controller-->
         <scene sceneID="vyv-R7-3Ob">
             <objects>
-                <navigationController restorationIdentifier="StartNC" storyboardIdentifier="StartNC" automaticallyAdjustsScrollViewInsets="NO" id="j51-Tp-HTi" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="StartNC" storyboardIdentifier="StartNC" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="j51-Tp-HTi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Il-k3-Hhb">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1211,7 +1171,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PAA-OB-hXT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t5x-SF-xQH">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1236,21 +1196,20 @@
             <objects>
                 <viewController id="zu0-vj-Scu" customClass="JoinRoomVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zUo-SX-dgP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초대코드 6자리를 입력해주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="136-GP-s4H">
-                                <rect key="frame" x="79.5" y="106" width="216" height="20.5"/>
+                                <rect key="frame" x="79.5" y="98" width="216" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-ap-kzu" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="152.5" width="291" height="50"/>
+                                <rect key="frame" x="42" y="144.5" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xUP-wQ-c03"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="one-time-code"/>
                                 <userDefinedRuntimeAttributes>
@@ -1273,7 +1232,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lis-8S-ohO" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="4pe-MY-ON3"/>
                                 </constraints>
@@ -1311,11 +1270,11 @@
             <objects>
                 <viewController id="Svi-Ew-Xj3" customClass="kidVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gwm-cm-Csb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsU-vB-GJy">
-                                <rect key="frame" x="66" y="106" width="243.5" height="88"/>
+                                <rect key="frame" x="66" y="98" width="243.5" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="zva-l4-Od4"/>
                                 </constraints>
@@ -1328,11 +1287,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-xe-x4H" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="220" width="291" height="50"/>
+                                <rect key="frame" x="42" y="212" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2ic-Qd-uAa"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -1355,7 +1313,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDc-nh-FUF" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="fqb-si-FYc"/>
                                 </constraints>
@@ -1435,15 +1393,14 @@
             <objects>
                 <viewController id="NpS-mw-8yf" customClass="Login2VC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QxR-Nb-421">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-oA-UOc" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="246" width="291" height="50"/>
+                                <rect key="frame" x="42" y="238" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="uxV-VI-8po"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -1466,14 +1423,14 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3e-Hb-nm0" customClass="WideButton" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <rect key="frame" x="0.0" y="595" width="375" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="oyC-q6-BtY"/>
                                 </constraints>
                                 <state key="normal" title="로그인"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전송받은 임시 비밀번호로 로그인해주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9v-Te-chu">
-                                <rect key="frame" x="37.5" y="106" width="300" height="41"/>
+                                <rect key="frame" x="37.5" y="98" width="300" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Liw-gc-BVx"/>
                                     <constraint firstAttribute="width" constant="300" id="rK5-6r-Ahd"/>
@@ -1483,11 +1440,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LVD-U8-0A0" customClass="PlugTextField" customModule="Plug" customModuleProvider="target">
-                                <rect key="frame" x="42" y="176" width="291" height="50"/>
+                                <rect key="frame" x="42" y="168" width="291" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Zo5-E5-sE4"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>

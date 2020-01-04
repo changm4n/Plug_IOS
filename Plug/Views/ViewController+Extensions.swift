@@ -36,8 +36,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.navigationBar.isTranslucent = true
     }
     
-    
-    
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -117,6 +115,7 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
 extension UIViewController {
+    
     func setStatusBar(isWhite: Bool) {
         UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
     }
@@ -148,6 +147,7 @@ extension UIViewController {
 }
 
 class PlugBarbuttonItem: UIBarButtonItem {
+    
     override init() {
         super.init()
         self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
