@@ -120,7 +120,6 @@ extension HomeVC {
         guard let me = Session.me else { return }
         self.messageCount = summaryData.filter({ $0.unreadCount > 0 }).count
         if me.role == .TEACHER {
-            
             for c in classData {
                 for user in c.users ?? [] {
                     if user.fragments.userApolloFragment.userId == me.userId {

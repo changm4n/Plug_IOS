@@ -12,6 +12,12 @@ import RxSwift
 
 struct ChatSummaryViewModel {
     
-//    var summaryObservable: Observable<MessageSummary> = Observable.of(MessageSummary())
-    var summaryObservable: Observable<[Int]> = Observable.of([1,2,3])
+    var me: Session
+    //output
+    var summaryObservable: Observable<[MessageSummary]>
+    
+    init(me: Session) {
+        self.me = me
+        summaryObservable  = Observable.of(me.summaryData)
+    }
 }
