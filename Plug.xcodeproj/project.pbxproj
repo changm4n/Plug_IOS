@@ -58,6 +58,10 @@
 		ED8C47E921DC8DF20065EC7E /* RegisterPlugIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */; };
 		ED8C47EB21DC92BF0065EC7E /* ChangePlugIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */; };
 		EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA29FF3223A750700C1EA1E /* FBLogger.swift */; };
+		EDA438DD23D9DE680012EAD7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDA438DC23D9DE680012EAD7 /* CoreData.framework */; };
+		EDA438E023D9DEA60012EAD7 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDA438DE23D9DEA60012EAD7 /* MessageModel.xcdatamodeld */; };
+		EDA4390823D9EBAF0012EAD7 /* ChatLog+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA4390623D9EBAF0012EAD7 /* ChatLog+CoreDataProperties.swift */; };
+		EDA4390923D9EBAF0012EAD7 /* ChatLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA4390723D9EBAF0012EAD7 /* ChatLog+CoreDataClass.swift */; };
 		EDADF85F239BFBD500C1D5B6 /* Spoqa Han Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */; };
 		EDADF860239BFBD500C1D5B6 /* Spoqa Han Sans Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85C239BFBD300C1D5B6 /* Spoqa Han Sans Light.ttf */; };
 		EDADF861239BFBD500C1D5B6 /* Spoqa Han Sans Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85D239BFBD300C1D5B6 /* Spoqa Han Sans Thin.ttf */; };
@@ -249,6 +253,10 @@
 		ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlugIDVC.swift; sourceTree = "<group>"; };
 		ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlugIDVC.swift; sourceTree = "<group>"; };
 		EDA29FF3223A750700C1EA1E /* FBLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogger.swift; sourceTree = "<group>"; };
+		EDA438DC23D9DE680012EAD7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EDA438DF23D9DEA60012EAD7 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
+		EDA4390623D9EBAF0012EAD7 /* ChatLog+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatLog+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EDA4390723D9EBAF0012EAD7 /* ChatLog+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatLog+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Regular.ttf"; sourceTree = "<group>"; };
 		EDADF85C239BFBD300C1D5B6 /* Spoqa Han Sans Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Light.ttf"; sourceTree = "<group>"; };
 		EDADF85D239BFBD300C1D5B6 /* Spoqa Han Sans Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Thin.ttf"; sourceTree = "<group>"; };
@@ -314,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */,
+				EDA438DD23D9DE680012EAD7 /* CoreData.framework in Frameworks */,
 				ED0A2CC8220730600035B887 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +349,7 @@
 		E99EA7AB4A5EC20FCF99424D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDA438DC23D9DE680012EAD7 /* CoreData.framework */,
 				ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */,
 				C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */,
 				715C68A0F65529153D517E37 /* Pods_Plug_Test.framework */,
@@ -350,6 +360,8 @@
 		ED3D980821A05FB300B61748 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				EDA4390723D9EBAF0012EAD7 /* ChatLog+CoreDataClass.swift */,
+				EDA4390623D9EBAF0012EAD7 /* ChatLog+CoreDataProperties.swift */,
 				EDD8C3952187243C008DA9E7 /* HomeVC.swift */,
 				ED77192422D9B211002896F2 /* HomeExtension.swift */,
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
@@ -502,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				ED71B6B2221029E400AC21FF /* Plug.entitlements */,
+				EDA438DE23D9DEA60012EAD7 /* MessageModel.xcdatamodeld */,
 				ED3CF408220A96F100356230 /* GoogleService-Info.plist */,
 				EDF609BB21BA468400CB3529 /* schema.json */,
 				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
@@ -890,6 +903,7 @@
 				ED77192322D0CEA7002896F2 /* Login2VC.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				EDB373E9218ED87A00F4A8BF /* InviteCodeVC2.swift in Sources */,
+				EDA4390823D9EBAF0012EAD7 /* ChatLog+CoreDataProperties.swift in Sources */,
 				ED1F586921E77AB400126A07 /* EditImageVC.swift in Sources */,
 				ED8C47E921DC8DF20065EC7E /* RegisterPlugIDVC.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
@@ -906,11 +920,13 @@
 				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
 				ED3E6A4521CF535B00C28403 /* SettingVC.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
+				EDA438E023D9DEA60012EAD7 /* MessageModel.xcdatamodeld in Sources */,
 				EDD8C3A8218ED25C008DA9E7 /* ClassHeader.swift in Sources */,
 				ED8C47EB21DC92BF0065EC7E /* ChangePlugIDVC.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */,
 				EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */,
+				EDA4390923D9EBAF0012EAD7 /* ChatLog+CoreDataClass.swift in Sources */,
 				ED71B6B62219391E00AC21FF /* LicenseVC.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
@@ -1347,6 +1363,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EDA438DE23D9DEA60012EAD7 /* MessageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EDA438DF23D9DEA60012EAD7 /* MessageModel.xcdatamodel */,
+			);
+			currentVersion = EDA438DF23D9DEA60012EAD7 /* MessageModel.xcdatamodel */;
+			path = MessageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EDE731CE217B4E7000D302DF /* Project object */;
 }
