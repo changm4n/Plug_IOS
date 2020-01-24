@@ -73,12 +73,20 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - Realm (4.3.1):
+    - Realm/Headers (= 4.3.1)
+  - Realm/Headers (4.3.1)
+  - RealmSwift (4.3.1):
+    - Realm (= 4.3.1)
   - RxCocoa (5.0.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRealm (2.0.0):
+    - RealmSwift (~> 4.0)
     - RxSwift (~> 5.0)
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
@@ -96,8 +104,10 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Kingfisher
   - lottie-ios
+  - RealmSwift
   - RxCocoa (~> 5)
   - RxDataSources (~> 4.0)
+  - RxRealm
   - RxSwift (~> 5)
   - Siren
   - SkyFloatingLabelTextField
@@ -125,8 +135,11 @@ SPEC REPOS:
     - SwiftyJSON
   trunk:
     - Differentiator
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxDataSources
+    - RxRealm
     - RxRelay
     - RxSwift
 
@@ -146,8 +159,11 @@ SPEC CHECKSUMS:
   lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  Realm: 31dc40934081ef740f60feedc46d88473cbfeb40
+  RealmSwift: b5199e9a41f67b99f51acf6874a6166f5fbe93d1
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRealm: 900f5c7e6f0a2d6527b56eaf7283f3035ec1e8ba
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   Siren: 7ebe56fbd69b335cbe4329bcde985253be0e2d61
@@ -155,6 +171,6 @@ SPEC CHECKSUMS:
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 8204699e2499cec41504e869968e21b6ef20d774
+PODFILE CHECKSUM: e9b781e081a2134e460207144cd0c0440a0fb060
 
 COCOAPODS: 1.8.4

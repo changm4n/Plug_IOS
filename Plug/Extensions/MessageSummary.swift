@@ -136,7 +136,7 @@ struct MessageSummary {
         
         summary.sort(by: { (lhs, rhs) -> Bool in
             lhs.lastMessage.createAt > rhs.lastMessage.createAt
-        })
+            })
         
         summary.sort(by: { (lhs, rhs) -> Bool in
             return lhs.unreadCount != 0 && rhs.unreadCount == 0

@@ -23,7 +23,6 @@
 		ED1FB5B2217E06650075C4CE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5B1217E06650075C4CE /* LoginVC.swift */; };
 		ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
 		ED2108DD2353753F00E38493 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2108DC2353753F00E38493 /* ChatListVC.swift */; };
-		ED22BD7323D9ED6400707BC0 /* ChatLog+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED22BD7123D9ED6400707BC0 /* ChatLog+CoreDataClass.swift */; };
 		ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED3CF408220A96F100356230 /* GoogleService-Info.plist */; };
 		ED3D980521A0187200B61748 /* EditClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980421A0187200B61748 /* EditClassVC.swift */; };
 		ED3D980721A05E6300B61748 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3D980621A05E6300B61748 /* Note.storyboard */; };
@@ -42,7 +41,6 @@
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
-		ED715AFE23DA064800E8D15B /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED715AFB23D9FE1100E8D15B /* MessageModel.xcdatamodeld */; };
 		ED71B6AF220FE35A00AC21FF /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
 		ED71B6B12210219400AC21FF /* ParentClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6B02210219400AC21FF /* ParentClassVC.swift */; };
 		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
@@ -184,6 +182,7 @@
 		EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF609C121BBC08D00CB3529 /* ChatDateHeader.xib */; };
 		EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
 		EDF609CC21BBDD7100CB3529 /* PlugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609CB21BBDD7100CB3529 /* PlugTests.swift */; };
+		EDFC46E923DA10C100AB194A /* ChatLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFC46E823DA10C100AB194A /* ChatLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,7 +214,6 @@
 		ED1FB5B1217E06650075C4CE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		ED2108DC2353753F00E38493 /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
-		ED22BD7123D9ED6400707BC0 /* ChatLog+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatLog+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ED3CF408220A96F100356230 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED3D980421A0187200B61748 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
 		ED3D980621A05E6300B61748 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
 		ED4750FB21ECB6540043FD18 /* indicator.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = indicator.json; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		ED715AFC23D9FE1100E8D15B /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		ED71B6AE220FE35A00AC21FF /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		ED71B6B02210219400AC21FF /* ParentClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentClassVC.swift; sourceTree = "<group>"; };
 		ED71B6B2221029E400AC21FF /* Plug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plug.entitlements; sourceTree = "<group>"; };
@@ -302,6 +299,7 @@
 		EDF609C921BBDD7100CB3529 /* PlugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF609CB21BBDD7100CB3529 /* PlugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugTests.swift; sourceTree = "<group>"; };
 		EDF609CD21BBDD7100CB3529 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDFC46E823DA10C100AB194A /* ChatLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLog.swift; sourceTree = "<group>"; };
 		F64DDDE6650DF586CD6AFD19 /* Pods-Plug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plug.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plug/Pods-Plug.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -356,7 +354,7 @@
 		ED3D980821A05FB300B61748 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				ED22BD7123D9ED6400707BC0 /* ChatLog+CoreDataClass.swift */,
+				EDFC46E823DA10C100AB194A /* ChatLog.swift */,
 				EDD8C3952187243C008DA9E7 /* HomeVC.swift */,
 				ED77192422D9B211002896F2 /* HomeExtension.swift */,
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
@@ -486,7 +484,6 @@
 		EDE731CD217B4E7000D302DF = {
 			isa = PBXGroup;
 			children = (
-				ED715AFB23D9FE1100E8D15B /* MessageModel.xcdatamodeld */,
 				EDE731D8217B4E7000D302DF /* Plug */,
 				EDF609CA21BBDD7100CB3529 /* PlugTests */,
 				EDE731D7217B4E7000D302DF /* Products */,
@@ -869,7 +866,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED715AFE23DA064800E8D15B /* MessageModel.xcdatamodeld in Sources */,
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
 				ED4750F221EA7C0C0043FD18 /* JoinRoomVC.swift in Sources */,
 				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
@@ -933,11 +929,11 @@
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				ED8C47E721DBAC840065EC7E /* EditProfileVC.swift in Sources */,
-				ED22BD7323D9ED6400707BC0 /* ChatLog+CoreDataClass.swift in Sources */,
 				EDD8C3A2218D77CC008DA9E7 /* ClassTVC.swift in Sources */,
 				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
 				ED71B6AF220FE35A00AC21FF /* WebVC.swift in Sources */,
 				EDE6089B239BFDB200F91EB4 /* ChatListCell.swift in Sources */,
+				EDFC46E923DA10C100AB194A /* ChatLog.swift in Sources */,
 				ED7D59D121B3FEAE0029E80A /* API.swift in Sources */,
 				EDAE3A52217E175A0015EAF2 /* CodeVC.swift in Sources */,
 			);
@@ -1357,19 +1353,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		ED715AFB23D9FE1100E8D15B /* MessageModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				ED715AFC23D9FE1100E8D15B /* MessageModel.xcdatamodel */,
-			);
-			currentVersion = ED715AFC23D9FE1100E8D15B /* MessageModel.xcdatamodel */;
-			path = MessageModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = EDE731CE217B4E7000D302DF /* Project object */;
 }
