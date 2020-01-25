@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
+import RxRealm
+import RxCocoa
+import RxSwift
+import RxDataSources
 
 class ChatVC: PlugViewController, UITextViewDelegate {
     
@@ -21,8 +26,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     @IBOutlet weak var inputField: UIView!
     @IBOutlet weak var banner: UILabel!
     
-    let chatModel = MessageModel()
-    var messageData: [MessageApolloFragment] = []
+    var disposeBag = DisposeBag()
+    var viewModel: ChatroomViewModel!
     
     var isLoading: Bool = false
     var isEnd: Bool = false
@@ -32,17 +37,31 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         }
     }
     
-    var receiver: UserApolloFragment? = nil
-    var sender: UserApolloFragment? = nil
-    var chatroom: ChatRoomSummaryApolloFragment? = nil
-
+    var identity: ChatroomIdentity!
+    
+    var sender: Identity {
+        identity.sender
+    }
+    
+    var receiver: Identity {
+        identity.receiver
+    }
+    
+    var chatroom: Identity {
+        identity.chatroom
+    }
+    
+    var chatroomHashKey: Int {
+        identity.hashKey
+    }
+    
     var kOriginHeight: CGFloat = 0
     var kSafeAreaInset: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboardHide()
-
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         kOriginHeight = self.view.frame.size.height
         
         if #available(iOS 11.0, *) {
@@ -50,8 +69,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         }
         
         sendButton.makeCircle()
-
-        tableView.dataSource = chatModel
+        
+//        tableView.dataSource = chatModel
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         textView.layer.cornerRadius = 18
@@ -62,22 +81,37 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         textView.textContainerInset.left = 8
         textView.textContainerInset.right = 8
         
+        setVM()
         setData()
         setUI()
         setTitle()
     }
     
+    typealias ChatSectionModel = SectionModel<String, MessageViewItem>
+    typealias ChatDataSource = RxTableViewSectionedReloadDataSource<ChatSectionModel>
+    
+    var chatDataSource: ChatDataSource!
+    
+    func setVM() {
+        let configureCell: (TableViewSectionedDataSource<ChatSectionModel>, UITableView, IndexPath, MessageViewItem) -> UITableViewCell = { datasource, tableView, indexPath, item in
+            let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! Configurable
+            cell.configure(item: item)
+            return cell
+        }
+        
+        self.chatDataSource = ChatDataSource.init(configureCell: configureCell)
+        self.viewModel = ChatroomViewModel(identity: identity)
+        
+        viewModel.output.bind(to: tableView.rx.items(dataSource: chatDataSource)).disposed(by: disposeBag)
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         setColors()
         super.viewWillAppear(animated)
-        
         readMessage()
         
-        guard
-            let chatroomId = chatroom?.id,
-            let senderid = sender?.userId else { return }
-        
-        let hash = "\(senderid)_\(chatroomId)"
+        let hash = "\(sender.id)_\(chatroom.id)"
         if let text = getUserDefaultStringValue(hash) {
             textView.text = text
         }
@@ -96,7 +130,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     override func willMove(toParent parent: UIViewController?) {
-        if parent == nil {
+        if parent == nil {  
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             statusbarLight = true
@@ -118,58 +152,27 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         statusbarLight = false
     }
     
-    @IBAction func addSampleMessage(_ sender: Any) {
+    @IBAction func addSampleMessage(_ userinfo: Any) {
         let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
-            text.count > 0,
-            let senderId = self.sender?.userId,
-            let chatRoomId = self.chatroom?.id
-            else { return }
+            text.count > 0 else { return }
         
         if isPlugOn {
             FBLogger.shared.log(id: "chatEach_sendBtn")
             self.resetTextView()
-            self.sendMessage(text: text, chatroomID: chatRoomId, receiverId: senderId)
+            self.sendMessage(text: text)
         } else {
             
-            showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { (action) in
+            showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { [unowned self] (action) in
                 FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
                 self.resetTextView()
-                self.sendMessage(text: text, chatroomID: chatRoomId, receiverId: senderId)
+                self.sendMessage(text: text)
             }, canceltype: .destructive) { (action) in
                 FBLogger.shared.log(id: "chatEach_PlugOffAlert_cancelBtn")
             }
         }
     }
     
-    func sendMessage(text: String, chatroomID: String, receiverId: String) {
-        Networking.sendMessage(text: text, chatRoomId: chatroomID, receiverId: receiverId) { (newMessage) in
-            
-            guard let newMessage = newMessage else { return }
-            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
-            self.tableView.reloadData()
-            self.setTableViewScrollBottom()
-        }
-    }
-    
-    @objc func receiveMessage(_ notification: NSNotification) {
-        guard
-            let chatroomId = chatroom?.id,
-            let receiverId = receiver?.userId,
-            let senderid = sender?.userId else { return }
-        
-        if let newMessage = notification.userInfo?["message"] as? MessageApolloFragment {
-            guard  newMessage.receivers?.first?.userId == receiverId &&
-                newMessage.sender.userId == senderid &&
-            newMessage.chatRoom.id == chatroomId else {
-                    return
-            }
-            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiverId == newMessage.sender.userId))
-            self.tableView.reloadData()
-            self.setTableViewScrollBottom()
-        }
-    }
-
     @objc override func keyboardWillShow(notification: NSNotification) {
         isKeyboardShow = true
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -206,8 +209,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-//        let fixedHeightOffset: [CGFloat] = [11.5, 14, 14, 14]
-//        let fixedHeight: [CGFloat] = [48, 69, 89, 110]
         let maxHeight: CGFloat = 112
         let fixedWidth = textView.frame.size.width
         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -234,48 +235,36 @@ extension ChatVC {
     }
     
     func setData() {
-        guard let senderid = sender?.userId else { return }
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.enterBackgound), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.receiveMessage(_:)), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
         
-        PlugIndicator.shared.play()
-        
-        loadMessage {
-            PlugIndicator.shared.stop()
-        }
-        
-        if Session.me?.role == .PARENT {
-            Networking.getOfficeTime(senderid) { (crontab) in
-                if let crontab = crontab {
-                    let schedule = Schedule(schedule: crontab)
-                    self.isPlugOn = crontab == "" ? true : schedule.isPlugOn()
-                }
-            }
-        }
+        viewModel.load()
     }
     
-    
-    func loadMessage(completion: (() -> Void)?) {
-        guard
-            let chatroomId = chatroom?.id,
-            let receiverId = receiver?.userId,
-            let senderid = sender?.userId else { return }
-        
-        Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: nil) { (messages) in
-            self.messageData = messages
-            self.title = "\(messages.count) 개 수신"
-            self.chatModel.setItems(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
-            }))
+    func sendMessage(text: String) {
+        Networking.sendMessage(text: text, chatRoomId: chatroom.id, receiverId: sender.id) { (newMessage) in
+            guard let newMessage = newMessage else { return }
+            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
+//            self.saveMessage(messages: [ChatLog(newMessage)])
             self.tableView.reloadData()
-            self.setTableViewScrollBottom()
-            completion?()
         }
     }
     
+    @objc func receiveMessage(_ notification: NSNotification) {
+        if let newMessage = notification.userInfo?["message"] as? MessageApolloFragment {
+            guard  newMessage.receivers?.first?.userId == receiver.id &&
+                newMessage.sender.userId == sender.id &&
+                newMessage.chatRoom.id == chatroom.id else {
+                    return
+            }
+            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiver.id == newMessage.sender.userId))
+            self.tableView.reloadData()
+        }
+    }
+   
     @objc func enterForeground() {
-        loadMessage(completion: nil)
+        viewModel.load()
     }
     
     @objc func enterBackgound() {
@@ -284,39 +273,27 @@ extension ChatVC {
     }
     
     func readMessage() {
-        guard
-            let chatroomId = chatroom?.id,
-            let receiverId = receiver?.userId,
-            let senderid = sender?.userId else { return }
-        Session.me?.readChat(chatRoomId: chatroomId, senderId: senderid)
-        Networking.readMessage(chatRoomId: chatroomId, receiverId: receiverId, senderId: senderid)
+        Session.me?.readChat(chatRoomId: chatroom.id, senderId: sender.id)
+        Networking.readMessage(chatRoomId: chatroom.id, receiverId: receiver.id, senderId: sender.id)
     }
     
     func saveTextViewText() {
-        guard
-            let chatroomId = chatroom?.id,
-            let senderid = sender?.userId else { return }
-        
-        let hash = "\(senderid)_\(chatroomId)"
+        let hash = "\(sender.id)_\(chatroom.id)"
         setUserDefaultWithString(textView.text, forKey: hash)
     }
     
     func setTitle() {
-        guard let senderName = sender?.name,
-            let senderId = sender?.userId,
-            let chatroomName = chatroom?.name,
-            let chatroomId = chatroom?.id,
-            let me = Session.me else { return }
+        guard let me = Session.me else { return }
         
         var topText: String
         var bottomText: String
         if me.role == .TEACHER,
-            let kid = me.getKid(chatroomID: chatroomId, parentID: senderId) {
+            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.id) {
             topText = "\(kid.name) 부모님"
-            bottomText = "\(chatroomName)"
+            bottomText = "\(chatroom.name)"
         } else {
-            topText = "\(senderName) 선생님"
-            bottomText = "\(chatroomName) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
+            topText = "\(sender.name) 선생님"
+            bottomText = "\(chatroom.name) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
         }
         
         let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey,
@@ -352,48 +329,45 @@ extension ChatVC {
     }
     
     func addMessage(newMessage: MessageItem) {
-        self.chatModel.addMessage(newMessage: newMessage)
+//        self.viewModel.addMessage(newMessage: newMessage)
         self.tableView.reloadData()
     }
     
-    func setTableViewScrollBottom(animated: Bool = false) {
-        if self.chatModel.mViewModel.count > 0 {
-            self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
-        }
-    }
+//    func setTableViewScrollBottom(animated: Bool = false) {
+//        if self.chatModel.mViewModel.count > 0 {
+//            self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
+//        }
+//    }
 }
 
 extension ChatVC: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 {
-            guard !self.isLoading,
-                !self.isEnd,
-                let chatroomId = chatroom?.id,
-                let receiverId = receiver?.userId,
-                let senderid = sender?.userId ,
-            self.messageData.count != 0 else { return }
-            self.isLoading = true
-            let lastId = self.messageData[0].id
-            PlugIndicator.shared.play()
-            Networking.getMeassages(chatroomId: chatroomId, userId: senderid, receiverId: receiverId, before: lastId) { (messages) in
-                PlugIndicator.shared.stop()
-                if messages.count == 0 {
-                    self.isEnd = true
-                }
-                self.messageData = messages + self.messageData
-                self.title = "\(messages.count) 개 수신"
-                let lastIndexPath = self.chatModel.addItemsFront(messages: messages.map({ MessageItem(with: $0, isMine: receiverId == $0.sender.userId)
-                }))
-                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: lastIndexPath, at: .top, animated: false)
-                self.isLoading = false
-            }
-        }
-    }
+//
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.section == 0 && indexPath.row == 0 {
+//            guard !self.isLoading,
+//                !self.isEnd,
+//                self.messageData.count != 0 else { return }
+//            self.isLoading = true
+//            let lastId = self.messageData[0].id
+//            PlugIndicator.shared.play()
+//            Networking.getMeassages(chatroomId: chatroom.id, userId: sender.id, receiverId: receiver.id, before: lastId) { [unowned self] (messages) in
+//                PlugIndicator.shared.stop()
+//                if messages.count == 0 {
+//                    self.isEnd = true
+//                }
+//                self.messageData = messages + self.messageData
+//                let lastIndexPath = self.chatModel.addItemsFront(messages: messages.map({ MessageItem(with: $0, isMine: self.receiver.id == $0.sender.userId)
+//                }))
+//                self.tableView.reloadData()
+//                self.tableView.scrollToRow(at: lastIndexPath, at: .top, animated: false)
+//                self.isLoading = false
+//            }
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch chatModel.getType(of: indexPath) {
+        let item = self.chatDataSource[indexPath]
+        switch item.messageType {
         case .BLANK:
             return 4
         case .LCELL, .RCELL:
@@ -401,41 +375,5 @@ extension ChatVC: UITableViewDelegate {
         case .STAMP:
             return 30
         }
-    }
-}
-
-class ChatCell: UITableViewCell {
-    
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var bubbleView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
-}
-
-class ChatRCell: ChatCell {
-    
-    override func awakeFromNib() {
-        bubbleView.layer.cornerRadius = 16
-        bubbleView.clipsToBounds = true
-    }
-    
-    func configure(viewItem: MessageViewItem) {
-        if let message = viewItem.message {
-            messageLabel.text = message.text
-            timeLabel.text = message.timeStamp
-            timeLabel.isHidden = !viewItem.isShowTime
-            //            timeLabel.backgroundColor = viewItem.isShowTime ? .blue : .clear
-        }
-    }
-}
-
-class StampCell: UITableViewCell {
-    
-    @IBOutlet weak var timeLabel: UILabel!
-    
-    func setTimeStamp(date: Date) {
-        let format = DateFormatter()
-        format.dateFormat = "yyyy. MM. dd. (E)"
-        format.locale = Locale(identifier: "ko_KR")
-        timeLabel.text = format.string(from: date)
     }
 }

@@ -392,7 +392,7 @@
                                             <outlet property="timeLabel" destination="UAs-cz-FEY" id="46X-gW-ixH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="blank" rowHeight="4" id="EQC-6X-KKr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="blank" rowHeight="4" id="EQC-6X-KKr" customClass="BlankCell" customModule="Plug" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="414" height="4"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EQC-6X-KKr" id="J9C-Gu-LTI">
@@ -426,9 +426,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="delegate" destination="ykd-Lh-fl4" id="iob-mj-yHV"/>
-                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kn-LC-c09">
                                 <rect key="frame" x="0.0" y="811" width="414" height="51"/>
@@ -508,7 +505,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c4C-OJ-6Ra"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FAf-ea-Evj">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="FAf-ea-Evj">
                         <barButtonItem key="backBarButtonItem" title=" " id="ZMi-WL-fLT"/>
                     </navigationItem>
                     <connections>
@@ -702,6 +699,7 @@
                     <navigationItem key="navigationItem" title="  채팅" id="ntK-l5-KV2"/>
                     <connections>
                         <outlet property="tableView" destination="4AJ-ji-8B0" id="vru-eC-ngS"/>
+                        <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="BEr-Kh-h3U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7z-Qw-JEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -926,4 +924,7 @@
         <image name="logo" width="147" height="127"/>
         <image name="master_close" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="BEr-Kh-h3U"/>
+    </inferredMetricsTieBreakers>
 </document>

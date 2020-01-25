@@ -35,7 +35,7 @@ class ChatLog: Object {
     
     @objc dynamic var text: String = ""
     
-    @objc dynamic var hashKey: String = ""
+    @objc dynamic var hashKey: Int = 0
     
     override static func primaryKey() -> String? {
         return "id"
@@ -44,7 +44,7 @@ class ChatLog: Object {
         
     }
     
-    init(message: MessageApolloFragment) {
+    init(_ message: MessageApolloFragment) {
         id = message.id
         chatroom = message.chatRoom.id
         
@@ -63,6 +63,23 @@ class ChatLog: Object {
         
         text = message.text ?? ""
         
-        hashKey = getHash([chatroom, sID, rID])
+        hashKey = ChatroomIdentity.getHash(arr: [chatroom, sID, rID])
+    }
+    
+    init(_ messageItem: MessageItem) {
+        id = messageItem.id
+        chatroom = messageItem.chatroomId
+        createAt = messageItem.createAt
+        readedAt = messageItem.readedAt
+        
+        rID = messageItem.receiverId
+        rName = messageItem.receiverName
+        
+        sID = messageItem.senderId
+        sName = messageItem.senderName
+        
+        text = messageItem.text
+        
+        hashKey = ChatroomIdentity.getHash(arr: [chatroom, sID, rID])
     }
 }

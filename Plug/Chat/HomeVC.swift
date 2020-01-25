@@ -88,9 +88,6 @@ class HomeVC: PlugViewController {
             FBLogger.shared.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             let data = sender as! MessageSummary
-            vc.receiver = data.receiver
-            vc.sender = data.sender
-            vc.chatroom = data.chatroom
         } else if segue.identifier == "share" {
             
             FBLogger.shared.log(id: "chatMain_invitIntro_to")

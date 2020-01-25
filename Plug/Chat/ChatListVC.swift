@@ -44,12 +44,39 @@ class ChatListVC: PlugViewController {
                 self.summaryViewModel = ChatSummaryViewModel(me: me)
                 self.summaryViewModel.summaryObservable.bind(to: self.tableView.rx.items) { tableView, row, item in
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0)) as! ChatListCell
-                    cell.nameLabel.text = item.sender.name
+                    cell.nameLabel.text = item.displayName
+                    cell.contentLabel.text = item.lastMessage.text
                     return cell
                     
                 }.disposed(by: self.disposeBag)
             })
         })
+        
+        tableView.rx.modelSelected(MessageSummary.self).subscribe({ [weak self] item in
+            guard let messageSummary = item.element else {
+                return
+            }
+            
+            self?.performSegue(withIdentifier: "chat", sender: messageSummary)
+        }).disposed(by: self.disposeBag)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chat" {
+            guard let data = sender as? MessageSummary else { return }
+            
+            FBLogger.shared.log(id: "chatMain_userListItem")
+            let vc = segue.destination as! ChatVC
+            
+            let sender = Identity(id: data.sender.userId, name: data.sender.name)
+            let receiver = Identity(id: data.receiver.userId, name: data.receiver.name)
+            let chatroom = Identity(id: data.chatroom.id, name: data.chatroom.name)
+            
+            let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
+            
+            vc.identity = identity
+        } else if segue.identifier == "share" {
+        }
     }
 }
 extension ChatListVC: UITableViewDelegate {

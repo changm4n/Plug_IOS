@@ -71,6 +71,7 @@
 		EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */; };
 		EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */; };
 		EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */; };
+		EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */; };
 		EDD3A851226C869B006E342A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
 		EDD3A853226C869B006E342A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
@@ -264,6 +265,7 @@
 		EDB373EA218ED8CD00F4A8BF /* InviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeVC.swift; sourceTree = "<group>"; };
 		EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectClassTVC.swift; sourceTree = "<group>"; };
 		EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageClassVC.swift; sourceTree = "<group>"; };
+		EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomIdentity.swift; sourceTree = "<group>"; };
 		EDD3A8AA226C869B006E342A /* Plug Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plug Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Plug Test-Info.plist"; path = "/Users/changminlee/Documents/IOS/Projects/Plug/Plug Test-Info.plist"; sourceTree = "<absolute>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
 				ED1F586421E1CF5F00126A07 /* SecretVC.swift */,
 				ED2108DC2353753F00E38493 /* ChatListVC.swift */,
+				EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */,
 				EDE6089A239BFDB200F91EB4 /* ChatListCell.swift */,
 				EDE6089C23C0640E00F91EB4 /* ChatSummaryViewModel.swift */,
 			);
@@ -917,6 +920,7 @@
 				EDD8C3962187243C008DA9E7 /* HomeVC.swift in Sources */,
 				EDB373EB218ED8CD00F4A8BF /* InviteCodeVC.swift in Sources */,
 				ED71B6B62219391E00AC21FF /* LicenseVC.swift in Sources */,
+				EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
