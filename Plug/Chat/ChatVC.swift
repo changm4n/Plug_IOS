@@ -70,9 +70,8 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         sendButton.makeCircle()
         
-//        tableView.dataSource = chatModel
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = UITableView.automaticDimension
         textView.layer.cornerRadius = 18
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
@@ -80,7 +79,6 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         textView.textContainerInset.left = 8
         textView.textContainerInset.right = 8
-        
         setVM()
         setData()
         setUI()
@@ -88,7 +86,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     }
     
     typealias ChatSectionModel = SectionModel<String, MessageViewItem>
-    typealias ChatDataSource = RxTableViewSectionedReloadDataSource<ChatSectionModel>
+    typealias ChatDataSource = RxTableViewSectionedReloadDataSourceWithReloadSignal<ChatSectionModel>
     
     var chatDataSource: ChatDataSource!
     
@@ -101,9 +99,38 @@ class ChatVC: PlugViewController, UITextViewDelegate {
         
         self.chatDataSource = ChatDataSource.init(configureCell: configureCell)
         self.viewModel = ChatroomViewModel(identity: identity)
-        
-        viewModel.output.bind(to: tableView.rx.items(dataSource: chatDataSource)).disposed(by: disposeBag)
+//        self.tableView.estimatedRowHeight = 1
+        viewModel.output.do(onNext: { (items) in
+            print(items.count, items.last?.items.count ?? 0)
+            if items.count > 0 {
+                
+//                self.tableView.layoutIfNeeded()
+                
+                
+//                let rows = items.reduce(0) { (result, section) -> Int in
+//                    return result + section.items.count
+//                }
+
+            }
+        }).bind(to: tableView.rx.items(dataSource: chatDataSource)).disposed(by: disposeBag)
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        sendButton.rx.tap.bind { [unowned self] in
+            var sample = MessageItem()
+            sample.chatroomId = self.chatroom.id
+            sample.receiverId = self.sender.id
+            sample.receiverId = self.sender.name
+            sample.senderId = self.receiver.id
+            sample.senderName = self.receiver.name
+            
+            self.viewModel.addMessage(message: MessageItem())
+        }.disposed(by: disposeBag)
+        
+        self.chatDataSource.dataReloaded
+            .asObservable()
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe(onNext: {
+                self.tableView.scrollToBottom()
+            }).disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -50,7 +50,7 @@ struct MessageItem {
         self.receiverName = kDefault
         self.senderId = "lcmini6528@gmail.com"
         self.senderName = kDefault
-        self.isMine = false
+        self.isMine = true
         self.createAt = Date()
     }
     
@@ -112,7 +112,7 @@ struct ChatroomViewModel {
     var identity: ChatroomIdentity
     var disposeBag = DisposeBag()
     
-    var output: BehaviorSubject<[SectionModel<String, MessageViewItem>]> = BehaviorSubject(value: [])
+    var output: PublishSubject<[SectionModel<String, MessageViewItem>]> = PublishSubject()
     
     var model: ChatroomModel
     
@@ -122,9 +122,14 @@ struct ChatroomViewModel {
     }
     
     func load() {
-        self.model.output.map({
+        self.model.output.distinctUntilChanged({ (lhs, rhs) -> Bool in
+            lhs.count == rhs.count
+        })
+            .filter({!$0.isEmpty})
+            .map({
             self.setViewModel(items: $0)
-        }).bind(to: output).disposed(by: disposeBag)
+        })
+            .bind(to: output).disposed(by: disposeBag)
         model.load()
     }
     
@@ -181,6 +186,10 @@ struct ChatroomViewModel {
         })
         return sections
     }
+    
+    public func addMessage(message: MessageItem) {
+        model.addMessage(newMessage: message)
+    }
 }
 
 class ChatroomModel {
@@ -232,5 +241,17 @@ class ChatroomModel {
     
     public func addMessage(newMessage: MessageItem) {
         self.items.append(newMessage)
+    }
+}
+
+final class RxTableViewSectionedReloadDataSourceWithReloadSignal<S: SectionModelType>: RxTableViewSectionedReloadDataSource<S> {
+    private let relay = PublishRelay<Void>()
+    var dataReloaded : Signal<Void> {
+        return relay.asSignal()
+    }
+    
+    override func tableView(_ tableView: UITableView, observedEvent: Event<[S]>) {
+        super.tableView(tableView, observedEvent: observedEvent)
+        relay.accept(())
     }
 }

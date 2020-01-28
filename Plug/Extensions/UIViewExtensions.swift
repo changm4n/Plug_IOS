@@ -115,4 +115,19 @@ extension String {
     }
 }
 
+extension UITableView {
+    var lastIndexPath: IndexPath? {
+        let lastSectionIndex = numberOfSections - 1
+        guard lastSectionIndex >= 0 else { return nil }
 
+        let lastIndexInLastSection = numberOfRows(inSection: lastSectionIndex) - 1
+        guard lastIndexInLastSection >= 0 else { return nil }
+
+        return IndexPath(row: lastIndexInLastSection, section: lastSectionIndex)
+    }
+    
+    func scrollToBottom() {
+        guard let indexPath = lastIndexPath else { return }
+        self.scrollToRow(at: indexPath, at: .bottom, animated: false)
+    }
+}
