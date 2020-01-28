@@ -41,9 +41,9 @@ class ManageClassVC: PlugViewController {
         } else if segue.identifier == "chat" {
             FBLogger.shared.log(id: "myclassEach_chatEach_to")
             let vc = segue.destination as! ChatVC
-            vc.receiver = meUser
-            vc.sender = sender as? UserApolloFragment
-            vc.chatroom = ChatRoomSummaryApolloFragment(id: classData!.id, name: classData!.name, chatRoomAt: classData!.chatRoomAt, createdAt: classData!.createdAt)
+//            vc.receiver = meUser
+//            vc.sender = sender as? UserApolloFragment
+//            vc.chatroom = ChatRoomSummaryApolloFragment(id: classData!.id, name: classData!.name, chatRoomAt: classData!.chatRoomAt, createdAt: classData!.createdAt)
         } else {
             FBLogger.shared.log(id: "myclassEach_editClass_to")
             let nvc = segue.destination as! UINavigationController
