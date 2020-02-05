@@ -15,8 +15,8 @@
             timestampString = "579368125.777042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "kakaoButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,42 +32,10 @@
             timestampString = "579368125.777148"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "kakaoButtonPressed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8DEABD39-F592-4B88-B73B-25B9D23140B0 - a11ae15cd793576f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Plug.ViewController.kakaoButtonPressed(Any) -&gt; ()"
-                  moduleName = "Plug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "351">
-               </Location>
-               <Location
-                  uuid = "8DEABD39-F592-4B88-B73B-25B9D23140B0 - 69dcb47305c90076"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Plug.ViewController.kakaoButtonPressed(Any) -&gt; ()"
-                  moduleName = "Plug"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "128">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -81,10 +49,42 @@
             timestampString = "579368125.7772011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "kakaoButtonPressed(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B84A6BB8-388C-4FBE-A400-9F83A211159A - a11ae15cd793576f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Plug.ViewController.kakaoButtonPressed(Any) -&gt; ()"
+                  moduleName = "Plug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "351">
+               </Location>
+               <Location
+                  uuid = "B84A6BB8-388C-4FBE-A400-9F83A211159A - 69dcb47305c90076"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Plug.ViewController.kakaoButtonPressed(Any) -&gt; ()"
+                  moduleName = "Plug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Join/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "128">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -98,8 +98,8 @@
             timestampString = "579368125.777247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "kakaoButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>

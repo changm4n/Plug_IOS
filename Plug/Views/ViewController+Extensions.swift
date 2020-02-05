@@ -37,10 +37,18 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
          NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        setViews()
+        setBinding()
     }
+    
+    func setViews() { }
+    
+    func setBinding() { }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -115,7 +123,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
 extension UIViewController {
-    
     func setStatusBar(isWhite: Bool) {
         UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
     }

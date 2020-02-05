@@ -67,8 +67,17 @@ class StartVC: PlugViewController {
                     self.titleImage.alpha = 0
                 }) { (completion) in
                     
-                    
-                    self.performSegue(withIdentifier: identifier, sender: sender)
+                    if identifier == "Login" {
+                        let VC = MainVC()
+//                        VC.modalPresentationStyle = .fullScreen
+                        let NVC = UINavigationController(rootViewController: VC)
+                        NVC.modalPresentationStyle = .fullScreen
+                        self.present(NVC, animated: false, completion: nil)
+                        
+                    } else {
+                        self.performSegue(withIdentifier: identifier, sender: sender)
+                    }
+
                 }
             }
         }

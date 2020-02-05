@@ -72,6 +72,8 @@
 		EDB373ED218EE9E900F4A8BF /* SelectClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */; };
 		EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */; };
 		EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */; };
+		EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3723EAE61C006ED196 /* MainVC.swift */; };
+		EDC1CD3B23EAFA5F006ED196 /* LoginVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */; };
 		EDD3A851226C869B006E342A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
 		EDD3A853226C869B006E342A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
@@ -266,6 +268,8 @@
 		EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectClassTVC.swift; sourceTree = "<group>"; };
 		EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageClassVC.swift; sourceTree = "<group>"; };
 		EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomIdentity.swift; sourceTree = "<group>"; };
+		EDC1CD3723EAE61C006ED196 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC2.swift; sourceTree = "<group>"; };
 		EDD3A8AA226C869B006E342A /* Plug Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plug Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Plug Test-Info.plist"; path = "/Users/changminlee/Documents/IOS/Projects/Plug/Plug Test-Info.plist"; sourceTree = "<absolute>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
@@ -403,6 +407,15 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		EDC1CD3923EAFA31006ED196 /* 2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				EDC1CD3723EAE61C006ED196 /* MainVC.swift */,
+				EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */,
+			);
+			path = 2.0;
+			sourceTree = "<group>";
+		};
 		EDD8C39221872405008DA9E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE731DB217B4E7000D302DF /* ViewController.swift */,
+				EDC1CD3923EAFA31006ED196 /* 2.0 */,
 				ED1FB5B1217E06650075C4CE /* LoginVC.swift */,
 				ED77192222D0CEA7002896F2 /* Login2VC.swift */,
 				EDAE3A4D217E13020015EAF2 /* PasswdVC.swift */,
@@ -882,6 +896,7 @@
 				ED3E6A4A21CF57B300C28403 /* PlugClassCell.swift in Sources */,
 				ED4750F421EA80190043FD18 /* kidVC.swift in Sources */,
 				EDAE3A54217E37B60015EAF2 /* ProfileImageVC.swift in Sources */,
+				EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */,
 				ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED3D980A21A05FE100B61748 /* NoteMainVC.swift in Sources */,
@@ -930,6 +945,7 @@
 				EDB373EF218FE31500F4A8BF /* ManageClassVC.swift in Sources */,
 				ED77192522D9B211002896F2 /* HomeExtension.swift in Sources */,
 				EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */,
+				EDC1CD3B23EAFA5F006ED196 /* LoginVC2.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				ED8C47E721DBAC840065EC7E /* EditProfileVC.swift in Sources */,
