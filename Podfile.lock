@@ -85,6 +85,9 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
+  - RxGesture (3.0.1):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - RxRealm (2.0.0):
     - RealmSwift (~> 4.0)
     - RxSwift (~> 5.0)
@@ -108,6 +111,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxCocoa (~> 5)
   - RxDataSources (~> 4.0)
+  - RxGesture
   - RxRealm
   - RxSwift (~> 5)
   - Siren
@@ -141,6 +145,7 @@ SPEC REPOS:
     - RealmSwift
     - RxCocoa
     - RxDataSources
+    - RxGesture
     - RxRealm
     - RxRelay
     - RxSwift
@@ -166,6 +171,7 @@ SPEC CHECKSUMS:
   RealmSwift: b5199e9a41f67b99f51acf6874a6166f5fbe93d1
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxGesture: a3f8dd6adf078110ed5e1c9c30d09d705a09852e
   RxRealm: 900f5c7e6f0a2d6527b56eaf7283f3035ec1e8ba
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
@@ -175,6 +181,6 @@ SPEC CHECKSUMS:
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 0968f9eb0117eaa09be1713014ccb8b7ff3f24f1
+PODFILE CHECKSUM: a817b5ce5089fefc7936cb6d3fcd70086d04459f
 
 COCOAPODS: 1.8.4

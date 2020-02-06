@@ -18,6 +18,7 @@ target 'Plug' do
     pod 'RxDataSources', '~> 4.0'
     pod "RxRealm"
     pod 'RealmSwift'
+    pod "RxGesture"
     pod 'SnapKit'
 end
 
