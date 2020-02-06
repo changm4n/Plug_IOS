@@ -2,17 +2,17 @@
   "images" : [
     {
       "scale" : "1x",
-      "filename" : "icTextLogoPrimary.png",
+      "filename" : "icSettingDefault.png",
       "idiom" : "universal"
     },
     {
       "scale" : "2x",
-      "filename" : "icTextLogoPrimary@2x.png",
+      "filename" : "icSettingDefault@2x.png",
       "idiom" : "universal"
     },
     {
       "scale" : "3x",
-      "filename" : "icTextLogoPrimary@3x.png",
+      "filename" : "icSettingDefault@3x.png",
       "idiom" : "universal"
     }
   ],

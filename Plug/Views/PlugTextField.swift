@@ -9,18 +9,57 @@
 import Foundation
 import UIKit
 import SkyFloatingLabelTextField
+import RxSwift
+import RxCocoa
 
 enum FieldType {
     case email, passwd, code, name, none
 }
 class PlugTextField: SkyFloatingLabelTextField {
     
+    private let inputText = PublishSubject<String>()
+    let validation = BehaviorSubject(value: false)
+    
     var changeHandler: ((String, Bool)->Void)?
     var type: FieldType = .none
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+    let disposeBag = DisposeBag()
+    
+    init(type: FieldType) {
+        super.init(frame: CGRect.zero)
+        self.type = type
+        self.rx.text.orEmpty
+            .map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
+            .filter({ $0.count > 0 })
+            .bind(to: self.inputText).disposed(by: disposeBag)
+        switch type {
+        case .email:
+            bindEmail()
+        case .passwd:
+            bindPasswd()
+        default:
+            break
+        }
+    }
+    
+    func bindEmail() {
+        inputText.map(Validator.isValidEmail(testStr:)).bind(to: validation).disposed(by: disposeBag)
+        validation.skip(1).subscribe(onNext: { result in
+            self.errorMessage = result ? "" : "이메일 양식으로 입력해주세요."
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindPasswd() {
+        inputText.map({ $0.count > 7 }).bind(to: validation).disposed(by: disposeBag)
+        validation.skip(1).subscribe(onNext: { result in
+            self.errorMessage = result ? "" : "8자 이상 입력해주세요."
+        }).disposed(by: disposeBag)
+    }
+    
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func textFieldDidChanged(_ textField: UITextField) {

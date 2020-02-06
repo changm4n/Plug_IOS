@@ -44,7 +44,7 @@
 		EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85E239BFBD400C1D5B6 /* Spoqa Han Sans Bold.ttf */; };
 		EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */; };
 		EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3723EAE61C006ED196 /* MainVC.swift */; };
-		EDC1CD3B23EAFA5F006ED196 /* LoginVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */; };
+		EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */; };
 		EDD3A851226C869B006E342A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
 		EDD3A853226C869B006E342A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
@@ -234,7 +234,7 @@
 		EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageClassVC.swift; sourceTree = "<group>"; };
 		EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomIdentity.swift; sourceTree = "<group>"; };
 		EDC1CD3723EAE61C006ED196 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC2.swift; sourceTree = "<group>"; };
+		EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		EDD3A8AA226C869B006E342A /* Plug Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plug Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Plug Test-Info.plist"; path = "/Users/changminlee/Documents/IOS/Projects/Plug/Plug Test-Info.plist"; sourceTree = "<absolute>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				EDC1CD3723EAE61C006ED196 /* MainVC.swift */,
-				EDC1CD3A23EAFA5F006ED196 /* LoginVC2.swift */,
+				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
 			);
 			path = 2.0;
@@ -878,7 +878,7 @@
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
 				EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */,
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
-				EDC1CD3B23EAFA5F006ED196 /* LoginVC2.swift in Sources */,
+				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,

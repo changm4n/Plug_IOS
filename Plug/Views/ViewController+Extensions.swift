@@ -10,17 +10,9 @@ import Foundation
 import UIKit
 import SkyFloatingLabelTextField
 
+
 class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var bottomButton : UIButton? = nil {
-        didSet {
-             bottomButton?.addTarget(self, action: #selector(PlugViewController.bottomButtonPressed), for: .touchUpInside)
-        }
-    }
-    var firstResponder: UITextField?
-    var bottomAction: (() -> Void)?
-    var keyboardHeight: CGFloat = 0
-    var isKeyboardShow: Bool = false
     var statusbarLight: Bool = true {
         didSet {
             UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
@@ -38,9 +30,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         setViews()
         setBinding()
@@ -49,15 +38,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     func setViews() { }
     
     func setBinding() { }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        firstResponder?.becomeFirstResponder()
-    }
-    
-    @objc func bottomButtonPressed() {
-        bottomAction?()
-    }
     
     func setKeyboardHide() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PlugViewController.dismissKeyboard))
@@ -69,46 +49,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         view.endEditing(true)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let bottomButton = bottomButton else { return }
-        let offset = view.frame.size.height - bottomButton.frame.size.height
-        bottomButton.frame.origin.y = isKeyboardShow ? offset - keyboardHeight : offset
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        isKeyboardShow = true
-        guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            if bottomButton.frame.origin.y == view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
-            }
-        }
-    }
-    
-    
-    @objc func keyboardChanged(notification: NSNotification) {
-        guard isKeyboardShow else { return }
-        guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
-            }
-        }
-        
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        isKeyboardShow = false
-        guard let bottomButton = bottomButton else { return }
-        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height
-            }
-        }
-    }
     
     func play() {
         PlugIndicator.shared.play()
@@ -144,6 +84,7 @@ extension UIViewController {
             self.navigationController?.navigationBar.shadowImage = nil
         }
     }
+    
     
     func resetNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor.white

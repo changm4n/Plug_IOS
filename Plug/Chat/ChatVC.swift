@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import RxDataSources
 
-class ChatVC: PlugViewController, UITextViewDelegate {
+class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
     
     @IBOutlet weak var textFieldBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var inputViewHeight: NSLayoutConstraint!
@@ -203,7 +203,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     @objc override func keyboardWillShow(notification: NSNotification) {
         isKeyboardShow = true
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
+            let keyboardHeight = keyboardSize.height
             let bottomOffset = keyboardHeight - kSafeAreaInset
             
             if self.view.frame.origin.y == 0  {
@@ -228,7 +228,7 @@ class ChatVC: PlugViewController, UITextViewDelegate {
     @objc override func keyboardChanged(notification: NSNotification) {
         guard isKeyboardShow else { return }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
+            let keyboardHeight = keyboardSize.height
             self.view.frame.origin.y = -keyboardHeight
             self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
             self.tableView.scrollIndicatorInsets = self.tableView.contentInset
