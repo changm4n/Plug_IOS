@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.applicationIconBadgeNumber = 0
             return
         }
-        let badgeCount = me.summaryData.reduce(0) { (result, summary) -> Int in
+        let badgeCount = me.summaryData.value.reduce(0) { (result, summary) -> Int in
             return result + summary.unreadCount
         }
         

@@ -1,11 +1,11 @@
 PODS:
   - Alamofire (4.8.2)
-  - Apollo (0.10.0):
-    - Apollo/Core (= 0.10.0)
-  - Apollo/Core (0.10.0)
-  - Apollo/WebSocket (0.10.0):
+  - Apollo (0.20.0):
+    - Apollo/Core (= 0.20.0)
+  - Apollo/Core (0.20.0)
+  - Apollo/WebSocket (0.20.0):
     - Apollo/Core
-    - Starscream (~> 3.1.0)
+    - Starscream (= 3.1.1)
   - Differentiator (4.0.1)
   - Firebase/Core (6.0.0):
     - Firebase/CoreOnly
@@ -97,12 +97,12 @@ PODS:
   - Siren (5.0.1)
   - SkyFloatingLabelTextField (3.7.0)
   - SnapKit (5.0.1)
-  - Starscream (3.1.0)
+  - Starscream (3.1.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
-  - Apollo (= 0.10.0)
+  - Apollo (= 0.20.0)
   - Apollo/WebSocket
   - Firebase/Core
   - Firebase/Messaging
@@ -122,7 +122,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - Apollo
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -137,9 +136,9 @@ SPEC REPOS:
     - Protobuf
     - Siren
     - SkyFloatingLabelTextField
-    - Starscream
     - SwiftyJSON
   trunk:
+    - Apollo
     - Differentiator
     - Realm
     - RealmSwift
@@ -150,10 +149,11 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SnapKit
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Apollo: aa9b870203900b9526332ea3d12c37b4dc6ce1b9
+  Apollo: 46b40c7023c1d49f2220a0364cdff8829674d9d3
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
@@ -178,9 +178,9 @@ SPEC CHECKSUMS:
   Siren: 7ebe56fbd69b335cbe4329bcde985253be0e2d61
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: a817b5ce5089fefc7936cb6d3fcd70086d04459f
+PODFILE CHECKSUM: 6c6242c81abeb018e5fb8115a08068cb179d20ee
 
 COCOAPODS: 1.8.4

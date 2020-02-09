@@ -17,7 +17,7 @@ enum FieldType {
 }
 class PlugTextField: SkyFloatingLabelTextField {
     
-    private let inputText = PublishSubject<String>()
+    let inputText = PublishSubject<String>()
     let validation = BehaviorSubject(value: false)
     
     var changeHandler: ((String, Bool)->Void)?
@@ -32,6 +32,7 @@ class PlugTextField: SkyFloatingLabelTextField {
             .map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
             .filter({ $0.count > 0 })
             .bind(to: self.inputText).disposed(by: disposeBag)
+        
         switch type {
         case .email:
             bindEmail()

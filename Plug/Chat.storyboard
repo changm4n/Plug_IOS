@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1iB-Qk-mOs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1iB-Qk-mOs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -574,9 +574,9 @@
         <!--Navigation Controller-->
         <scene sceneID="hVf-LK-XNE">
             <objects>
-                <navigationController modalPresentationStyle="fullScreen" id="1iB-Qk-mOs" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MainNVC" storyboardIdentifier="MainNVC" modalPresentationStyle="fullScreen" id="1iB-Qk-mOs" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ec5-wG-faU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -678,6 +678,7 @@
                                             <outlet property="nameLabel" destination="Jml-pY-Jvg" id="BJi-WK-K6M"/>
                                             <outlet property="newImageView" destination="aUY-Q5-pU4" id="PA2-1k-GX7"/>
                                             <outlet property="profileImageView" destination="HQP-IB-XXt" id="eTz-zJ-YWW"/>
+                                            <outlet property="roomLabel" destination="Zcd-0b-ZcW" id="gbq-EU-1AZ"/>
                                             <outlet property="timeLabel" destination="GVv-9g-eNe" id="rOc-oD-0bV"/>
                                         </connections>
                                     </tableViewCell>
@@ -693,8 +694,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nNF-CV-vQH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="  채팅" id="ntK-l5-KV2"/>
+                    <navigationItem key="navigationItem" title="  채팅" id="ntK-l5-KV2">
+                        <barButtonItem key="rightBarButtonItem" image="icSettingDefault" id="bx7-fE-O4b">
+                            <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="settingButton" destination="bx7-fE-O4b" id="Ox4-tF-8cz"/>
                         <outlet property="tableView" destination="4AJ-ji-8B0" id="vru-eC-ngS"/>
                         <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="BEr-Kh-h3U"/>
                     </connections>
@@ -914,6 +920,7 @@
         <image name="berrymelon" width="64.5" height="79.5"/>
         <image name="homeActive" width="24" height="24"/>
         <image name="homeDeactive" width="24" height="24"/>
+        <image name="icSettingDefault" width="18" height="18"/>
         <image name="icTextLogoWhite" width="37" height="22"/>
         <image name="iconsGlyphsIcNewTag" width="18" height="18"/>
         <image name="iconsGlyphsIcSendWhite" width="20" height="20"/>

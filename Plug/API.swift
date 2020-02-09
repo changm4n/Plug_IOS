@@ -1,6 +1,7 @@
 //  This file was automatically generated and should not be edited.
 
 import Apollo
+import Foundation
 
 public struct UserInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -47,7 +48,7 @@ public struct UserInput: GraphQLMapConvertible {
 
   public var profileImageUrl: Swift.Optional<String?> {
     get {
-      return graphQLMap["profileImageUrl"] as! Swift.Optional<String?>
+      return graphQLMap["profileImageUrl"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profileImageUrl")
@@ -56,7 +57,7 @@ public struct UserInput: GraphQLMapConvertible {
 
   public var phoneNumber: Swift.Optional<String?> {
     get {
-      return graphQLMap["phoneNumber"] as! Swift.Optional<String?>
+      return graphQLMap["phoneNumber"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "phoneNumber")
@@ -64,7 +65,7 @@ public struct UserInput: GraphQLMapConvertible {
   }
 }
 
-public enum Role: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+public enum Role: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case teacher
   case parent
@@ -95,6 +96,13 @@ public enum Role: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, A
       default: return false
     }
   }
+
+  public static var allCases: [Role] {
+    return [
+      .teacher,
+      .parent,
+    ]
+  }
 }
 
 public struct UserUpdateInput: GraphQLMapConvertible {
@@ -124,7 +132,7 @@ public struct UserUpdateInput: GraphQLMapConvertible {
 
   public var profileImageUrl: Swift.Optional<String?> {
     get {
-      return graphQLMap["profileImageUrl"] as! Swift.Optional<String?>
+      return graphQLMap["profileImageUrl"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profileImageUrl")
@@ -133,7 +141,7 @@ public struct UserUpdateInput: GraphQLMapConvertible {
 
   public var phoneNumber: Swift.Optional<String?> {
     get {
-      return graphQLMap["phoneNumber"] as! Swift.Optional<String?>
+      return graphQLMap["phoneNumber"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "phoneNumber")
@@ -150,7 +158,7 @@ public struct UserWhereUniqueInput: GraphQLMapConvertible {
 
   public var id: Swift.Optional<GraphQLID?> {
     get {
-      return graphQLMap["id"] as! Swift.Optional<GraphQLID?>
+      return graphQLMap["id"] as? Swift.Optional<GraphQLID?> ?? Swift.Optional<GraphQLID?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
@@ -159,7 +167,7 @@ public struct UserWhereUniqueInput: GraphQLMapConvertible {
 
   public var userId: Swift.Optional<String?> {
     get {
-      return graphQLMap["userId"] as! Swift.Optional<String?>
+      return graphQLMap["userId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "userId")
@@ -167,7 +175,7 @@ public struct UserWhereUniqueInput: GraphQLMapConvertible {
   }
 }
 
-public enum Platform: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+public enum Platform: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case ios
   case android
@@ -198,9 +206,16 @@ public enum Platform: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodabl
       default: return false
     }
   }
+
+  public static var allCases: [Platform] {
+    return [
+      .ios,
+      .android,
+    ]
+  }
 }
 
-public enum UserType: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case kakao
   case email
@@ -231,9 +246,16 @@ public enum UserType: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodabl
       default: return false
     }
   }
+
+  public static var allCases: [UserType] {
+    return [
+      .kakao,
+      .email,
+    ]
+  }
 }
 
-public enum MutationType: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+public enum MutationType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case created
   case updated
@@ -268,11 +290,29 @@ public enum MutationType: RawRepresentable, Equatable, Hashable, Apollo.JSONDeco
       default: return false
     }
   }
+
+  public static var allCases: [MutationType] {
+    return [
+      .created,
+      .updated,
+      .deleted,
+    ]
+  }
 }
 
 public final class SignInMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation SignIn($userId: String!, $password: String!) {\n  signin(userId: $userId, password: $password) {\n    __typename\n    token\n  }\n}"
+    """
+    mutation SignIn($userId: String!, $password: String!) {
+      signin(userId: $userId, password: $password) {
+        __typename
+        token
+      }
+    }
+    """
+
+  public let operationName = "SignIn"
 
   public var userId: String
   public var password: String
@@ -352,8 +392,18 @@ public final class SignInMutation: GraphQLMutation {
 }
 
 public final class SignUpMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation SignUp($data: UserInput!) {\n  signup(data: $data) {\n    __typename\n    name\n  }\n}"
+    """
+    mutation SignUp($data: UserInput!) {
+      signup(data: $data) {
+        __typename
+        name
+      }
+    }
+    """
+
+  public let operationName = "SignUp"
 
   public var data: UserInput
 
@@ -431,8 +481,18 @@ public final class SignUpMutation: GraphQLMutation {
 }
 
 public final class ChangePwMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation changePW($userId: String!, $old: String!, $new: String!) {\n  updateNewPassword(email: $userId, newPassword: $new, oldPassword: $old) {\n    __typename\n    name\n  }\n}"
+    """
+    mutation changePW($userId: String!, $old: String!, $new: String!) {
+      updateNewPassword(email: $userId, newPassword: $new, oldPassword: $old) {
+        __typename
+        name
+      }
+    }
+    """
+
+  public let operationName = "changePW"
 
   public var userId: String
   public var old: String
@@ -514,15 +574,25 @@ public final class ChangePwMutation: GraphQLMutation {
 }
 
 public final class UpdateUserMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {\n  updateUser(where: $where, data: $data) {\n    __typename\n    name\n  }\n}"
+    """
+    mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+      updateUser(where: $where, data: $data) {
+        __typename
+        name
+      }
+    }
+    """
+
+  public let operationName = "updateUser"
 
   public var data: UserUpdateInput
   public var `where`: UserWhereUniqueInput
 
   public init(data: UserUpdateInput, `where`: UserWhereUniqueInput) {
     self.data = data
-    self.where = `where`
+    self.`where` = `where`
   }
 
   public var variables: GraphQLMap? {
@@ -595,8 +665,18 @@ public final class UpdateUserMutation: GraphQLMutation {
 }
 
 public final class CreateRoomMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {\n  createChatRoom(data: {name: $roomName, userIds: [$userId], chatRoomAt: $year}) {\n    __typename\n    inviteCode\n  }\n}"
+    """
+    mutation createRoom($roomName: String!, $userId: ID!, $year: DateTime!) {
+      createChatRoom(data: {name: $roomName, userIds: [$userId], chatRoomAt: $year}) {
+        __typename
+        inviteCode
+      }
+    }
+    """
+
+  public let operationName = "createRoom"
 
   public var roomName: String
   public var userId: GraphQLID
@@ -678,8 +758,18 @@ public final class CreateRoomMutation: GraphQLMutation {
 }
 
 public final class UpdateChatRoomMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation updateChatRoom($id: ID!, $newName: String!, $newYear: DateTime!) {\n  updateChatRoom(id: $id, data: {name: $newName, chatRoomAt: $newYear}) {\n    __typename\n    id\n  }\n}"
+    """
+    mutation updateChatRoom($id: ID!, $newName: String!, $newYear: DateTime!) {
+      updateChatRoom(id: $id, data: {name: $newName, chatRoomAt: $newYear}) {
+        __typename
+        id
+      }
+    }
+    """
+
+  public let operationName = "updateChatRoom"
 
   public var id: GraphQLID
   public var newName: String
@@ -761,8 +851,18 @@ public final class UpdateChatRoomMutation: GraphQLMutation {
 }
 
 public final class WithdrawKidMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation withdrawKid($chatroomID: ID!, $userID: ID!, $kidName: String!) {\n  withdrawChatRoomUser(id: $chatroomID, data: {userId: $userID, kidName: $kidName}) {\n    __typename\n    id\n  }\n}"
+    """
+    mutation withdrawKid($chatroomID: ID!, $userID: ID!, $kidName: String!) {
+      withdrawChatRoomUser(id: $chatroomID, data: {userId: $userID, kidName: $kidName}) {
+        __typename
+        id
+      }
+    }
+    """
+
+  public let operationName = "withdrawKid"
 
   public var chatroomID: GraphQLID
   public var userID: GraphQLID
@@ -844,8 +944,18 @@ public final class WithdrawKidMutation: GraphQLMutation {
 }
 
 public final class SetOfficeMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation setOffice($crontab: String!) {\n  upsertOfficePeriod(data: {crontab: $crontab}) {\n    __typename\n    crontab\n  }\n}"
+    """
+    mutation setOffice($crontab: String!) {
+      upsertOfficePeriod(data: {crontab: $crontab}) {
+        __typename
+        crontab
+      }
+    }
+    """
+
+  public let operationName = "setOffice"
 
   public var crontab: String
 
@@ -923,28 +1033,33 @@ public final class SetOfficeMutation: GraphQLMutation {
 }
 
 public final class GetUserInfoQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query getUserInfo($id: ID!, $userId: String) {\n  chatRooms(where: {users_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n}"
+    """
+    query getUserInfo($id: ID!) {
+      officePeriods(where: {user: {id: $id}}) {
+        __typename
+        crontab
+      }
+    }
+    """
 
-  public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
+  public let operationName = "getUserInfo"
 
   public var id: GraphQLID
-  public var userId: String?
 
-  public init(id: GraphQLID, userId: String? = nil) {
+  public init(id: GraphQLID) {
     self.id = id
-    self.userId = userId
   }
 
   public var variables: GraphQLMap? {
-    return ["id": id, "userId": userId]
+    return ["id": id]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("chatRooms", arguments: ["where": ["users_some": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
       GraphQLField("officePeriods", arguments: ["where": ["user": ["id": GraphQLVariable("id")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
     ]
 
@@ -954,17 +1069,8 @@ public final class GetUserInfoQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(chatRooms: [ChatRoom], officePeriods: [OfficePeriod]) {
-      self.init(unsafeResultMap: ["__typename": "Query", "chatRooms": chatRooms.map { (value: ChatRoom) -> ResultMap in value.resultMap }, "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }])
-    }
-
-    public var chatRooms: [ChatRoom] {
-      get {
-        return (resultMap["chatRooms"] as! [ResultMap]).map { (value: ResultMap) -> ChatRoom in ChatRoom(unsafeResultMap: value) }
-      }
-      set {
-        resultMap.updateValue(newValue.map { (value: ChatRoom) -> ResultMap in value.resultMap }, forKey: "chatRooms")
-      }
+    public init(officePeriods: [OfficePeriod]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }])
     }
 
     public var officePeriods: [OfficePeriod] {
@@ -973,56 +1079,6 @@ public final class GetUserInfoQuery: GraphQLQuery {
       }
       set {
         resultMap.updateValue(newValue.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, forKey: "officePeriods")
-      }
-    }
-
-    public struct ChatRoom: GraphQLSelectionSet {
-      public static let possibleTypes = ["ChatRoom"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ChatRoomApolloFragment.self),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var chatRoomApolloFragment: ChatRoomApolloFragment {
-          get {
-            return ChatRoomApolloFragment(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
       }
     }
 
@@ -1066,10 +1122,24 @@ public final class GetUserInfoQuery: GraphQLQuery {
 }
 
 public final class GetUserInfoInStartQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query getUserInfoInStart($id: ID!, $userId: String!) {\n  chatRooms(where: {users_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n  messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
+    """
+    query getUserInfoInStart($id: ID!, $userId: String!) {
+      officePeriods(where: {user: {id: $id}}) {
+        __typename
+        crontab
+      }
+      messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {
+        __typename
+        ...MessageSummaryApolloFragment
+      }
+    }
+    """
 
-  public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition).appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
+  public let operationName = "getUserInfoInStart"
+
+  public var queryDocument: String { return operationDefinition.appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
   public var id: GraphQLID
   public var userId: String
@@ -1087,7 +1157,6 @@ public final class GetUserInfoInStartQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("chatRooms", arguments: ["where": ["users_some": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
       GraphQLField("officePeriods", arguments: ["where": ["user": ["id": GraphQLVariable("id")]]], type: .nonNull(.list(.nonNull(.object(OfficePeriod.selections))))),
       GraphQLField("messageSummaries", arguments: ["where": ["OR": [["sender": ["userId": GraphQLVariable("userId")]], ["receiver": ["userId": GraphQLVariable("userId")]]]]], type: .nonNull(.list(.object(MessageSummary.selections)))),
     ]
@@ -1098,17 +1167,8 @@ public final class GetUserInfoInStartQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(chatRooms: [ChatRoom], officePeriods: [OfficePeriod], messageSummaries: [MessageSummary?]) {
-      self.init(unsafeResultMap: ["__typename": "Query", "chatRooms": chatRooms.map { (value: ChatRoom) -> ResultMap in value.resultMap }, "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, "messageSummaries": messageSummaries.map { (value: MessageSummary?) -> ResultMap? in value.flatMap { (value: MessageSummary) -> ResultMap in value.resultMap } }])
-    }
-
-    public var chatRooms: [ChatRoom] {
-      get {
-        return (resultMap["chatRooms"] as! [ResultMap]).map { (value: ResultMap) -> ChatRoom in ChatRoom(unsafeResultMap: value) }
-      }
-      set {
-        resultMap.updateValue(newValue.map { (value: ChatRoom) -> ResultMap in value.resultMap }, forKey: "chatRooms")
-      }
+    public init(officePeriods: [OfficePeriod], messageSummaries: [MessageSummary?]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "officePeriods": officePeriods.map { (value: OfficePeriod) -> ResultMap in value.resultMap }, "messageSummaries": messageSummaries.map { (value: MessageSummary?) -> ResultMap? in value.flatMap { (value: MessageSummary) -> ResultMap in value.resultMap } }])
     }
 
     public var officePeriods: [OfficePeriod] {
@@ -1126,56 +1186,6 @@ public final class GetUserInfoInStartQuery: GraphQLQuery {
       }
       set {
         resultMap.updateValue(newValue.map { (value: MessageSummary?) -> ResultMap? in value.flatMap { (value: MessageSummary) -> ResultMap in value.resultMap } }, forKey: "messageSummaries")
-      }
-    }
-
-    public struct ChatRoom: GraphQLSelectionSet {
-      public static let possibleTypes = ["ChatRoom"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ChatRoomApolloFragment.self),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var chatRoomApolloFragment: ChatRoomApolloFragment {
-          get {
-            return ChatRoomApolloFragment(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
       }
     }
 
@@ -1269,8 +1279,15 @@ public final class GetUserInfoInStartQuery: GraphQLQuery {
 }
 
 public final class UploadFileMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation uploadFile($file: Upload!) {\n  multipleUpload(files: [$file])\n}"
+    """
+    mutation uploadFile($file: Upload!) {
+      multipleUpload(files: [$file])
+    }
+    """
+
+  public let operationName = "uploadFile"
 
   public var file: String
 
@@ -1311,8 +1328,18 @@ public final class UploadFileMutation: GraphQLMutation {
 }
 
 public final class GetCronTabQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query getCronTab($id: ID!) {\n  officePeriods(where: {user: {id: $id}}) {\n    __typename\n    crontab\n  }\n}"
+    """
+    query getCronTab($id: ID!) {
+      officePeriods(where: {user: {id: $id}}) {
+        __typename
+        crontab
+      }
+    }
+    """
+
+  public let operationName = "getCronTab"
 
   public var id: GraphQLID
 
@@ -1390,8 +1417,18 @@ public final class GetCronTabQuery: GraphQLQuery {
 }
 
 public final class MyChatroomsQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query MyChatrooms($userId: String) {\n  chatRooms(where: {admins_some: {userId: $userId}}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n}"
+    """
+    query MyChatrooms($userId: String) {
+      chatRooms(where: {admins_some: {userId: $userId}}) {
+        __typename
+        ...ChatRoomApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "MyChatrooms"
 
   public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
 
@@ -1484,8 +1521,18 @@ public final class MyChatroomsQuery: GraphQLQuery {
 }
 
 public final class MessageSummariesQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query MessageSummaries($userId: String!) {\n  messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {\n    __typename\n    ...MessageSummaryApolloFragment\n  }\n}"
+    """
+    query MessageSummaries($userId: String!) {
+      messageSummaries(where: {OR: [{sender: {userId: $userId}}, {receiver: {userId: $userId}}]}) {
+        __typename
+        ...MessageSummaryApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "MessageSummaries"
 
   public var queryDocument: String { return operationDefinition.appending(MessageSummaryApolloFragment.fragmentDefinition).appending(ChatRoomSummaryApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
@@ -1578,8 +1625,21 @@ public final class MessageSummariesQuery: GraphQLQuery {
 }
 
 public final class ReadMessageMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {\n  readMessage(chatRoomId: $chatroom, receiverId: $receiver, senderId: $sender) {\n    __typename\n    lastMessage {\n      __typename\n      text\n    }\n  }\n}"
+    """
+    mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
+      readMessage(chatRoomId: $chatroom, receiverId: $receiver, senderId: $sender) {
+        __typename
+        lastMessage {
+          __typename
+          text
+        }
+      }
+    }
+    """
+
+  public let operationName = "ReadMessage"
 
   public var chatroom: GraphQLID
   public var sender: GraphQLID
@@ -1698,8 +1758,19 @@ public final class ReadMessageMutation: GraphQLMutation {
 }
 
 public final class KakaoSignUpMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation kakaoSignUp($role: Role!, $userId: String!) {\n  kakaoSignup(data: {kakaoUserId: $userId, role: $role}) {\n    __typename\n    userId\n    id\n  }\n}"
+    """
+    mutation kakaoSignUp($role: Role!, $userId: String!) {
+      kakaoSignup(data: {kakaoUserId: $userId, role: $role}) {
+        __typename
+        userId
+        id
+      }
+    }
+    """
+
+  public let operationName = "kakaoSignUp"
 
   public var role: Role
   public var userId: String
@@ -1789,8 +1860,18 @@ public final class KakaoSignUpMutation: GraphQLMutation {
 }
 
 public final class KakaoSignInMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation kakaoSignIn($userId: String!) {\n  kakaoSignin(kakaoUserId: $userId) {\n    __typename\n    token\n  }\n}"
+    """
+    mutation kakaoSignIn($userId: String!) {
+      kakaoSignin(kakaoUserId: $userId) {
+        __typename
+        token
+      }
+    }
+    """
+
+  public let operationName = "kakaoSignIn"
 
   public var userId: String
 
@@ -1868,8 +1949,18 @@ public final class KakaoSignInMutation: GraphQLMutation {
 }
 
 public final class RegisterPushKeyMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation registerPushKey($pushKey: String!) {\n  registerNotification(data: {pushKey: $pushKey, platform: IOS}) {\n    __typename\n    pushKey\n  }\n}"
+    """
+    mutation registerPushKey($pushKey: String!) {
+      registerNotification(data: {pushKey: $pushKey, platform: IOS}) {
+        __typename
+        pushKey
+      }
+    }
+    """
+
+  public let operationName = "registerPushKey"
 
   public var pushKey: String
 
@@ -1947,8 +2038,18 @@ public final class RegisterPushKeyMutation: GraphQLMutation {
 }
 
 public final class RemovePushKeyMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation removePushKey {\n  removeNotification {\n    __typename\n    pushKey\n  }\n}"
+    """
+    mutation removePushKey {
+      removeNotification {
+        __typename
+        pushKey
+      }
+    }
+    """
+
+  public let operationName = "removePushKey"
 
   public init() {
   }
@@ -2019,8 +2120,15 @@ public final class RemovePushKeyMutation: GraphQLMutation {
 }
 
 public final class RefreshEmailMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation refreshEmail($email: String!) {\n  sendNewPasswordByEmail(email: $email)\n}"
+    """
+    mutation refreshEmail($email: String!) {
+      sendNewPasswordByEmail(email: $email)
+    }
+    """
+
+  public let operationName = "refreshEmail"
 
   public var email: String
 
@@ -2061,8 +2169,19 @@ public final class RefreshEmailMutation: GraphQLMutation {
 }
 
 public final class VersionQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query version {\n  appVersions(where: {platform: IOS}) {\n    __typename\n    platform\n    version\n  }\n}"
+    """
+    query version {
+      appVersions(where: {platform: IOS}) {
+        __typename
+        platform
+        version
+      }
+    }
+    """
+
+  public let operationName = "version"
 
   public init() {
   }
@@ -2143,8 +2262,18 @@ public final class VersionQuery: GraphQLQuery {
 }
 
 public final class MessagesQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {\n  messages(where: {chatRoom: {id: $chatRoomId}, receivers_some: {userId_in: [$myId, $userId]}, sender: {userId_in: [$myId, $userId]}}, last: $pageCount, before: $startCursor) {\n    __typename\n    ...MessageApolloFragment\n  }\n}"
+    """
+    query Messages($chatRoomId: ID!, $myId: String!, $userId: String!, $pageCount: Int!, $startCursor: String) {
+      messages(where: {chatRoom: {id: $chatRoomId}, receivers_some: {userId_in: [$myId, $userId]}, sender: {userId_in: [$myId, $userId]}}, last: $pageCount, before: $startCursor) {
+        __typename
+        ...MessageApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "Messages"
 
   public var queryDocument: String { return operationDefinition.appending(MessageApolloFragment.fragmentDefinition) }
 
@@ -2245,8 +2374,18 @@ public final class MessagesQuery: GraphQLQuery {
 }
 
 public final class MeQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query Me {\n  me {\n    __typename\n    ...UserApolloFragment\n  }\n}"
+    """
+    query Me {
+      me {
+        __typename
+        ...UserApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "Me"
 
   public var queryDocument: String { return operationDefinition.appending(UserApolloFragment.fragmentDefinition) }
 
@@ -2335,9 +2474,227 @@ public final class MeQuery: GraphQLQuery {
   }
 }
 
-public final class MessageSubscriptionSubscription: GraphQLSubscription {
+public final class MemberRoomQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "subscription MessageSubscription {\n  message {\n    __typename\n    ...MessageSubscriptionPayloadApolloFragment\n  }\n}"
+    """
+    query memberRoom($userId: String!) {
+      chatRooms(where: {users_some: {userId: $userId}, admins_none: {userId: $userId}}) {
+        __typename
+        ...ChatRoomApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "memberRoom"
+
+  public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("chatRooms", arguments: ["where": ["users_some": ["userId": GraphQLVariable("userId")], "admins_none": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(chatRooms: [ChatRoom]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "chatRooms": chatRooms.map { (value: ChatRoom) -> ResultMap in value.resultMap }])
+    }
+
+    public var chatRooms: [ChatRoom] {
+      get {
+        return (resultMap["chatRooms"] as! [ResultMap]).map { (value: ResultMap) -> ChatRoom in ChatRoom(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: ChatRoom) -> ResultMap in value.resultMap }, forKey: "chatRooms")
+      }
+    }
+
+    public struct ChatRoom: GraphQLSelectionSet {
+      public static let possibleTypes = ["ChatRoom"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(ChatRoomApolloFragment.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var chatRoomApolloFragment: ChatRoomApolloFragment {
+          get {
+            return ChatRoomApolloFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class AdminRoomQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    query adminRoom($userId: String!) {
+      chatRooms(where: {admins_some: {userId: $userId}}) {
+        __typename
+        ...ChatRoomApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "adminRoom"
+
+  public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("chatRooms", arguments: ["where": ["admins_some": ["userId": GraphQLVariable("userId")]]], type: .nonNull(.list(.nonNull(.object(ChatRoom.selections))))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(chatRooms: [ChatRoom]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "chatRooms": chatRooms.map { (value: ChatRoom) -> ResultMap in value.resultMap }])
+    }
+
+    public var chatRooms: [ChatRoom] {
+      get {
+        return (resultMap["chatRooms"] as! [ResultMap]).map { (value: ResultMap) -> ChatRoom in ChatRoom(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: ChatRoom) -> ResultMap in value.resultMap }, forKey: "chatRooms")
+      }
+    }
+
+    public struct ChatRoom: GraphQLSelectionSet {
+      public static let possibleTypes = ["ChatRoom"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(ChatRoomApolloFragment.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var chatRoomApolloFragment: ChatRoomApolloFragment {
+          get {
+            return ChatRoomApolloFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class MessageSubscriptionSubscription: GraphQLSubscription {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    subscription MessageSubscription {
+      message {
+        __typename
+        ...MessageSubscriptionPayloadApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "MessageSubscription"
 
   public var queryDocument: String { return operationDefinition.appending(MessageSubscriptionPayloadApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition).appending(MessagePreviousValuesApolloFragment.fragmentDefinition) }
 
@@ -2423,8 +2780,18 @@ public final class MessageSubscriptionSubscription: GraphQLSubscription {
 }
 
 public final class SendMessageMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {\n  sendMessage(data: {text: $text, chatRoomId: $chatRoomId, fileIds: $fileIds, receiverIds: [$receiverId]}) {\n    __typename\n    ...MessageApolloFragment\n  }\n}"
+    """
+    mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {
+      sendMessage(data: {text: $text, chatRoomId: $chatRoomId, fileIds: $fileIds, receiverIds: [$receiverId]}) {
+        __typename
+        ...MessageApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "SendMessage"
 
   public var queryDocument: String { return operationDefinition.appending(MessageApolloFragment.fragmentDefinition) }
 
@@ -2523,8 +2890,18 @@ public final class SendMessageMutation: GraphQLMutation {
 }
 
 public final class VerifyEmailResponseMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation VerifyEmailResponse($email: String!) {\n  verifyEmail(email: $email) {\n    __typename\n    verifyCode\n  }\n}"
+    """
+    mutation VerifyEmailResponse($email: String!) {
+      verifyEmail(email: $email) {
+        __typename
+        verifyCode
+      }
+    }
+    """
+
+  public let operationName = "VerifyEmailResponse"
 
   public var email: String
 
@@ -2602,8 +2979,18 @@ public final class VerifyEmailResponseMutation: GraphQLMutation {
 }
 
 public final class GetChatroomQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query GetChatroom($code: String!) {\n  chatRooms(where: {inviteCode: $code}) {\n    __typename\n    ...ChatRoomApolloFragment\n  }\n}"
+    """
+    query GetChatroom($code: String!) {
+      chatRooms(where: {inviteCode: $code}) {
+        __typename
+        ...ChatRoomApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "GetChatroom"
 
   public var queryDocument: String { return operationDefinition.appending(ChatRoomApolloFragment.fragmentDefinition).appending(UserApolloFragment.fragmentDefinition).appending(KidApolloFragment.fragmentDefinition) }
 
@@ -2696,8 +3083,18 @@ public final class GetChatroomQuery: GraphQLQuery {
 }
 
 public final class ApplyChatRoomMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {\n  applyChatRoom(id: $id, data: {userId: $userId, kidName: $kidName}) {\n    __typename\n    id\n  }\n}"
+    """
+    mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
+      applyChatRoom(id: $id, data: {userId: $userId, kidName: $kidName}) {
+        __typename
+        id
+      }
+    }
+    """
+
+  public let operationName = "ApplyChatRoom"
 
   public var id: GraphQLID
   public var userId: GraphQLID
@@ -2779,8 +3176,18 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
 }
 
 public final class GetOfficeTimeQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query getOfficeTime($userId: String!) {\n  officePeriods(where: {user: {userId: $userId}}) {\n    __typename\n    crontab\n  }\n}"
+    """
+    query getOfficeTime($userId: String!) {
+      officePeriods(where: {user: {userId: $userId}}) {
+        __typename
+        crontab
+      }
+    }
+    """
+
+  public let operationName = "getOfficeTime"
 
   public var userId: String
 
@@ -2858,8 +3265,20 @@ public final class GetOfficeTimeQuery: GraphQLQuery {
 }
 
 public struct UserApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment UserApolloFragment on User {\n  __typename\n  id\n  type\n  role\n  userId\n  name\n  profileImageUrl\n  phoneNumber\n}"
+    """
+    fragment UserApolloFragment on User {
+      __typename
+      id
+      type
+      role
+      userId
+      name
+      profileImageUrl
+      phoneNumber
+    }
+    """
 
   public static let possibleTypes = ["User"]
 
@@ -2958,8 +3377,19 @@ public struct UserApolloFragment: GraphQLFragment {
 }
 
 public struct KidApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment KidApolloFragment on Kid {\n  __typename\n  id\n  name\n  parents {\n    __typename\n    ...UserApolloFragment\n  }\n}"
+    """
+    fragment KidApolloFragment on Kid {
+      __typename
+      id
+      name
+      parents {
+        __typename
+        ...UserApolloFragment
+      }
+    }
+    """
 
   public static let possibleTypes = ["Kid"]
 
@@ -3072,8 +3502,21 @@ public struct KidApolloFragment: GraphQLFragment {
 }
 
 public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment ChatRoomSummaryApolloFragment on ChatRoom {\n  __typename\n  id\n  name\n  chatRoomAt\n  createdAt\n}"
+    """
+    fragment ChatRoomSummaryApolloFragment on ChatRoom {
+      __typename
+      id
+      name
+      admins {
+        __typename
+        ...UserApolloFragment
+      }
+      chatRoomAt
+      createdAt
+    }
+    """
 
   public static let possibleTypes = ["ChatRoom"]
 
@@ -3081,6 +3524,7 @@ public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
     GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
+    GraphQLField("admins", type: .list(.nonNull(.object(Admin.selections)))),
     GraphQLField("chatRoomAt", type: .nonNull(.scalar(String.self))),
     GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
   ]
@@ -3091,8 +3535,8 @@ public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, name: String, chatRoomAt: String, createdAt: String) {
-    self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name, "chatRoomAt": chatRoomAt, "createdAt": createdAt])
+  public init(id: GraphQLID, name: String, admins: [Admin]? = nil, chatRoomAt: String, createdAt: String) {
+    self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name, "admins": admins.flatMap { (value: [Admin]) -> [ResultMap] in value.map { (value: Admin) -> ResultMap in value.resultMap } }, "chatRoomAt": chatRoomAt, "createdAt": createdAt])
   }
 
   public var __typename: String {
@@ -3122,6 +3566,15 @@ public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
     }
   }
 
+  public var admins: [Admin]? {
+    get {
+      return (resultMap["admins"] as? [ResultMap]).flatMap { (value: [ResultMap]) -> [Admin] in value.map { (value: ResultMap) -> Admin in Admin(unsafeResultMap: value) } }
+    }
+    set {
+      resultMap.updateValue(newValue.flatMap { (value: [Admin]) -> [ResultMap] in value.map { (value: Admin) -> ResultMap in value.resultMap } }, forKey: "admins")
+    }
+  }
+
   public var chatRoomAt: String {
     get {
       return resultMap["chatRoomAt"]! as! String
@@ -3139,11 +3592,87 @@ public struct ChatRoomSummaryApolloFragment: GraphQLFragment {
       resultMap.updateValue(newValue, forKey: "createdAt")
     }
   }
+
+  public struct Admin: GraphQLSelectionSet {
+    public static let possibleTypes = ["User"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(UserApolloFragment.self),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(id: GraphQLID, type: UserType, role: Role, userId: String, name: String, profileImageUrl: String? = nil, phoneNumber: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "User", "id": id, "type": type, "role": role, "userId": userId, "name": name, "profileImageUrl": profileImageUrl, "phoneNumber": phoneNumber])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var fragments: Fragments {
+      get {
+        return Fragments(unsafeResultMap: resultMap)
+      }
+      set {
+        resultMap += newValue.resultMap
+      }
+    }
+
+    public struct Fragments {
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var userApolloFragment: UserApolloFragment {
+        get {
+          return UserApolloFragment(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+    }
+  }
 }
 
 public struct ChatRoomApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment ChatRoomApolloFragment on ChatRoom {\n  __typename\n  id\n  name\n  admins {\n    __typename\n    ...UserApolloFragment\n  }\n  users {\n    __typename\n    ...UserApolloFragment\n  }\n  kids {\n    __typename\n    ...KidApolloFragment\n  }\n  inviteCode\n  chatRoomAt\n  createdAt\n}"
+    """
+    fragment ChatRoomApolloFragment on ChatRoom {
+      __typename
+      id
+      name
+      admins {
+        __typename
+        ...UserApolloFragment
+      }
+      users {
+        __typename
+        ...UserApolloFragment
+      }
+      kids {
+        __typename
+        ...KidApolloFragment
+      }
+      inviteCode
+      chatRoomAt
+      createdAt
+    }
+    """
 
   public static let possibleTypes = ["ChatRoom"]
 
@@ -3410,8 +3939,23 @@ public struct ChatRoomApolloFragment: GraphQLFragment {
 }
 
 public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {\n  __typename\n  mutation\n  node {\n    __typename\n    ...MessageApolloFragment\n  }\n  updatedFields\n  previousValues {\n    __typename\n    ...MessagePreviousValuesApolloFragment\n  }\n}"
+    """
+    fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
+      __typename
+      mutation
+      node {
+        __typename
+        ...MessageApolloFragment
+      }
+      updatedFields
+      previousValues {
+        __typename
+        ...MessagePreviousValuesApolloFragment
+      }
+    }
+    """
 
   public static let possibleTypes = ["MessageSubscriptionPayload"]
 
@@ -3584,8 +4128,33 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
 }
 
 public struct MessageApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment MessageApolloFragment on Message {\n  __typename\n  id\n  chatRoom {\n    __typename\n    id\n  }\n  text\n  receivers {\n    __typename\n    userId\n    profileImageUrl\n    name\n  }\n  sender {\n    __typename\n    userId\n    profileImageUrl\n    name\n  }\n  createdAt\n  readedAt\n}"
+    """
+    fragment MessageApolloFragment on Message {
+      __typename
+      id
+      chatRoom {
+        __typename
+        id
+      }
+      text
+      receivers {
+        __typename
+        userId
+        profileImageUrl
+        name
+      }
+      sender {
+        __typename
+        userId
+        profileImageUrl
+        name
+      }
+      createdAt
+      readedAt
+    }
+    """
 
   public static let possibleTypes = ["Message"]
 
@@ -3835,8 +4404,17 @@ public struct MessageApolloFragment: GraphQLFragment {
 }
 
 public struct MessagePreviousValuesApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {\n  __typename\n  id\n  text\n  createdAt\n  readedAt\n}"
+    """
+    fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
+      __typename
+      id
+      text
+      createdAt
+      readedAt
+    }
+    """
 
   public static let possibleTypes = ["MessagePreviousValues"]
 
@@ -3905,8 +4483,32 @@ public struct MessagePreviousValuesApolloFragment: GraphQLFragment {
 }
 
 public struct MessageSummaryApolloFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment MessageSummaryApolloFragment on MessageSummary {\n  __typename\n  id\n  chatRoom {\n    __typename\n    ...ChatRoomSummaryApolloFragment\n  }\n  sender {\n    __typename\n    ...UserApolloFragment\n  }\n  receiver {\n    __typename\n    ...UserApolloFragment\n  }\n  unReadMessageCount\n  lastMessage {\n    __typename\n    ...MessageApolloFragment\n  }\n  createdAt\n}"
+    """
+    fragment MessageSummaryApolloFragment on MessageSummary {
+      __typename
+      id
+      chatRoom {
+        __typename
+        ...ChatRoomSummaryApolloFragment
+      }
+      sender {
+        __typename
+        ...UserApolloFragment
+      }
+      receiver {
+        __typename
+        ...UserApolloFragment
+      }
+      unReadMessageCount
+      lastMessage {
+        __typename
+        ...MessageApolloFragment
+      }
+      createdAt
+    }
+    """
 
   public static let possibleTypes = ["MessageSummary"]
 
@@ -4015,10 +4617,6 @@ public struct MessageSummaryApolloFragment: GraphQLFragment {
 
     public init(unsafeResultMap: ResultMap) {
       self.resultMap = unsafeResultMap
-    }
-
-    public init(id: GraphQLID, name: String, chatRoomAt: String, createdAt: String) {
-      self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name, "chatRoomAt": chatRoomAt, "createdAt": createdAt])
     }
 
     public var __typename: String {

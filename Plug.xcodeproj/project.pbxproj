@@ -25,11 +25,9 @@
 		ED3E6A4821CF570400C28403 /* PlugClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4721CF570400C28403 /* PlugClassCell.xib */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
-		ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
-		ED7D59D121B3FEAE0029E80A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
 		ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D421B6985D0029E80A /* UserInfo.swift */; };
 		ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */; };
 		ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609B921B7915500CB3529 /* ChatVC.swift */; };
@@ -37,6 +35,12 @@
 		ED8C493023EC4B1E00443477 /* PlugCronParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C47E221DA4D230065EC7E /* PlugCronParser.swift */; };
 		ED8C493123EC4B4000443477 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
 		ED8C493223EC4B4F00443477 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
+		ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493323EF133E00443477 /* Apollo+Rx.swift */; };
+		ED8C493823EF1A6700443477 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493723EF1A6700443477 /* Networking.swift */; };
+		ED8C493A23EF1C9100443477 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493923EF1C9000443477 /* API.swift */; };
+		ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493B23EF1D1F00443477 /* UserAPI.swift */; };
+		ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493D23F04A0300443477 /* ChatroomAPI.swift */; };
+		ED8C494023F051B100443477 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493F23F051B100443477 /* MessageAPI.swift */; };
 		EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA29FF3223A750700C1EA1E /* FBLogger.swift */; };
 		EDADF85F239BFBD500C1D5B6 /* Spoqa Han Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */; };
 		EDADF860239BFBD500C1D5B6 /* Spoqa Han Sans Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85C239BFBD300C1D5B6 /* Spoqa Han Sans Light.ttf */; };
@@ -83,7 +87,6 @@
 		EDD3A874226C869B006E342A /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
 		EDD3A875226C869B006E342A /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C397218964CF008DA9E7 /* HomeHeaderView.swift */; };
 		EDD3A876226C869B006E342A /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
-		EDD3A877226C869B006E342A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5D58D121B3D3D8001EB2A2 /* Network.swift */; };
 		EDD3A878226C869B006E342A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
 		EDD3A879226C869B006E342A /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4421CF535B00C28403 /* SettingVC.swift */; };
 		EDD3A87A226C869B006E342A /* PlugIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2CC5220717F50035B887 /* PlugIndicator.swift */; };
@@ -107,7 +110,6 @@
 		EDD3A88C226C869B006E342A /* ClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A1218D77CC008DA9E7 /* ClassTVC.swift */; };
 		EDD3A88D226C869B006E342A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609C321BBC2AC00CB3529 /* MessageModel.swift */; };
 		EDD3A88E226C869B006E342A /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71B6AE220FE35A00AC21FF /* WebVC.swift */; };
-		EDD3A88F226C869B006E342A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59D021B3FEAE0029E80A /* API.swift */; };
 		EDD3A890226C869B006E342A /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE3A51217E175A0015EAF2 /* CodeVC.swift */; };
 		EDD3A893226C869B006E342A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
 		EDD3A895226C869B006E342A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE731E2217B4E7100D302DF /* LaunchScreen.storyboard */; };
@@ -208,7 +210,6 @@
 		ED77192422D9B211002896F2 /* HomeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeExtension.swift; sourceTree = "<group>"; };
 		ED7D59C821B3D89D0029E80A /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		ED7D59CC21B3DCA90029E80A /* Queries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
-		ED7D59D021B3FEAE0029E80A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		ED7D59D221B43BBE0029E80A /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		ED7D59D421B6985D0029E80A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		ED8C47E221DA4D230065EC7E /* PlugCronParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugCronParser.swift; sourceTree = "<group>"; };
@@ -217,6 +218,12 @@
 		ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlugIDVC.swift; sourceTree = "<group>"; };
 		ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlugIDVC.swift; sourceTree = "<group>"; };
 		ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugViewControllerWithButton.swift; sourceTree = "<group>"; };
+		ED8C493323EF133E00443477 /* Apollo+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Apollo+Rx.swift"; sourceTree = "<group>"; };
+		ED8C493723EF1A6700443477 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		ED8C493923EF1C9000443477 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		ED8C493B23EF1D1F00443477 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		ED8C493D23F04A0300443477 /* ChatroomAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomAPI.swift; sourceTree = "<group>"; };
+		ED8C493F23F051B100443477 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		EDA29FF3223A750700C1EA1E /* FBLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogger.swift; sourceTree = "<group>"; };
 		EDA438DC23D9DE680012EAD7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -361,6 +368,17 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		ED8C493623EF1A5D00443477 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C493723EF1A6700443477 /* Networking.swift */,
+				ED8C493B23EF1D1F00443477 /* UserAPI.swift */,
+				ED8C493D23F04A0300443477 /* ChatroomAPI.swift */,
+				ED8C493F23F051B100443477 /* MessageAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		EDADF863239BFBD900C1D5B6 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +396,7 @@
 				EDC1CD3723EAE61C006ED196 /* MainVC.swift */,
 				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
+				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
 			);
 			path = 2.0;
 			sourceTree = "<group>";
@@ -407,6 +426,7 @@
 		EDD8C3932187240D008DA9E7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				ED8C493623EF1A5D00443477 /* Network */,
 				EDE731EB217C1D1100D302DF /* UIColor+Additions.swift */,
 				ED1FB5AF217E05240075C4CE /* MNFunction.swift */,
 				ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */,
@@ -494,8 +514,8 @@
 				EDF609BB21BA468400CB3529 /* schema.json */,
 				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
-				ED7D59D021B3FEAE0029E80A /* API.swift */,
 				ED7D59D221B43BBE0029E80A /* Secret.swift */,
+				ED8C493923EF1C9000443477 /* API.swift */,
 				EDE731ED217C1D3E00D302DF /* Strings.swift */,
 				ED4750FB21ECB6540043FD18 /* indicator.json */,
 				ED71B6B32219359400AC21FF /* licenses.json */,
@@ -751,7 +771,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
+			shellScript = "SCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
 		};
 		EDD3A84F226C869B006E342A /* Generate Apollo GraphQL API */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -816,7 +836,6 @@
 				EDD3A874226C869B006E342A /* StartVC.swift in Sources */,
 				EDD3A875226C869B006E342A /* HomeHeaderView.swift in Sources */,
 				EDD3A876226C869B006E342A /* MessageSummary.swift in Sources */,
-				EDD3A877226C869B006E342A /* Network.swift in Sources */,
 				EDD3A878226C869B006E342A /* Constants.swift in Sources */,
 				EDD3A879226C869B006E342A /* SettingVC.swift in Sources */,
 				EDD3A87A226C869B006E342A /* PlugIndicator.swift in Sources */,
@@ -840,7 +859,6 @@
 				EDD3A88C226C869B006E342A /* ClassTVC.swift in Sources */,
 				EDD3A88D226C869B006E342A /* MessageModel.swift in Sources */,
 				EDD3A88E226C869B006E342A /* WebVC.swift in Sources */,
-				EDD3A88F226C869B006E342A /* API.swift in Sources */,
 				EDD3A890226C869B006E342A /* CodeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,6 +869,7 @@
 			files = (
 				ED8C492F23EC4AED00443477 /* Secret.swift in Sources */,
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
+				ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */,
 				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				ED8C493223EC4B4F00443477 /* Validator.swift in Sources */,
@@ -861,6 +880,7 @@
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED8C493123EC4B4000443477 /* WebVC.swift in Sources */,
 				EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */,
+				ED8C494023F051B100443477 /* MessageAPI.swift in Sources */,
 				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
 				EDE6089D23C0640E00F91EB4 /* ChatSummaryViewModel.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
@@ -868,24 +888,26 @@
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
 				ED2108DD2353753F00E38493 /* ChatListVC.swift in Sources */,
 				ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */,
-				ED5D58D221B3D3D8001EB2A2 /* Network.swift in Sources */,
 				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
+				ED8C493823EF1A6700443477 /* Networking.swift in Sources */,
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
 				EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */,
+				ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */,
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
+				ED8C493A23EF1C9100443477 /* API.swift in Sources */,
+				ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
 				EDE6089B239BFDB200F91EB4 /* ChatListCell.swift in Sources */,
 				EDFC46E923DA10C100AB194A /* ChatLog.swift in Sources */,
-				ED7D59D121B3FEAE0029E80A /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

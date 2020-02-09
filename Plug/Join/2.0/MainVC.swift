@@ -62,6 +62,7 @@ class MainVC: PlugViewController {
         let v = UIView(frame: CGRect.zero)
         v.isUserInteractionEnabled = false
         v.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        v.isHidden = true
         return v
     }()
     
@@ -106,6 +107,7 @@ class MainVC: PlugViewController {
     }
     
     func showSelector() {
+        blockView.isHidden = false
         self.selectorView.snp.updateConstraints {
             $0.top.equalTo(self.view.snp.bottom).offset(-260)
         }
@@ -123,6 +125,8 @@ class MainVC: PlugViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.blockView.backgroundColor = UIColor(white: 0, alpha: 0.0)
             self?.view.layoutIfNeeded()
+            }, completion: { [weak self] _ in
+                self?.blockView.isHidden = true
         })
         blockView.isUserInteractionEnabled = false
     }

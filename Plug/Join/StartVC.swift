@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class StartVC: PlugViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleImage: UIImageView!
     
     var summary: [MessageSummary] = []
+    
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(StartVC.appDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -35,21 +38,17 @@ class StartVC: PlugViewController {
 //        return
         ////
         if Session.fetchToken() != nil {
-            print("[token] \(Session.me?.token ?? "")")
-            Session.me?.refreshMe(completion: { (user) in
-                guard user != nil else {
-                    self.animateSegue("Login", sender: nil)
-                    return
-                }
-                Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
-                    Session.me?.classData = classData
-                    if let crontab = crontab {
-                        Session.me?.schedule = Schedule(schedule: crontab)
-                    }
-                    Session.me?.summaryData = summary
-                    self.animateSegue("Main", sender: nil)
+            
+            UserAPI.getMe().flatMap({ _ in
+                return UserAPI.getUserInfo()
+            }).subscribe(
+                onSuccess: { [weak self] (_) in
+                self?.animateSegue("Main", sender: nil)
+            },
+                onError: { [weak self] (_) in
+                self?.animateSegue("Login", sender: nil)
                 })
-            })
+                .disposed(by: disposeBag)
         } else {
             self.animateSegue("Login", sender: nil)
         }
@@ -69,7 +68,6 @@ class StartVC: PlugViewController {
                     
                     if identifier == "Login" {
                         let VC = MainVC()
-//                        VC.modalPresentationStyle = .fullScreen
                         let NVC = UINavigationController(rootViewController: VC)
                         NVC.modalPresentationStyle = .fullScreen
                         self.present(NVC, animated: false, completion: nil)

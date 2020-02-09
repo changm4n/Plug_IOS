@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 import UIKit
+import RxSwift
+import RxCocoa
 
 let kYears = ["2016","2017","2018","2019","2020"]
 let kDidLogoutNotification = "kDidLogoutNotification"
@@ -27,6 +29,8 @@ public enum SessionRole: String {
 }
 
 public class Session : NSObject {
+    
+    let disposeBag = DisposeBag()
     
     public static var me: Session? = nil
     
@@ -57,8 +61,10 @@ public class Session : NSObject {
     var appPushID: String?
     var profileImage: UIImage?
     
-    var classData: [ChatRoomApolloFragment] = []
-    var summaryData: [MessageSummary] = []
+    var adminClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
+    var memberClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
+    
+    var summaryData: BehaviorRelay<[MessageSummary]> = BehaviorRelay(value: [])
     
     public convenience override init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
@@ -109,64 +115,71 @@ public class Session : NSObject {
         self.saveMyProfile()
     }
     
-    func refreshSummary(completion:@escaping (_ chatrooms:[MessageSummary]) -> Void) {
-        guard let userId = userId else {
-            completion([])
-            return
-        }
-        Networking.getMessageSummary(userID: userId) { (summary) in
-            self.summaryData = summary
-            completion(summary)
-        }
+    static func saveWithToken(token: String) {
+        let sess = Session()
+        Session.me = sess
+        sess.token = token
+        sess.save()
     }
     
-    func refreshRoom(completion:@escaping (_ chatrooms:[ChatRoomApolloFragment]) -> Void) {
-        if role == .TEACHER {
-            Networking.getMyClasses { (classData) in
-                Session.me?.classData = classData
-                completion(classData)
-            }
-        } else {
-            Networking.getUserInfo { (classData, crontab) in
-                Session.me?.classData = classData
-                completion(classData)
-            }
+    func refreshSummary() {
+        guard let userId = userId else {
+            return
         }
+        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [weak self] (data) in
+            let tmp: [MessageSummary] = data.messageSummaries.compactMap{$0}.map({
+                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
+            })
+            self?.summaryData.accept(MessageSummary.sortSummary(arr: tmp))
+        }).disposed(by: disposeBag)
+    }
+    
+    func reloadChatRoom() {
+        guard let userId = self.userId else { return }
+        let member = ChatroomAPI.getMemberChatroom(userId: userId).asObservable()
+        let admin = ChatroomAPI.getAdminChatroom(userId: userId).asObservable()
+        Observable.zip(member, admin) { return ($0, $1) }.subscribe(onNext: { [weak self] (member, admin) in
+            let memberData = member.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
+            self?.memberClass.accept(memberData)
+            
+            let adminData = admin.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
+            self?.adminClass.accept(adminData)
+        }).disposed(by: disposeBag)
     }
     
     func refreshMe(completion:@escaping (_ m: Session?) -> Void) {
-        Networking.getMe(completion: { (me) in
-            if let me = me {
-                let user = Session(withUser: me)
-                user.token = self.token
-                Session.me = user
-                user.save()
-                Networking.registerPushKey()
-                
-                completion(user)
-            } else {
-                completion(nil)
-            }
-        })
+//        Networking.getMe(completion: { (me) in
+//            if let me = me {
+//                let user = Session(withUser: me)
+//                user.token = self.token
+//                Session.me = user
+//                user.save()
+//                Networking.registerPushKey()
+//
+//                completion(user)
+//            } else {
+//                completion(nil)
+//            }
+//        })
     }
     
-    func readChat(chatRoomId: String, senderId: String) {
-        for index in 0..<summaryData.count {
-            if summaryData[index].chatroom.id == chatRoomId &&
-                summaryData[index].sender.userId == senderId {
-                summaryData[index].unreadCount = 0
-                return
-            }
-        }
-    }
+//    func readChat(chatRoomId: String, senderId: String) {
+//        for index in 0..<summaryData.count {
+//            if summaryData[index].chatroom.id == chatRoomId &&
+//                summaryData[index].sender.userId == senderId {
+//                summaryData[index].unreadCount = 0
+//                return
+//            }
+//        }
+//    }
     
-    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
-        if let id = id {
-            return Session.me?.classData.filter({$0.id == id}).first ?? nil
-        } else {
-            return nil
-        }
-    }
+//    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
+//        if let id = id {
+//            return Session.me?.classData.filter({$0.id == id}).first ?? nil
+//        } else {
+//            return nil
+//        }
+//    }
     
     func getKid(chatroom: ChatRoomApolloFragment) -> KidApolloFragment? {
         let kids = chatroom.kids?.compactMap({ $0.fragments.kidApolloFragment }) ?? []
@@ -174,15 +187,15 @@ public class Session : NSObject {
         return kid
     }
     
-    func getKid(chatroomID: String,parentID: String) -> KidApolloFragment? {
-        if let room = classData.filter({ $0.id == chatroomID }).first,
-            let kids = room.kids?.compactMap({ $0.fragments.kidApolloFragment }),
-        let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.userId == parentID }) ?? []).count > 0}).first {
-            return kid
-        } else {
-            return nil
-        }
-    }
+//    func getKid(chatroomID: String,parentID: String) -> KidApolloFragment? {
+//        if let room = classData.filter({ $0.id == chatroomID }).first,
+//            let kids = room.kids?.compactMap({ $0.fragments.kidApolloFragment }),
+//        let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.userId == parentID }) ?? []).count > 0}).first {
+//            return kid
+//        } else {
+//            return nil
+//        }
+//    }
     
     fileprivate func saveToken() {
         UserDefaults.standard.set(self.token, forKey: "UserToken")

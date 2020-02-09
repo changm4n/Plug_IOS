@@ -12,11 +12,12 @@ import RxSwift
 
 class ChatListVC: PlugViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    var disposeBag = DisposeBag()
     
     var filterCollectionView: UICollectionView?
-    var summaryViewModel: ChatSummaryViewModel!
-    var disposeBag = DisposeBag()
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var settingButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +39,17 @@ class ChatListVC: PlugViewController {
     
     func bindData() {
         guard let me = Session.me else { return }
-        me.refreshRoom(completion: { (classData) in
-            Session.me?.refreshSummary(completion: { (summary) in
-                
-                self.summaryViewModel = ChatSummaryViewModel(me: me)
-                self.summaryViewModel.summaryObservable.bind(to: self.tableView.rx.items) { tableView, row, item in
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0)) as! ChatListCell
-                    cell.nameLabel.text = item.displayName
-                    cell.contentLabel.text = item.lastMessage.text
-                    return cell
-                    
-                }.disposed(by: self.disposeBag)
-            })
-        })
+        me.reloadChatRoom()
+        me.refreshSummary()
+        
+        
+        me.summaryData.bind(to: self.tableView.rx.items) { tableView, row, item in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0)) as! ChatListCell
+            
+            cell.bind(item: item)
+            return cell
+            
+        }.disposed(by: self.disposeBag)
         
         tableView.rx.modelSelected(MessageSummary.self).subscribe({ [weak self] item in
             guard let messageSummary = item.element else {
@@ -59,6 +58,15 @@ class ChatListVC: PlugViewController {
             
             self?.performSegue(withIdentifier: "chat", sender: messageSummary)
         }).disposed(by: self.disposeBag)
+        
+        settingButton.rx.tap.subscribe(onNext: { (_) in
+            Session.removeSavedUser()
+            let VC = MainVC()
+            let NVC = UINavigationController(rootViewController: VC)
+            NVC.modalPresentationStyle = .fullScreen
+            self.present(NVC, animated: false, completion: nil)
+            
+        }).disposed(by: disposeBag)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,6 +87,7 @@ class ChatListVC: PlugViewController {
         }
     }
 }
+
 extension ChatListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

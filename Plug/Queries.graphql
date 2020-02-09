@@ -62,10 +62,7 @@ mutation setOffice($crontab: String!) {
     }
 }
 
-query getUserInfo($id: ID!, $userId: String) {
-    chatRooms(where: { users_some: { userId: $userId }}) {
-        ...ChatRoomApolloFragment
-    }
+query getUserInfo($id: ID!) {
     
     officePeriods(where: {user : {id : $id}}) {
         crontab
@@ -73,10 +70,6 @@ query getUserInfo($id: ID!, $userId: String) {
 }
 
 query getUserInfoInStart($id: ID!, $userId: String!) {
-    chatRooms(where: { users_some: { userId: $userId }}) {
-        ...ChatRoomApolloFragment
-    }
-    
     officePeriods(where: {user : {id : $id}}) {
         crontab
     }
@@ -194,6 +187,18 @@ query Me {
     }
 }
 
+query memberRoom($userId: String!) {
+  chatRooms(where: {users_some : {userId : $userId}, admins_none : {userId: $userId}}) {
+    ...ChatRoomApolloFragment
+  }
+}
+
+query adminRoom($userId: String!) {
+  chatRooms(where: { admins_some: { userId: $userId}}) {
+        ...ChatRoomApolloFragment
+  }
+}
+
 subscription MessageSubscription {
     message {
         ... MessageSubscriptionPayloadApolloFragment
@@ -256,6 +261,7 @@ fragment KidApolloFragment on Kid {
 fragment ChatRoomSummaryApolloFragment on ChatRoom {
     id
     name
+    admins { ...UserApolloFragment }
     chatRoomAt
     createdAt
 }
