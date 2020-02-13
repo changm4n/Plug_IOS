@@ -26,17 +26,26 @@ struct MessageSummary {
     var createAt: Date
     
     var displayName: String {
-        if let me = Session.me,
-            me.role == .TEACHER {
-            if let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
-                return "\(kid.name) 부모님"
-            } else {
-                return "\(sender.name)"
-            }
-            
+        guard let me = Session.me,
+            let admin = chatroom.admins?.first?.fragments.userApolloFragment.userId else { return ""}
+        
+        if admin == me.userId {
+            return "\(sender.name) 부모님"
         } else {
             return "\(sender.name) 선생님"
         }
+//
+//        if let me = Session.me,
+//            me.role == .TEACHER {
+//            if let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
+//                return "\(kid.name) 부모님"
+//            } else {
+//                return "\(sender.name)"
+//            }
+//
+//        } else {
+//
+//        }
     }
     
     public init(with classData: ChatRoomApolloFragment) {
@@ -63,13 +72,13 @@ struct MessageSummary {
         unreadCount = 0
         lastMessage = MessageItem()
         
-        if myType == .TEACHER {
-            if let kidName = Session.me?.getKid(chatroomID: classData.id , parentID: user.userId)?.name {
-                lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
-            }
-        } else {
-            lastMessage.text = "\(user.name) 선생님과 대화를 시작해보세요."
-        }
+//        if myType == .TEACHER {
+//            if let kidName = Session.me?.getKid(chatroomID: classData.id , parentID: user.userId)?.name {
+//                lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
+//            }
+//        } else {
+//            lastMessage.text = "\(user.name) 선생님과 대화를 시작해보세요."
+//        }
         
         
         sender = user
@@ -142,17 +151,17 @@ struct MessageSummary {
             return lhs.unreadCount != 0 && rhs.unreadCount == 0
         })
         
-        if Session.me?.role ?? .NONE == .TEACHER {//탈퇴한 부모의 서머리 삭제
-            summary = summary.filter { (summary) -> Bool in
-                return me.getKid(chatroomID: summary.chatroom.id, parentID: summary.sender.userId) != nil
-            }
-        } else {//탈퇴한 클래스 선생님 삭제
-            summary = summary.filter({ (summary) -> Bool in
-                me.classData.filter({ (chatroom) -> Bool in
-                    return chatroom.id == summary.chatroom.id
-                }).count > 0
-            })
-        }
+//        if Session.me?.role ?? .NONE == .TEACHER {//탈퇴한 부모의 서머리 삭제
+//            summary = summary.filter { (summary) -> Bool in
+//                return me.getKid(chatroomID: summary.chatroom.id, parentID: summary.sender.userId) != nil
+//            }
+//        } else {//탈퇴한 클래스 선생님 삭제
+//            summary = summary.filter({ (summary) -> Bool in
+//                me.classData.filter({ (chatroom) -> Bool in
+//                    return chatroom.id == summary.chatroom.id
+//                }).count > 0
+//            })
+//        }
         return summary
     }
 }
