@@ -15,7 +15,7 @@ class WideButton: UIButton {
             self.backgroundColor = isEnabled ? UIColor.plugBlue : UIColor.disableGray
             setTitleColor(isEnabled ? UIColor.white : UIColor.lightGray, for: .normal)
             if self.image(for: .normal) != nil {
-                setImage(isEnabled ? UIImage(named: "btnChevronWhite") : UIImage(named: "btnChevronDisabled"), for: .normal)
+//                setImage(isEnabled ? UIImage(named: "btnChevronWhite") : UIImage(named: "btnChevronDisabled"), for: .normal)
             }
         }
     }

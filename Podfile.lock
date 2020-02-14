@@ -74,7 +74,7 @@ PODS:
   - Protobuf (3.7.0)
   - Siren (5.0.1)
   - SkyFloatingLabelTextField (3.7.0)
-  - Starscream (3.1.0)
+  - Starscream (3.1.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -92,7 +92,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - Apollo
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -107,8 +106,10 @@ SPEC REPOS:
     - Protobuf
     - Siren
     - SkyFloatingLabelTextField
-    - Starscream
     - SwiftyJSON
+  trunk:
+    - Apollo
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -127,9 +128,9 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   Siren: 7ebe56fbd69b335cbe4329bcde985253be0e2d61
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
-  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
 PODFILE CHECKSUM: 13dd358fe68683d2ed2d2e0eb4410b9d14d6c964
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.8.4

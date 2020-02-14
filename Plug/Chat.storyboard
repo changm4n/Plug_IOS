@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2JB-9L-hly">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2JB-9L-hly">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,7 +55,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="owO-gs-Fhp" customClass="SummaryCell" customModule="Plug" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="196" width="375" height="117"/>
+                                        <rect key="frame" x="0.0" y="164" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="owO-gs-Fhp" id="7p6-le-CIM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
@@ -524,7 +522,7 @@
         <!--채팅-->
         <scene sceneID="bXd-rU-6vh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Thu-0z-Iuh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Thu-0z-Iuh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="채팅" image="homeDeactive" selectedImage="homeActive" id="8qz-0T-6RI"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -574,7 +572,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="lED-4e-wbO">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="2JB-9L-hly" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="2JB-9L-hly" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gcE-7I-d5y">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -699,7 +697,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="master_close" translatesAutoresizingMaskIntoConstraints="NO" id="WmP-lh-zXy">
-                                                    <rect key="frame" x="179.66666666666666" y="27" width="16" height="16"/>
+                                                    <rect key="frame" x="171.66666666666666" y="19" width="32" height="32"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

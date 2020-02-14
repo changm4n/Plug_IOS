@@ -156,7 +156,7 @@ class MessageModel: NSObject {
         }
         
         if let lastMessage = mViewModel.last?.last?.message {
-            
+            guard lastMessage.id != newMessage.id else { return }
             var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
             item.isShowTime = true
             
