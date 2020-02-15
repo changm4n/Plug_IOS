@@ -14,8 +14,9 @@ import RxGesture
 
 class MainVC: PlugViewController {
     
+    let kakaoManager = KakaoLoginManager()
     let disposeBag = DisposeBag()
-
+    
     let selectorView: LoginSelectorView = LoginSelectorView()
     
     let logoIV: UIImageView = {
@@ -44,10 +45,10 @@ class MainVC: PlugViewController {
     }()
     
     let loginButton: PlugButton = {
-           let btn = PlugButton(theme: ButtonTheme.WHITE, isShadow: false)
-           btn.setTitle("로그인", for: .normal)
-           return btn
-       }()
+        let btn = PlugButton(theme: ButtonTheme.WHITE, isShadow: false)
+        btn.setTitle("로그인", for: .normal)
+        return btn
+    }()
     
     let descLabel: UILabel = {
         let lb = UILabel(frame: CGRect.zero)
@@ -73,7 +74,6 @@ class MainVC: PlugViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
-        self.setStatusBar(isWhite: false)
     }
     
     override func setViews() {
@@ -91,6 +91,34 @@ class MainVC: PlugViewController {
     }
     
     override func setBinding() {
+        Observable.of(kakaoButton.rx.tap.asDriver(), selectorView.kakaoButton.rx.tap.asDriver()).merge()
+            .asDriver(onErrorJustReturn: ())
+            .drive(kakaoManager.input)
+            .disposed(by: disposeBag)
+        
+        kakaoManager.output.subscribe(onNext: { (isMember) in
+            if isMember {
+                let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "MainNVC")
+                controller.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(controller, animated: true, completion: nil)
+            } else {
+                
+                
+                
+                
+            }
+        }).disposed(by: disposeBag)
+        
+        kakaoManager.error.subscribe(onNext: { (message) in
+            print(message)
+        }).disposed(by: disposeBag)
+        
+        emailButton.rx.tap.asDriver().drive(onNext: { [weak self]  in
+            let vc = SetProfileViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: disposeBag)
+        
         loginButton.rx.tap.subscribe(onNext: { [weak self] in
             self?.showSelector()
         }).disposed(by: disposeBag)

@@ -33,13 +33,13 @@ class WebVC: PlugViewController, WKUIDelegate, WKNavigationDelegate{
     
     override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
-            statusbarLight = true
+//            statusbarLight = true
         }
         super.willMove(toParent: parent)
     }
     
     private func setColors() {
-        statusbarLight = false
+//        statusbarLight = false
     }
     
     @IBAction func close(_ sender: Any) {

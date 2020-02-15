@@ -13,16 +13,16 @@ import SkyFloatingLabelTextField
 
 class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var statusbarLight: Bool = true {
-        didSet {
-            UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
-        }
-    }
+//    var statusbarLight: Bool = false {
+//        didSet {
+//            UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
+//        }
+//    }
     
     @IBAction func back(segue: UIStoryboardSegue) {}
     
     func hideNavigationBar() {
-        UIApplication.shared.statusBarStyle = .lightContent
+//        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -63,9 +63,9 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
 extension UIViewController {
-    func setStatusBar(isWhite: Bool) {
-        UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
-    }
+//    func setStatusBar(isWhite: Bool) {
+//        UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
+//    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

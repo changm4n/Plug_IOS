@@ -17,6 +17,9 @@
 		ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AF217E05240075C4CE /* MNFunction.swift */; };
 		ED1FB5B4217E0BAB0075C4CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */; };
 		ED2108DD2353753F00E38493 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2108DC2353753F00E38493 /* ChatListVC.swift */; };
+		ED2A26E823F84A8700E22B01 /* KakaoLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A26E723F84A8700E22B01 /* KakaoLoginManager.swift */; };
+		ED2A26EA23F8714D00E22B01 /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A26E923F8714D00E22B01 /* SetProfileViewController.swift */; };
+		ED2A26ED23F87DCF00E22B01 /* PhotoSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A26EC23F87DCF00E22B01 /* PhotoSelector.swift */; };
 		ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED3CF408220A96F100356230 /* GoogleService-Info.plist */; };
 		ED3D980721A05E6300B61748 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED3D980621A05E6300B61748 /* Note.storyboard */; };
 		ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980C21A060E000B61748 /* NoteModel.swift */; };
@@ -183,6 +186,9 @@
 		ED1FB5B1217E06650075C4CE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		ED1FB5B3217E0BAB0075C4CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		ED2108DC2353753F00E38493 /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
+		ED2A26E723F84A8700E22B01 /* KakaoLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginManager.swift; sourceTree = "<group>"; };
+		ED2A26E923F8714D00E22B01 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
+		ED2A26EC23F87DCF00E22B01 /* PhotoSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelector.swift; sourceTree = "<group>"; };
 		ED3CF408220A96F100356230 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED3D980421A0187200B61748 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
 		ED3D980621A05E6300B61748 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
@@ -329,6 +335,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED2A26EB23F87DBF00E22B01 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				ED2A26E923F8714D00E22B01 /* SetProfileViewController.swift */,
+				ED2A26EC23F87DCF00E22B01 /* PhotoSelector.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		ED3D980821A05FB300B61748 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,9 +409,11 @@
 			isa = PBXGroup;
 			children = (
 				EDC1CD3723EAE61C006ED196 /* MainVC.swift */,
+				ED2A26E723F84A8700E22B01 /* KakaoLoginManager.swift */,
 				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
 				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
+				ED2A26EB23F87DBF00E22B01 /* SignIn */,
 			);
 			path = 2.0;
 			sourceTree = "<group>";
@@ -579,7 +596,7 @@
 				EDE731D2217B4E7000D302DF /* Sources */,
 				EDE731D3217B4E7000D302DF /* Frameworks */,
 				EDE731D4217B4E7000D302DF /* Resources */,
-				18037A9665CF310AB17E0D66 /* [CP] Embed Pods Frameworks */,
+				6E1B520E731E6E8B95DEAED3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -720,7 +737,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18037A9665CF310AB17E0D66 /* [CP] Embed Pods Frameworks */ = {
+		6E1B520E731E6E8B95DEAED3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -868,15 +885,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED8C492F23EC4AED00443477 /* Secret.swift in Sources */,
+				ED2A26E823F84A8700E22B01 /* KakaoLoginManager.swift in Sources */,
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
 				ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */,
 				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
+				ED2A26ED23F87DCF00E22B01 /* PhotoSelector.swift in Sources */,
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				ED8C493223EC4B4F00443477 /* Validator.swift in Sources */,
 				ED8C493023EC4B1E00443477 /* PlugCronParser.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */,
 				ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */,
+				ED2A26EA23F8714D00E22B01 /* SetProfileViewController.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED8C493123EC4B4000443477 /* WebVC.swift in Sources */,
 				EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */,
@@ -1143,7 +1163,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				VALIDATE_PRODUCT = YES;

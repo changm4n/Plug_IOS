@@ -13,8 +13,8 @@ import Firebase
 class ViewController: PlugViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var kakaoBtn: UIButton!
-    @IBOutlet weak var emailBtn: UIButton!
+    @IBOutlet weak var kakaoBtn: PlugButton!
+    @IBOutlet weak var emailBtn: PlugButton!
     @IBOutlet weak var descLabel: UILabel!
     
     override func viewDidLoad() {
@@ -29,22 +29,22 @@ class ViewController: PlugViewController {
         performSegue(withIdentifier: "web", sender: kUserDesc)
     }
     
+    
     func setUI() {
         #if DEBUG
             descLabel.attributedText = kLaunchTestDescString
         #else
             descLabel.attributedText = kLaunchDescString
         #endif
-        titleLabel.attributedText = kLaunchTitleString
         
-        kakaoBtn.setPlugBlue()
-        emailBtn.setPlugWhite()
+//        kakaoBtn.setPlugBlue()
+//        emailBtn.setShadow()//.setPlugWhite()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
-        self.setStatusBar(isWhite: false)
+//        self.setStatusBar(isWhite: false)
     }
     
     
@@ -115,57 +115,57 @@ class LoginSelectVC: PlugViewController {
     @IBAction func emailLoginPressed(_ sender: Any) {
         FBLogger.shared.log(id: "signInWays_SignInEmailPw_to")
     }
-    
-    @IBAction func kakaoLoginPressed(_ sender: Any) {
-        FBLogger.shared.log(id: "signInWays_Kakao_toChatMain")
-        KOSession.shared()?.close()
-        
-        KOSession.shared()?.open(completionHandler: { (error) in
-            if KOSession.shared()?.isOpen() ?? false {
-                KOSessionTask.userMeTask(completion: { (error, me) in
-                    if let id = me?.id {
-                        let user = Session()
-                        user.id = id
-                        user.userType = .KAKAO
-                        user.password = "KAKAO"
-                        Session.me = user
-                        
-                        Networking.kakaoSignIn(userId: id, completion: { (token, message, error) in
-                            if let token = token {
-                                let tmp = Session()
-                                Session.me = tmp
-                                tmp.token = token
-                                tmp.save()
-                                Networking.getMe(completion: { (me) in
-                                    if let me = me {
-                                        let user = Session(withUser: me)
-                                        user.token = token
-                                        Session.me = user
-                                        user.save()
-                                        Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
-                                            Session.me?.classData = classData
-                                            if let crontab = crontab {
-                                                Session.me?.schedule = Schedule(schedule: crontab)
-                                            }
-                                            Networking.registerPushKey()
-                                            PlugIndicator.shared.stop()
-                                            self.performSegue(withIdentifier: "kakao", sender: nil)
-                                        })
-                                    } else {
-                                        showNetworkError(sender: self)
-                                    }
-                                })
-                            } else {
-                                showNetworkError(message: message, sender: self)
-                            }
-                        })
-                    } else {
-                        showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
-                    }
-                })
-            } else {
-                showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
-            }
-        }, authTypes: [NSNumber(value: KOAuthType.talk.rawValue)])
-    }
+//
+//    @IBAction func kakaoLoginPressed(_ sender: Any) {
+//        FBLogger.shared.log(id: "signInWays_Kakao_toChatMain")
+//        KOSession.shared()?.close()
+//
+//        KOSession.shared()?.open(completionHandler: { (error) in
+//            if KOSession.shared()?.isOpen() ?? false {
+//                KOSessionTask.userMeTask(completion: { (error, me) in
+//                    if let id = me?.id {
+//                        let user = Session()
+//                        user.id = id
+//                        user.userType = .KAKAO
+//                        user.password = "KAKAO"
+//                        Session.me = user
+//
+//                        Networking.kakaoSignIn(userId: id, completion: { (token, message, error) in
+//                            if let token = token {
+//                                let tmp = Session()
+//                                Session.me = tmp
+//                                tmp.token = token
+//                                tmp.save()
+//                                Networking.getMe(completion: { (me) in
+//                                    if let me = me {
+//                                        let user = Session(withUser: me)
+//                                        user.token = token
+//                                        Session.me = user
+//                                        user.save()
+//                                        Networking.getUserInfoinStart(completion: { (classData, crontab, summary) in
+//                                            Session.me?.classData = classData
+//                                            if let crontab = crontab {
+//                                                Session.me?.schedule = Schedule(schedule: crontab)
+//                                            }
+//                                            Networking.registerPushKey()
+//                                            PlugIndicator.shared.stop()
+//                                            self.performSegue(withIdentifier: "kakao", sender: nil)
+//                                        })
+//                                    } else {
+//                                        showNetworkError(sender: self)
+//                                    }
+//                                })
+//                            } else {
+//                                showNetworkError(message: message, sender: self)
+//                            }
+//                        })
+//                    } else {
+//                        showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
+//                    }
+//                })
+//            } else {
+//                showAlertWithString("오류", message: "카카오 로그인 중 오류가 발생하였습니다.", sender: self)
+//            }
+//        }, authTypes: [NSNumber(value: KOAuthType.talk.rawValue)])
+//    }
 }

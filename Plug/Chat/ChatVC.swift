@@ -160,7 +160,7 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         if parent == nil {  
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
-            statusbarLight = true
+//            statusbarLight = true
             
             if self.navigationController?.viewControllers.count ?? 0 == 3 {
                 self.navigationController?.navigationBar.isTranslucent = false
@@ -176,7 +176,7 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.isTranslucent = true
-        statusbarLight = false
+//        statusbarLight = false
     }
     
     @IBAction func addSampleMessage(_ userinfo: Any) {
@@ -270,12 +270,12 @@ extension ChatVC {
     }
     
     func sendMessage(text: String) {
-        Networking.sendMessage(text: text, chatRoomId: chatroom.id, receiverId: sender.id) { (newMessage) in
-            guard let newMessage = newMessage else { return }
-            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
-//            self.saveMessage(messages: [ChatLog(newMessage)])
-            self.tableView.reloadData()
-        }
+//        Networking.sendMessage(text: text, chatRoomId: chatroom.id, receiverId: sender.id) { (newMessage) in
+//            guard let newMessage = newMessage else { return }
+//            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: true))
+////            self.saveMessage(messages: [ChatLog(newMessage)])
+//            self.tableView.reloadData()
+//        }
     }
     
     @objc func receiveMessage(_ notification: NSNotification) {
@@ -300,8 +300,8 @@ extension ChatVC {
     }
     
     func readMessage() {
-        Session.me?.readChat(chatRoomId: chatroom.id, senderId: sender.id)
-        Networking.readMessage(chatRoomId: chatroom.id, receiverId: receiver.id, senderId: sender.id)
+//        Session.me?.readChat(chatRoomId: chatroom.id, senderId: sender.id)
+//        Networking.readMessage(chatRoomId: chatroom.id, receiverId: receiver.id, senderId: sender.id)
     }
     
     func saveTextViewText() {
@@ -314,9 +314,9 @@ extension ChatVC {
         
         var topText: String
         var bottomText: String
-        if me.role == .TEACHER,
-            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.id) {
-            topText = "\(kid.name) 부모님"
+        if me.role == .TEACHER {
+//            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.id) {
+            topText = "\(sender.name) 부모님"
             bottomText = "\(chatroom.name)"
         } else {
             topText = "\(sender.name) 선생님"

@@ -38,6 +38,8 @@ class PlugTextField: SkyFloatingLabelTextField {
             bindEmail()
         case .passwd:
             bindPasswd()
+        case .name:
+            bindName()
         default:
             break
         }
@@ -57,6 +59,12 @@ class PlugTextField: SkyFloatingLabelTextField {
         }).disposed(by: disposeBag)
     }
     
+    func bindName() {
+        inputText.map({ $0.count > 1 }).bind(to: validation).disposed(by: disposeBag)
+        validation.skip(1).subscribe(onNext: { result in
+            self.errorMessage = result ? "" : "2자 이상 입력해주세요."
+        }).disposed(by: disposeBag)
+    }
     
     
     required init?(coder aDecoder: NSCoder) {

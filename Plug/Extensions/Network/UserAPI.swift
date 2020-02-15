@@ -11,6 +11,13 @@ import RxSwift
 import Firebase
 
 class UserAPI: NSObject {
+    
+    static func kakaoLogin(id: String) -> Maybe<KakaoSignInMutation.Data> {
+        return Network.shared.perform(query: KakaoSignInMutation(userId: id)).do(onNext: { (data) in
+            Session.saveWithToken(token: data.kakaoSignin.token)
+        })
+    }
+    
     static func login(form: (String, String)) -> Maybe<SignInMutation.Data> {
         return Network.shared.perform(query: SignInMutation(userId: form.0, password: form.1)).do(onNext: { (data) in
             Session.saveWithToken(token: data.signin.token)

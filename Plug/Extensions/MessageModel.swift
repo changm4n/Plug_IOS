@@ -222,12 +222,12 @@ class ChatroomModel {
         if logs.count != 0 {
             self.items = logs.map({ MessageItem(with: $0, isMine: identity.receiver.id == $0.sID)})
         } else {
-            Networking.getMeassages(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil) { [unowned self] (messages) in
-                self.saveMessage(messages: messages.map({ ChatLog($0) }))
-                
-                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
-                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
-            }
+//            Networking.getMeassages(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil) { [unowned self] (messages) in
+//                self.saveMessage(messages: messages.map({ ChatLog($0) }))
+//                
+//                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
+//                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+//            }
         }
     }
     
