@@ -65,7 +65,7 @@ extension Date {
         return cal.component(.minute, from: self) == cal.component(.minute, from: rhs)
     }
     
-    func toString(format: String) -> String {
+    func toString(format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)

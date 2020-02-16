@@ -52,6 +52,8 @@
 		EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */; };
 		EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3723EAE61C006ED196 /* MainVC.swift */; };
 		EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */; };
+		EDCF234023F945C6003CBE4B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF233F23F945C6003CBE4B /* SignUpViewController.swift */; };
+		EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCF234123F94683003CBE4B /* SignUpViewModel.swift */; };
 		EDD3A851226C869B006E342A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731DB217B4E7000D302DF /* ViewController.swift */; };
 		EDD3A852226C869B006E342A /* JoinRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */; };
 		EDD3A853226C869B006E342A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
@@ -148,6 +150,7 @@
 		EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731EB217C1D1100D302DF /* UIColor+Additions.swift */; };
 		EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731ED217C1D3E00D302DF /* Strings.swift */; };
 		EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */; };
+		EDEAC2FE23F998210097753A /* DescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAC2FD23F998210097753A /* DescViewController.swift */; };
 		EDF609BC21BA468400CB3529 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = EDF609BB21BA468400CB3529 /* schema.json */; };
 		EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */; };
 		EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */; };
@@ -248,6 +251,8 @@
 		EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomIdentity.swift; sourceTree = "<group>"; };
 		EDC1CD3723EAE61C006ED196 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		EDCF233F23F945C6003CBE4B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		EDCF234123F94683003CBE4B /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EDD3A8AA226C869B006E342A /* Plug Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plug Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD3A8AB226C869B006E342A /* Plug Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Plug Test-Info.plist"; path = "/Users/changminlee/Documents/IOS/Projects/Plug/Plug Test-Info.plist"; sourceTree = "<absolute>"; };
 		EDD8C38E218710A3008DA9E7 /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
@@ -274,6 +279,7 @@
 		EDE731EB217C1D1100D302DF /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		EDE731ED217C1D3E00D302DF /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
+		EDEAC2FD23F998210097753A /* DescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescViewController.swift; sourceTree = "<group>"; };
 		EDF609B921B7915500CB3529 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		EDF609BB21BA468400CB3529 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -335,13 +341,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ED2A26EB23F87DBF00E22B01 /* SignIn */ = {
+		ED2A26EB23F87DBF00E22B01 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				ED2A26E923F8714D00E22B01 /* SetProfileViewController.swift */,
+				EDCF234123F94683003CBE4B /* SignUpViewModel.swift */,
 				ED2A26EC23F87DCF00E22B01 /* PhotoSelector.swift */,
+				EDCF233F23F945C6003CBE4B /* SignUpViewController.swift */,
 			);
-			path = SignIn;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		ED3D980821A05FB300B61748 /* Chat */ = {
@@ -409,11 +417,12 @@
 			isa = PBXGroup;
 			children = (
 				EDC1CD3723EAE61C006ED196 /* MainVC.swift */,
+				EDEAC2FD23F998210097753A /* DescViewController.swift */,
 				ED2A26E723F84A8700E22B01 /* KakaoLoginManager.swift */,
 				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
 				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
-				ED2A26EB23F87DBF00E22B01 /* SignIn */,
+				ED2A26EB23F87DBF00E22B01 /* SignUp */,
 			);
 			path = 2.0;
 			sourceTree = "<group>";
@@ -893,6 +902,7 @@
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				ED8C493223EC4B4F00443477 /* Validator.swift in Sources */,
 				ED8C493023EC4B1E00443477 /* PlugCronParser.swift in Sources */,
+				EDEAC2FE23F998210097753A /* DescViewController.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */,
 				ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */,
@@ -908,6 +918,7 @@
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
 				ED2108DD2353753F00E38493 /* ChatListVC.swift in Sources */,
 				ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */,
+				EDCF234023F945C6003CBE4B /* SignUpViewController.swift in Sources */,
 				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
@@ -919,6 +930,7 @@
 				EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */,
 				ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */,
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
+				EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */,
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,

@@ -91,6 +91,11 @@ class MainVC: PlugViewController {
     }
     
     override func setBinding() {
+        descLabel.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] (_) in
+            let vc = DescViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: disposeBag)
+        
         Observable.of(kakaoButton.rx.tap.asDriver(), selectorView.kakaoButton.rx.tap.asDriver()).merge()
             .asDriver(onErrorJustReturn: ())
             .drive(kakaoManager.input)
@@ -115,7 +120,7 @@ class MainVC: PlugViewController {
         }).disposed(by: disposeBag)
         
         emailButton.rx.tap.asDriver().drive(onNext: { [weak self]  in
-            let vc = SetProfileViewController()
+            let vc = SignUpViewController()
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
         

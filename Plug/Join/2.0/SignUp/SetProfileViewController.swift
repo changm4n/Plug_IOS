@@ -13,7 +13,7 @@ import RxCocoa
 class SetProfileViewController: PlugViewControllerWithButton {
     
     let disposeBag = DisposeBag()
-    
+    var viewModel: SignUpViewModel!
     var imagePicker = ImagePicker()
     
     let photoSelector = PhotoSelector()
@@ -36,7 +36,9 @@ class SetProfileViewController: PlugViewControllerWithButton {
     }()
     
     override func setBinding() {
+        
         self.imagePicker.presentationController = self
+        
         self.imagePicker.selectedImage
             .bind(to: self.photoSelector.rx.selectedImage)
             .disposed(by: disposeBag)
@@ -49,21 +51,24 @@ class SetProfileViewController: PlugViewControllerWithButton {
             .bind(to: confirmButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        //        confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
-        //            .withLatestFrom(nameTF.rx.text).bind(to: viewModel.loginPressed).disposed(by: disposeBag)
+        nameTF.rx.text.orEmpty
+            .bind(to: viewModel.infoForm)
+            .disposed(by: disposeBag)
         
-        //        viewModel.loginSuccess.subscribe(onNext: { (result) in
-        //            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        //            let controller = storyboard.instantiateViewController(withIdentifier: "MainNVC")
-        //            controller.modalPresentationStyle = .fullScreen
-        //            self.navigationController?.present(controller, animated: true, completion: nil)
-        //
-        //        }).disposed(by: disposeBag)
-        //
-        //        viewModel.loginError.asDriver(onErrorJustReturn: "오류")
-        //            .drive(onNext: { (errorMessage) in
-        //                print(errorMessage)
-        //            }).disposed(by: disposeBag)
+        confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.seletedImage = self?.photoSelector.photoView.image
+                self?.viewModel.signUpPressed.onNext(())
+            }).disposed(by: disposeBag)
+
+        viewModel.signUpSuccess.subscribe(onNext: { (result, message) in
+            if result {
+                print("회원가입 성공")
+                self.navigationController?.popToRootViewController(animated: true)
+            } else {
+                print(message)
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func setViews() {
@@ -92,3 +97,5 @@ class SetProfileViewController: PlugViewControllerWithButton {
         })
     }
 }
+
+

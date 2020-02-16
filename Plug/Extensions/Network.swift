@@ -305,7 +305,7 @@ class Networking: NSObject {
 
             let headers = ["accept" : "application/json",
                            "content-type": "multipart/form-data"]
-
+            
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 let q1 = stringToData(str: """
             { "query":"mutation ($files: [Upload!]!) { multipleUpload(files: $files) }","variables": { "files": [null]}}

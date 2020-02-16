@@ -10,6 +10,12 @@ mutation SignUp($data: UserInput!) {
     }
 }
 
+query isMemeber($userId: String!) {
+  users(where : {userId : $userId}) {
+    userId
+  }
+}
+
 mutation changePW($userId: String!, $old: String!, $new: String!) {
     updateNewPassword(email:$userId
                       newPassword:$new,

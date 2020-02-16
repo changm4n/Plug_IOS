@@ -33,6 +33,19 @@ class UserAPI: NSObject {
         })
     }
     
+    static func isMemeber(id: String) -> Maybe<Bool> {
+        return Network.shared.fetch(query: IsMemeberQuery(userId: id)).map { return $0.users.count > 0 }
+    }
+    
+    static func uploadIamge(image: UIImage?, userId: String) -> Observable<String?> {
+        let filename = userId + Date().toString()
+        return Network.shared.uploadImage(image: image, userId: filename)
+    }
+    
+    static func signUp(userId: String, passwd: String, name: String, url: String?) -> Maybe<SignUpMutation.Data> {
+        let input = UserInput(role: .parent, userId: userId, name: name, password: passwd, profileImageUrl: url, phoneNumber: nil)
+        return Network.shared.perform(query: SignUpMutation(data: input))
+    }
     static func registerPushKey() -> Maybe<RegisterPushKeyMutation.Data> {
         let key = Messaging.messaging().fcmToken ?? ""
         return Network.shared.perform(query: RegisterPushKeyMutation(pushKey: key))

@@ -8,7 +8,10 @@
 
 import Foundation
 import Apollo
+import UIKit
 import RxSwift
+import Alamofire
+import RxCocoa
 
 // MARK: - Singleton Wrapper
 
@@ -25,16 +28,63 @@ class Network {
     private(set) lazy var apollo = ApolloClient(networkTransport: self.networkTransport)
     
     func fetch<Query: GraphQLQuery>(
-      query: Query,
-      cachePolicy: CachePolicy = .fetchIgnoringCacheData,
-      queue: DispatchQueue = DispatchQueue.main
+        query: Query,
+        cachePolicy: CachePolicy = .fetchIgnoringCacheData,
+        queue: DispatchQueue = DispatchQueue.main
     ) -> Maybe<Query.Data> {
-      return self.apollo.rx
-        .fetch(query: query, cachePolicy: cachePolicy, queue: queue)
+        return self.apollo.rx
+            .fetch(query: query, cachePolicy: cachePolicy, queue: queue)
     }
     
     func perform<Query: GraphQLMutation>(query: Query) -> Maybe<Query.Data> {
         return self.apollo.rx.perform(mutation: query, context: nil, queue: .main)
+    }
+    
+    func uploadImage(image: UIImage?, userId: String) -> Observable<String?> {
+        let headers = ["accept" : "application/json",
+                               "content-type": "multipart/form-data"]
+        
+        guard let data = image?.jpegData(compressionQuality: 1) else {
+            return Observable.create { observable in
+                observable.onNext(nil)
+                return Disposables.create()
+            }
+        }
+        return Observable.create { observable in
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                let q1 = stringToData(str: """
+                       { "query":"mutation ($files: [Upload!]!) { multipleUpload(files: $files) }","variables": { "files": [null]}}
+                       """)
+                let q2 = stringToData(str: """
+                       { "0": ["variables.files.0"] }
+                       """)
+                multipartFormData.append(q1, withName: "operations")
+                multipartFormData.append(q2, withName: "map")
+                multipartFormData.append(data, withName: "0", fileName: "\(userId).jpeg", mimeType: "image/jpeg")
+                
+            }, usingThreshold: UInt64.init(), to: kBaseURL, method: .post, headers: headers) { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseJSON(completionHandler: { (jsonData) in
+                        switch jsonData.result {
+                        case .success(let data):
+                            if let json = data as? [String : AnyObject],
+                                let urls = json["data"]?["multipleUpload"] as? [String],
+                                let url = urls.first {
+                                observable.onNext(url)
+                            } else {
+                                observable.onNext(nil)
+                            }
+                        case .failure:
+                            observable.onNext(nil)
+                        }
+                    })
+                case .failure(_):
+                    observable.onNext(nil)
+                }
+            }
+            return Disposables.create()
+        }
     }
 }
 
@@ -57,7 +107,7 @@ extension Network: HTTPNetworkTransportPreflightDelegate {
             headers["Authorization"] = token
             headers["Platform"] = "IOS"
         }
-               
+        
         // Re-assign the updated headers to the request.
         request.allHTTPHeaderFields = headers
     }
