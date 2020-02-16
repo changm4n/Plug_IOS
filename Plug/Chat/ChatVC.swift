@@ -99,31 +99,16 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         
         self.chatDataSource = ChatDataSource.init(configureCell: configureCell)
         self.viewModel = ChatroomViewModel(identity: identity)
-//        self.tableView.estimatedRowHeight = 1
-        viewModel.output.do(onNext: { (items) in
-            print(items.count, items.last?.items.count ?? 0)
-            if items.count > 0 {
-                
-//                self.tableView.layoutIfNeeded()
-                
-                
-//                let rows = items.reduce(0) { (result, section) -> Int in
-//                    return result + section.items.count
-//                }
-
-            }
-        }).bind(to: tableView.rx.items(dataSource: chatDataSource)).disposed(by: disposeBag)
+        viewModel.output.asDriver(onErrorJustReturn: []).drive(tableView.rx.items(dataSource: chatDataSource)).disposed(by: disposeBag)
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
-        sendButton.rx.tap.bind { [unowned self] in
-            var sample = MessageItem()
-            sample.chatroomId = self.chatroom.id
-            sample.receiverId = self.sender.id
-            sample.receiverId = self.sender.name
-            sample.senderId = self.receiver.id
-            sample.senderName = self.receiver.name
-            
-            self.viewModel.addMessage(message: MessageItem())
-        }.disposed(by: disposeBag)
+        
+        sendButton.rx.tap.withLatestFrom(textView.rx.text.orEmpty)
+            .filter({ $0 != nil && $0?.isEmpty == false })
+            .subscribe(onNext: { [unowned self] (text) in
+                let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
+                self.viewModel.sendMessage(message: message)
+                self.resetTextView()
+            }).disposed(by: disposeBag)
         
         self.chatDataSource.dataReloaded
             .asObservable()

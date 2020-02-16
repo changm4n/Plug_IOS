@@ -34,9 +34,6 @@ class ChatListCell: UITableViewCell {
         
         let messageItem = item.lastMessage
         timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
-//        if messageItem.id == "default" {
-//            timeLabel.text = ""
-//        }
     }
 }
 

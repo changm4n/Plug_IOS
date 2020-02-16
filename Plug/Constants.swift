@@ -10,3 +10,4 @@ import Foundation
 
 let kAppEnterBackGround = "kAppEnterBackGround"
 let kMessageReceived = "kMessageReceived"
+let kMessageWindowSize = 50

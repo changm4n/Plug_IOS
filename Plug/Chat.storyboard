@@ -296,7 +296,7 @@
                                     <constraint firstAttribute="height" constant="100" id="RJU-sR-egT"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JQV-VV-BPb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JQV-VV-BPb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="726"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -576,7 +576,7 @@
             <objects>
                 <navigationController restorationIdentifier="MainNVC" storyboardIdentifier="MainNVC" modalPresentationStyle="fullScreen" id="1iB-Qk-mOs" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ec5-wG-faU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -929,6 +929,6 @@
         <image name="master_close" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BEr-Kh-h3U"/>
+        <segue reference="soo-V7-Zx3"/>
     </inferredMetricsTieBreakers>
 </document>

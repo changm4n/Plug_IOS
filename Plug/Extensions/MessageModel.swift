@@ -86,6 +86,18 @@ struct MessageItem {
         
         self.isMine = isMine
     }
+    
+    public init(text: String, chatroom: String, receiver: String) {
+        self.id = kDefault
+        self.chatroomId = chatroom
+        self.text = text
+        self.receiverId = receiver
+        self.receiverName = kDefault
+        self.senderId = kDefault
+        self.senderName = kDefault
+        self.isMine = true
+        self.createAt = Date()
+    }
 }
 
 enum MessageViewType: String {
@@ -190,6 +202,10 @@ struct ChatroomViewModel {
     public func addMessage(message: MessageItem) {
         model.addMessage(newMessage: message)
     }
+    
+    public func sendMessage(message: MessageItem) {
+        model.sendMessage(message: message)
+    }
 }
 
 class ChatroomModel {
@@ -219,15 +235,18 @@ class ChatroomModel {
     func load() {
         let realm = try! Realm()
         let logs = realm.objects(ChatLog.self).filter("hashKey == %@", identity.hashKey)
-        if logs.count != 0 {
+        if logs.count >= kMessageWindowSize {
             self.items = logs.map({ MessageItem(with: $0, isMine: identity.receiver.id == $0.sID)})
         } else {
-//            Networking.getMeassages(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil) { [unowned self] (messages) in
-//                self.saveMessage(messages: messages.map({ ChatLog($0) }))
-//                
-//                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
-//                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
-//            }
+            
+            let lastMessage = items.first?.id
+            MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: lastMessage).subscribe(onSuccess: { (messages) in
+                self.saveMessage(messages: messages.map({ ChatLog($0) }))
+                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
+                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+            }, onError: { (error) in
+                
+            }).disposed(by: disposeBag)
         }
     }
     
@@ -241,6 +260,15 @@ class ChatroomModel {
     
     public func addMessage(newMessage: MessageItem) {
         self.items.append(newMessage)
+    }
+    
+    public func sendMessage(message: MessageItem) {
+        MessageAPI.sendMessage(message: message).subscribe(onSuccess: { [weak self] (message) in
+            self?.saveMessage(messages: [ChatLog(message)])
+            self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
+            }, onError: { (error) in
+                print("send message error")
+        }).disposed(by: disposeBag)
     }
 }
 

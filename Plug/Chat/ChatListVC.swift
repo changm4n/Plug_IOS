@@ -37,11 +37,15 @@ class ChatListVC: PlugViewController {
         bindData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Session.me?.reloadChatRoom()
+        Session.me?.refreshSummary()
+    }
+    
     func bindData() {
         guard let me = Session.me else { return }
-        me.reloadChatRoom()
-        me.refreshSummary()
-        
         
         me.summaryData.bind(to: self.tableView.rx.items) { tableView, row, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0)) as! ChatListCell
@@ -89,10 +93,6 @@ class ChatListVC: PlugViewController {
 }
 
 extension ChatListVC: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
     
     //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     //        return 58
