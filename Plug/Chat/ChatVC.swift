@@ -353,6 +353,11 @@ extension ChatVC {
 }
 
 extension ChatVC: UITableViewDelegate {
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let cell = cell as? ChatRCell else { return }
+//        
+//    }
 //
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        if indexPath.section == 0 && indexPath.row == 0 {

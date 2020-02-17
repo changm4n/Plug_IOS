@@ -28,6 +28,7 @@
 		ED3E6A4821CF570400C28403 /* PlugClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4721CF570400C28403 /* PlugClassCell.xib */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
+		ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B192623FAEA0A007C402C /* ForgotVC.swift */; };
 		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
 		ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7D59CC21B3DCA90029E80A /* Queries.swift */; };
@@ -210,6 +211,7 @@
 		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
 		ED4750FB21ECB6540043FD18 /* indicator.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = indicator.json; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		ED6B192623FAEA0A007C402C /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		ED71B6AE220FE35A00AC21FF /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		ED71B6B02210219400AC21FF /* ParentClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentClassVC.swift; sourceTree = "<group>"; };
 		ED71B6B2221029E400AC21FF /* Plug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plug.entitlements; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				EDEAC2FD23F998210097753A /* DescViewController.swift */,
 				ED2A26E723F84A8700E22B01 /* KakaoLoginManager.swift */,
 				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
+				ED6B192623FAEA0A007C402C /* ForgotVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
 				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
 				ED2A26EB23F87DBF00E22B01 /* SignUp */,
@@ -934,6 +937,7 @@
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
+				ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */,
 				ED8C493A23EF1C9100443477 /* API.swift in Sources */,
 				ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,

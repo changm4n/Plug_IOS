@@ -28,10 +28,11 @@ class ChatListVC: PlugViewController {
         let style = NSMutableParagraphStyle()
         style.firstLineHeadIndent = 18 // This is added to the default margin
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.paragraphStyle : style]
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         //        self.tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
         navigationItem.searchController = UISearchController(searchResultsController: nil)
-        
+//        self.navigationController?.navigationBar.sizeToFit()
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         bindData()
@@ -93,6 +94,10 @@ class ChatListVC: PlugViewController {
 }
 
 extension ChatListVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     //        return 58

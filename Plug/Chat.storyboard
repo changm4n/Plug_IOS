@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1iB-Qk-mOs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMm-ac-nRE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -257,7 +257,6 @@
                         <outlet property="topView" destination="vaC-2G-dkD" id="HlX-W3-0dJ"/>
                         <outlet property="topViewTopInset" destination="fKF-g6-USg" id="Jdr-ss-hAK"/>
                         <segue destination="P94-t1-WDa" kind="presentation" identifier="out" animates="NO" modalPresentationStyle="fullScreen" id="fQG-6H-2do"/>
-                        <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="soo-V7-Zx3"/>
                         <segue destination="Azx-jK-vBQ" kind="presentation" identifier="share" id="Wjc-Oi-lvb"/>
                     </connections>
                 </viewController>
@@ -279,12 +278,12 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="StartNC" id="P94-t1-WDa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFm-a3-MtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="-667"/>
+            <point key="canvasLocation" x="3247.1014492753625" y="-667.63392857142856"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="Uny-Ei-mNR">
             <objects>
-                <viewController storyboardIdentifier="ChatVC" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ykd-Lh-fl4" customClass="ChatVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ykd-Lh-fl4" customClass="ChatVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2AN-Cb-bWI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -519,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tY-6t-0Ip" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="54"/>
+            <point key="canvasLocation" x="1747.826086956522" y="-622.09821428571422"/>
         </scene>
         <!--채팅-->
         <scene sceneID="bXd-rU-6vh">
@@ -571,26 +570,10 @@
             </objects>
             <point key="canvasLocation" x="-226" y="506"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hVf-LK-XNE">
-            <objects>
-                <navigationController restorationIdentifier="MainNVC" storyboardIdentifier="MainNVC" modalPresentationStyle="fullScreen" id="1iB-Qk-mOs" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ec5-wG-faU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="dR9-qg-DYH" kind="relationship" relationship="rootViewController" id="5i0-8J-ElW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RZB-w3-GoE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-687" y="-622"/>
-        </scene>
-        <!--  채팅-->
+        <!--채팅-->
         <scene sceneID="Pca-hd-fF2">
             <objects>
-                <viewController id="dR9-qg-DYH" customClass="ChatListVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dR9-qg-DYH" customClass="ChatListVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CG9-TZ-ZEz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -687,14 +670,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4AJ-ji-8B0" firstAttribute="top" secondItem="nNF-CV-vQH" secondAttribute="top" id="STD-ef-Zxz"/>
+                            <constraint firstItem="4AJ-ji-8B0" firstAttribute="top" secondItem="nNF-CV-vQH" secondAttribute="top" id="b4k-C9-Le2"/>
                             <constraint firstItem="nNF-CV-vQH" firstAttribute="trailing" secondItem="4AJ-ji-8B0" secondAttribute="trailing" id="eFC-fP-W13"/>
                             <constraint firstItem="4AJ-ji-8B0" firstAttribute="leading" secondItem="nNF-CV-vQH" secondAttribute="leading" id="fbT-7w-5ZI"/>
                             <constraint firstItem="nNF-CV-vQH" firstAttribute="bottom" secondItem="4AJ-ji-8B0" secondAttribute="bottom" id="pvG-Td-d7E"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nNF-CV-vQH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="  채팅" id="ntK-l5-KV2">
+                    <navigationItem key="navigationItem" title="채팅" largeTitleDisplayMode="always" id="ntK-l5-KV2">
                         <barButtonItem key="rightBarButtonItem" image="icSettingDefault" id="bx7-fE-O4b">
                             <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -707,7 +690,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7z-Qw-JEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11.594202898550726" y="-622.09821428571422"/>
+            <point key="canvasLocation" x="971.01449275362324" y="-622.09821428571422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lED-4e-wbO">
@@ -911,7 +894,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeD-RF-41o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1454" y="-666"/>
+            <point key="canvasLocation" x="2363.768115942029" y="-666.29464285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nsl-1A-bDu">
+            <objects>
+                <navigationController storyboardIdentifier="MainNVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jMm-ac-nRE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="InC-Eb-odI">
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dR9-qg-DYH" kind="relationship" relationship="rootViewController" id="al7-Ik-VNE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GOD-PM-Soi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60.869565217391312" y="-622.09821428571422"/>
         </scene>
     </scenes>
     <resources>
@@ -928,7 +929,4 @@
         <image name="logo" width="147" height="127"/>
         <image name="master_close" width="16" height="16"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="soo-V7-Zx3"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -70,4 +70,8 @@ class UserAPI: NSObject {
                 Session.me?.summaryData.accept(summary)
             })
     }
+    
+    static func resetPassword(email: String) -> Maybe<RefreshEmailMutation.Data> {
+        return Network.shared.perform(query: RefreshEmailMutation(email: email))
+    }
 }

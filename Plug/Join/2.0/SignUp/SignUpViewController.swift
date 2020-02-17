@@ -69,7 +69,7 @@ class SignUpViewController: PlugViewControllerWithButton {
         
         confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
             .bind(to: viewModel.checkPressed).disposed(by: disposeBag)
-//
+
         viewModel.checkSuccess.subscribe(onNext: { [unowned self] (result, message) in
             if result {
                 print(message)

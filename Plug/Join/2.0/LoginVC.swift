@@ -44,6 +44,12 @@ class LoginVC2: PlugViewControllerWithButton {
         return btn
     }()
     
+    let forgotButton: PlugButton = {
+        let btn = PlugButton(theme: ButtonTheme.WHITE, isShadow: false, enable: true)
+        btn.setTitle("비밀번호 찾기", for: .normal)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -60,19 +66,23 @@ class LoginVC2: PlugViewControllerWithButton {
         confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(loginForm).bind(to: viewModel.loginPressed).disposed(by: disposeBag)
         
-        viewModel.loginSuccess.subscribe(onNext: { (result) in
+        forgotButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            let vc = ForgotVC()
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: disposeBag)
+        
+        viewModel.loginSuccess.subscribe(onNext: { [weak self] (result) in
             let storyboard = UIStoryboard(name: "Chat", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "MainNVC")
             controller.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(controller, animated: true, completion: nil)
+            self?.navigationController?.present(controller, animated: true, completion: nil)
             
         }).disposed(by: disposeBag)
         
         viewModel.loginError.asDriver(onErrorJustReturn: "오류")
-            .drive(onNext: { (errorMessage) in
-                print(errorMessage)
+            .drive(onNext: { [unowned self] (errorMessage) in
+                showAlertWithString("로그인 오류", message: errorMessage, sender: self)
             }).disposed(by: disposeBag)
-        
     }
     
     override func setViews() {
@@ -81,15 +91,16 @@ class LoginVC2: PlugViewControllerWithButton {
         self.view.addSubview(emailTF)
         self.view.addSubview(passwdTF)
         self.view.addSubview(confirmButton)
+        self.view.addSubview(forgotButton)
         
-        self.bottomButton = confirmButton
+        self.bottomButton = forgotButton
         setLayout()
     }
     
     func setLayout() {
         emailTF.snp.makeConstraints({
             $0.left.equalToSuperview().offset(28)
-            $0.top.equalToSuperview().offset(177)
+            $0.top.equalToSuperview().offset(145)
             $0.right.equalToSuperview().offset(-28)
             $0.height.equalTo(52)
         })
@@ -99,6 +110,13 @@ class LoginVC2: PlugViewControllerWithButton {
             $0.top.equalTo(emailTF.snp.bottom).offset(32)
             $0.right.equalToSuperview().offset(-28)
             $0.height.equalTo(52)
+        })
+        
+        confirmButton.snp.makeConstraints({
+            $0.left.equalToSuperview().offset(28)
+            $0.right.equalToSuperview().offset(-28)
+            $0.height.equalTo(56)
+            $0.bottom.equalTo(forgotButton.snp.top).offset(-14)
         })
     }
 }

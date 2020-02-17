@@ -51,13 +51,16 @@ class ChatCell: UITableViewCell {
 class BlankCell: UITableViewCell, Configurable {
     func configure(item: MessageViewItem) {
     }
+    
+    func setUI() {}
 }
 
 class ChatRCell: ChatCell, Configurable {
     
     override func awakeFromNib() {
-        bubbleView.layer.cornerRadius = 16
         bubbleView.clipsToBounds = true
+        bubbleView.layer.cornerRadius = 12
+        
     }
     
     func configure(item: MessageViewItem) {
@@ -67,6 +70,7 @@ class ChatRCell: ChatCell, Configurable {
             timeLabel.isHidden = !item.isShowTime
             //            timeLabel.backgroundColor = viewItem.isShowTime ? .blue : .clear
         }
+        
     }
 }
 
@@ -84,4 +88,5 @@ class StampCell: UITableViewCell, Configurable {
             timeLabel.text = "error"
         }
     }
+    func setUI() {}
 }
