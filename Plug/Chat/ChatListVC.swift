@@ -28,13 +28,15 @@ class ChatListVC: PlugViewController {
         let style = NSMutableParagraphStyle()
         style.firstLineHeadIndent = 18 // This is added to the default margin
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.paragraphStyle : style]
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         //        self.tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
         navigationItem.searchController = UISearchController(searchResultsController: nil)
-//        self.navigationController?.navigationBar.sizeToFit()
+        tableView.dataSource = nil
+        tableView.delegate = nil
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
+        tableView.tableFooterView = UIView()
         bindData()
     }
     
@@ -64,13 +66,16 @@ class ChatListVC: PlugViewController {
             self?.performSegue(withIdentifier: "chat", sender: messageSummary)
         }).disposed(by: self.disposeBag)
         
-        settingButton.rx.tap.subscribe(onNext: { (_) in
-            Session.removeSavedUser()
-            let VC = MainVC()
-            let NVC = UINavigationController(rootViewController: VC)
-            NVC.modalPresentationStyle = .fullScreen
-            self.present(NVC, animated: false, completion: nil)
+        settingButton.rx.tap.subscribe(onNext: { [weak self] (_) in
+//            Session.removeSavedUser()
+//            let VC = MainVC()
+//            let NVC = UINavigationController(rootViewController: VC)
+//            NVC.modalPresentationStyle = .fullScreen
+//            self.present(NVC, animated: false, completion: nil)
             
+//            let vc = UIStoryboard.viewController(storyBoard: "Settings", withID: "SettingVC")
+//            self.navigationController?.pushViewController(vc, animated: true)
+            self?.performSegue(withIdentifier: "setting", sender: nil)
         }).disposed(by: disposeBag)
     }
     
@@ -88,7 +93,6 @@ class ChatListVC: PlugViewController {
             let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
             
             vc.identity = identity
-        } else if segue.identifier == "share" {
         }
     }
 }

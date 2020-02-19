@@ -16,10 +16,29 @@ class ForgotVC: PlugViewControllerWithButton {
     let disposeBag = DisposeBag()
     var viewModel = ForgotViewModel()
     
+    let titleLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "비밀번호를 잊으셨나요?"
+        lb.font = UIFont.getBold(withSize: 20)
+        lb.textColor = UIColor.charcoalGrey
+        lb.numberOfLines = 1
+        return lb
+    }()
+    
+    let subTitleLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "가입한 이메일 주소로 임시 비밀번호를 보내드릴게요"
+        lb.font = UIFont.getRegular(withSize: 14)   
+        lb.textColor = UIColor.blueGrey
+        lb.adjustsFontSizeToFitWidth = true
+        lb.numberOfLines = 1
+        return lb
+    }()
+    
     let emailTF: PlugTextField = {
         let tf = PlugTextField(type: .email)
-        tf.placeholder = "이메일 주소"
-        tf.placeholderColor = .black
+        tf.placeholder = "plug@plugapp.me"
+        tf.title = "이메일 주소"
         tf.titleColor = .textBlue
         tf.lineHeight = 1
         tf.selectedLineColor = .plugBlue
@@ -54,20 +73,31 @@ class ForgotVC: PlugViewControllerWithButton {
     override func setViews() {
         self.view.backgroundColor = .white
         
+        self.view.addSubview(titleLabel)
+        self.view.addSubview(subTitleLabel)
         self.view.addSubview(emailTF)
-        
         self.view.addSubview(confirmButton)
-        
         
         self.bottomButton = confirmButton
         setLayout()
     }
     
     func setLayout() {
+        titleLabel.snp.makeConstraints({
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(12)
+            $0.left.right.equalToSuperview().inset(24)
+            $0.height.equalTo(29)
+        })
+        
+        subTitleLabel.snp.makeConstraints({
+            $0.top.equalTo(titleLabel.snp.bottom).offset(6)
+            $0.left.right.equalToSuperview().inset(24)
+            $0.height.equalTo(20)
+        })
+        
         emailTF.snp.makeConstraints({
-            $0.left.equalToSuperview().offset(28)
-            $0.top.equalToSuperview().offset(145)
-            $0.right.equalToSuperview().offset(-28)
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(30)
+            $0.left.right.equalToSuperview().inset(24)
             $0.height.equalTo(52)
         })
     }

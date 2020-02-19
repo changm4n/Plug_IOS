@@ -47,14 +47,14 @@ class PlugTextField: SkyFloatingLabelTextField {
     
     func bindEmail() {
         inputText.map(Validator.isValidEmail(testStr:)).bind(to: validation).disposed(by: disposeBag)
-        validation.skip(1).subscribe(onNext: { result in
+        validation.skip(3).subscribe(onNext: { result in
             self.errorMessage = result ? "" : "이메일 양식으로 입력해주세요."
         }).disposed(by: disposeBag)
     }
     
     func bindPasswd() {
         inputText.map({ $0.count > 7 }).bind(to: validation).disposed(by: disposeBag)
-        validation.skip(1).subscribe(onNext: { result in
+        validation.skip(2).subscribe(onNext: { result in
             self.errorMessage = result ? "" : "8자 이상 입력해주세요."
         }).disposed(by: disposeBag)
     }

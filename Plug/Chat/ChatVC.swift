@@ -161,7 +161,6 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.isTranslucent = true
-//        statusbarLight = false
     }
     
     @IBAction func addSampleMessage(_ userinfo: Any) {

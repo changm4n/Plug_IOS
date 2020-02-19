@@ -116,7 +116,7 @@ func checkPermission(completion: @escaping (_ authorized: Bool) -> Void) {
 }
 
 extension UIStoryboard {
-    class func viewController(storyBoard sbID: String,withID identifier: String) -> UIViewController {
+    class func viewController(storyBoard sbID: String, withID identifier: String) -> UIViewController {
         return UIStoryboard(name: sbID, bundle: nil).instantiateViewController(withIdentifier: identifier)
     }
 }

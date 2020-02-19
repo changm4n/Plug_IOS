@@ -104,12 +104,14 @@ class MainVC: PlugViewController {
         kakaoManager.output.subscribe(onNext: { (isMember) in
             if isMember {
                 let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "MainNVC")
-                controller.modalPresentationStyle = .fullScreen
-                self.navigationController?.present(controller, animated: true, completion: nil)
+
+                let vc = storyboard.instantiateViewController(withIdentifier: "ChatListVC")
+                vc.modalPresentationStyle = .fullScreen
+                let nvc = UINavigationController(rootViewController: vc)
+                nvc.navigationBar.prefersLargeTitles = true
+                nvc.modalPresentationStyle = .fullScreen
+                self.present(nvc, animated: true, completion: nil)
             } else {
-                
-                
                 
                 
             }

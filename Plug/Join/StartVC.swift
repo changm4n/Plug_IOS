@@ -70,12 +70,19 @@ class StartVC: PlugViewController {
                         let VC = MainVC()
                         let NVC = UINavigationController(rootViewController: VC)
                         NVC.modalPresentationStyle = .fullScreen
+                        NVC.navigationBar.isTranslucent = false
                         self.present(NVC, animated: false, completion: nil)
                         
                     } else {
-                        self.performSegue(withIdentifier: identifier, sender: sender)
-                    }
+                        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
 
+                        let vc = storyboard.instantiateViewController(withIdentifier: "ChatListVC")
+                        vc.modalPresentationStyle = .fullScreen
+                        let nvc = UINavigationController(rootViewController: vc)
+                        nvc.navigationBar.prefersLargeTitles = true
+                        nvc.modalPresentationStyle = .fullScreen
+                        self.present(nvc, animated: false, completion: nil)
+                    }
                 }
             }
         }

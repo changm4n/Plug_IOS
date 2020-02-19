@@ -209,4 +209,8 @@ extension UIFont {
     static func getBold(withSize size: CGFloat) -> UIFont {
         return UIFont(name: "SpoqaHanSans-Bold", size: size)!
     }
+    
+    static func getRegular(withSize size: CGFloat) -> UIFont {
+        return UIFont(name: "SpoqaHanSans-Regular", size: size)!
+    }
 }
