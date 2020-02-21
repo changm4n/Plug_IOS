@@ -76,4 +76,8 @@ class SignUpViewModel {
     func uploadImage() -> Observable<String?> {
         return  UserAPI.uploadIamge(image: seletedImage, userId: selectedId)
     }
+    
+    func updateImage(image: UIImage, userId: String) {
+        UserAPI.uploadIamge(image: seletedImage, userId: selectedId)
+    }
 }

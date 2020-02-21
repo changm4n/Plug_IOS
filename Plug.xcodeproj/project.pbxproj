@@ -29,6 +29,12 @@
 		ED44B21923FD7E1D00AEB833 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44B21823FD7E1D00AEB833 /* Settings.storyboard */; };
 		ED44B21A23FD7EC700AEB833 /* ClassHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */; };
 		ED44B21D23FD8C9900AEB833 /* SettingCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B21C23FD8C9900AEB833 /* SettingCells.swift */; };
+		ED44B21F24002E5800AEB833 /* SettingProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */; };
+		ED44B2222400513100AEB833 /* ClassListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2212400513100AEB833 /* ClassListVC.swift */; };
+		ED44B2232400580900AEB833 /* PlugClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */; };
+		ED44B2252400629300AEB833 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED44B2242400629300AEB833 /* DefaultCell.xib */; };
+		ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2262400647F00AEB833 /* DefaultCell.swift */; };
+		ED44B2292400655E00AEB833 /* ClassDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2282400655E00AEB833 /* ClassDetailVC.swift */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B192623FAEA0A007C402C /* ForgotVC.swift */; };
@@ -195,6 +201,11 @@
 		ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugClassCell.swift; sourceTree = "<group>"; };
 		ED44B21823FD7E1D00AEB833 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		ED44B21C23FD8C9900AEB833 /* SettingCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCells.swift; sourceTree = "<group>"; };
+		ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileVC.swift; sourceTree = "<group>"; };
+		ED44B2212400513100AEB833 /* ClassListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassListVC.swift; sourceTree = "<group>"; };
+		ED44B2242400629300AEB833 /* DefaultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCell.xib; sourceTree = "<group>"; };
+		ED44B2262400647F00AEB833 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
+		ED44B2282400655E00AEB833 /* ClassDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetailVC.swift; sourceTree = "<group>"; };
 		ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC.swift; sourceTree = "<group>"; };
 		ED4750F321EA80190043FD18 /* kidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidVC.swift; sourceTree = "<group>"; };
 		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
@@ -371,7 +382,10 @@
 			children = (
 				ED3E6A4421CF535B00C28403 /* SettingVC.swift */,
 				ED44B21C23FD8C9900AEB833 /* SettingCells.swift */,
+				ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */,
 				ED44B21823FD7E1D00AEB833 /* Settings.storyboard */,
+				ED44B2242400629300AEB833 /* DefaultCell.xib */,
+				ED44B2262400647F00AEB833 /* DefaultCell.swift */,
 				ED44B21423FD784D00AEB833 /* 1.0 */,
 			);
 			path = Setting;
@@ -417,6 +431,23 @@
 				EDE6089C23C0640E00F91EB4 /* ChatSummaryViewModel.swift */,
 			);
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		ED44B2202400511E00AEB833 /* 1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				EDD8C3A1218D77CC008DA9E7 /* ClassTVC.swift */,
+				EDB373E6218ED85100F4A8BF /* CreateClassVC2.swift */,
+				EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */,
+				EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */,
+				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
+				ED71B6B02210219400AC21FF /* ParentClassVC.swift */,
+				ED3D980421A0187200B61748 /* EditClassVC.swift */,
+				ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */,
+				ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */,
+				ED4750F721EB17370043FD18 /* KidVC2.swift */,
+			);
+			path = 1.0;
 			sourceTree = "<group>";
 		};
 		ED8C493623EF1A5D00443477 /* Network */ = {
@@ -516,16 +547,9 @@
 		EDD8C3A9218ED4A8008DA9E7 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				EDD8C3A1218D77CC008DA9E7 /* ClassTVC.swift */,
-				EDB373E6218ED85100F4A8BF /* CreateClassVC2.swift */,
-				EDB373E8218ED87A00F4A8BF /* InviteCodeVC2.swift */,
-				EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */,
-				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
-				ED71B6B02210219400AC21FF /* ParentClassVC.swift */,
-				ED3D980421A0187200B61748 /* EditClassVC.swift */,
-				ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */,
-				ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */,
-				ED4750F721EB17370043FD18 /* KidVC2.swift */,
+				ED44B2202400511E00AEB833 /* 1.0 */,
+				ED44B2212400513100AEB833 /* ClassListVC.swift */,
+				ED44B2282400655E00AEB833 /* ClassDetailVC.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -748,6 +772,7 @@
 				ED71B6B42219359400AC21FF /* licenses.json in Resources */,
 				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
+				ED44B2252400629300AEB833 /* DefaultCell.xib in Resources */,
 				EDD8C3A6218ED1CB008DA9E7 /* ClassHeader.xib in Resources */,
 				ED44B21923FD7E1D00AEB833 /* Settings.storyboard in Resources */,
 			);
@@ -917,11 +942,13 @@
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED8C493123EC4B4000443477 /* WebVC.swift in Sources */,
 				ED44B21723FD7A5400AEB833 /* SettingVC.swift in Sources */,
+				ED44B2222400513100AEB833 /* ClassListVC.swift in Sources */,
 				EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */,
 				ED8C494023F051B100443477 /* MessageAPI.swift in Sources */,
 				ED44B21A23FD7EC700AEB833 /* ClassHeader.swift in Sources */,
 				ED1FB5B0217E05240075C4CE /* MNFunction.swift in Sources */,
 				EDE6089D23C0640E00F91EB4 /* ChatSummaryViewModel.swift in Sources */,
+				ED44B2292400655E00AEB833 /* ClassDetailVC.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
@@ -932,7 +959,9 @@
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */,
+				ED44B21F24002E5800AEB833 /* SettingProfileVC.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
+				ED44B2232400580900AEB833 /* PlugClassCell.swift in Sources */,
 				ED8C493823EF1A6700443477 /* Networking.swift in Sources */,
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
@@ -942,6 +971,7 @@
 				EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */,
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
+				ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
 				ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */,
 				ED8C493A23EF1C9100443477 /* API.swift in Sources */,

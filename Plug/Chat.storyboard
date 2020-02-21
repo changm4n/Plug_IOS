@@ -254,9 +254,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c4C-OJ-6Ra"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="FAf-ea-Evj">
-                        <barButtonItem key="backBarButtonItem" title=" " id="ZMi-WL-fLT"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="FAf-ea-Evj"/>
                     <connections>
                         <outlet property="banner" destination="nMu-4U-O1W" id="bKo-gS-wpU"/>
                         <outlet property="bannerYOffset" destination="Z3k-Ni-LmG" id="ZlK-Oi-9NP"/>
@@ -411,7 +409,6 @@
                         <viewLayoutGuide key="safeArea" id="nNF-CV-vQH"/>
                     </view>
                     <navigationItem key="navigationItem" title="채팅" id="ntK-l5-KV2">
-                        <barButtonItem key="backBarButtonItem" title="채팅" id="g4U-34-fJd"/>
                         <barButtonItem key="rightBarButtonItem" image="icSettingDefault" id="bx7-fE-O4b">
                             <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>

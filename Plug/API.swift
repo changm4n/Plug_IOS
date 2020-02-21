@@ -670,6 +670,7 @@ public final class UpdateUserMutation: GraphQLMutation {
       updateUser(where: $where, data: $data) {
         __typename
         name
+        profileImageUrl
       }
     }
     """
@@ -720,6 +721,7 @@ public final class UpdateUserMutation: GraphQLMutation {
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("profileImageUrl", type: .scalar(String.self)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -728,8 +730,8 @@ public final class UpdateUserMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String) {
-        self.init(unsafeResultMap: ["__typename": "User", "name": name])
+      public init(name: String, profileImageUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "User", "name": name, "profileImageUrl": profileImageUrl])
       }
 
       public var __typename: String {
@@ -747,6 +749,15 @@ public final class UpdateUserMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var profileImageUrl: String? {
+        get {
+          return resultMap["profileImageUrl"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "profileImageUrl")
         }
       }
     }

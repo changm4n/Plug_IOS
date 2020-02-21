@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SettingVC: PlugViewController {
     
@@ -27,6 +29,7 @@ class SettingVC: PlugViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -39,7 +42,9 @@ class SettingVC: PlugViewController {
         formatter.dateFormat = "a hh:mm"
         return formatter
     }()
-    //
+    
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,18 +57,24 @@ class SettingVC: PlugViewController {
         //        datePicker?.addTarget(self, action: #selector(pickerChanged(picker:)), for: .valueChanged)
         //        textfield.inputView = datePicker
         
+        
+        self.tableView.register(UINib(nibName: "DefaultCell", bundle: nil), forCellReuseIdentifier: "cell")
         self.tableView.tableFooterView = UIView()
         self.tableView.keyboardDismissMode = .onDrag
-        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        self.tableView.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "classCell")
     }
     
     override func setBinding() {
         guard let me = Session.me else { return }
-        profileImageView.image = me.profileImage
+        me.profileImage.bind(to: profileImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        headerView.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] _ in
+            self?.performSegue(withIdentifier: "profile", sender: nil)
+        }).disposed(by: disposeBag)
     }
     
     override func setViews() {
+        setTitle(title: "계정 설정")
         guard let me = Session.me else { return }
         self.profileImageView.makeCircle()
         self.nameLabel.text = me.name
@@ -126,70 +137,78 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let section = indexPath.section
-        //        let row = indexPath.row
-        //        view.endEditing(true)
-        //        guard let me = Session.me else { return }
+        let section = indexPath.section
+        let row = indexPath.row
+        let item = cells[section][row]
+        let id = item.1
+        view.endEditing(true)
+        guard let me = Session.me else { return }
+        
+        if id == "class" {
+            let vc = ClassListVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+//                if self.role == .TEACHER {
+//                    let list = section == 0 ? currentList : shareTitles
+//                    let item = list[row]
+//                    if section == 0 {
+//                        if item.1 == "plug" {
+//
+//                        } else if item.1 == "off" {
+//                            performSegue(withIdentifier: "holiday", sender: nil)
+//                        } else if item.1 == "start" {
+//                            FBLogger.shared.log(id: "edit_on_time_start")
+//                            if currentShowing == 1 {
+//                                currentShowing = 0
+//                                view.endEditing(true)
+//                            } else {
+//                                currentShowing = 1
+//                                if let date = me.schedule.getStartDate() {
+//                                    datePicker?.date = date
+//                                }
+//                                textfield.becomeFirstResponder()
+//                            }
+//
+//                        } else if item.1 == "end" {
+//                            FBLogger.shared.log(id: "edit_on_time_end")
+//                            if currentShowing == 2 {
+//                                currentShowing = 0
+//                                view.endEditing(true)
+//                            } else {
+//                                currentShowing = 2
+//                                if let date = me.schedule.getEndDate() {
+//                                    datePicker?.date = date
+//                                }
+//                                textfield.becomeFirstResponder()
+//                            }
+//                        }
+//                    } else {
+//                    }
+//
+//                } else if self.role == .PARENT {
+//                    if section == 0 {
+//                        let classData = classItems[row]
+//                        performSegue(withIdentifier: "out", sender: classData.id)
+//                    }
+//                }
         //
-        //        if self.role == .TEACHER {
-        //            let list = section == 0 ? currentList : shareTitles
-        //            let item = list[row]
-        //            if section == 0 {
-        //                if item.1 == "plug" {
-        //
-        //                } else if item.1 == "off" {
-        //                    performSegue(withIdentifier: "holiday", sender: nil)
-        //                } else if item.1 == "start" {
-        //                    FBLogger.shared.log(id: "edit_on_time_start")
-        //                    if currentShowing == 1 {
-        //                        currentShowing = 0
-        //                        view.endEditing(true)
-        //                    } else {
-        //                        currentShowing = 1
-        //                        if let date = me.schedule.getStartDate() {
-        //                            datePicker?.date = date
-        //                        }
-        //                        textfield.becomeFirstResponder()
-        //                    }
-        //
-        //                } else if item.1 == "end" {
-        //                    FBLogger.shared.log(id: "edit_on_time_end")
-        //                    if currentShowing == 2 {
-        //                        currentShowing = 0
-        //                        view.endEditing(true)
-        //                    } else {
-        //                        currentShowing = 2
-        //                        if let date = me.schedule.getEndDate() {
-        //                            datePicker?.date = date
-        //                        }
-        //                        textfield.becomeFirstResponder()
-        //                    }
-        //                }
-        //            } else {
-        //            }
-        //
-        //        } else if self.role == .PARENT {
-        //            if section == 0 {
-        //                let classData = classItems[row]
-        //                performSegue(withIdentifier: "out", sender: classData.id)
-        //            }
-        //        }
-        //
-        //        if section == 1 {
-        //            let item = shareTitles[row]
-        //
-        //            if item.0 == "로그아웃" {
-        //                showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
-        //                    Networking.removePushKey()
-        //                    Session.removeSavedUser()
-        //                    self.performSegue(withIdentifier: "logout", sender: nil)
-        //                }, canceltype: .default, confirmtype: .destructive)
-        //            } else if item.0 == "약관 및 개인정보 처리방침" {
-        //                performSegue(withIdentifier: "web", sender: kUserDesc)
-        //            } else if item.0 == "오픈소스 라이선스" {
-        //                performSegue(withIdentifier: "license", sender: nil)
-        //            }
-        //        }
+        
+        if id == "logout" {
+            showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
+//                Networking.removePushKey()
+                Session.removeSavedUser()
+                let VC = MainVC()
+                let NVC = UINavigationController(rootViewController: VC)
+                NVC.modalPresentationStyle = .fullScreen
+                self.present(NVC, animated: false, completion: nil)
+                
+            }, canceltype: .default, confirmtype: .destructive)
+        } else if id == "privacy" {
+            let vc = DescViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if item.0 == "오픈소스 라이선스" {
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -207,12 +226,12 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         if id == "switch" {
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as! SettingSwitchCell
             cell.titleLabel.text = item.0
-            cell.switcher.isOn = Session.me?.schedule.isPlugOn() ?? false
+            cell.switcher.isOn = Session.me?.schedule.isOn ?? false
             cell.switcher.addTarget(self, action: #selector(switchChanged(switch:)), for: .valueChanged)
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingDefaultCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DefaultCell
         cell.titleLabel.text = item.0
         
         if id == "off" {
@@ -251,7 +270,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header =  UINib(nibName: "ClassHeader", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ClassHeader
         header?.label.text = headers[section]
-        return heade¸r
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

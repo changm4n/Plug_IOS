@@ -307,7 +307,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
             endingLineNumber = "46"
-            landmarkName = "signUp(userId:passwd:name:url:)"
+            landmarkName = "updateUser(me:name:url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -372,6 +372,22 @@
             startingLineNumber = "267"
             endingLineNumber = "267"
             landmarkName = "sendMessage(message:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D56D33FD-EA69-4D70-A0E7-6A3822CDDD77"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Plug/Extensions/PlugCronParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getDaysString()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -14,8 +14,10 @@ import RxSwift
 extension Reactive where Base: PhotoSelector {
     var selectedImage: Binder<UIImage?> {
         return Binder(self.base) { (view, image) in
-            view.photoView.image = image
-            view.setTitle(image != nil ? "" : "+", for: .normal)
+            if image != nil {
+                view.photoView.image = image
+                view.setTitle(image != nil ? "" : "+", for: .normal)
+            }
         }
     }
 }
@@ -83,6 +85,7 @@ class PhotoSelector: UIButton {
         self.layer.masksToBounds = false
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 3
         self.layer.shadowColor = UIColor(r: 26/255.0, g: 56/255.0, b: 127/255.0, a: 0.35).cgColor
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.layer.cornerRadius).cgPath
         self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)

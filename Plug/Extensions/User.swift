@@ -45,9 +45,9 @@ public class Session : NSObject {
                 let url = URL(string: urlStr) {
                 do {
                     let ImageData = try Data(contentsOf: url)
-                    profileImage = UIImage(data: ImageData)
+                    profileImage.onNext(UIImage(data: ImageData))
                 } catch {
-                    profileImage = nil
+                    profileImage.onNext(nil)
                 }
             }
         }
@@ -59,7 +59,7 @@ public class Session : NSObject {
     var schedule: Schedule
     
     var appPushID: String?
-    var profileImage: UIImage?
+    var profileImage: BehaviorSubject<UIImage?> = BehaviorSubject(value: nil)
     
     var adminClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
     var memberClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
@@ -87,9 +87,9 @@ public class Session : NSObject {
             let url = URL(string: urlStr) {
             do {
                 let ImageData = try Data(contentsOf: url)
-                profileImage = UIImage(data: ImageData)
+                profileImage.onNext(UIImage(data: ImageData))
             } catch {
-                profileImage = nil
+                profileImage.onNext(nil)
             }
         }
     }
@@ -284,6 +284,19 @@ public class Session : NSObject {
         data["push_id"] = Session.fetchDeviceKey()
      
         return data
+    }
+}
+
+extension Session {
+    func updateProfile(name: String, image: UIImage?) {
+        guard let userId = userId else { return }
+        UserAPI.uploadIamge(image: image, userId: userId)
+            .flatMap { (url) in
+                return UserAPI.updateUser(me: Session.me, name: name, url: url)
+        }.subscribe(onNext: { (result) in
+            Session.me?.profileImageUrl = result.updateUser?.profileImageUrl
+            Session.me?.name = result.updateUser?.name
+        }).disposed(by: disposeBag)
     }
 }
 

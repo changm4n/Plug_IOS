@@ -14,15 +14,6 @@ class SettingCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 }
 
-class SettingDefaultCell: SettingCell {
-    @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var indicator: UIImageView!
-    
-    func setContentText(text: String) {
-        contentLabel.text = text
-        indicator.isHidden = true
-    }
-}
 
 class SettingSwitchCell: SettingCell {
     @IBOutlet weak var switcher: UISwitch!

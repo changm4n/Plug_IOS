@@ -42,6 +42,12 @@ class UserAPI: NSObject {
         return Network.shared.uploadImage(image: image, userId: filename)
     }
     
+    static func updateUser(me: Session?, name: String, url: String?) -> Maybe<UpdateUserMutation.Data> {
+        let input = UserUpdateInput(role: .parent, name: name, profileImageUrl: url)
+        let unique = UserWhereUniqueInput(id: me?.id, userId: me?.userId)
+        return Network.shared.perform(query: UpdateUserMutation(data: input, where: unique))
+    }
+    
     static func signUp(userId: String, passwd: String, name: String, url: String?) -> Maybe<SignUpMutation.Data> {
         let input = UserInput(role: .parent, userId: userId, name: name, password: passwd, profileImageUrl: url, phoneNumber: nil)
         return Network.shared.perform(query: SignUpMutation(data: input))
