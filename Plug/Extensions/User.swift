@@ -12,7 +12,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-let kYears = ["2016","2017","2018","2019","2020"]
+let kYears = ["2020","2019","2018"]
 let kDidLogoutNotification = "kDidLogoutNotification"
 let kSavedUserData = "kSavedUserData"
 

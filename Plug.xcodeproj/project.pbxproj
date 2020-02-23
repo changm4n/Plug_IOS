@@ -11,6 +11,9 @@
 		ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2CC5220717F50035B887 /* PlugIndicator.swift */; };
 		ED0A2CC8220730600035B887 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
 		ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
+		ED1153212402B99600AD59FA /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153202402B99600AD59FA /* CreateClassVC.swift */; };
+		ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153232402CA9F00AD59FA /* CodeVC.swift */; };
+		ED1153262402D59600AD59FA /* JoinClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153252402D59600AD59FA /* JoinClassVC.swift */; };
 		ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
@@ -35,6 +38,8 @@
 		ED44B2252400629300AEB833 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED44B2242400629300AEB833 /* DefaultCell.xib */; };
 		ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2262400647F00AEB833 /* DefaultCell.swift */; };
 		ED44B2292400655E00AEB833 /* ClassDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2282400655E00AEB833 /* ClassDetailVC.swift */; };
+		ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED44B22A24025D6D00AEB833 /* MemberCell.xib */; };
+		ED44B22D24025E3000AEB833 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B22C24025E3000AEB833 /* MemberCell.swift */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B192623FAEA0A007C402C /* ForgotVC.swift */; };
@@ -173,6 +178,9 @@
 		ED0A2CC5220717F50035B887 /* PlugIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugIndicator.swift; sourceTree = "<group>"; };
 		ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		ED0E65DA225CAE3500D25E0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ED1153202402B99600AD59FA /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
+		ED1153232402CA9F00AD59FA /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
+		ED1153252402D59600AD59FA /* JoinClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinClassVC.swift; sourceTree = "<group>"; };
 		ED1F586021DE29C100126A07 /* OutClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutClassVC.swift; sourceTree = "<group>"; };
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
@@ -206,6 +214,8 @@
 		ED44B2242400629300AEB833 /* DefaultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCell.xib; sourceTree = "<group>"; };
 		ED44B2262400647F00AEB833 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		ED44B2282400655E00AEB833 /* ClassDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetailVC.swift; sourceTree = "<group>"; };
+		ED44B22A24025D6D00AEB833 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
+		ED44B22C24025E3000AEB833 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC.swift; sourceTree = "<group>"; };
 		ED4750F321EA80190043FD18 /* kidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidVC.swift; sourceTree = "<group>"; };
 		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
@@ -385,6 +395,8 @@
 				ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */,
 				ED44B21823FD7E1D00AEB833 /* Settings.storyboard */,
 				ED44B2242400629300AEB833 /* DefaultCell.xib */,
+				ED44B22A24025D6D00AEB833 /* MemberCell.xib */,
+				ED44B22C24025E3000AEB833 /* MemberCell.swift */,
 				ED44B2262400647F00AEB833 /* DefaultCell.swift */,
 				ED44B21423FD784D00AEB833 /* 1.0 */,
 			);
@@ -550,6 +562,9 @@
 				ED44B2202400511E00AEB833 /* 1.0 */,
 				ED44B2212400513100AEB833 /* ClassListVC.swift */,
 				ED44B2282400655E00AEB833 /* ClassDetailVC.swift */,
+				ED1153202402B99600AD59FA /* CreateClassVC.swift */,
+				ED1153252402D59600AD59FA /* JoinClassVC.swift */,
+				ED1153232402CA9F00AD59FA /* CodeVC.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -767,6 +782,7 @@
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */,
+				ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				ED71B6B42219359400AC21FF /* licenses.json in Resources */,
@@ -927,6 +943,8 @@
 				ED8C492F23EC4AED00443477 /* Secret.swift in Sources */,
 				ED2A26E823F84A8700E22B01 /* KakaoLoginManager.swift in Sources */,
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
+				ED1153262402D59600AD59FA /* JoinClassVC.swift in Sources */,
+				ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */,
 				ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */,
 				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
 				ED2A26ED23F87DCF00E22B01 /* PhotoSelector.swift in Sources */,
@@ -943,6 +961,7 @@
 				ED8C493123EC4B4000443477 /* WebVC.swift in Sources */,
 				ED44B21723FD7A5400AEB833 /* SettingVC.swift in Sources */,
 				ED44B2222400513100AEB833 /* ClassListVC.swift in Sources */,
+				ED44B22D24025E3000AEB833 /* MemberCell.swift in Sources */,
 				EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */,
 				ED8C494023F051B100443477 /* MessageAPI.swift in Sources */,
 				ED44B21A23FD7EC700AEB833 /* ClassHeader.swift in Sources */,
@@ -972,6 +991,7 @@
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */,
+				ED1153212402B99600AD59FA /* CreateClassVC.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
 				ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */,
 				ED8C493A23EF1C9100443477 /* API.swift in Sources */,

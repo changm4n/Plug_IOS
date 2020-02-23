@@ -140,21 +140,3 @@ extension ManageClassVC: UITableViewDataSource, UITableViewDelegate {
         performSegue(withIdentifier: "chat", sender: member)
     }
 }
-
-
-class MemberCell: UITableViewCell {
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var memberNameLabel: UILabel!
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        profileImage.makeCircle()
-    }
-    
-    func setProfile(with urlString: String?) {
-        if let urlStr = urlString {
-            profileImage.kf.setImage(with: URL(string: urlStr))
-        }
-    }
-}

@@ -461,7 +461,7 @@
             <objects>
                 <viewController id="NMY-se-DPC" customClass="RegisterPlugIDVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mrv-uO-Khl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSh-3Y-JfL" customClass="WideButton" customModule="Plug" customModuleProvider="target">
@@ -560,7 +560,7 @@
             <objects>
                 <viewController id="hwI-qZ-V8a" customClass="RegisterCodeVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K82-E4-r8s">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-Yy-nS6">
@@ -637,7 +637,7 @@
             <objects>
                 <viewController id="Jcg-nX-lsQ" customClass="ChangePlugIDVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Hq-2X-UhY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnU-i7-Jre" customClass="WideButton" customModule="Plug" customModuleProvider="target">
@@ -713,7 +713,7 @@
             <objects>
                 <viewController id="bYi-sD-5nm" customClass="ChangePWVC" customModule="Plug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a5z-ei-waA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-Or-3nC" customClass="WideButton" customModule="Plug" customModuleProvider="target">
@@ -870,6 +870,6 @@
         <image name="iconIcClose" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RRu-ez-0l3"/>
+        <segue reference="uK4-vl-8hE"/>
     </inferredMetricsTieBreakers>
 </document>

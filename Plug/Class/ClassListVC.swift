@@ -46,12 +46,8 @@ class ClassListVC: PlugViewController {
         viewModel = ClassListViewModel(me: me)
         let configureCell: (TableViewSectionedDataSource<ClassSectionModel>, UITableView, IndexPath, ChatRoomApolloFragment) -> UITableViewCell = { datasource, tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlugClassCell
-            if indexPath.section == 0 {
-                cell.configure(item: item)
-            } else {
-                cell.configure(item: item, isAdmin: false)
-            }
-            
+            cell.selectionStyle = .none
+            cell.configure(item: item, isAdmin: indexPath.section == 0)
             return cell
         }
         
@@ -72,6 +68,7 @@ extension ClassListVC: UITableViewDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 72
     }

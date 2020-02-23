@@ -147,6 +147,12 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         if id == "class" {
             let vc = ClassListVC()
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if id == "new" {
+            let vc = CreateClassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if id == "join" {
+            let vc = JoinClassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
 //                if self.role == .TEACHER {
@@ -194,7 +200,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
 //                }
         //
         
-        if id == "logout" {
+        else if id == "logout" {
             showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
 //                Networking.removePushKey()
                 Session.removeSavedUser()

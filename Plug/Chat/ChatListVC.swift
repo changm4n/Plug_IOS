@@ -24,7 +24,7 @@ class ChatListVC: PlugViewController {
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+
         let style = NSMutableParagraphStyle()
         style.firstLineHeadIndent = 18 // This is added to the default margin
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.paragraphStyle : style]

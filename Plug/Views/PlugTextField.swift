@@ -27,11 +27,13 @@ class PlugTextField: SkyFloatingLabelTextField {
     
     init(type: FieldType) {
         super.init(frame: CGRect.zero)
+        self.setTitleVisible(true)
         self.type = type
         self.rx.text.orEmpty
             .map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
             .filter({ $0.count > 0 })
             .bind(to: self.inputText).disposed(by: disposeBag)
+        self.clearButtonMode = .whileEditing
         
         switch type {
         case .email:
@@ -40,6 +42,8 @@ class PlugTextField: SkyFloatingLabelTextField {
             bindPasswd()
         case .name:
             bindName()
+        case .code:
+            bindCode()
         default:
             break
         }
@@ -66,6 +70,14 @@ class PlugTextField: SkyFloatingLabelTextField {
         }).disposed(by: disposeBag)
     }
     
+    func bindCode() {
+        self.keyboardType = .alphabet
+        inputText.map({ $0.count == 6 }).bind(to: validation).disposed(by: disposeBag)
+        inputText.map({ $0.uppercased() }).bind(to: self.rx.text).disposed(by: disposeBag)
+        validation.skip(1).subscribe(onNext: { result in
+            self.errorMessage = result ? "" : "알파벳 6자리를 입력해주세요."
+        }).disposed(by: disposeBag)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

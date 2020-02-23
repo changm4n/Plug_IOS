@@ -10,6 +10,9 @@
         <array key="Spoqa Han Sans Bold.ttf">
             <string>SpoqaHanSans-Bold</string>
         </array>
+        <array key="Spoqa Han Sans Regular.ttf">
+            <string>SpoqaHanSans-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,17 +30,29 @@
                     <color key="textColor" red="0.2196078431372549" green="0.23529411764705882" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKO-fj-JgR">
+                    <rect key="frame" x="78.5" y="11" width="0.0" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="gd1-ZP-5s3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SpoqaHanSans-Regular" family="SpoqaHanSans" pointSize="14"/>
+                    <color key="textColor" red="0.25490196078431371" green="0.44705882352941173" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Ukl-wg-Zk3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="1Bc-5e-QeV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ukl-wg-Zk3" secondAttribute="bottom" constant="15" id="Aqe-ru-5g5"/>
+                <constraint firstItem="fKO-fj-JgR" firstAttribute="bottom" secondItem="Ukl-wg-Zk3" secondAttribute="bottom" constant="-2" id="xTg-qW-7ad"/>
+                <constraint firstItem="fKO-fj-JgR" firstAttribute="leading" secondItem="Ukl-wg-Zk3" secondAttribute="trailing" constant="8" id="yzq-iK-oQf"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="label" destination="Ukl-wg-Zk3" id="D3s-Du-geQ"/>
+                <outlet property="subLabel" destination="fKO-fj-JgR" id="rg5-M7-Cl6"/>
             </connections>
             <point key="canvasLocation" x="138" y="155"/>
         </view>

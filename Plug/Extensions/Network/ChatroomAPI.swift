@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-
+import Apollo
 
 class ChatroomAPI: NSObject {
     static func getAdminChatroom(userId: String) -> Maybe<AdminRoomQuery.Data> {
@@ -25,6 +25,21 @@ class ChatroomAPI: NSObject {
 //            let classData = data.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
 //            Session.me?.memberClass.accept(classData)s
 //        })
+    }
+    
+    static func createChatroom(userId: String, name: String, year: String) -> Maybe<String> {
+        return Network.shared.perform(query: CreateRoomMutation(roomName: name, userId: userId, year: year)).map({ data in
+            return data.createChatRoom.inviteCode
+        })
+    }
+    
+    static func getChatroom(byCode code: String) -> Maybe<ChatRoomApolloFragment> {
+        return Network.shared.fetch(query: GetChatroomQuery(code: code)).map({ data in
+            guard let chatroom = data.chatRooms.first?.fragments.chatRoomApolloFragment else {
+                throw GraphQLError(JSONObject())
+            }
+            return chatroom
+        })
     }
 }
 
