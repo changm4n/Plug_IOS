@@ -57,10 +57,7 @@ class SettingProfileVC: PlugViewController {
     }
     
     override func setBinding() {
-        Session.me?.profileImage
-            .bind(to: self.photoSelector.rx.selectedImage)
-            .disposed(by: disposeBag)
-        
+        self.photoSelector.setImage(url: Session.me?.profileImageUrl)
         self.imagePicker.presentationController = self
         
         self.imagePicker.selectedImage
@@ -104,7 +101,6 @@ class SettingProfileVC: PlugViewController {
         })
     }
 }
-
 
 extension SettingProfileVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -339,7 +339,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
                   endingLineNumber = "70"
-                  offsetFromSymbolStart = "256">
+                  offsetFromSymbolStart = "297">
                </Location>
                <Location
                   uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 6fa90146fa5ad970"
@@ -354,7 +354,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
                   endingLineNumber = "70"
-                  offsetFromSymbolStart = "276">
+                  offsetFromSymbolStart = "301">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -388,6 +388,22 @@
             startingLineNumber = "91"
             endingLineNumber = "91"
             landmarkName = "getDaysString()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F44939B8-0DBD-4ABD-B645-C0E5429CC445"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Plug/Join/2.0/SignUp/PhotoSelector.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "present(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

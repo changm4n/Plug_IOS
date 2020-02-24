@@ -47,8 +47,10 @@ public class Session : NSObject {
                     let ImageData = try Data(contentsOf: url)
                     profileImage.onNext(UIImage(data: ImageData))
                 } catch {
-                    profileImage.onNext(nil)
+                    profileImage.onNext(UIImage.getDefaultProfile())
                 }
+            } else {
+                profileImage.onNext(UIImage.getDefaultProfile())
             }
         }
     }

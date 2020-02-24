@@ -3190,6 +3190,7 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
       applyChatRoom(id: $id, data: {userId: $userId, kidName: $kidName}) {
         __typename
         id
+        name
       }
     }
     """
@@ -3242,6 +3243,7 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -3250,8 +3252,8 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID) {
-        self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id])
+      public init(id: GraphQLID, name: String) {
+        self.init(unsafeResultMap: ["__typename": "ChatRoom", "id": id, "name": name])
       }
 
       public var __typename: String {
@@ -3269,6 +3271,15 @@ public final class ApplyChatRoomMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
         }
       }
     }

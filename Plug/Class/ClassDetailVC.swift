@@ -24,7 +24,7 @@ class ClassDetailVC: PlugViewController {
     let headers = ["클래스 초대", "클래스 구성원"]
     
     let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    let cellAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,15 +57,6 @@ class ClassDetailVC: PlugViewController {
         })
         
         alertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
-        
-        cellAlertController.addAction(UIAlertAction(title: "대화하기", style: .default) { [unowned self] _ in
-            
-        })
-        
-        cellAlertController.addAction(UIAlertAction(title: "구성원 제외", style: .destructive) { [unowned self] _ in
-            
-        })
-        cellAlertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
     }
     
     @objc func morePressed() {
@@ -106,8 +97,40 @@ extension ClassDetailVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             
         } else {
-            self.present(cellAlertController, animated: true, completion: nil)
+            self.selectMember(row: indexPath.row)
+            
         }
+    }
+    
+    //TODO : Rx
+    func selectMember(row: Int) {
+        guard let sender = kids[row].fragments.kidApolloFragment.parents?.first?.fragments.userApolloFragment,
+            let userId = Session.me?.userId,
+            let name = Session.me?.name else {
+            return
+        }
+        let cellAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        cellAlertController.addAction(UIAlertAction(title: "대화하기", style: .default) { [unowned self] _ in
+            
+            let sender = Identity(id: sender.userId, name: sender.name)
+            let receiver = Identity(id: userId, name: name)
+            let chatroom = Identity(id: self.item.id, name: self.item.name)
+            
+            let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
+            
+            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+
+            let vc = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+            vc.identity = identity
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        cellAlertController.addAction(UIAlertAction(title: "구성원 제외", style: .destructive) { [unowned self] _ in
+            
+        })
+        
+        cellAlertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
+        self.present(cellAlertController, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

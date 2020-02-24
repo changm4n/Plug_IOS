@@ -240,6 +240,7 @@ mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
     applyChatRoom(id: $id, data : {userId:$userId
                   kidName :$kidName}) {
         id
+        name
     }
 }
 

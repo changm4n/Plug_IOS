@@ -32,6 +32,11 @@ class ClassListVC: PlugViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Session.me?.reloadChatRoom()
+    }
+    
     override func setViews() {
         setTitle(title: "내 클래스")
         self.tableView.tableFooterView = UIView()

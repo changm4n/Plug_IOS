@@ -136,9 +136,22 @@ class PlugBarbuttonItem: UIBarButtonItem {
 }
 
 extension UIImageView {
-    func setImageWithURL(urlString: String?) {
-        guard let urlString = urlString else { return }
-        guard let url = URL(string: urlString) else { return }
+    func setImageWithURL(urlString: String?, showDefault: Bool = true) {
+        guard let urlString = urlString else {
+            self.image = showDefault ? UIImage(named: "profileDefault") : nil
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            self.image = showDefault ? UIImage(named: "profileDefault") : nil
+            return
+            
+        }
         self.kf.setImage(with: url)
+    }
+}
+
+extension UIImage {
+    static func getDefaultProfile() -> UIImage? {
+        return UIImage(named: "profileDefault") ?? nil
     }
 }

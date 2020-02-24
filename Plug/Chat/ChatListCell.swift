@@ -27,13 +27,19 @@ class ChatListCell: UITableViewCell {
         contentLabel.text = item.lastMessage.text
         roomLabel.text = item.chatroom.name
         newImageView.isHidden = item.unreadCount == 0
-        
-        if let url = item.sender.profileImageUrl, item.sender.profileImageUrl != "" {
-            profileImageView.kf.setImage(with: URL(string: url))
-        }
+        profileImageView.setImageWithURL(urlString: item.sender.profileImageUrl)
         
         let messageItem = item.lastMessage
         timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
+    }
+    
+    override func prepareForReuse() {
+        nameLabel.text = ""
+        contentLabel.text = ""
+        roomLabel.text = ""
+        newImageView.isHidden = true
+        profileImageView.image = nil
+        timeLabel.text = ""
     }
 }
 

@@ -41,6 +41,10 @@ class ChatroomAPI: NSObject {
             return chatroom
         })
     }
+    
+    static func joinChatroom(id: String, userId: String, name: String) -> Maybe<ApplyChatRoomMutation.Data> {
+        return Network.shared.perform(query: ApplyChatRoomMutation(id: id, userId: userId, kidName: name))
+    }
 }
 
 

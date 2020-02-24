@@ -14,10 +14,8 @@ import RxSwift
 extension Reactive where Base: PhotoSelector {
     var selectedImage: Binder<UIImage?> {
         return Binder(self.base) { (view, image) in
-            if image != nil {
-                view.photoView.image = image
-                view.setTitle(image != nil ? "" : "+", for: .normal)
-            }
+            view.photoView.image = image
+            view.setTitle(image != nil ? "" : "+", for: .normal)
         }
     }
 }
@@ -72,7 +70,10 @@ class PhotoSelector: UIButton {
         }, completion: nil)
     }
     
-    
+    public func setImage(url: String?) {
+        self.photoView.setImageWithURL(urlString: url, showDefault: false)
+        self.setTitle(url != nil ? "" : "+", for: .normal)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

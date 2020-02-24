@@ -59,11 +59,13 @@ class JoinClassVC: PlugViewControllerWithButton {
         codeTF.validation.bind(to: confirmButton.rx.isEnabled).disposed(by: disposeBag)
         
         confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
-            .withLatestFrom(codeTF.rx.text.orEmpty).bind(to: viewModel.joinPressed).disposed(by: disposeBag)
+            .withLatestFrom(codeTF.rx.text.orEmpty).bind(to: viewModel.checkPressed).disposed(by: disposeBag)
         
         viewModel.checkSuccess.subscribe(onNext: { [unowned self] (result) in
             if result {
-                showAlertWithString("클래스 가입 오류", message: self.viewModel.chatroom?.name ?? "error", sender: self, handler: nil)
+                let vc = JoinKidVC()
+                vc.viewModel = self.viewModel
+                self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 showAlertWithString("클래스 가입 오류", message: "초대코드를 확인해주세요.", sender: self, handler: nil)
             }}, onError: { error in
@@ -109,14 +111,24 @@ class JoinClassViewModel {
     let disposeBag = DisposeBag()
     var chatroom: ChatRoomApolloFragment? = nil
     //input
+    var checkPressed: PublishSubject<(String)> = PublishSubject()
     var joinPressed: PublishSubject<(String)> = PublishSubject()
     
     //output
     var checkSuccess: PublishSubject<Bool> = PublishSubject()
+    var joinSuccess: PublishSubject<(Bool, String)> = PublishSubject()
 
     init() {
-        joinPressed.subscribe(onNext: { [unowned self] (code) in
+        checkPressed.subscribe(onNext: { [unowned self] (code) in
             self.check(code: code)
+        }).disposed(by: disposeBag)
+        
+        joinPressed.subscribe(onNext: { [unowned self] (name) in
+            if let userId = Session.me?.userId, let id = self.chatroom?.id {
+                self.join(id: id, userId: userId, name: name)
+            } else {
+                self.joinSuccess.onNext((false, ""))
+            }
         }).disposed(by: disposeBag)
     }
 
@@ -127,6 +139,15 @@ class JoinClassViewModel {
                 self.checkSuccess.onNext(true)
             }, onError: { [unowned self] (error) in
                 self.checkSuccess.onNext(false)
+        }).disposed(by: disposeBag)
+    }
+    
+    func join(id: String, userId: String, name: String) {
+        ChatroomAPI.joinChatroom(id: id, userId: userId, name: name).subscribe(
+            onSuccess: { [weak self] (data) in
+                self?.joinSuccess.onNext((true, data.applyChatRoom.name))
+            }, onError: { [weak self] (error) in
+                self?.joinSuccess.onNext((false, ""))
         }).disposed(by: disposeBag)
     }
 }
