@@ -32,12 +32,24 @@ class Network {
         cachePolicy: CachePolicy = .fetchIgnoringCacheData,
         queue: DispatchQueue = DispatchQueue.main
     ) -> Maybe<Query.Data> {
+        Network.isNetworking(status: true)
         return self.apollo.rx
             .fetch(query: query, cachePolicy: cachePolicy, queue: queue)
+            .do(onNext: { (_) in
+                Network.isNetworking(status: false)
+            }, onError: { _ in
+                Network.isNetworking(status: false)
+            })
     }
     
     func perform<Query: GraphQLMutation>(query: Query) -> Maybe<Query.Data> {
+        Network.isNetworking(status: true)
         return self.apollo.rx.perform(mutation: query, context: nil, queue: .main)
+            .do(onNext: { (_) in
+                Network.isNetworking(status: false)
+            }, onError: { _ in
+                Network.isNetworking(status: false)
+            })
     }
     
     func uploadImage(image: UIImage?, userId: String) -> Observable<String?> {
@@ -113,6 +125,15 @@ extension Network: HTTPNetworkTransportPreflightDelegate {
     }
 }
 
+extension Network {
+    static func isNetworking(status: Bool) {
+        if status {
+            PlugIndicator.shared.play()
+        } else {
+            PlugIndicator.shared.stop()
+        }
+    }
+}
 //// MARK: - Task Completed Delegate
 //
 //extension Network: HTTPNetworkTransportTaskCompletedDelegate {
