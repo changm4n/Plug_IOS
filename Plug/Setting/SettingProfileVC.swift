@@ -36,6 +36,8 @@ class SettingProfileVC: PlugViewController {
     let headers = ["플러그 계정 설정", "로그아웃 및 계정관리"]
     let cells: [[(String, String)]] = [[("플러그 계정","subtitle"), ("비밀번호 변경", "cell")],[("로그아웃","cell"), ("계정 삭제","cell")]]
     
+    var needToUpdate = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -49,10 +51,15 @@ class SettingProfileVC: PlugViewController {
             guard let myName = Session.me?.name, var name = nameTF.text else {
                 return
             }
+            if name != myName {
+                needToUpdate = true
+            }
             if name == "" {
                 name = myName
             }
-            Session.me?.updateProfile(name: name, image: self.photoSelector.photoView.image)
+            if needToUpdate {
+                Session.me?.updateProfile(name: name, image: self.photoSelector.photoView.image)
+            }
         }
     }
     
@@ -60,8 +67,9 @@ class SettingProfileVC: PlugViewController {
         self.photoSelector.setImage(url: Session.me?.profileImageUrl)
         self.imagePicker.presentationController = self
         
-        self.imagePicker.selectedImage
-            .bind(to: self.photoSelector.rx.selectedImage)
+        self.imagePicker.selectedImage.do(onNext: { [weak self] (_) in
+            self?.needToUpdate = true
+        }).bind(to: self.photoSelector.rx.selectedImage)
             .disposed(by: disposeBag)
         
         photoSelector.rx.tap.asDriver().drive(onNext: { [unowned self] (_) in

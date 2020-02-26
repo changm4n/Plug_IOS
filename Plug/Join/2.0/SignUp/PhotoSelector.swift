@@ -29,6 +29,7 @@ class PhotoSelector: UIButton {
         iv.clipsToBounds = true
         iv.backgroundColor = UIColor.clear
         iv.isUserInteractionEnabled = false
+        iv.contentMode = .scaleAspectFill
         return iv
         }()
     

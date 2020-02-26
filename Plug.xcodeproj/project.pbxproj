@@ -15,6 +15,8 @@
 		ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153232402CA9F00AD59FA /* CodeVC.swift */; };
 		ED1153262402D59600AD59FA /* JoinClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153252402D59600AD59FA /* JoinClassVC.swift */; };
 		ED115328240418A000AD59FA /* JoinKidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED115327240418A000AD59FA /* JoinKidVC.swift */; };
+		ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C397218964CF008DA9E7 /* HomeHeaderView.swift */; };
+		ED11532A2406B92300AD59FA /* HomeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C39D21896F80008DA9E7 /* HomeHeaderCell.swift */; };
 		ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
@@ -981,6 +983,7 @@
 				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
+				ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */,
 				EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */,
 				ED44B21F24002E5800AEB833 /* SettingProfileVC.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
@@ -1003,6 +1006,7 @@
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
 				EDE6089B239BFDB200F91EB4 /* ChatListCell.swift in Sources */,
+				ED11532A2406B92300AD59FA /* HomeHeaderCell.swift in Sources */,
 				EDFC46E923DA10C100AB194A /* ChatLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

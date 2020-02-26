@@ -321,40 +321,55 @@
             filePath = "Plug/Extensions/Network/Networking.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "uploadImage(image:userId:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 6fa90146fa5ad970"
+                  uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 32fa34931bae28ec"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in closure #2 (RxSwift.AnyObserver&lt;Swift.Optional&lt;Swift.String&gt;&gt;) -&gt; RxSwift.Disposable in Plug.Network.uploadImage(image: Swift.Optional&lt;__C.UIImage&gt;, userId: Swift.String) -&gt; RxSwift.Observable&lt;Swift.Optional&lt;Swift.String&gt;&gt;"
+                  symbolName = "closure #2 (RxSwift.AnyObserver&lt;Swift.Optional&lt;Swift.String&gt;&gt;) -&gt; RxSwift.Disposable in Plug.Network.uploadImage(image: Swift.Optional&lt;__C.UIImage&gt;, userId: Swift.String) -&gt; RxSwift.Observable&lt;Swift.Optional&lt;Swift.String&gt;&gt;"
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Extensions/Network/Networking.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "297">
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "304">
                </Location>
                <Location
-                  uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 6fa90146fa5ad970"
+                  uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 8e9f980e30c3dd99"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in closure #2 (RxSwift.AnyObserver&lt;Swift.Optional&lt;Swift.String&gt;&gt;) -&gt; RxSwift.Disposable in Plug.Network.uploadImage(image: Swift.Optional&lt;__C.UIImage&gt;, userId: Swift.String) -&gt; RxSwift.Observable&lt;Swift.Optional&lt;Swift.String&gt;&gt;"
+                  symbolName = "closure #1 (Alamofire.MultipartFormData) -&gt; () in closure #2 (RxSwift.AnyObserver&lt;Swift.Optional&lt;Swift.String&gt;&gt;) -&gt; RxSwift.Disposable in Plug.Network.uploadImage(image: Swift.Optional&lt;__C.UIImage&gt;, userId: Swift.String) -&gt; RxSwift.Observable&lt;Swift.Optional&lt;Swift.String&gt;&gt;"
                   moduleName = "Plug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Extensions/Network/Networking.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "301">
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "932">
+               </Location>
+               <Location
+                  uuid = "616175BF-766D-4883-B94F-F47E87A6F5CA - 9fb717252fb4996e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in closure #2 (RxSwift.AnyObserver&lt;Swift.Optional&lt;Swift.String&gt;&gt;) -&gt; RxSwift.Disposable in Plug.Network.uploadImage(image: Swift.Optional&lt;__C.UIImage&gt;, userId: Swift.String) -&gt; RxSwift.Observable&lt;Swift.Optional&lt;Swift.String&gt;&gt;"
+                  moduleName = "Plug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changminlee/Documents/IOS/Projects/Plug/Plug/Extensions/Network/Networking.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "112">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -401,8 +416,8 @@
             filePath = "Plug/Join/2.0/SignUp/PhotoSelector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "present(from:)"
             landmarkType = "7">
          </BreakpointContent>
