@@ -38,7 +38,6 @@ class StartVC: PlugViewController {
 //        return
         ////
         if Session.fetchToken() != nil {
-            
             UserAPI.getMe().flatMap({ _ in
                 return UserAPI.getUserInfo()
             }).subscribe(

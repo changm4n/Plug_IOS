@@ -28,7 +28,7 @@ public enum SessionRole: String {
     , NONE = "NONE"
 }
 
-public class Session : NSObject {
+public class Session {
     
     let disposeBag = DisposeBag()
     
@@ -65,10 +65,14 @@ public class Session : NSObject {
     
     var adminClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
     var memberClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
+    var allClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
     
     var summaryData: BehaviorRelay<[MessageSummary]> = BehaviorRelay(value: [])
     
-    public convenience override init() {
+    var kids: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
+    
+    
+    public convenience init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
          schedule = Schedule(schedule: "0-30 9-18 6,7")
@@ -94,6 +98,7 @@ public class Session : NSObject {
                 profileImage.onNext(nil)
             }
         }
+        setBinding()
     }
     
     public init (withDic dic: [String : Any]) {
@@ -109,6 +114,29 @@ public class Session : NSObject {
         appPushID = dic["appPushId"] as? String
         
         schedule = Schedule(schedule: "0-30 9-18 6,7")
+        setBinding()
+    }
+    
+    func setBinding() {
+//        self.adminClass.map({
+//            $0.compactMap({$0}).compactMap({$0.kids}).flatMap({$0}).map({$0.fragments.kidApolloFragment})
+//        }).bind(to: kids).disposed(by: disposeBag)
+//
+        //kids = (kid, classname)
+        self.adminClass.asDriver().drive(onNext: { (rooms) in
+            var kidList: [KidItem] = []
+            rooms.forEach({
+                let chatroom = $0
+                $0.kids?.forEach({
+                    kidList.append(KidItem(kid: $0.fragments.kidApolloFragment, chatroom: chatroom))
+                })
+            })
+            self.kids.accept(kidList)
+        }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(adminClass, memberClass).map({
+            $0.0 + $0.1
+        }).bind(to: allClass).disposed(by: disposeBag)
     }
     
     func save() {
@@ -125,15 +153,19 @@ public class Session : NSObject {
     }
     
     func refreshSummary() {
-        guard let userId = userId else {
-            return
-        }
-        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [weak self] (data) in
-            let tmp: [MessageSummary] = data.messageSummaries.compactMap{$0}.map({
-                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
-            })
-            self?.summaryData.accept(MessageSummary.sortSummary(arr: tmp))
-        }).disposed(by: disposeBag)
+//        guard let userId = userId else {
+//            return
+//        }
+//        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [unowned self] (data) in
+//            let tmp: [MessageSummary] = data.messageSummaries.compactMap{$0}.map({
+//                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
+//            })
+//            self.summaryData.accept(MessageSummary.sortSummary(arr: tmp).filter({ summary in
+//                self.allClass.value.contains(where: { (chatroom) -> Bool in
+//                    return chatroom.id == summary.chatroom.id
+//                })
+//            }))
+//        }).disposed(by: disposeBag)
     }
     
     func reloadChatRoom() {
@@ -147,6 +179,28 @@ public class Session : NSObject {
             let adminData = admin.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
             self?.adminClass.accept(adminData)
         }).disposed(by: disposeBag)
+    }
+    
+    func reload() {
+        guard let userId = self.userId else { return }
+        let member = ChatroomAPI.getMemberChatroom(userId: userId).asObservable()
+        let admin = ChatroomAPI.getAdminChatroom(userId: userId).asObservable()
+        Observable.zip(member, admin) { return ($0, $1) }
+            .do(onNext: { [weak self] (member, admin) in
+            let memberData = member.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
+            self?.memberClass.accept(memberData)
+            
+            let adminData = admin.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
+            self?.adminClass.accept(adminData)
+            }).flatMap ({ (_,_) in
+                MessageAPI.getSummary(userId: userId).asObservable()
+            }).subscribe(onNext: { [unowned self] (data) in
+                self.summaryData.accept(MessageSummary.sortSummary(arr: data).filter({ summary in
+                    self.allClass.value.contains(where: { (chatroom) -> Bool in
+                        return chatroom.id == summary.chatroom.id
+                    })
+                }))
+            }).disposed(by: disposeBag)
     }
     
     func refreshMe(completion:@escaping (_ m: Session?) -> Void) {
@@ -302,5 +356,8 @@ extension Session {
     }
 }
 
-
-
+extension KidApolloFragment {
+    var profileURL: String? {
+        return self.parents?.first?.fragments.userApolloFragment.profileImageUrl
+    }
+}

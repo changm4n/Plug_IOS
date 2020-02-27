@@ -409,14 +409,20 @@
                         <viewLayoutGuide key="safeArea" id="nNF-CV-vQH"/>
                     </view>
                     <navigationItem key="navigationItem" title="채팅" id="ntK-l5-KV2">
-                        <barButtonItem key="rightBarButtonItem" image="icSettingDefault" id="bx7-fE-O4b">
-                            <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icSettingDefault" id="bx7-fE-O4b">
+                                <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                            <barButtonItem image="write" id="DDZ-Sk-0SL">
+                                <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="settingButton" destination="bx7-fE-O4b" id="Ox4-tF-8cz"/>
                         <outlet property="tableView" destination="4AJ-ji-8B0" id="vru-eC-ngS"/>
+                        <outlet property="writeButton" destination="DDZ-Sk-0SL" id="Qnb-LZ-gMo"/>
                         <segue destination="ykd-Lh-fl4" kind="show" identifier="chat" id="BEr-Kh-h3U"/>
                         <segue destination="eM8-3l-f3M" kind="show" identifier="setting" id="UKI-I8-ETI"/>
                     </connections>
@@ -618,5 +624,6 @@
         <image name="jake" width="70" height="86"/>
         <image name="logo" width="147" height="127"/>
         <image name="master_close" width="16" height="16"/>
+        <image name="write" width="48" height="48"/>
     </resources>
 </document>

@@ -22,7 +22,7 @@ class ChatListVC: PlugViewController {
         let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 50), collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
         cv.register(UINib(nibName: "HomeHeaderCell", bundle: nil), forCellWithReuseIdentifier: "cell")
-        
+        cv.backgroundColor = .white
         cv.showsHorizontalScrollIndicator = false
         cv.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return cv
@@ -33,6 +33,7 @@ class ChatListVC: PlugViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingButton: UIBarButtonItem!
+    @IBOutlet weak var writeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +59,9 @@ class ChatListVC: PlugViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        Session.me?.reloadChatRoom()
-        Session.me?.refreshSummary()
+//        Session.me?.reloadChatRoom()
+//        Session.me?.refreshSummary()
+        Session.me?.reload()
     }
     
     func bindData() {
@@ -89,6 +91,11 @@ class ChatListVC: PlugViewController {
         
         settingButton.rx.tap.subscribe(onNext: { [weak self] (_) in
             self?.performSegue(withIdentifier: "setting", sender: nil)
+        }).disposed(by: disposeBag)
+        
+        writeButton.rx.tap.subscribe(onNext: { [weak self] in
+            let vc = MultiSendVC()
+            self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
         
         Observable.combineLatest(me.adminClass, me.memberClass).map ({

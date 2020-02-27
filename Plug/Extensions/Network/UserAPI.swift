@@ -69,11 +69,11 @@ class UserAPI: NSObject {
                     Session.me?.schedule = Schedule(schedule: crontab)
                 }
                 
-                let tmp: [MessageSummary] = data.messageSummaries.compactMap{ $0 }.map({
-                    MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
-                })
-                let summary = MessageSummary.sortSummary(arr: tmp)
-                Session.me?.summaryData.accept(summary)
+//                let tmp: [MessageSummary] = data.messageSummaries.compactMap{ $0 }.map({
+//                    MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
+//                })
+//                let summary = MessageSummary.sortSummary(arr: tmp)
+//                Session.me?.summaryData.accept(summary)
             })
     }
     

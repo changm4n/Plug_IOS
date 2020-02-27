@@ -17,6 +17,13 @@
 		ED115328240418A000AD59FA /* JoinKidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED115327240418A000AD59FA /* JoinKidVC.swift */; };
 		ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C397218964CF008DA9E7 /* HomeHeaderView.swift */; };
 		ED11532A2406B92300AD59FA /* HomeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C39D21896F80008DA9E7 /* HomeHeaderCell.swift */; };
+		ED11532C2407C90E00AD59FA /* MultiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */; };
+		ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11532D2407F89300AD59FA /* MultiSendCell.xib */; };
+		ED1153302407F8A500AD59FA /* MultiSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11532F2407F8A500AD59FA /* MultiSendCell.swift */; };
+		ED11533224083D5000AD59FA /* MultiSelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11533124083D5000AD59FA /* MultiSelectedCell.swift */; };
+		ED11533424083D8200AD59FA /* MultiSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533324083D8200AD59FA /* MultiSelectedCell.xib */; };
+		ED115335240844D200AD59FA /* MultiSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533324083D8200AD59FA /* MultiSelectedCell.xib */; };
+		ED11533924084C3E00AD59FA /* MultiMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11533824084C3E00AD59FA /* MultiMessageVC.swift */; };
 		ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
@@ -185,6 +192,12 @@
 		ED1153232402CA9F00AD59FA /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
 		ED1153252402D59600AD59FA /* JoinClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinClassVC.swift; sourceTree = "<group>"; };
 		ED115327240418A000AD59FA /* JoinKidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinKidVC.swift; sourceTree = "<group>"; };
+		ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectVC.swift; sourceTree = "<group>"; };
+		ED11532D2407F89300AD59FA /* MultiSendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiSendCell.xib; sourceTree = "<group>"; };
+		ED11532F2407F8A500AD59FA /* MultiSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSendCell.swift; sourceTree = "<group>"; };
+		ED11533124083D5000AD59FA /* MultiSelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectedCell.swift; sourceTree = "<group>"; };
+		ED11533324083D8200AD59FA /* MultiSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiSelectedCell.xib; sourceTree = "<group>"; };
+		ED11533824084C3E00AD59FA /* MultiMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMessageVC.swift; sourceTree = "<group>"; };
 		ED1F586021DE29C100126A07 /* OutClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutClassVC.swift; sourceTree = "<group>"; };
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
@@ -359,6 +372,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED11533624084C1A00AD59FA /* MultiSend */ = {
+			isa = PBXGroup;
+			children = (
+				ED11533724084C2E00AD59FA /* Select */,
+				ED11533824084C3E00AD59FA /* MultiMessageVC.swift */,
+			);
+			name = MultiSend;
+			sourceTree = "<group>";
+		};
+		ED11533724084C2E00AD59FA /* Select */ = {
+			isa = PBXGroup;
+			children = (
+				ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */,
+				ED11532D2407F89300AD59FA /* MultiSendCell.xib */,
+				ED11532F2407F8A500AD59FA /* MultiSendCell.swift */,
+				ED11533124083D5000AD59FA /* MultiSelectedCell.swift */,
+				ED11533324083D8200AD59FA /* MultiSelectedCell.xib */,
+			);
+			name = Select;
+			sourceTree = "<group>";
+		};
 		ED2A26EB23F87DBF00E22B01 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +413,7 @@
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
 				EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */,
 				ED2108DC2353753F00E38493 /* ChatListVC.swift */,
+				ED11533624084C1A00AD59FA /* MultiSend */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -762,6 +797,7 @@
 				EDD3A89D226C869B006E342A /* schema.json in Resources */,
 				EDD3A89E226C869B006E342A /* GoogleService-Info.plist in Resources */,
 				EDD3A89F226C869B006E342A /* Queries.graphql in Resources */,
+				ED115335240844D200AD59FA /* MultiSelectedCell.xib in Resources */,
 				EDD3A8A0226C869B006E342A /* Main.storyboard in Resources */,
 				EDD3A8A1226C869B006E342A /* licenses.json in Resources */,
 				EDD3A8A2226C869B006E342A /* indicator.json in Resources */,
@@ -787,10 +823,12 @@
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */,
+				ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */,
 				ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				ED71B6B42219359400AC21FF /* licenses.json in Resources */,
+				ED11533424083D8200AD59FA /* MultiSelectedCell.xib in Resources */,
 				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				ED44B2252400629300AEB833 /* DefaultCell.xib in Resources */,
@@ -977,10 +1015,12 @@
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
+				ED11533924084C3E00AD59FA /* MultiMessageVC.swift in Sources */,
 				ED2108DD2353753F00E38493 /* ChatListVC.swift in Sources */,
 				ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */,
 				EDCF234023F945C6003CBE4B /* SignUpViewController.swift in Sources */,
 				ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */,
+				ED11533224083D5000AD59FA /* MultiSelectedCell.swift in Sources */,
 				ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */,
 				EDD8C391218715FC008DA9E7 /* PlugTextField.swift in Sources */,
 				ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */,
@@ -995,12 +1035,14 @@
 				ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */,
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
 				EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */,
+				ED11532C2407C90E00AD59FA /* MultiSelectVC.swift in Sources */,
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */,
 				ED1153212402B99600AD59FA /* CreateClassVC.swift in Sources */,
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
 				ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */,
+				ED1153302407F8A500AD59FA /* MultiSendCell.swift in Sources */,
 				ED8C493A23EF1C9100443477 /* API.swift in Sources */,
 				ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
@@ -1182,7 +1224,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1239,7 +1281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

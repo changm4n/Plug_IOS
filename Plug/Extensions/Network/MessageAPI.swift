@@ -11,8 +11,12 @@ import RxSwift
 
 
 class MessageAPI: NSObject {
-    static func getSummary(userId: String) -> Maybe<MessageSummariesQuery.Data> {
-        return Network.shared.fetch(query: MessageSummariesQuery(userId: userId))
+    static func getSummary(userId: String) -> Maybe<[MessageSummary]> {
+        return Network.shared.fetch(query: MessageSummariesQuery(userId: userId)).map({
+            return $0.messageSummaries.compactMap{$0}.map({
+                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
+            })
+        })
     }
     
     static func getMessage(chatroomId: String, userId: String, receiverId: String, last: Int = kMessageWindowSize, before: String?) -> Maybe<[MessageApolloFragment]> {
