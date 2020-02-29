@@ -24,6 +24,8 @@
 		ED11533424083D8200AD59FA /* MultiSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533324083D8200AD59FA /* MultiSelectedCell.xib */; };
 		ED115335240844D200AD59FA /* MultiSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533324083D8200AD59FA /* MultiSelectedCell.xib */; };
 		ED11533924084C3E00AD59FA /* MultiMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11533824084C3E00AD59FA /* MultiMessageVC.swift */; };
+		ED11533B240937BC00AD59FA /* MultiMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533A240937BC00AD59FA /* MultiMessageCell.xib */; };
+		ED11533D240937DE00AD59FA /* MultiMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11533C240937DE00AD59FA /* MultiMessageCell.swift */; };
 		ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586A21EA0BF000126A07 /* MessageManager.swift */; };
 		ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AB217E00880075C4CE /* WideButton.swift */; };
 		ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1FB5AD217E019F0075C4CE /* UIFont+Additions.swift */; };
@@ -52,6 +54,8 @@
 		ED44B22D24025E3000AEB833 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B22C24025E3000AEB833 /* MemberCell.swift */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
+		ED54BD8B240986FB00F62354 /* GraphQLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED54BD8A240986FB00F62354 /* GraphQLExtension.swift */; };
+		ED54BD8D24098A7A00F62354 /* EditClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED54BD8C24098A7A00F62354 /* EditClassVC.swift */; };
 		ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B192623FAEA0A007C402C /* ForgotVC.swift */; };
 		ED71B6B42219359400AC21FF /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = ED71B6B32219359400AC21FF /* licenses.json */; };
 		ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = ED7D59C821B3D89D0029E80A /* Queries.graphql */; };
@@ -162,6 +166,7 @@
 		EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731ED217C1D3E00D302DF /* Strings.swift */; };
 		EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */; };
 		EDEAC2FE23F998210097753A /* DescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAC2FD23F998210097753A /* DescViewController.swift */; };
+		EDEBEC23240A5B9F00CD7357 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBEC22240A5B9F00CD7357 /* SearchVC.swift */; };
 		EDF609BC21BA468400CB3529 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = EDF609BB21BA468400CB3529 /* schema.json */; };
 		EDF609BE21BA5BE600CB3529 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */; };
 		EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF609BF21BBC07F00CB3529 /* ChatDataHeader.swift */; };
@@ -198,6 +203,8 @@
 		ED11533124083D5000AD59FA /* MultiSelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectedCell.swift; sourceTree = "<group>"; };
 		ED11533324083D8200AD59FA /* MultiSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiSelectedCell.xib; sourceTree = "<group>"; };
 		ED11533824084C3E00AD59FA /* MultiMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMessageVC.swift; sourceTree = "<group>"; };
+		ED11533A240937BC00AD59FA /* MultiMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiMessageCell.xib; sourceTree = "<group>"; };
+		ED11533C240937DE00AD59FA /* MultiMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMessageCell.swift; sourceTree = "<group>"; };
 		ED1F586021DE29C100126A07 /* OutClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutClassVC.swift; sourceTree = "<group>"; };
 		ED1F586221E09A2500126A07 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		ED1F586421E1CF5F00126A07 /* SecretVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretVC.swift; sourceTree = "<group>"; };
@@ -214,7 +221,7 @@
 		ED2A26E923F8714D00E22B01 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		ED2A26EC23F87DCF00E22B01 /* PhotoSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelector.swift; sourceTree = "<group>"; };
 		ED3CF408220A96F100356230 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED3D980421A0187200B61748 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
+		ED3D980421A0187200B61748 /* EditClassVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC2.swift; sourceTree = "<group>"; };
 		ED3D980621A05E6300B61748 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
 		ED3D980921A05FE100B61748 /* NoteMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMainVC.swift; sourceTree = "<group>"; };
 		ED3D980C21A060E000B61748 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
@@ -239,6 +246,8 @@
 		ED4750F721EB17370043FD18 /* KidVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidVC2.swift; sourceTree = "<group>"; };
 		ED4750F921EC76360043FD18 /* MessageSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSummary.swift; sourceTree = "<group>"; };
 		ED4750FB21ECB6540043FD18 /* indicator.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = indicator.json; sourceTree = "<group>"; };
+		ED54BD8A240986FB00F62354 /* GraphQLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLExtension.swift; sourceTree = "<group>"; };
+		ED54BD8C24098A7A00F62354 /* EditClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassVC.swift; sourceTree = "<group>"; };
 		ED5D58D121B3D3D8001EB2A2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		ED6B192623FAEA0A007C402C /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		ED71B6AE220FE35A00AC21FF /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
@@ -311,6 +320,7 @@
 		EDE731ED217C1D3E00D302DF /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		EDE731EF217C20A600D302DF /* ViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
 		EDEAC2FD23F998210097753A /* DescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescViewController.swift; sourceTree = "<group>"; };
+		EDEBEC22240A5B9F00CD7357 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		EDF609B921B7915500CB3529 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		EDF609BB21BA468400CB3529 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		EDF609BD21BA5BE600CB3529 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -389,6 +399,8 @@
 				ED11532F2407F8A500AD59FA /* MultiSendCell.swift */,
 				ED11533124083D5000AD59FA /* MultiSelectedCell.swift */,
 				ED11533324083D8200AD59FA /* MultiSelectedCell.xib */,
+				ED11533A240937BC00AD59FA /* MultiMessageCell.xib */,
+				ED11533C240937DE00AD59FA /* MultiMessageCell.swift */,
 			);
 			name = Select;
 			sourceTree = "<group>";
@@ -413,6 +425,7 @@
 				EDF609B921B7915500CB3529 /* ChatVC.swift */,
 				EDBE948E23DC534A000D81AA /* ChatroomIdentity.swift */,
 				ED2108DC2353753F00E38493 /* ChatListVC.swift */,
+				EDEBEC22240A5B9F00CD7357 /* SearchVC.swift */,
 				ED11533624084C1A00AD59FA /* MultiSend */,
 			);
 			path = Chat;
@@ -493,7 +506,7 @@
 				EDB373EC218EE9E900F4A8BF /* SelectClassTVC.swift */,
 				EDB373EE218FE31500F4A8BF /* ManageClassVC.swift */,
 				ED71B6B02210219400AC21FF /* ParentClassVC.swift */,
-				ED3D980421A0187200B61748 /* EditClassVC.swift */,
+				ED3D980421A0187200B61748 /* EditClassVC2.swift */,
 				ED1F586621E4DFC600126A07 /* EditClassNameVC.swift */,
 				ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */,
 				ED4750F721EB17370043FD18 /* KidVC2.swift */,
@@ -505,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				ED8C493723EF1A6700443477 /* Networking.swift */,
+				ED54BD8A240986FB00F62354 /* GraphQLExtension.swift */,
 				ED8C493B23EF1D1F00443477 /* UserAPI.swift */,
 				ED8C493D23F04A0300443477 /* ChatroomAPI.swift */,
 				ED8C493F23F051B100443477 /* MessageAPI.swift */,
@@ -602,6 +616,7 @@
 				ED44B2212400513100AEB833 /* ClassListVC.swift */,
 				ED44B2282400655E00AEB833 /* ClassDetailVC.swift */,
 				ED1153202402B99600AD59FA /* CreateClassVC.swift */,
+				ED54BD8C24098A7A00F62354 /* EditClassVC.swift */,
 				ED1153252402D59600AD59FA /* JoinClassVC.swift */,
 				ED115327240418A000AD59FA /* JoinKidVC.swift */,
 				ED1153232402CA9F00AD59FA /* CodeVC.swift */,
@@ -821,6 +836,7 @@
 				EDF609C221BBC08D00CB3529 /* ChatDateHeader.xib in Resources */,
 				EDADF85F239BFBD500C1D5B6 /* Spoqa Han Sans Regular.ttf in Resources */,
 				EDF609BC21BA468400CB3529 /* schema.json in Resources */,
+				ED11533B240937BC00AD59FA /* MultiMessageCell.xib in Resources */,
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */,
 				ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */,
@@ -994,6 +1010,7 @@
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				ED8C493223EC4B4F00443477 /* Validator.swift in Sources */,
 				ED8C493023EC4B1E00443477 /* PlugCronParser.swift in Sources */,
+				ED54BD8B240986FB00F62354 /* GraphQLExtension.swift in Sources */,
 				EDEAC2FE23F998210097753A /* DescViewController.swift in Sources */,
 				EDE731DA217B4E7000D302DF /* AppDelegate.swift in Sources */,
 				ED44B21D23FD8C9900AEB833 /* SettingCells.swift in Sources */,
@@ -1012,6 +1029,7 @@
 				EDE6089D23C0640E00F91EB4 /* ChatSummaryViewModel.swift in Sources */,
 				ED115328240418A000AD59FA /* JoinKidVC.swift in Sources */,
 				ED44B2292400655E00AEB833 /* ClassDetailVC.swift in Sources */,
+				EDEBEC23240A5B9F00CD7357 /* SearchVC.swift in Sources */,
 				EDD8C3A4218ED036008DA9E7 /* User.swift in Sources */,
 				ED7D59D521B6985D0029E80A /* UserInfo.swift in Sources */,
 				ED3D981121A111CD00B61748 /* StartVC.swift in Sources */,
@@ -1036,6 +1054,8 @@
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
 				EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */,
 				ED11532C2407C90E00AD59FA /* MultiSelectVC.swift in Sources */,
+				ED11533D240937DE00AD59FA /* MultiMessageCell.swift in Sources */,
+				ED54BD8D24098A7A00F62354 /* EditClassVC.swift in Sources */,
 				EDC1CD3B23EAFA5F006ED196 /* LoginVC.swift in Sources */,
 				ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */,
 				ED44B2272400647F00AEB833 /* DefaultCell.swift in Sources */,

@@ -125,9 +125,9 @@ extension UITableView {
         return IndexPath(row: lastIndexInLastSection, section: lastSectionIndex)
     }
     
-    func scrollToBottom() {
+    func scrollToBottom(animated: Bool = false) {
         guard let indexPath = lastIndexPath else { return }
-        self.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
     }
 }
 

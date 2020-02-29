@@ -11,9 +11,11 @@ mutation SignUp($data: UserInput!) {
 }
 
 query isMemeber($userId: String!) {
-  users(where : {userId : $userId}) {
-    userId
-  }
+    isSignup(userId: $userId) 
+}
+
+query isSignup($userId: String!) {
+  isSignup(userId: $userId)
 }
 
 mutation changePW($userId: String!, $old: String!, $new: String!) {
@@ -196,15 +198,15 @@ query Me {
 }
 
 query memberRoom($userId: String!) {
-  chatRooms(where: {users_some : {userId : $userId}, admins_none : {userId: $userId}}) {
-    ...ChatRoomApolloFragment
-  }
+    chatRooms(where: {users_some : {userId : $userId}, admins_none : {userId: $userId}}) {
+        ...ChatRoomApolloFragment
+    }
 }
 
 query adminRoom($userId: String!) {
-  chatRooms(where: { admins_some: { userId: $userId}}) {
+    chatRooms(where: { admins_some: { userId: $userId}}) {
         ...ChatRoomApolloFragment
-  }
+    }
 }
 
 subscription MessageSubscription {
@@ -219,6 +221,17 @@ mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileId
                 chatRoomId : $chatRoomId
                 fileIds : $fileIds
                 receiverIds : [$receiverId]
+                }) {
+        ... MessageApolloFragment
+    }
+}
+
+mutation SendMultiMessage($text: String!, $chatRoomId: ID!, $receiverId: [ID!]!, $fileIds: [ID!]!) {
+    sendMessage(data: {
+                text : $text
+                chatRoomId : $chatRoomId
+                fileIds : $fileIds
+                receiverIds : $receiverId
                 }) {
         ... MessageApolloFragment
     }
@@ -244,6 +257,12 @@ mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
     }
 }
 
+mutation DeleteChatRoom($id: ID!) {
+    deleteChatRoom(id: $id) {
+        id
+    }
+}
+
 query getOfficeTime($userId: String!) {
     officePeriods(where :{user :{userId :$userId}}) {
         crontab
@@ -259,6 +278,7 @@ fragment UserApolloFragment on User {
     name
     profileImageUrl
     phoneNumber
+    userStatus
 }
 
 fragment KidApolloFragment on Kid {
@@ -284,6 +304,7 @@ fragment ChatRoomApolloFragment on ChatRoom {
     inviteCode,
     chatRoomAt
     createdAt
+    status
 }
 
 fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
@@ -320,7 +341,7 @@ fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
 
 fragment MessageSummaryApolloFragment on MessageSummary {
     id
-    chatRoom { ...ChatRoomSummaryApolloFragment }
+    chatRoom { ...ChatRoomApolloFragment }
     sender { ...UserApolloFragment },
     receiver { ...UserApolloFragment },
     unReadMessageCount,

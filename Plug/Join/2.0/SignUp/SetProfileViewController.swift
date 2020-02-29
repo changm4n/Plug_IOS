@@ -35,8 +35,12 @@ class SetProfileViewController: PlugViewControllerWithButton {
         return btn
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.target = self
+    }
+    
     override func setBinding() {
-        
         self.imagePicker.presentationController = self
         
         self.imagePicker.selectedImage
@@ -61,12 +65,10 @@ class SetProfileViewController: PlugViewControllerWithButton {
                 self?.viewModel.signUpPressed.onNext(())
             }).disposed(by: disposeBag)
 
-        viewModel.signUpSuccess.subscribe(onNext: { (result, message) in
+        viewModel.signUpSuccess.subscribe(onNext: { (result) in
             if result {
                 print("회원가입 성공")
                 self.navigationController?.popToRootViewController(animated: true)
-            } else {
-                print(message)
             }
         }).disposed(by: disposeBag)
     }

@@ -194,12 +194,16 @@ public class Session {
             self?.adminClass.accept(adminData)
             }).flatMap ({ (_,_) in
                 MessageAPI.getSummary(userId: userId).asObservable()
-            }).subscribe(onNext: { [unowned self] (data) in
-                self.summaryData.accept(MessageSummary.sortSummary(arr: data).filter({ summary in
-                    self.allClass.value.contains(where: { (chatroom) -> Bool in
-                        return chatroom.id == summary.chatroom.id
-                    })
-                }))
+            }).retry(2).subscribe(onNext: { [unowned self] (data) in
+                let list = MessageSummary.sortSummary(arr: data).filter({ summary in
+                    if let index = self.allClass.value.firstIndex(of: summary.chatroom) {
+                        let users = self.allClass.value[index].users ?? []
+                        return users.map({$0.fragments.userApolloFragment}).contains(summary.sender)
+                    } else {
+                        return false
+                    }
+                })
+                self.summaryData.accept(list)
             }).disposed(by: disposeBag)
     }
     
@@ -353,11 +357,5 @@ extension Session {
             Session.me?.profileImageUrl = result.updateUser?.profileImageUrl
             Session.me?.name = result.updateUser?.name
         }).disposed(by: disposeBag)
-    }
-}
-
-extension KidApolloFragment {
-    var profileURL: String? {
-        return self.parents?.first?.fragments.userApolloFragment.profileImageUrl
     }
 }

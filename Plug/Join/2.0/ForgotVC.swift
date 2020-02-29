@@ -55,7 +55,9 @@ class ForgotVC: PlugViewControllerWithButton {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func setBinding() {
+        self.viewModel.target = self
         emailTF.validation.bind(to: confirmButton.rx.isEnabled).disposed(by: disposeBag)
         
         confirmButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
@@ -112,6 +114,8 @@ class ForgotViewModel {
     //output
     var forgotSuccess: PublishSubject<Bool> = PublishSubject()
     
+    var target: UIViewController?
+    
     init() {
         forgotPressed.subscribe(onNext: { [unowned self] (email) in
             self.reset(email: email)
@@ -121,8 +125,9 @@ class ForgotViewModel {
     func reset(email: String) {
         UserAPI.resetPassword(email: email).subscribe(onSuccess: { [weak self] (_) in
                 self?.forgotSuccess.onNext(true)
-            }, onError: { [weak self] (_) in
-                self?.forgotSuccess.onNext(false)
+            }, onError: { [unowned self] (error) in
+//                showErrorAlert(error: error, sender: self.target)
+                self.forgotSuccess.onNext(false)
         }).disposed(by: disposeBag)
     }
 }

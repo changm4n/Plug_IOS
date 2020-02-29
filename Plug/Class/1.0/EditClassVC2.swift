@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditClassVC: PlugViewController {
+class EditClassVC2: PlugViewController {
 
     var selectedYear = 2019
     var selectedName: String = ""

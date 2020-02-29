@@ -85,11 +85,8 @@ class SettingVC: PlugViewController {
         //        self.setData()
         //        self.setUI()
         
-//        self.navigationController?.navigationBar.barTintColor = UIColor.white
+
         self.navigationController?.navigationBar.tintColor = UIColor.black
-//        self.navigationController?.navigationBar.shadowImage = nil
-//        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-//        self.navigationController?.navigationBar.isTranslucent = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(SettingVC.updateOffice), name: UIApplication.willResignActiveNotification, object: nil)
     }
@@ -212,6 +209,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }, canceltype: .default, confirmtype: .destructive)
         } else if id == "privacy" {
             let vc = DescViewController()
+            vc.type = .privacy
             self.navigationController?.pushViewController(vc, animated: true)
         } else if item.0 == "오픈소스 라이선스" {
         }

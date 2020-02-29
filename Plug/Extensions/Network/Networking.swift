@@ -26,7 +26,9 @@ class Network {
     
     // Use the configured network transport in your Apollo client.
     private(set) lazy var apollo = ApolloClient(networkTransport: self.networkTransport)
-    
+//    query isSignup($userId: String!) {
+//      isSignup(userId: $userId)
+//    }
     func fetch<Query: GraphQLQuery>(
         query: Query,
         cachePolicy: CachePolicy = .fetchIgnoringCacheData,

@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 import WebKit
 
+enum WEB_TYPE {
+    case privacy
+    case usage
+}
+
 class DescViewController: PlugViewController {
 
     let webView: WKWebView = {
@@ -17,7 +22,32 @@ class DescViewController: PlugViewController {
         return wv
     }()
 
+    var type: WEB_TYPE!
+    
+    var urlString: String {
+        switch type {
+        case .privacy:
+            return kUserDesc
+        case .usage:
+            return kUserTip
+        case .none:
+            return ""
+        }
+    }
+    
+    var titleString: String {
+        switch type {
+        case .privacy:
+            return "약관 및 개인정보 처리방침"
+        case .usage:
+            return "초대방법"
+        case .none:
+            return ""
+        }
+    }
+    
     override func setViews() {
+        setTitle(title: titleString)
         self.view.addSubview(webView)
         setLayout()
     }
@@ -27,7 +57,7 @@ class DescViewController: PlugViewController {
     }
     
     func setWebView() {
-        guard let url = URL(string: kUserDesc)  else { return }
+        guard let url = URL(string: urlString)  else { return }
         let request = URLRequest(url: url)
         webView.load(request)
     }

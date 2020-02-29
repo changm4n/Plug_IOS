@@ -12,6 +12,7 @@ import RxCocoa
 class SignUpViewModel {
     typealias formType = (String, String, String)
     let disposeBag = DisposeBag()
+    var target: UIViewController?
     
     var signUpForm: BehaviorSubject<(String, String)> = BehaviorSubject(value: ("",""))
     var infoForm: BehaviorSubject<String> = BehaviorSubject(value: "")
@@ -27,7 +28,7 @@ class SignUpViewModel {
     //output
     var checkSuccess: PublishSubject<(Bool, String)> = PublishSubject()
     
-    var signUpSuccess: PublishSubject<(Bool, String)> = PublishSubject()
+    var signUpSuccess: PublishSubject<Bool> = PublishSubject()
     
     init() {
         form = Observable.zip(signUpForm.asObserver(), infoForm.asObserver(), resultSelector: { form, name in
@@ -46,13 +47,11 @@ class SignUpViewModel {
     }
     
     func isMember(form: (String, String)) {
-//        UserAPI.isMemeber(id: form.0).subscribe(onSuccess: { [weak self] (success) in
-//            self?.checkSuccess.onNext((success, "존재하는 사용자 이메일입니다."))
-//        }, onError: { [weak self] (error) in
-//            self?.checkSuccess.onNext((true, "네트워크 오류가 발생하였습니다."))
-//        }).disposed(by: disposeBag)
-        checkSuccess.onNext((false, ""))
-        
+        UserAPI.isMemeber(id: form.0).subscribe(onSuccess: { [weak self] (success) in
+            self?.checkSuccess.onNext((success, "존재하는 사용자 이메일입니다."))
+        }, onError: { [weak self] (error) in
+            self?.checkSuccess.onNext((true, "네트워크 오류가 발생하였습니다."))
+        }).disposed(by: disposeBag)
     }
     
     func signUp() {
@@ -62,14 +61,10 @@ class SignUpViewModel {
         }.flatMap({ newForm in
             UserAPI.signUp(userId: newForm.0, passwd: newForm.1, name: newForm.2, url: newForm.3)
         }) .subscribe(onNext: { [weak self] (_) in
-            self?.signUpSuccess.onNext((true, ""))
+            self?.signUpSuccess.onNext(true)
             }, onError: { [weak self] (error) in
-                switch error {
-                case let ApolloError.gqlErrors(errors):
-                    self?.signUpSuccess.onNext((false, errors.first?.message ?? "회원가입 중 오류가 발생하였습니다."))
-                default:
-                    self?.signUpSuccess.onNext((false, "회원가입 중 오류가 발생하였습니다."))
-                }
+                self?.signUpSuccess.onNext(false)
+                showErrorAlert(error: error, sender: self?.target)
         }).disposed(by: disposeBag)
     }
     

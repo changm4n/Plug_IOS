@@ -22,6 +22,7 @@ class ClassListVC: PlugViewController {
     let tableView: UITableView = {
         let tv = UITableView()
         tv.register(UINib(nibName: "PlugClassCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tv.separatorStyle = .none
         return tv
     }()
     

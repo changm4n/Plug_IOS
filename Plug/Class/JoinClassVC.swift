@@ -55,6 +55,11 @@ class JoinClassVC: PlugViewControllerWithButton {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.target = self
+    }
     override func setBinding() {
         codeTF.validation.bind(to: confirmButton.rx.isEnabled).disposed(by: disposeBag)
         
@@ -65,12 +70,11 @@ class JoinClassVC: PlugViewControllerWithButton {
             if result {
                 let vc = JoinKidVC()
                 vc.viewModel = self.viewModel
+                vc.viewModel?.target = vc
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 showAlertWithString("클래스 가입 오류", message: "초대코드를 확인해주세요.", sender: self, handler: nil)
-            }}, onError: { error in
-                showAlertWithString("클래스 가입 오류", message: "클래스 가입 중 오류가 발생하였습니다.", sender: self, handler: nil)
-        }).disposed(by: disposeBag)
+            }}).disposed(by: disposeBag)
     }
     
     override func setViews() {
@@ -108,6 +112,7 @@ class JoinClassVC: PlugViewControllerWithButton {
 }
 
 class JoinClassViewModel {
+    var target: UIViewController?
     let disposeBag = DisposeBag()
     var chatroom: ChatRoomApolloFragment? = nil
     //input
@@ -138,7 +143,7 @@ class JoinClassViewModel {
                 self.chatroom = chatroom
                 self.checkSuccess.onNext(true)
             }, onError: { [unowned self] (error) in
-                self.checkSuccess.onNext(false)
+                showErrorAlert(error: error, sender: self.target)
         }).disposed(by: disposeBag)
     }
     
@@ -147,7 +152,7 @@ class JoinClassViewModel {
             onSuccess: { [weak self] (data) in
                 self?.joinSuccess.onNext((true, data.applyChatRoom.name))
             }, onError: { [weak self] (error) in
-                self?.joinSuccess.onNext((false, ""))
+                showErrorAlert(error: error, sender: self?.target)
         }).disposed(by: disposeBag)
     }
 }

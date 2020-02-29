@@ -52,8 +52,10 @@ class LoginVC2: PlugViewControllerWithButton {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     override func setBinding() {
+        self.viewModel.target = self
         Observable.combineLatest(emailTF.validation, passwdTF.validation,
                                  resultSelector: { $0 && $1 })
             .bind(to: confirmButton.rx.isEnabled)
@@ -133,6 +135,7 @@ class LoginViewModel {
     var loginSuccess: PublishSubject<Bool> = PublishSubject()
     var loginError: PublishSubject<String> = PublishSubject()
     
+    var target: UIViewController?
     init() {
         loginPressed.subscribe(onNext: { [unowned self] (form) in
             self.login(form: form)
@@ -150,13 +153,8 @@ class LoginViewModel {
             }).subscribe(onSuccess: { [weak self] (_) in
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()
-                }, onError: { [weak self] (error) in
-                    switch error {
-                    case let ApolloError.gqlErrors(errors):
-                        self?.loginError.onNext(errors.first?.message ?? "로그인 중 오류가 발생하였습니다.")
-                    default:
-                        self?.loginError.onNext("로그인 중 오류가 발생하였습니다.")
-                    }
+                }, onError: { [unowned self] (error) in
+                    showErrorAlert(error: error, sender: self.target)
             }).disposed(by: disposeBag)
     }
 }

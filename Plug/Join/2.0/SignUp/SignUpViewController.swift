@@ -55,6 +55,12 @@ class SignUpViewController: PlugViewControllerWithButton {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.target = self
+    }
+    
     override func setBinding() {
         Observable.combineLatest(emailTF.validation, passwdTF.validation,
                                  resultSelector: { $0 && $1 })
@@ -72,7 +78,7 @@ class SignUpViewController: PlugViewControllerWithButton {
 
         viewModel.checkSuccess.subscribe(onNext: { [unowned self] (result, message) in
             if result {
-                print(message)
+                showAlertWithString("회원가입", message: message, sender: self)
             } else {
                 let vc = SetProfileViewController()
                 vc.viewModel = self.viewModel

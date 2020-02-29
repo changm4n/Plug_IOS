@@ -18,7 +18,7 @@ import Foundation
 
 struct MessageSummary {
     var id: String
-    var chatroom: ChatRoomSummaryApolloFragment
+    var chatroom: ChatRoomApolloFragment
     var unreadCount: Int
     var sender: UserApolloFragment
     var receiver: UserApolloFragment
@@ -27,40 +27,36 @@ struct MessageSummary {
     
     var displayName: String {
         guard let me = Session.me,
-            let admin = chatroom.admins?.first?.fragments.userApolloFragment.userId else { return ""}
+            let admin = chatroom.admin else { return ""}
         
-        if admin == me.userId {
-            return "\(sender.name) 부모님"
+        if sender.userStatus == UserStatus.deleted {
+            return "탈퇴한 사용자"
+        }
+        
+        if admin.userId == me.userId {
+            if let kid = chatroom.getKid(parent: sender) {
+                return "\(kid.name) 부모님"
+            } else {
+                return "\(sender.name) 부모님"
+            }
+            
         } else {
             return "\(sender.name) 선생님"
         }
-//
-//        if let me = Session.me,
-//            me.role == .TEACHER {
-//            if let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
-//                return "\(kid.name) 부모님"
-//            } else {
-//                return "\(sender.name)"
-//            }
-//
-//        } else {
-//
-//        }
     }
     
     public init(with classData: ChatRoomApolloFragment) {
         id = "id"
-        chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
+        chatroom = classData
         unreadCount = 0
         lastMessage = MessageItem()
-        lastMessage.text = "채팅을 시작하세요"
-        let admin = classData.admins!.first!.fragments.userApolloFragment
+        lastMessage.text = "\(classData.admin?.name ?? "") 선생님과 대화를 시작해보세요."
         
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         
-        sender = admin
+        sender = classData.admin!
         receiver = classData.users!.filter({$0.fragments.userApolloFragment.userId == Session.me!.userId}).first!.fragments.userApolloFragment
         
         createAt = Date()
@@ -68,7 +64,8 @@ struct MessageSummary {
     
     public init(with user: UserApolloFragment, classData: ChatRoomApolloFragment, myType: SessionRole) {
         id = "id"
-        chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
+        chatroom = classData
+        //ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
         unreadCount = 0
         lastMessage = MessageItem()
         
@@ -89,7 +86,7 @@ struct MessageSummary {
     
     public init(with summary: MessageSummaryApolloFragment) {
         id = summary.id
-        chatroom = summary.chatRoom.fragments.chatRoomSummaryApolloFragment
+        chatroom = summary.chatRoom.fragments.chatRoomApolloFragment
         unreadCount = summary.unReadMessageCount
         if let last = summary.lastMessage?.fragments.messageApolloFragment {
             lastMessage = MessageItem(with: last, isMine: true)
@@ -107,7 +104,9 @@ struct MessageSummary {
     }
     
     static func ==(lhs: MessageSummary, rhs: MessageSummary) -> Bool {
-        return ((lhs.sender.userId == rhs.receiver.userId) && (lhs.receiver.userId == rhs.sender.userId)) || ((lhs.sender.userId == rhs.sender.userId) && (lhs.receiver.userId == rhs.receiver.userId))
+        return ((lhs.sender.userId == rhs.receiver.userId) && (lhs.receiver.userId == rhs.sender.userId) && (lhs.chatroom.id == rhs.chatroom.id))
+            ||
+            ((lhs.sender.userId == rhs.sender.userId) && (lhs.receiver.userId == rhs.receiver.userId) && (lhs.chatroom.id == rhs.chatroom.id))
     }
     
     static func sortSummary(arr: [MessageSummary]) -> [MessageSummary] {

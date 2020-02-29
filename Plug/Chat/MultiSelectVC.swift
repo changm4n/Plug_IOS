@@ -62,10 +62,14 @@ class MultiSendVC: PlugViewController {
         return tf
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
     
     override func setBinding() {
@@ -73,7 +77,7 @@ class MultiSendVC: PlugViewController {
         
         viewModel.outputList.bind(to: tableView.rx.items) { [unowned self] tableView, row, item in
                 let cell = tableView.dequeueReusableCell(withIdentifier: "multi", for: IndexPath(row: row, section: 0)) as! MultiSendCell
-            cell.configure(name: "\(item.kid.name) 부모님", desc: item.chatroom.name, urlString: item.kid.parents?.first?.fragments.userApolloFragment.profileImageUrl)
+            cell.configure(name: "\(item.kid.name) 부모님", desc: item.chatroom.name, urlString: item.kid.profileURL)
             
             let isSelected = self.viewModel.outputSelectedList.value.contains(item)
             cell.accessoryType = isSelected ? .checkmark : .none
@@ -108,8 +112,16 @@ class MultiSendVC: PlugViewController {
         }).disposed(by: disposeBag)
         
         sendButton.rx.tap.subscribe(onNext: { [unowned self] (_) in
+            self.searchTF.resignFirstResponder()
+            let list = self.viewModel.outputSelectedList.value
+            
+            if list.isEmpty {
+                showAlertWithString("단체 메세지", message: "메세지를 전송할 상대를 선택해주세요.", sender: self)
+                return
+            }
+            
             let vc = MultiMessageVC()
-            vc.seletedKid = self.viewModel.outputSelectedList.value
+            vc.seletedKid = list
             self.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
     }

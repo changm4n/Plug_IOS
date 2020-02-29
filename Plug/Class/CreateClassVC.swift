@@ -69,7 +69,11 @@ class CreateClassVC: PlugViewControllerWithButton {
     }
     override func setBinding() {
         nameTF.validation.bind(to: confirmButton.rx.isEnabled).disposed(by: disposeBag)
-        
+        self.bindForm()
+    }
+    
+    func bindForm() {
+        self.viewModel.target = self
         let createForm = Observable.combineLatest(nameTF.rx.text.orEmpty, yearTF.rx.text.orEmpty) { (email, year) in
             return (email, year)
         }
@@ -85,10 +89,9 @@ class CreateClassVC: PlugViewControllerWithButton {
                 vc.year = self.yearTF.text
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
-                showAlertWithString("클래스 생성", message: "클래스 생성에 실패하였습니다.", sender: self, handler: nil)
-            }}, onError: { error in
-                showAlertWithString("클래스 생성", message: "클래스 생성에 실패하였습니다.", sender: self, handler: nil)
-        }).disposed(by: disposeBag)
+                showAlertWithString("오류", message: "클래스 생성에 실패하였습니다.", sender: self, handler: nil)
+            }}
+        ).disposed(by: disposeBag)
     }
     
     override func setViews() {
@@ -157,6 +160,7 @@ extension CreateClassVC: UIPickerViewDelegate, UIPickerViewDataSource {
 
 class CreateClassViewModel {
     let disposeBag = DisposeBag()
+    var target: UIViewController?
     //input
     var createPressed: PublishSubject<(String, String)> = PublishSubject()
 
@@ -177,9 +181,9 @@ class CreateClassViewModel {
         ChatroomAPI.createChatroom(userId: userId, name: name, year: year)
             .subscribe(onSuccess: { [weak self] (code) in
                 self?.createSuccess.onNext(code)
-            }, onError: { [weak self] (error) in
-                self?.createSuccess.onNext(nil)
-        }).disposed(by: disposeBag)
+                }, onError: { [weak self] (error) in
+                    showErrorAlert(error: error, sender: self?.target)
+            }).disposed(by: disposeBag)
     }
 }
 

@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class ClassDetailVC: PlugViewController {
+    
+    let disposeBag = DisposeBag()
     
     var item: ChatRoomApolloFragment!
     var kids: [ChatRoomApolloFragment.Kid]  {
@@ -49,11 +52,13 @@ class ClassDetailVC: PlugViewController {
         let more = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(morePressed))
         self.navigationItem.rightBarButtonItem = more
         alertController.addAction(UIAlertAction(title: "클래스 편집", style: .default) { [unowned self] _ in
-            
+            let vc = EditClassVC()
+            vc.item = self.item
+            self.navigationController?.pushViewController(vc, animated: true)
         })
         
         alertController.addAction(UIAlertAction(title: "클래스 삭제", style: .destructive) { [unowned self] _ in
-            
+            self.deleteChatroom()
         })
         
         alertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
@@ -61,6 +66,68 @@ class ClassDetailVC: PlugViewController {
     
     @objc func morePressed() {
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func deleteChatroom() {
+        showAlertWithSelect("", message: "\(item.name) 클래스를 삭제하시겠어요?\n소속된 모든 학부모님들이 클래스를\n나가게 됩니다.", sender: self, handler: { (_) in
+            ChatroomAPI.deleteChatroom(id: self.item.id)
+                .subscribe(onSuccess: { [unowned self]  (id) in
+                self.navigationController?.popViewController(animated: true)
+            }, onError: { [unowned self] (error) in
+                var message: String? = nil
+                switch error {
+                case let ApolloError.gqlErrors(errors):
+                    message = errors.first?.message
+                default:
+                    message = nil
+                }
+                showAlertWithString("오류", message: message ?? "클래스 삭제 중 오류가 발생하였습니다.", sender: self)
+            }).disposed(by: self.disposeBag)
+        }, confirmtype: .destructive)
+    }
+    
+    func startChat(row: Int) {
+        guard let sender = kids[row].fragments.kidApolloFragment.parent,
+            let userId = Session.me?.userId,
+            let name = Session.me?.name else {
+            return
+        }
+        
+        let senderI = Identity(id: sender.userId, name: sender.name)
+        let receiverI = Identity(id: userId, name: name)
+        let chatroom = Identity(id: self.item.id, name: self.item.name)
+        
+        let identity = ChatroomIdentity(sender: senderI, receiver: receiverI, chatroom: chatroom)
+        
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        vc.identity = identity
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func withdrawKid(row: Int) {
+        let kid = kids[row].fragments.kidApolloFragment
+        guard let parentID = kid.parentUserID else {
+            return
+        }
+        
+        showAlertWithSelect("", message: "\(kid.name) 회원을 구성원에서 제외합니다.", sender: self, handler: { [unowned self] (_) in
+            ChatroomAPI.withdrawKid(id: self.item.id, userId: parentID, kidName: kid.name)
+                .subscribe(onSuccess: { [unowned self]  (id) in
+                    self.item.kids?.remove(at: row)
+                    self.tableView.reloadData()
+            }, onError: { [unowned self] (error) in
+                var message: String? = nil
+                switch error {
+                case let ApolloError.gqlErrors(errors):
+                    message = errors.first?.message
+                default:
+                    message = nil
+                }
+                showAlertWithString("오류", message: message ?? "구성원 제외 중 오류가 발생하였습니다.", sender: self)
+            }).disposed(by: self.disposeBag)
+        }, confirmtype: .destructive)
     }
 }
 
@@ -84,49 +151,38 @@ extension ClassDetailVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "member", for: indexPath) as! MemberCell
-            let kidName = kids[row].fragments.kidApolloFragment.name
-            let parent = kids[row].fragments.kidApolloFragment.parents?.first?.fragments.userApolloFragment
-            cell.configure(name: "\(kidName) 부모님", urlString: parent?.profileImageUrl)
+            let kid = kids[row].fragments.kidApolloFragment
+            cell.configure(name: "\(kid.name) 부모님", urlString: kid.profileURL)
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
+        let row = indexPath.row
         
         if section == 0 {
-            
+            if row == 0 {
+                
+            } else {
+                let vc = DescViewController()
+                vc.type = .usage
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         } else {
             self.selectMember(row: indexPath.row)
-            
         }
     }
     
     //TODO : Rx
     func selectMember(row: Int) {
-        guard let sender = kids[row].fragments.kidApolloFragment.parents?.first?.fragments.userApolloFragment,
-            let userId = Session.me?.userId,
-            let name = Session.me?.name else {
-            return
-        }
         let cellAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         cellAlertController.addAction(UIAlertAction(title: "대화하기", style: .default) { [unowned self] _ in
-            
-            let sender = Identity(id: sender.userId, name: sender.name)
-            let receiver = Identity(id: userId, name: name)
-            let chatroom = Identity(id: self.item.id, name: self.item.name)
-            
-            let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
-            
-            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-
-            let vc = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
-            vc.identity = identity
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.startChat(row: row)
         })
         
         cellAlertController.addAction(UIAlertAction(title: "구성원 제외", style: .destructive) { [unowned self] _ in
-            
+            self.withdrawKid(row: row)
         })
         
         cellAlertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))

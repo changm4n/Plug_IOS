@@ -12,8 +12,6 @@ import RxCocoa
 
 class MultiMessageVC: PlugViewControllerWithButton {
     
-    var kSafeAreaInset: CGFloat = 0
-    
     var disposeBag = DisposeBag()
     var viewModel: MultiMessageViewModel!
     var seletedKid: [KidItem] = []
@@ -22,8 +20,7 @@ class MultiMessageVC: PlugViewControllerWithButton {
         let tv = UITableView()
         tv.separatorStyle = .none
         tv.backgroundColor = UIColor.paleGrey2
-        tv.register(UINib(nibName: "MultiSendCell", bundle: nil), forCellReuseIdentifier: "multi")
-//        tv.keyboardDismissMode = .onDrag
+        tv.register(UINib(nibName: "MultiMessageCell", bundle: nil), forCellReuseIdentifier: "cell")
         return tv
     }()
     
@@ -42,30 +39,49 @@ class MultiMessageVC: PlugViewControllerWithButton {
     
     let containerView: UIView = {
         let v = UIView()
-        v.backgroundColor = .blue
+        v.backgroundColor = UIColor.white
         return v
     }()
     
-    let messageTF: PlugTextField = {
-        let tf = PlugTextField(type: .none)
-        tf.title = ""
-        tf.lineHeight = 0
+    let backView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .white
+        return v
+    }()
+    
+    let messageTV: UITextView = {
+        let tf = UITextView()
+        tf.isEditable = true
+        tf.isSelectable = true
+        tf.font = UIFont.getRegular(withSize: 16)
+        tf.textColor = UIColor.darkGreyText
+        tf.contentInset = UIEdgeInsets.zero
+        tf.textContainerInset.left = 8
+        tf.textContainerInset.right = 8
         return tf
     }()
     
+    let sendButton: UIButton = {
+        let bt = UIButton()
+        bt.setImage(UIImage(named: "send"), for: .normal)
+        return bt
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .never
-        
-        kSafeAreaInset = UIApplication.shared.windows[0].safeAreaInsets.bottom
-        
     }
     
     override func setBinding() {
-        self.viewModel = MultiMessageViewModel(selectedList: self.seletedKid)
+        self.viewModel = MultiMessageViewModel(selectedList: self.seletedKid, target: self)
         
-        self.messageTF.rx.text.orEmpty.bind(to: viewModel.textinput).disposed(by: disposeBag)
+        self.messageTV.rx.text.orEmpty.bind(to: viewModel.textinput).disposed(by: disposeBag)
+        
+        self.sendButton.rx.tap.asDriver().drive(onNext: { [weak self] in
+            self?.resetTextView()
+            self?.viewModel.sendPressed.onNext(())
+        }).disposed(by: disposeBag)
+        
         Observable.of(self.viewModel.selectedList).bind(to: self.collectionView.rx.items) {
             collectionView, row, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "multiselected", for: IndexPath(row: row, section: 0)) as! MultiSeletecCell
@@ -75,33 +91,41 @@ class MultiMessageVC: PlugViewControllerWithButton {
             return cell
         }.disposed(by: disposeBag)
         
-        Observable.just([1,2,3,4,5,6,7,8,9,1,2,3,4,5]).bind(to: self.tableView.rx.items) {
+        viewModel.messageList.bind(to: self.tableView.rx.items) {
             tableView, row, item in
-            let cell = UITableViewCell()
-            cell.textLabel?.text = "\(item)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0)) as! MultiMessageCell
+            cell.configure(item: item)
             return cell
         }.disposed(by: disposeBag)
     }
     
     override func setViews() {
-        self.view.backgroundColor = UIColor.white
-            
+        self.view.backgroundColor = UIColor.paleGrey2
+        self.messageTV.delegate = self
         setTitle(title: "단체 메세지")
         
+        self.view.addSubview(backView)
         self.view.addSubview(containerView)
         self.view.addSubview(collectionView)
         self.view.addSubview(tableView)
         
-        self.containerView.addSubview(messageTF)
+        
+        self.containerView.addSubview(messageTV)
+        self.containerView.addSubview(sendButton)
         setLayout()
     }
     
+    func resetTextView() {
+        self.messageTV.text = ""
+        containerView.snp.updateConstraints({
+            $0.height.equalTo(54.5)
+        })
+    }
     func setLayout() {
         containerView.snp.makeConstraints({
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
-//            $0.bottom.equalToSuperview()
-            $0.height.equalTo(52)
+            $0.height.equalTo(54.5)
         })
         
         collectionView.snp.makeConstraints({
@@ -116,9 +140,21 @@ class MultiMessageVC: PlugViewControllerWithButton {
             $0.bottom.equalTo(containerView.snp.top)
         })
         
-        messageTF.snp.makeConstraints({
-            $0.leading.trailing.equalToSuperview()
+        messageTV.snp.makeConstraints({
+            $0.leading.equalToSuperview().inset(4)
+            $0.trailing.equalTo(sendButton.snp.leading).inset(4)
             $0.top.bottom.equalToSuperview().inset(4)
+        })
+        
+        sendButton.snp.makeConstraints({
+            $0.top.bottom.equalToSuperview().inset(2)
+            $0.trailing.equalToSuperview().inset(12)
+            $0.leading.equalTo(messageTV.snp.trailing).offset(4)
+        })
+        
+        backView.snp.makeConstraints({
+            $0.top.equalTo(tableView.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
         })
     }
     
@@ -129,20 +165,11 @@ class MultiMessageVC: PlugViewControllerWithButton {
             containerView.snp.remakeConstraints({
                 $0.leading.trailing.equalToSuperview()
                 $0.bottom.equalToSuperview().inset(keyboardHeight)
-                $0.height.equalTo(52)
+                $0.height.equalTo(containerView.frame.height)
             })
             UIView.animate(withDuration: 1, animations: { [weak self] in
                            self?.view.layoutIfNeeded()
             })
-//            var origin = self.tableView.contentOffset
-//            origin.y += (keyboardHeight - kSafeAreaInset)
-//            self.tableView.setContentOffset(origin, animated: true)
-//            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-//            if self.view.frame.origin.y == 0  {
-//                self.view.frame.origin.y -= bottomOffset
-
-
-//            }
         }
     }
     
@@ -150,20 +177,11 @@ class MultiMessageVC: PlugViewControllerWithButton {
         containerView.snp.remakeConstraints({
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(self.view.safeAreaInsets)
-            $0.height.equalTo(52)
+            $0.height.equalTo(containerView.frame.height)
         })
         UIView.animate(withDuration: 1, animations: { [weak self] in
                self?.view.layoutIfNeeded()
         })
-
-//        isKeyboardShow = false
-//        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y != 0  {
-//                self.view.frame.origin.y = 0
-//                self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-//            }
-//        }
     }
     
     @objc override func keyboardChanged(notification: NSNotification) {
@@ -173,15 +191,28 @@ class MultiMessageVC: PlugViewControllerWithButton {
             containerView.snp.remakeConstraints({
                 $0.leading.trailing.equalToSuperview()
                 $0.bottom.equalToSuperview().inset(keyboardHeight)
-                $0.height.equalTo(52)
+                $0.height.equalTo(containerView.frame.height)
             })
-            UIView.animate(withDuration: 1, animations: { [weak self] in
-                           self?.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.view.layoutIfNeeded()
             })
-            
-//            self.tableView.contentInset = UIEdgeInsets(top: keyboardHeight, left: 0, bottom: 0, right: 0)
-//            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         }
+    }
+}
+
+extension MultiMessageVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let maxHeight: CGFloat = 112
+        let fixedWidth = textView.frame.size.width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        newSize.height += 14.5
+        print(newSize)
+        self.messageTV.isScrollEnabled = newSize.height >= maxHeight
+        containerView.snp.updateConstraints({
+            $0.height.equalTo(min(newSize.height, maxHeight))
+        })
     }
 }
 
@@ -191,23 +222,40 @@ extension MultiMessageVC: UITableViewDelegate {
     }
 }
 
-
 class MultiMessageViewModel {
     let disposeBag = DisposeBag()
     //input
     var textinput: PublishSubject<String> = PublishSubject()
-    
+    var sendPressed: PublishSubject<Void> = PublishSubject()
     //output
-    var outputList: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
+//    var outputList: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
     var selectedList: [KidItem]
+    var messageList: BehaviorRelay<[MessageViewItem]> = BehaviorRelay(value: [])
     
-    init(selectedList: [KidItem]) {
+    var target: UIViewController
+    init(selectedList: [KidItem], target: UIViewController) {
 //        guard let me = Session.me else { return }
+        self.target = target
         self.selectedList = selectedList
+        sendPressed.withLatestFrom(textinput).filter({ !$0.isEmpty })
+            .subscribe(onNext: { [weak self] (text) in
+                self?.sendMessage(text: text)
+            }).disposed(by: disposeBag)
     }
     
     func sendMessage(text: String) {
-       
+        MessageAPI.sendMultiMessage(text: text, kids: selectedList).subscribe(onNext: { [unowned self] (arr) in
+            var message = MessageItem()
+            message.text = text
+            
+            let item = MessageViewItem(withMessage: message, type: .RCELL)
+            
+            var list = self.messageList.value
+            list.append(item)
+            self.messageList.accept(list)
+        }, onError: { [unowned self] (error) in
+            showErrorAlert(error: error, sender: self.target)
+        }).disposed(by: disposeBag)
     }
 }
 

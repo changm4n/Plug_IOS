@@ -48,7 +48,7 @@ struct MessageItem {
         self.text = "text"
         self.receiverId = Session.me!.userId!
         self.receiverName = kDefault
-        self.senderId = "lcmini6528@gmail.com"
+        self.senderId = kDefault
         self.senderName = kDefault
         self.isMine = true
         self.createAt = Date()
@@ -232,22 +232,29 @@ class ChatroomModel {
         })).disposed(by: disposeBag)
     }
     
+//    func load() {
+//        let realm = try! Realm()
+//        let logs = realm.objects(ChatLog.self).filter("hashKey == %@", identity.hashKey)
+//        if logs.count >= kMessageWindowSize {
+//            self.items = logs.map({ MessageItem(with: $0, isMine: identity.receiver.id == $0.sID)})
+//        } else {
+//
+//            let lastMessage = items.first?.id
+//            MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: lastMessage).subscribe(onSuccess: { (messages) in
+//                self.saveMessage(messages: messages.map({ ChatLog($0) }))
+//                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
+//                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+//            }, onError: { (error) in
+//
+//            }).disposed(by: disposeBag)
+//        }
+//    }
     func load() {
-        let realm = try! Realm()
-        let logs = realm.objects(ChatLog.self).filter("hashKey == %@", identity.hashKey)
-        if logs.count >= kMessageWindowSize {
-            self.items = logs.map({ MessageItem(with: $0, isMine: identity.receiver.id == $0.sID)})
-        } else {
+       MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil).subscribe(onSuccess: { (messages) in
+            self.items = messages.map({ ChatLog($0) }).map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+        }, onError: { (error) in
             
-            let lastMessage = items.first?.id
-            MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: lastMessage).subscribe(onSuccess: { (messages) in
-                self.saveMessage(messages: messages.map({ ChatLog($0) }))
-                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
-                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
-            }, onError: { (error) in
-                
-            }).disposed(by: disposeBag)
-        }
+        }).disposed(by: disposeBag)
     }
     
     public func setItems(messages: [MessageItem]) {
@@ -267,7 +274,12 @@ class ChatroomModel {
             self?.saveMessage(messages: [ChatLog(message)])
             self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
             }, onError: { (error) in
-                print("send message error")
+                switch error {
+                case let ApolloError.gqlErrors(errors):
+                    print(errors.first?.message)
+                default:
+                    print(error.localizedDescription)
+                }
         }).disposed(by: disposeBag)
     }
 }

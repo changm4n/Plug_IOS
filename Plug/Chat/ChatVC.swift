@@ -114,7 +114,7 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
             .asObservable()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: {
-                self.tableView.scrollToBottom()
+                self.tableView.scrollToBottom(animated: true)
             }).disposed(by: disposeBag)
     }
     

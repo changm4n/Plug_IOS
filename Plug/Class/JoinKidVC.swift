@@ -71,8 +71,6 @@ class JoinKidVC: PlugViewControllerWithButton {
                 showAlertWithString("클래스 가입", message: "\(name)클래스에 가입되었습니다.", sender: self, handler: { [weak self] _ in
                     self?.navigationController?.popToViewController(ofClass: SettingVC.self)
                 })
-            } else {
-                showAlertWithString("오류", message: "클래스 가입 중 오류가 발생하였습니다.", sender: self)
             }
         }).disposed(by: disposeBag)
     }

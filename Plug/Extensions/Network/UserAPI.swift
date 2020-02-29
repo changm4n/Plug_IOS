@@ -34,7 +34,7 @@ class UserAPI: NSObject {
     }
     
     static func isMemeber(id: String) -> Maybe<Bool> {
-        return Network.shared.fetch(query: IsMemeberQuery(userId: id)).map { return $0.users.count > 0 }
+        return Network.shared.fetch(query: IsMemeberQuery(userId: id)).map { return $0.isSignup }
     }
     
     static func uploadIamge(image: UIImage?, userId: String) -> Observable<String?> {
