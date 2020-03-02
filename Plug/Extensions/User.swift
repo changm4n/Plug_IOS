@@ -60,8 +60,8 @@ public class Session {
     public var password: String?
     var schedule: Schedule
     
-    var appPushID: String?
-    var profileImage: BehaviorSubject<UIImage?> = BehaviorSubject(value: nil)
+    var subscriptionToken: String?
+    var profileImage: BehaviorSubject<UIImage?> = BehaviorSubject(value: UIImage.getDefaultProfile())
     
     var adminClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
     var memberClass: BehaviorRelay<[ChatRoomApolloFragment]> = BehaviorRelay(value: [])
@@ -111,7 +111,7 @@ public class Session {
         phoneNumber = dic["phoneNumber"] as? String
         token = dic["token"] as? String
         
-        appPushID = dic["appPushId"] as? String
+        subscriptionToken = dic["subscriptionToken"] as? String
         
         schedule = Schedule(schedule: "0-30 9-18 6,7")
         setBinding()
@@ -181,30 +181,34 @@ public class Session {
         }).disposed(by: disposeBag)
     }
     
-    func reload() {
-        guard let userId = self.userId else { return }
+    func reload() -> Maybe<Void> {
+        guard let userId = self.userId else { return Maybe.error(NSError()) }
         let member = ChatroomAPI.getMemberChatroom(userId: userId).asObservable()
         let admin = ChatroomAPI.getAdminChatroom(userId: userId).asObservable()
-        Observable.zip(member, admin) { return ($0, $1) }
-            .do(onNext: { [weak self] (member, admin) in
+        
+        return Observable.zip(member, admin) { return ($0, $1) }
+        .do(onNext: { [weak self] (member, admin) in
             let memberData = member.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
             self?.memberClass.accept(memberData)
             
             let adminData = admin.chatRooms.compactMap { $0.fragments.chatRoomApolloFragment }
             self?.adminClass.accept(adminData)
-            }).flatMap ({ (_,_) in
-                MessageAPI.getSummary(userId: userId).asObservable()
-            }).retry(2).subscribe(onNext: { [unowned self] (data) in
-                let list = MessageSummary.sortSummary(arr: data).filter({ summary in
-                    if let index = self.allClass.value.firstIndex(of: summary.chatroom) {
-                        let users = self.allClass.value[index].users ?? []
-                        return users.map({$0.fragments.userApolloFragment}).contains(summary.sender)
-                    } else {
-                        return false
-                    }
-                })
-                self.summaryData.accept(list)
-            }).disposed(by: disposeBag)
+        }).flatMap({ (_,_) in
+            MessageAPI.registerPushKey()
+        })
+        .flatMap ({ (_) in
+            MessageAPI.getSummary(userId: userId).asObservable()
+        }).retry(2).do(onNext: { (data) in
+            let list = MessageSummary.sortSummary(arr: data).filter({ summary in
+                if let index = self.allClass.value.firstIndex(of: summary.chatroom) {
+                    let users = self.allClass.value[index].users ?? []
+                    return users.map({$0.fragments.userApolloFragment}).contains(summary.sender)
+                } else {
+                    return false
+                }
+            })
+            self.summaryData.accept(list)
+        }).map({ _ in Void() }).asMaybe()
     }
     
     func refreshMe(completion:@escaping (_ m: Session?) -> Void) {
@@ -223,15 +227,17 @@ public class Session {
 //        })
     }
     
-//    func readChat(chatRoomId: String, senderId: String) {
-//        for index in 0..<summaryData.count {
-//            if summaryData[index].chatroom.id == chatRoomId &&
-//                summaryData[index].sender.userId == senderId {
-//                summaryData[index].unreadCount = 0
-//                return
-//            }
-//        }
-//    }
+    func readChat(chatRoomId: String, senderId: String) {
+        var summary = summaryData.value
+        for index in 0..<summary.count {
+            if summary[index].chatroom.id == chatRoomId &&
+                summary[index].sender.userId == senderId {
+                summary[index].unreadCount = 0
+                self.summaryData.accept(summary)
+                return
+            }
+        }
+    }
     
 //    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
 //        if let id = id {

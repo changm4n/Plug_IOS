@@ -70,6 +70,10 @@ class ChatroomAPI: NSObject {
             return data.withdrawChatRoomUser.id
         })
     }
+    
+    static func updateOffice(crontab: String) -> Maybe<SetOfficeMutation.Data> {
+        return Network.shared.perform(query: SetOfficeMutation(crontab: crontab))
+    }
 }
 
 

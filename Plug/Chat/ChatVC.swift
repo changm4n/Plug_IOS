@@ -157,7 +157,6 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
     
     private func setColors() {
         self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.isTranslucent = true
@@ -284,8 +283,8 @@ extension ChatVC {
     }
     
     func readMessage() {
-//        Session.me?.readChat(chatRoomId: chatroom.id, senderId: sender.id)
-//        Networking.readMessage(chatRoomId: chatroom.id, receiverId: receiver.id, senderId: sender.id)
+        Session.me?.readChat(chatRoomId: chatroom.id, senderId: sender.id)
+        MessageAPI.readMessage(identity: identity).subscribe().disposed(by: disposeBag)
     }
     
     func saveTextViewText() {

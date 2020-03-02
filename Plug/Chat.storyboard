@@ -320,15 +320,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar4" translatesAutoresizingMaskIntoConstraints="NO" id="HQP-IB-XXt">
-                                                    <rect key="frame" x="28" y="16" width="48" height="48"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar4" translatesAutoresizingMaskIntoConstraints="NO" id="HQP-IB-XXt">
+                                                    <rect key="frame" x="24" y="16" width="48" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="vij-YS-QMi"/>
                                                         <constraint firstAttribute="width" constant="48" id="wKw-5U-V0x"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김희정 부모님" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jml-pY-Jvg">
-                                                    <rect key="frame" x="90" y="19" width="92" height="24"/>
+                                                    <rect key="frame" x="86" y="19" width="92" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="8Lf-vd-MKT"/>
                                                     </constraints>
@@ -337,7 +337,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안녕하세요 선생님. 오늘은 아무래도 집에 일 ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpR-1a-gR7">
-                                                    <rect key="frame" x="90" y="44" width="231" height="18"/>
+                                                    <rect key="frame" x="86" y="44" width="231" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="hVS-CE-You"/>
                                                     </constraints>
@@ -346,7 +346,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcd-0b-ZcW">
-                                                    <rect key="frame" x="191" y="26" width="16.5" height="15"/>
+                                                    <rect key="frame" x="187" y="26" width="16.5" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="v4i-a4-adv"/>
                                                     </constraints>
@@ -375,7 +375,7 @@
                                                 <constraint firstItem="Zcd-0b-ZcW" firstAttribute="bottom" secondItem="Jml-pY-Jvg" secondAttribute="bottom" constant="-2" id="5Ah-R4-MW9"/>
                                                 <constraint firstItem="Jml-pY-Jvg" firstAttribute="top" secondItem="HQP-IB-XXt" secondAttribute="top" constant="3" id="BLl-RS-Luy"/>
                                                 <constraint firstItem="aUY-Q5-pU4" firstAttribute="centerY" secondItem="bpR-1a-gR7" secondAttribute="centerY" id="CDE-8B-z2k"/>
-                                                <constraint firstItem="HQP-IB-XXt" firstAttribute="leading" secondItem="WtW-kq-VXw" secondAttribute="leading" constant="28" id="EAr-eu-pbP"/>
+                                                <constraint firstItem="HQP-IB-XXt" firstAttribute="leading" secondItem="WtW-kq-VXw" secondAttribute="leading" constant="24" id="EAr-eu-pbP"/>
                                                 <constraint firstItem="aUY-Q5-pU4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bpR-1a-gR7" secondAttribute="trailing" constant="4" id="H1j-lV-Ol5"/>
                                                 <constraint firstItem="bpR-1a-gR7" firstAttribute="leading" secondItem="HQP-IB-XXt" secondAttribute="trailing" constant="14" id="HWc-06-nHV"/>
                                                 <constraint firstItem="HQP-IB-XXt" firstAttribute="centerY" secondItem="WtW-kq-VXw" secondAttribute="centerY" id="MDG-9y-LQc"/>
@@ -411,9 +411,11 @@
                     <navigationItem key="navigationItem" title="채팅" id="ntK-l5-KV2">
                         <rightBarButtonItems>
                             <barButtonItem image="icSettingDefault" id="bx7-fE-O4b">
+                                <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
                                 <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                             </barButtonItem>
                             <barButtonItem image="write" id="DDZ-Sk-0SL">
+                                <inset key="imageInsets" minX="14" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="tintColor" red="0.4941176471" green="0.52156862749999999" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                             </barButtonItem>
                         </rightBarButtonItems>

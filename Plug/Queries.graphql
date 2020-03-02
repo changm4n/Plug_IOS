@@ -132,6 +132,13 @@ mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
     }
 }
 
+mutation withdrawUser($userId: String!) {
+  withdrawUser(userId :$userId) {
+    userId
+  }
+}
+
+
 mutation kakaoSignUp($role: Role!, $userId: String!) {
     kakaoSignup(data: {kakaoUserId: $userId,
                 role : $role }) {
@@ -158,6 +165,10 @@ mutation removePushKey {
     removeNotification {
         pushKey
     }
+}
+
+mutation generateSubscription {
+  generateSubscriptionToken
 }
 
 mutation refreshEmail($email: String!) {

@@ -115,6 +115,7 @@ extension SettingProfileVC: UITableViewDataSource, UITableViewDelegate {
         let section = indexPath.section
         let row = indexPath.row
         let item = cells[section][row]
+//        let value = item.0
         let id = item.1
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DefaultCell
         cell.titleLabel.text = item.0
@@ -149,6 +150,35 @@ extension SettingProfileVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        let item = cells[section][row]
+        let value = item.0
+        
+        if value == "로그아웃" {
+            showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { [unowned self] (action) in
+                UserAPI.logOut().subscribe().disposed(by: self.disposeBag)
+                Session.removeSavedUser()
+                let VC = MainVC()
+                let NVC = UINavigationController(rootViewController: VC)
+                NVC.modalPresentationStyle = .fullScreen
+                self.present(NVC, animated: false, completion: nil)
+            }, canceltype: .default, confirmtype: .destructive)
+        } else if value == "계정 삭제" {
+            showAlertWithSelect("계정 삭제", message: "계정을 삭제하시겠습니까?", sender: self, handler: { (_) in
+                guard let userId = Session.me?.userId else { return }
+                UserAPI.withDraw(userId: userId).subscribe(onSuccess: { [unowned self] (_) in
+                    Session.removeSavedUser()
+                    let VC = MainVC()
+                    let NVC = UINavigationController(rootViewController: VC)
+                    NVC.modalPresentationStyle = .fullScreen
+                    self.present(NVC, animated: false, completion: nil)
+                }).disposed(by: self.disposeBag)
+            }, canceltype: .cancel, confirmtype: .destructive)
+        }
     }
 }
 

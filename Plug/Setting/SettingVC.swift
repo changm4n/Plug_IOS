@@ -14,14 +14,22 @@ class SettingVC: PlugViewController {
     
     let headers = ["플러그 오프 설정", "클래스 관리", "기타"]
     
-    var mainCell: [(String, String)] = [("플러그 오프 설정","switch"), ("휴일 설정","off"), ("근무 시작시간","start"), ("근무 종료시간","end"), ("","desc")]
+    var onCell: [(String, String)] = [("플러그 오프 설정","switch"), ("휴일 설정","off"), ("근무 시작시간","start"), ("근무 종료시간","end"), ("","desc")]
+    var offCell: [(String, String)] = [("플러그 오프 설정","switch"), ("","desc")]
     
+    var topCell: [(String, String)] {
+        if Session.me?.schedule.isOn ?? false {
+            return onCell
+        } else {
+            return offCell
+        }
+    }
     let classCell: [(String, String)] = [("내 클래스 관리/초대코드", "class"), ("새 클래스 만들기", "new"),("클래스 가입하기", "join")]
     let exCell: [(String, String)] = [("약관 및 개인정보 처리방침","privacy"), ("오픈소스 라이선스","opensource"),("로그아웃","logout")]
     
     var cells: [[(String, String)]] {
         get{
-            return [mainCell, classCell,exCell]
+            return [topCell, classCell,exCell]
         }
     }
     
@@ -35,6 +43,7 @@ class SettingVC: PlugViewController {
     
     //    var datePicker: UIDatePicker?
     //    var textfield: UITextField = UITextField(frame: CGRect.zero)
+    
     
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -85,9 +94,6 @@ class SettingVC: PlugViewController {
         //        self.setData()
         //        self.setUI()
         
-
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-        
         NotificationCenter.default.addObserver(self, selector: #selector(SettingVC.updateOffice), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
@@ -104,6 +110,10 @@ class SettingVC: PlugViewController {
         //        Networking.updateOffice(isplugOn ? me.schedule.toString() : "") { (cron) in
         //            me.schedule = Schedule(schedule: cron ?? "")
         //        }
+        
+        ChatroomAPI.updateOffice(crontab: me.schedule.toString()).subscribe(onSuccess: { (data) in
+            me.schedule = Schedule(schedule: data.upsertOfficePeriod.crontab ?? "")
+        }).disposed(by: disposeBag)
     }
     
     //    @objc func pickerChanged(picker: UIDatePicker) {
@@ -115,13 +125,23 @@ class SettingVC: PlugViewController {
     //        }
     //    }
     
-    @objc func switchChanged(switch: UISwitch) {
+    @objc func switchChanged(switchObj: UISwitch) {
         //        FBLogger.shared.log(id: "edit_onoff")
         //        isplugOn = !isplugOn
         //        if isplugOn {
         //            Session.me?.schedule = Schedule(schedule: "0-30 9-18 6,7")
         //        }
         //        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        
+        guard let me = Session.me else { return }
+        
+        if switchObj.isOn {
+            me.schedule = Schedule(schedule: "0-30 9-18 6,7")
+        } else {
+            me.schedule = Schedule(schedule: "")
+        }
+        
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
 
@@ -198,8 +218,8 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         //
         
         else if id == "logout" {
-            showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { (action) in
-//                Networking.removePushKey()
+            showAlertWithSelect("로그아웃", message: "로그아웃 하시겠습니까?", sender: self, handler: { [unowned self] (action) in
+                UserAPI.logOut().subscribe().disposed(by: self.disposeBag)
                 Session.removeSavedUser()
                 let VC = MainVC()
                 let NVC = UINavigationController(rootViewController: VC)
@@ -231,7 +251,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as! SettingSwitchCell
             cell.titleLabel.text = item.0
             cell.switcher.isOn = Session.me?.schedule.isOn ?? false
-            cell.switcher.addTarget(self, action: #selector(switchChanged(switch:)), for: .valueChanged)
+            cell.switcher.addTarget(self, action: #selector(switchChanged(switchObj:)), for: .valueChanged)
             return cell
         }
         

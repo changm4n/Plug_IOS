@@ -147,9 +147,11 @@ class LoginViewModel {
             .flatMap({ data in
                 return UserAPI.getMe()
             }).flatMap({ _ in
-                return UserAPI.registerPushKey()
+                return MessageAPI.registerPushKey()
             }).flatMap({ _ in
                 return UserAPI.getUserInfo()
+            }).flatMap({ _ in
+                return Session.me!.reload()
             }).subscribe(onSuccess: { [weak self] (_) in
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()

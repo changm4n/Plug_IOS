@@ -29,6 +29,8 @@ class ChatListCell: UITableViewCell {
         newImageView.isHidden = item.unreadCount == 0
         profileImageView.setImageWithURL(urlString: item.sender.profileImageUrl)
         
+        nameLabel.font = item.unreadCount == 0 ? UIFont.getRegular(withSize: 16) : UIFont.getBold(withSize: 16)
+        
         let messageItem = item.lastMessage
         timeLabel.text = messageItem.createAt.isToday() ? messageItem.timeStamp : messageItem.timeStampLong
     }

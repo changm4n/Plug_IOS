@@ -66,6 +66,7 @@ class CreateClassVC: PlugViewControllerWithButton {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     override func setBinding() {
         nameTF.validation.bind(to: confirmButton.rx.isEnabled).disposed(by: disposeBag)

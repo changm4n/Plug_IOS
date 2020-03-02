@@ -66,12 +66,7 @@ class MultiSendVC: PlugViewController {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .never
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-    }
-    
+        
     override func setBinding() {
         self.searchTF.rx.text.orEmpty.bind(to: viewModel.textinput).disposed(by: disposeBag)
         

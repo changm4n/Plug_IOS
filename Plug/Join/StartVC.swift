@@ -35,12 +35,15 @@ class StartVC: PlugViewController {
     fileprivate func show() {
         //For UI2.0
 //        self.animateSegue("Main", sender: nil)
-//        return
+//        returns
         ////
         if Session.fetchToken() != nil {
             UserAPI.getMe().flatMap({ _ in
                 return UserAPI.getUserInfo()
-            }).subscribe(
+                }).flatMap({ _ in
+                   return Session.me!.reload()
+                })
+                .subscribe(
                 onSuccess: { [weak self] (_) in
                 self?.animateSegue("Main", sender: nil)
             },

@@ -10,23 +10,130 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+class ColdView: UIView {
+    
+    let titleLabel: UILabel = {
+       let lb = UILabel()
+        lb.text = "소속한 클래스가 없습니다"
+        lb.font = UIFont.getBold(withSize: 20)
+        lb.textColor = UIColor.charcoalGrey
+        return lb
+    }()
+    
+    let subtitleLabel: UILabel = {
+       let lb = UILabel()
+        lb.text = "클래스에 가입하거나 클래스를 만들어주세요"
+        lb.font = UIFont.getRegular(withSize: 14)
+        lb.textColor = UIColor.blueGrey
+        return lb
+    }()
+    
+    let joinButton: PlugButton = {
+        let btn = PlugButton(theme: .WHITE, isShadow: true, enable: true)
+        btn.setTitle("클래스 가입하기", for: .normal)
+        btn.setTitleColor(UIColor.textBlue, for: .normal)
+        btn.titleLabel?.font = UIFont.getBold(withSize: 16)
+        return btn
+    }()
+    
+    let createButton: PlugButton = {
+        let btn = PlugButton(theme: .WHITE, isShadow: true, enable: true)
+        btn.setTitle("클래스 만들기", for: .normal)
+        btn.setTitleColor(UIColor.textBlue, for: .normal)
+        btn.titleLabel?.font = UIFont.getBold(withSize: 16)
+        return btn
+    }()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        
+        self.backgroundColor = UIColor.paleGrey2
+        self.addSubview(titleLabel)
+        self.addSubview(subtitleLabel)
+        self.addSubview(joinButton)
+        self.addSubview(createButton)
+        
+        setLayout()
+    }
+    
+    func setLayout() {
+        titleLabel.snp.makeConstraints({
+            $0.top.left.right.equalToSuperview().inset(24)
+            $0.height.equalTo(29)
+        })
+        
+        subtitleLabel.snp.makeConstraints({
+            $0.top.equalTo(titleLabel.snp.bottom).offset(3)
+            $0.left.right.equalToSuperview().inset(24)
+            $0.height.equalTo(20)
+        })
+        
+        joinButton.snp.makeConstraints({
+            $0.left.equalToSuperview().inset(24)
+            $0.top.equalTo(subtitleLabel.snp.bottom).offset(36)
+            $0.width.equalTo(createButton.snp.width)
+            $0.height.equalTo(56)
+        })
+
+        createButton.snp.makeConstraints({
+            $0.right.equalToSuperview().inset(24)
+            $0.top.equalTo(subtitleLabel.snp.bottom).offset(36)
+            $0.left.equalTo(joinButton.snp.right).offset(14)
+            $0.height.equalTo(56)
+        })
+    }
+}
+
 class SearchView: UIView {
     
     private var shadowLayer: CAShapeLayer? = nil
     private var fillColor: CGColor = UIColor.white.cgColor
-    private var disableColor = UIColor.plugBlueDisable.cgColor
-    private var isShadow: Bool = false
     private var disposebag = DisposeBag()
+    
+    let image: UIImageView = {
+        let iv = UIImageView(image: UIImage(named: "search"))
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
+    
+    let label: UILabel = {
+        let lb = UILabel()
+        lb.text = "학급 또는 이름 검색"
+        lb.font = UIFont.getRegular(withSize: 16)
+        lb.textColor = UIColor.filterGray
+        return lb
+    }()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print("not implement!")
     }
     
     init() {
         super.init(frame: CGRect.zero)
         shadowLayer?.fillColor = UIColor.white.cgColor
         fillColor = UIColor.white.cgColor
+        self.addSubview(image)
+        self.addSubview(label)
+        
+        setLayout()
+    }
+    
+    func setLayout() {
+        image.snp.makeConstraints({
+            $0.width.height.equalTo(25)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(10)
+        })
+        
+        label.snp.makeConstraints({
+            $0.leading.equalTo(image.snp.trailing).offset(12)
+            $0.height.equalTo(21)
+            $0.centerY.equalTo(image)
+        })
     }
     
     override func layoutSubviews() {
@@ -59,7 +166,7 @@ class ChatListVC: PlugViewController {
     }()
     
     let searchTF: UIView = SearchView()
-    
+    let coldView = ColdView()
     
     let filterCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -89,9 +196,12 @@ class ChatListVC: PlugViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.barTintColor = UIColor.clear
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = .black
         let style = NSMutableParagraphStyle()
-        style.firstLineHeadIndent = 18 // This is added to the default margin
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.paragraphStyle : style]
+        style.firstLineHeadIndent = 8 // This is added to the default margin
+        self.navigationController?.navigationBar.largeTitleTextAttributes =
+            [NSAttributedString.Key.paragraphStyle : style,
+             NSAttributedString.Key.font : UIFont.getBold(withSize: 24)   ]
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
@@ -102,11 +212,28 @@ class ChatListVC: PlugViewController {
         
         tableView.tableFooterView = UIView()
         bindData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Session.me?.reload()
+        Session.me?.reload().subscribe().disposed(by: disposeBag)
+    }
+    
+    override func setViews() {
+        super.setViews()
+        coldView.isHidden = true
+        self.view.addSubview(coldView)
+        
+        coldView.snp.makeConstraints({
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(232)
+        })
+        
+    }
+    
+    func isShowColdView(show: Bool) {
+        coldView.isHidden = !show
     }
     
     func bindData() {
@@ -170,6 +297,19 @@ class ChatListVC: PlugViewController {
                 self.selectedFilter.accept(filter)
                 self.filterCollectionView.reloadSections([0], animationStyle: .automatic)
             }).disposed(by: disposeBag)
+        
+        //cold view bind
+        me.allClass.map({ $0.count != 0 }).bind(to: coldView.rx.isHidden).disposed(by: disposeBag)
+        
+        coldView.joinButton.rx.tap.subscribe(onNext: { (_) in
+            let vc = JoinClassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: disposeBag)
+        
+        coldView.createButton.rx.tap.subscribe(onNext: { (_) in
+            let vc = CreateClassVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: disposeBag)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

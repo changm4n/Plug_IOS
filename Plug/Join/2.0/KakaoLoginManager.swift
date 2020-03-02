@@ -35,8 +35,14 @@ class KakaoLoginManager {
     }
     
     func check() {
-        getKakaoId().subscribe(onNext: { [weak self] (id) in
-            self?.login(id: id)
+        getKakaoId().flatMap({ id in
+            return UserAPI.isMemeber(id: id).map({ ($0, id) })
+        }).subscribe(onNext: { [weak self] (isSignup, id) in
+            if isSignup {
+                self?.login(id: id)
+            } else {
+             
+            }
         }, onError: { [weak self] (error) in
             self?.error.onNext("카카오 로그인 중 오류가 발생하였습니다.")
         }).disposed(by: disposeBag)
@@ -71,9 +77,11 @@ class KakaoLoginManager {
         .flatMap({ data in
             return UserAPI.getMe()
         }).flatMap({ _ in
-            return UserAPI.registerPushKey()
+            return MessageAPI.registerPushKey()
         }).flatMap({ _ in
             return UserAPI.getUserInfo()
+        }).flatMap({ _ in
+            return Session.me!.reload()
         }).subscribe(onSuccess: { [weak self] (_) in
             self?.output.onNext(true)
             self?.output.onCompleted()

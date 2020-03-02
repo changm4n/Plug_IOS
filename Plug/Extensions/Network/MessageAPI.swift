@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Firebase
 
 class MessageAPI: NSObject {
     static func getSummary(userId: String) -> Maybe<[MessageSummary]> {
@@ -16,7 +17,7 @@ class MessageAPI: NSObject {
             return $0.messageSummaries.compactMap{$0}.map({
                 return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
             })
-        })
+        }).subscribeOn(SerialDispatchQueueScheduler(qos: .background))
     }
     
     static func getMessage(chatroomId: String, userId: String, receiverId: String, last: Int = kMessageWindowSize, before: String?) -> Maybe<[MessageApolloFragment]> {
@@ -43,5 +44,21 @@ class MessageAPI: NSObject {
         }
         
         return Observable.zip(observables)
+    }
+    
+    static func registerPushKey() -> Maybe<RegisterPushKeyMutation.Data> {
+        if let token = Messaging.messaging().fcmToken {
+            return Network.shared.perform(query: RegisterPushKeyMutation(pushKey: token))
+        } else {
+            return Maybe.error(NSError())
+        }
+    }
+    
+    static func readMessage(identity: ChatroomIdentity) -> Maybe<ReadMessageMutation.Data> {
+        return Network.shared.perform(query: ReadMessageMutation(chatroom: identity.chatroom.id, sender: identity.sender.id, receiver: identity.receiver.id))
+    }
+    
+    static func getSubscriptToken() -> Maybe<String> {
+        return Network.shared.perform(query: GenerateSubscriptionMutation()).map({ $0.generateSubscriptionToken })
     }
 }

@@ -129,11 +129,11 @@ extension Network: HTTPNetworkTransportPreflightDelegate {
 
 extension Network {
     static func isNetworking(status: Bool) {
-        if status {
-            PlugIndicator.shared.play()
-        } else {
-            PlugIndicator.shared.stop()
-        }
+//        if status {
+//            PlugIndicator.shared.play()
+//        } else {
+//            PlugIndicator.shared.stop()
+//        }
     }
 }
 //// MARK: - Task Completed Delegate

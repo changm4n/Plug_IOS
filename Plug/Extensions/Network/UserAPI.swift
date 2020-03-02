@@ -52,10 +52,6 @@ class UserAPI: NSObject {
         let input = UserInput(role: .parent, userId: userId, name: name, password: passwd, profileImageUrl: url, phoneNumber: nil)
         return Network.shared.perform(query: SignUpMutation(data: input))
     }
-    static func registerPushKey() -> Maybe<RegisterPushKeyMutation.Data> {
-        let key = Messaging.messaging().fcmToken ?? ""
-        return Network.shared.perform(query: RegisterPushKeyMutation(pushKey: key))
-    }
     
     static func getUserInfo() -> Maybe<GetUserInfoInStartQuery.Data> {
         guard let id = Session.me?.id, let userId = Session.me?.userId else {
@@ -79,5 +75,13 @@ class UserAPI: NSObject {
     
     static func resetPassword(email: String) -> Maybe<RefreshEmailMutation.Data> {
         return Network.shared.perform(query: RefreshEmailMutation(email: email))
+    }
+    
+    static func logOut() -> Maybe<Void> {
+        return Network.shared.perform(query: RemovePushKeyMutation()).map({ _ in Void() })
+    }
+    
+    static func withDraw(userId: String) -> Maybe<Void> {
+        return Network.shared.perform(query: WithdrawUserMutation(userId: userId)).map({_ in Void() })
     }
 }

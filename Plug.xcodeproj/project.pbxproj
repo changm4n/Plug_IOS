@@ -40,6 +40,7 @@
 		ED3D980D21A060E000B61748 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D980C21A060E000B61748 /* NoteModel.swift */; };
 		ED3D981121A111CD00B61748 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
 		ED3E6A4821CF570400C28403 /* PlugClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4721CF570400C28403 /* PlugClassCell.xib */; };
+		ED4179D5240D4A610022491F /* Apollo+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493323EF133E00443477 /* Apollo+Rx.swift */; };
 		ED44B21723FD7A5400AEB833 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4421CF535B00C28403 /* SettingVC.swift */; };
 		ED44B21923FD7E1D00AEB833 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44B21823FD7E1D00AEB833 /* Settings.storyboard */; };
 		ED44B21A23FD7EC700AEB833 /* ClassHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */; };
@@ -267,7 +268,7 @@
 		ED8C47E821DC8DF20065EC7E /* RegisterPlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPlugIDVC.swift; sourceTree = "<group>"; };
 		ED8C47EA21DC92BF0065EC7E /* ChangePlugIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePlugIDVC.swift; sourceTree = "<group>"; };
 		ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugViewControllerWithButton.swift; sourceTree = "<group>"; };
-		ED8C493323EF133E00443477 /* Apollo+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Apollo+Rx.swift"; sourceTree = "<group>"; };
+		ED8C493323EF133E00443477 /* Apollo+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Apollo+Rx.swift"; path = "../Join/2.0/Apollo+Rx.swift"; sourceTree = "<group>"; };
 		ED8C493723EF1A6700443477 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ED8C493923EF1C9000443477 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		ED8C493B23EF1D1F00443477 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
@@ -546,7 +547,6 @@
 				EDC1CD3A23EAFA5F006ED196 /* LoginVC.swift */,
 				ED6B192623FAEA0A007C402C /* ForgotVC.swift */,
 				ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */,
-				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
 				ED2A26EB23F87DBF00E22B01 /* SignUp */,
 			);
 			path = 2.0;
@@ -594,6 +594,7 @@
 				ED1F586221E09A2500126A07 /* Validator.swift */,
 				ED4750F921EC76360043FD18 /* MessageSummary.swift */,
 				EDA29FF3223A750700C1EA1E /* FBLogger.swift */,
+				ED8C493323EF133E00443477 /* Apollo+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -963,6 +964,7 @@
 				EDD3A867226C869B006E342A /* HomeHeaderCell.swift in Sources */,
 				EDD3A868226C869B006E342A /* PlugCronParser.swift in Sources */,
 				EDD3A86A226C869B006E342A /* User.swift in Sources */,
+				ED4179D5240D4A610022491F /* Apollo+Rx.swift in Sources */,
 				EDD3A86C226C869B006E342A /* EditImageVC.swift in Sources */,
 				EDD3A86D226C869B006E342A /* RegisterPlugIDVC.swift in Sources */,
 				EDD3A86E226C869B006E342A /* UserInfo.swift in Sources */,

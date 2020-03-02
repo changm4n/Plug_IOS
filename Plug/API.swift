@@ -1946,6 +1946,95 @@ public final class ReadMessageMutation: GraphQLMutation {
   }
 }
 
+public final class WithdrawUserMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    mutation withdrawUser($userId: String!) {
+      withdrawUser(userId: $userId) {
+        __typename
+        userId
+      }
+    }
+    """
+
+  public let operationName = "withdrawUser"
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("withdrawUser", arguments: ["userId": GraphQLVariable("userId")], type: .nonNull(.object(WithdrawUser.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(withdrawUser: WithdrawUser) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "withdrawUser": withdrawUser.resultMap])
+    }
+
+    public var withdrawUser: WithdrawUser {
+      get {
+        return WithdrawUser(unsafeResultMap: resultMap["withdrawUser"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "withdrawUser")
+      }
+    }
+
+    public struct WithdrawUser: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("userId", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(userId: String) {
+        self.init(unsafeResultMap: ["__typename": "User", "userId": userId])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var userId: String {
+        get {
+          return resultMap["userId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "userId")
+        }
+      }
+    }
+  }
+}
+
 public final class KakaoSignUpMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =
@@ -2303,6 +2392,48 @@ public final class RemovePushKeyMutation: GraphQLMutation {
         set {
           resultMap.updateValue(newValue, forKey: "pushKey")
         }
+      }
+    }
+  }
+}
+
+public final class GenerateSubscriptionMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    mutation generateSubscription {
+      generateSubscriptionToken
+    }
+    """
+
+  public let operationName = "generateSubscription"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("generateSubscriptionToken", type: .nonNull(.scalar(String.self))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(generateSubscriptionToken: String) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "generateSubscriptionToken": generateSubscriptionToken])
+    }
+
+    public var generateSubscriptionToken: String {
+      get {
+        return resultMap["generateSubscriptionToken"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "generateSubscriptionToken")
       }
     }
   }

@@ -51,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Session.me = user
         }
         
+//        if let token = UserDefaults.standard.object(forKey: kSubscriptToken) {
+//
+//        }
+//
         return true
     }
     
@@ -90,11 +94,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     }
     
-    /*
+   
     func applicationWillEnterForeground(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
+        if let me = Session.me {
+            me.reload().subscribe().disposed(by: me.disposeBag)
+        }
     }
-   */
+   
     func applicationDidEnterBackground(_ application: UIApplication) {
         guard let me = Session.me else {
             application.applicationIconBadgeNumber = 0
