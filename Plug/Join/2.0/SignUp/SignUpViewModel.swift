@@ -9,6 +9,9 @@
 import RxSwift
 import RxCocoa
 
+protocol SignUpManager {
+}
+
 class SignUpViewModel {
     typealias formType = (String, String, String)
     let disposeBag = DisposeBag()

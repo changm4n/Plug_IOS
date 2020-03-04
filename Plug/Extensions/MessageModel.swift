@@ -271,7 +271,7 @@ class ChatroomModel {
     
     public func sendMessage(message: MessageItem) {
         MessageAPI.sendMessage(message: message).subscribe(onSuccess: { [weak self] (message) in
-            self?.saveMessage(messages: [ChatLog(message)])
+//            self?.saveMessage(messages: [ChatLog(message)])
             self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
             }, onError: { (error) in
                 switch error {

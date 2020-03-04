@@ -41,6 +41,7 @@
 		ED3D981121A111CD00B61748 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D981021A111CD00B61748 /* StartVC.swift */; };
 		ED3E6A4821CF570400C28403 /* PlugClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3E6A4721CF570400C28403 /* PlugClassCell.xib */; };
 		ED4179D5240D4A610022491F /* Apollo+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493323EF133E00443477 /* Apollo+Rx.swift */; };
+		ED4179D7241006BF0022491F /* ChangePWVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4179D6241006BF0022491F /* ChangePWVC.swift */; };
 		ED44B21723FD7A5400AEB833 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3E6A4421CF535B00C28403 /* SettingVC.swift */; };
 		ED44B21923FD7E1D00AEB833 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED44B21823FD7E1D00AEB833 /* Settings.storyboard */; };
 		ED44B21A23FD7EC700AEB833 /* ClassHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C3A7218ED25C008DA9E7 /* ClassHeader.swift */; };
@@ -53,6 +54,8 @@
 		ED44B2292400655E00AEB833 /* ClassDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B2282400655E00AEB833 /* ClassDetailVC.swift */; };
 		ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED44B22A24025D6D00AEB833 /* MemberCell.xib */; };
 		ED44B22D24025E3000AEB833 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED44B22C24025E3000AEB833 /* MemberCell.swift */; };
+		ED45FE2624100A7000E4D2BD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45FE2524100A6D00E4D2BD /* API.swift */; };
+		ED45FE282410134A00E4D2BD /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45FE272410134A00E4D2BD /* Subscription.swift */; };
 		ED4750FA21EC76360043FD18 /* MessageSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4750F921EC76360043FD18 /* MessageSummary.swift */; };
 		ED4750FC21ECB6540043FD18 /* indicator.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4750FB21ECB6540043FD18 /* indicator.json */; };
 		ED54BD8B240986FB00F62354 /* GraphQLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED54BD8A240986FB00F62354 /* GraphQLExtension.swift */; };
@@ -70,7 +73,6 @@
 		ED8C493223EC4B4F00443477 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1F586221E09A2500126A07 /* Validator.swift */; };
 		ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493323EF133E00443477 /* Apollo+Rx.swift */; };
 		ED8C493823EF1A6700443477 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493723EF1A6700443477 /* Networking.swift */; };
-		ED8C493A23EF1C9100443477 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493923EF1C9000443477 /* API.swift */; };
 		ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493B23EF1D1F00443477 /* UserAPI.swift */; };
 		ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493D23F04A0300443477 /* ChatroomAPI.swift */; };
 		ED8C494023F051B100443477 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493F23F051B100443477 /* MessageAPI.swift */; };
@@ -232,6 +234,7 @@
 		ED3E6A4421CF535B00C28403 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		ED3E6A4721CF570400C28403 /* PlugClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlugClassCell.xib; sourceTree = "<group>"; };
 		ED3E6A4921CF57B300C28403 /* PlugClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugClassCell.swift; sourceTree = "<group>"; };
+		ED4179D6241006BF0022491F /* ChangePWVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePWVC.swift; sourceTree = "<group>"; };
 		ED44B21823FD7E1D00AEB833 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		ED44B21C23FD8C9900AEB833 /* SettingCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCells.swift; sourceTree = "<group>"; };
 		ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileVC.swift; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 		ED44B2282400655E00AEB833 /* ClassDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetailVC.swift; sourceTree = "<group>"; };
 		ED44B22A24025D6D00AEB833 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
 		ED44B22C24025E3000AEB833 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		ED45FE2524100A6D00E4D2BD /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		ED45FE272410134A00E4D2BD /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		ED4750F121EA7C0C0043FD18 /* JoinRoomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC.swift; sourceTree = "<group>"; };
 		ED4750F321EA80190043FD18 /* kidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidVC.swift; sourceTree = "<group>"; };
 		ED4750F521EB16920043FD18 /* JoinRoomVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomVC2.swift; sourceTree = "<group>"; };
@@ -270,7 +275,6 @@
 		ED8C492C23EC47CA00443477 /* PlugViewControllerWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugViewControllerWithButton.swift; sourceTree = "<group>"; };
 		ED8C493323EF133E00443477 /* Apollo+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Apollo+Rx.swift"; path = "../Join/2.0/Apollo+Rx.swift"; sourceTree = "<group>"; };
 		ED8C493723EF1A6700443477 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		ED8C493923EF1C9000443477 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		ED8C493B23EF1D1F00443477 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		ED8C493D23F04A0300443477 /* ChatroomAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomAPI.swift; sourceTree = "<group>"; };
 		ED8C493F23F051B100443477 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
@@ -451,6 +455,7 @@
 				ED44B22A24025D6D00AEB833 /* MemberCell.xib */,
 				ED44B22C24025E3000AEB833 /* MemberCell.swift */,
 				ED44B2262400647F00AEB833 /* DefaultCell.swift */,
+				ED4179D6241006BF0022491F /* ChangePWVC.swift */,
 				ED44B21423FD784D00AEB833 /* 1.0 */,
 			);
 			path = Setting;
@@ -519,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				ED8C493723EF1A6700443477 /* Networking.swift */,
+				ED45FE272410134A00E4D2BD /* Subscription.swift */,
 				ED54BD8A240986FB00F62354 /* GraphQLExtension.swift */,
 				ED8C493B23EF1D1F00443477 /* UserAPI.swift */,
 				ED8C493D23F04A0300443477 /* ChatroomAPI.swift */,
@@ -654,9 +660,9 @@
 				ED3CF408220A96F100356230 /* GoogleService-Info.plist */,
 				EDF609BB21BA468400CB3529 /* schema.json */,
 				ED7D59C821B3D89D0029E80A /* Queries.graphql */,
+				ED45FE2524100A6D00E4D2BD /* API.swift */,
 				EDE731D9217B4E7000D302DF /* AppDelegate.swift */,
 				ED7D59D221B43BBE0029E80A /* Secret.swift */,
-				ED8C493923EF1C9000443477 /* API.swift */,
 				EDE731ED217C1D3E00D302DF /* Strings.swift */,
 				ED4750FB21ECB6540043FD18 /* indicator.json */,
 				ED71B6B32219359400AC21FF /* licenses.json */,
@@ -1008,6 +1014,7 @@
 				ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */,
 				ED8C493423EF133E00443477 /* Apollo+Rx.swift in Sources */,
 				ED1F586B21EA0BF000126A07 /* MessageManager.swift in Sources */,
+				ED4179D7241006BF0022491F /* ChangePWVC.swift in Sources */,
 				ED2A26ED23F87DCF00E22B01 /* PhotoSelector.swift in Sources */,
 				EDE731F0217C20A600D302DF /* ViewController+Extensions.swift in Sources */,
 				ED8C493223EC4B4F00443477 /* Validator.swift in Sources */,
@@ -1052,6 +1059,7 @@
 				EDF609C021BBC07F00CB3529 /* ChatDataHeader.swift in Sources */,
 				EDE731EC217C1D1100D302DF /* UIColor+Additions.swift in Sources */,
 				EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */,
+				ED45FE282410134A00E4D2BD /* Subscription.swift in Sources */,
 				ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */,
 				ED8C492D23EC47CA00443477 /* PlugViewControllerWithButton.swift in Sources */,
 				EDCF234223F94683003CBE4B /* SignUpViewModel.swift in Sources */,
@@ -1065,12 +1073,12 @@
 				ED8C492E23EC4AD300443477 /* ChatVC.swift in Sources */,
 				ED6B192723FAEA0A007C402C /* ForgotVC.swift in Sources */,
 				ED1153302407F8A500AD59FA /* MultiSendCell.swift in Sources */,
-				ED8C493A23EF1C9100443477 /* API.swift in Sources */,
 				ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */,
 				ED1FB5AE217E019F0075C4CE /* UIFont+Additions.swift in Sources */,
 				EDF609C421BBC2AC00CB3529 /* MessageModel.swift in Sources */,
 				EDE6089B239BFDB200F91EB4 /* ChatListCell.swift in Sources */,
 				ED11532A2406B92300AD59FA /* HomeHeaderCell.swift in Sources */,
+				ED45FE2624100A7000E4D2BD /* API.swift in Sources */,
 				EDFC46E923DA10C100AB194A /* ChatLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

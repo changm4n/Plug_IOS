@@ -11932,13 +11932,9 @@
             "name": "role",
             "description": "",
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "Role",
+              "ofType": null
             },
             "defaultValue": null
           },
@@ -11953,6 +11949,36 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "name",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "profileImageUrl",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "phoneNumber",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null
           }

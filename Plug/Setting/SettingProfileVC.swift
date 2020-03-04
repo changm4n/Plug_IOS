@@ -34,7 +34,17 @@ class SettingProfileVC: PlugViewController {
     let disposeBag = DisposeBag()
     
     let headers = ["플러그 계정 설정", "로그아웃 및 계정관리"]
-    let cells: [[(String, String)]] = [[("플러그 계정","subtitle"), ("비밀번호 변경", "cell")],[("로그아웃","cell"), ("계정 삭제","cell")]]
+    let emailCells: [[(String, String)]] = [[("플러그 계정","subtitle"), ("비밀번호 변경", "cell")],[("로그아웃","cell"), ("계정 삭제","cell")]]
+    
+    let kakaoCells: [[(String, String)]] = [[("플러그 계정","subtitle")],[("로그아웃","cell"), ("계정 삭제","cell")]]
+    
+    var cells: [[(String, String)]] {
+        if let type = Session.me?.userType {
+            return type == .KAKAO ? kakaoCells : emailCells
+        } else {
+            return emailCells
+        }
+    }
     
     var needToUpdate = false
     
@@ -178,6 +188,9 @@ extension SettingProfileVC: UITableViewDataSource, UITableViewDelegate {
                     self.present(NVC, animated: false, completion: nil)
                 }).disposed(by: self.disposeBag)
             }, canceltype: .cancel, confirmtype: .destructive)
+        } else if value == "비밀번호 변경" {
+            let vc = ChangePWVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

@@ -61,4 +61,8 @@ class MessageAPI: NSObject {
     static func getSubscriptToken() -> Maybe<String> {
         return Network.shared.perform(query: GenerateSubscriptionMutation()).map({ $0.generateSubscriptionToken })
     }
+    
+//    static func subscript() -> Maybe<MessageSubscriptionSubscription.Data> {
+//        return Network.shared.
+//    }
 }

@@ -53,6 +53,13 @@ class UserAPI: NSObject {
         return Network.shared.perform(query: SignUpMutation(data: input))
     }
     
+    static func kakaoSignUP(userId: String, passwd: String, name: String, url: String?) -> Maybe<SignUpMutation.Data> {
+        let input = UserInput(role: .parent, userId: userId, name: name, password: passwd, profileImageUrl: url, phoneNumber: nil)
+        
+//        KaKaoUserInput(role: <#T##Role#>, kakaoUserId: <#T##String#>)
+        return Network.shared.perform(query: SignUpMutation(data: input))
+    }
+    
     static func getUserInfo() -> Maybe<GetUserInfoInStartQuery.Data> {
         guard let id = Session.me?.id, let userId = Session.me?.userId else {
             return Maybe.error(ApolloError.gqlErrors([]))
@@ -83,5 +90,9 @@ class UserAPI: NSObject {
     
     static func withDraw(userId: String) -> Maybe<Void> {
         return Network.shared.perform(query: WithdrawUserMutation(userId: userId)).map({_ in Void() })
+    }
+    
+    static func changePw(userId: String, origin: String, new: String) -> Maybe<ChangePwMutation.Data> {
+        return Network.shared.perform(query: ChangePwMutation(userId: userId, old: origin, new: new))
     }
 }

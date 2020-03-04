@@ -268,8 +268,8 @@ extension ChatVC {
                 newMessage.chatRoom.id == chatroom.id else {
                     return
             }
-            self.addMessage(newMessage: MessageItem(with: newMessage, isMine: receiver.id == newMessage.sender.userId))
-            self.tableView.reloadData()
+            let item = MessageItem(with: newMessage, isMine: receiver.id == newMessage.sender.userId)
+            self.viewModel.addMessage(message: item)
         }
     }
    
@@ -339,8 +339,8 @@ extension ChatVC {
     }
     
     func addMessage(newMessage: MessageItem) {
-//        self.viewModel.addMessage(newMessage: newMessage)
-        self.tableView.reloadData()
+        
+//        self.tableView.reloadData()
     }
     
 //    func setTableViewScrollBottom(animated: Bool = false) {
