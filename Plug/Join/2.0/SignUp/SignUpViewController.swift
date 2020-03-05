@@ -14,7 +14,7 @@ import SnapKit
 class SignUpViewController: PlugViewControllerWithButton {
     
     let disposeBag = DisposeBag()
-    var viewModel = SignUpViewModel()
+    var viewModel = SignUpViewModel(type: .EMAIL)
     
     let titleLabel: UILabel = {
         let lb = UILabel()

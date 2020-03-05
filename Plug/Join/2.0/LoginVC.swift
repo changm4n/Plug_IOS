@@ -88,6 +88,14 @@ class LoginVC2: PlugViewControllerWithButton {
             .drive(onNext: { [unowned self] (errorMessage) in
                 showAlertWithString("로그인 오류", message: errorMessage, sender: self)
             }).disposed(by: disposeBag)
+        
+        viewModel.isNetworking.subscribe(onNext: { [weak self] (isNetworking) in
+            if isNetworking {
+                self?.play()
+            } else {
+                self?.stop()
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func setViews() {
@@ -135,9 +143,12 @@ class LoginViewModel {
     var loginSuccess: PublishSubject<Bool> = PublishSubject()
     var loginError: PublishSubject<String> = PublishSubject()
     
+    var isNetworking: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    
     var target: UIViewController?
     init() {
         loginPressed.subscribe(onNext: { [unowned self] (form) in
+            self.isNetworking.accept(true)
             self.login(form: form)
         }).disposed(by: disposeBag)
     }
@@ -153,6 +164,7 @@ class LoginViewModel {
             }).flatMap({ _ in
                 return Session.me!.reload()
             }).subscribe(onSuccess: { [weak self] (_) in
+                self?.isNetworking.accept(false)
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()
                 }, onError: { [unowned self] (error) in

@@ -70,6 +70,14 @@ class ForgotVC: PlugViewControllerWithButton {
                 showAlertWithString("비밀번호 초기화", message: "존재하지 않는 이메일입니다.", sender: self)
             }
         }).disposed(by: disposeBag)
+        
+        viewModel.isNetworking.subscribe(onNext: { [weak self] (isNetworking) in
+            if isNetworking {
+                self?.play()
+            } else {
+                self?.stop()
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func setViews() {
@@ -113,20 +121,23 @@ class ForgotViewModel {
     
     //output
     var forgotSuccess: PublishSubject<Bool> = PublishSubject()
-    
+    var isNetworking: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var target: UIViewController?
     
     init() {
         forgotPressed.subscribe(onNext: { [unowned self] (email) in
+            self.isNetworking.accept(true)
             self.reset(email: email)
         }).disposed(by: disposeBag)
     }
     
     func reset(email: String) {
         UserAPI.resetPassword(email: email).subscribe(onSuccess: { [weak self] (_) in
-                self?.forgotSuccess.onNext(true)
+            self?.isNetworking.accept(false)
+            self?.forgotSuccess.onNext(true)
             }, onError: { [unowned self] (error) in
-//                showErrorAlert(error: error, sender: self.target)
+                self.isNetworking.accept(false)
+                //                showErrorAlert(error: error, sender: self.target)
                 self.forgotSuccess.onNext(false)
         }).disposed(by: disposeBag)
     }

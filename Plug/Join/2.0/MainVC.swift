@@ -101,7 +101,15 @@ class MainVC: PlugViewController {
             .drive(kakaoManager.input)
             .disposed(by: disposeBag)
         
-        kakaoManager.output.subscribe(onNext: { (isMember) in
+        kakaoManager.isNetworking.subscribe(onNext: { [weak self] (isNetworking) in
+            if isNetworking {
+                self?.play()
+            } else {
+                self?.stop()
+            }
+        }).disposed(by: disposeBag)
+        
+        kakaoManager.output.subscribe(onNext: { [unowned self] (isMember, id) in
             if isMember {
                 let storyboard = UIStoryboard(name: "Chat", bundle: nil)
 
@@ -112,13 +120,19 @@ class MainVC: PlugViewController {
                 nvc.modalPresentationStyle = .fullScreen
                 self.present(nvc, animated: true, completion: nil)
             } else {
+                let vc = SetProfileViewController()
+                let viewModel = SignUpViewModel(type: .KAKAO)
+                viewModel.signUpForm.onNext((id, ""))
+                viewModel.selectedId = id
                 
+                vc.viewModel = viewModel
                 
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }).disposed(by: disposeBag)
         
-        kakaoManager.error.subscribe(onNext: { (message) in
-            print(message)
+        kakaoManager.error.subscribe(onNext: { [unowned self] (message) in
+            showAlertWithString("오류", message: message, sender: self)
         }).disposed(by: disposeBag)
         
         emailButton.rx.tap.asDriver().drive(onNext: { [weak self]  in

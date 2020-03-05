@@ -71,6 +71,14 @@ class SetProfileViewController: PlugViewControllerWithButton {
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }).disposed(by: disposeBag)
+        
+        viewModel.isNetworking.subscribe(onNext: { [weak self] (isNetworking) in
+            if isNetworking {
+                self?.play()
+            } else {
+                self?.stop()
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func setViews() {

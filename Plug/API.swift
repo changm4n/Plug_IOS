@@ -175,6 +175,59 @@ public struct UserWhereUniqueInput: GraphQLMapConvertible {
   }
 }
 
+public struct KaKaoUserInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  public init(role: Swift.Optional<Role?> = nil, kakaoUserId: String, name: Swift.Optional<String?> = nil, profileImageUrl: Swift.Optional<String?> = nil, phoneNumber: Swift.Optional<String?> = nil) {
+    graphQLMap = ["role": role, "kakaoUserId": kakaoUserId, "name": name, "profileImageUrl": profileImageUrl, "phoneNumber": phoneNumber]
+  }
+
+  public var role: Swift.Optional<Role?> {
+    get {
+      return graphQLMap["role"] as? Swift.Optional<Role?> ?? Swift.Optional<Role?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "role")
+    }
+  }
+
+  public var kakaoUserId: String {
+    get {
+      return graphQLMap["kakaoUserId"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "kakaoUserId")
+    }
+  }
+
+  public var name: Swift.Optional<String?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var profileImageUrl: Swift.Optional<String?> {
+    get {
+      return graphQLMap["profileImageUrl"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profileImageUrl")
+    }
+  }
+
+  public var phoneNumber: Swift.Optional<String?> {
+    get {
+      return graphQLMap["phoneNumber"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "phoneNumber")
+    }
+  }
+}
+
 public enum Platform: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case ios
@@ -2039,8 +2092,8 @@ public final class KakaoSignUpMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =
     """
-    mutation kakaoSignUp($role: Role!, $userId: String!) {
-      kakaoSignup(data: {kakaoUserId: $userId, role: $role}) {
+    mutation kakaoSignUp($data: KaKaoUserInput!) {
+      kakaoSignup(data: $data) {
         __typename
         userId
         id
@@ -2050,23 +2103,21 @@ public final class KakaoSignUpMutation: GraphQLMutation {
 
   public let operationName = "kakaoSignUp"
 
-  public var role: Role
-  public var userId: String
+  public var data: KaKaoUserInput
 
-  public init(role: Role, userId: String) {
-    self.role = role
-    self.userId = userId
+  public init(data: KaKaoUserInput) {
+    self.data = data
   }
 
   public var variables: GraphQLMap? {
-    return ["role": role, "userId": userId]
+    return ["data": data]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("kakaoSignup", arguments: ["data": ["kakaoUserId": GraphQLVariable("userId"), "role": GraphQLVariable("role")]], type: .nonNull(.object(KakaoSignup.selections))),
+      GraphQLField("kakaoSignup", arguments: ["data": GraphQLVariable("data")], type: .nonNull(.object(KakaoSignup.selections))),
     ]
 
     public private(set) var resultMap: ResultMap

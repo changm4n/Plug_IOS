@@ -138,10 +138,8 @@ mutation withdrawUser($userId: String!) {
   }
 }
 
-
-mutation kakaoSignUp($role: Role!, $userId: String!) {
-    kakaoSignup(data: {kakaoUserId: $userId,
-                role : $role }) {
+mutation kakaoSignUp($data: KaKaoUserInput!) {
+    kakaoSignup(data: $data) {
         userId
         id
     }

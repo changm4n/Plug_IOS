@@ -23,7 +23,7 @@ class SubscriptionManager {
     func getSubscriptClient(token: String) -> ApolloClient {
         let map: GraphQLMap = ["Authorization" : token]
         let wsEndpointURL = URL(string: kPrismaURL)!
-        let endpointURL = URL(string: kPrismaURL)!
+        let endpointURL = URL(string: kBaseURL)!
         let websocket = WebSocketTransport(request: URLRequest(url: wsEndpointURL), connectingPayload: map)
         
         let configuration = URLSessionConfiguration.default

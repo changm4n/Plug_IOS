@@ -53,11 +53,10 @@ class UserAPI: NSObject {
         return Network.shared.perform(query: SignUpMutation(data: input))
     }
     
-    static func kakaoSignUP(userId: String, passwd: String, name: String, url: String?) -> Maybe<SignUpMutation.Data> {
-        let input = UserInput(role: .parent, userId: userId, name: name, password: passwd, profileImageUrl: url, phoneNumber: nil)
+    static func kakaoSignUP(userId: String, name: String, url: String?) -> Maybe<KakaoSignUpMutation.Data> {
+        let input = KaKaoUserInput(role: .parent, kakaoUserId: userId, name: name, profileImageUrl: url, phoneNumber: nil)
         
-//        KaKaoUserInput(role: <#T##Role#>, kakaoUserId: <#T##String#>)
-        return Network.shared.perform(query: SignUpMutation(data: input))
+        return Network.shared.perform(query: KakaoSignUpMutation(data: input))
     }
     
     static func getUserInfo() -> Maybe<GetUserInfoInStartQuery.Data> {

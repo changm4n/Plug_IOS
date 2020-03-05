@@ -33,10 +33,7 @@ class StartVC: PlugViewController {
     }
     
     fileprivate func show() {
-        //For UI2.0
-//        self.animateSegue("Main", sender: nil)
-//        returns
-        ////
+
         if Session.fetchToken() != nil {
             UserAPI.getMe().flatMap({ _ in
                 return UserAPI.getUserInfo()
