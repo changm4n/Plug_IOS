@@ -10,6 +10,9 @@
 		56611547AFA62ECD403A81D3 /* Pods_Plug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */; };
 		ED0A2CC6220717F50035B887 /* PlugIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2CC5220717F50035B887 /* PlugIndicator.swift */; };
 		ED0A2CC8220730600035B887 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */; };
+		ED0DDC932414203400F73359 /* OffSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0DDC922414203400F73359 /* OffSelectView.swift */; };
+		ED0DDC952414236800F73359 /* OffSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0DDC942414236800F73359 /* OffSelectCell.swift */; };
+		ED0DDC972414237200F73359 /* OffSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0DDC962414237200F73359 /* OffSelectCell.xib */; };
 		ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
 		ED1153212402B99600AD59FA /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153202402B99600AD59FA /* CreateClassVC.swift */; };
 		ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153232402CA9F00AD59FA /* CodeVC.swift */; };
@@ -195,6 +198,9 @@
 		C95E6B84EAAB476DF8BC3F42 /* Pods_Plug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED0A2CC5220717F50035B887 /* PlugIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlugIndicator.swift; sourceTree = "<group>"; };
 		ED0A2CC7220730600035B887 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		ED0DDC922414203400F73359 /* OffSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffSelectView.swift; sourceTree = "<group>"; };
+		ED0DDC942414236800F73359 /* OffSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffSelectCell.swift; sourceTree = "<group>"; };
+		ED0DDC962414237200F73359 /* OffSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OffSelectCell.xib; sourceTree = "<group>"; };
 		ED0E65DA225CAE3500D25E0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED1153202402B99600AD59FA /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
 		ED1153232402CA9F00AD59FA /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
@@ -387,6 +393,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED0DDC912414202400F73359 /* subview */ = {
+			isa = PBXGroup;
+			children = (
+				ED0DDC922414203400F73359 /* OffSelectView.swift */,
+				ED0DDC962414237200F73359 /* OffSelectCell.xib */,
+				ED0DDC942414236800F73359 /* OffSelectCell.swift */,
+			);
+			path = subview;
+			sourceTree = "<group>";
+		};
 		ED11533624084C1A00AD59FA /* MultiSend */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3E6A4421CF535B00C28403 /* SettingVC.swift */,
+				ED0DDC912414202400F73359 /* subview */,
 				ED44B21C23FD8C9900AEB833 /* SettingCells.swift */,
 				ED44B21E24002E5800AEB833 /* SettingProfileVC.swift */,
 				ED44B21823FD7E1D00AEB833 /* Settings.storyboard */,
@@ -726,7 +743,7 @@
 				EDE731D2217B4E7000D302DF /* Sources */,
 				EDE731D3217B4E7000D302DF /* Frameworks */,
 				EDE731D4217B4E7000D302DF /* Resources */,
-				6E1B520E731E6E8B95DEAED3 /* [CP] Embed Pods Frameworks */,
+				F36411281502651AD4E3D367 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -762,7 +779,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = changmin;
 				TargetAttributes = {
 					EDE731D5217B4E7000D302DF = {
@@ -847,6 +864,7 @@
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */,
 				ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */,
+				ED0DDC972414237200F73359 /* OffSelectCell.xib in Resources */,
 				ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
@@ -870,23 +888,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6E1B520E731E6E8B95DEAED3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A1C3FC55F00CF14CF8FC5B9D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -940,6 +941,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/Plug\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate --queries=\"$(find . -name '*.graphql')\" --schema=schema.json API.swift\n\n";
+		};
+		F36411281502651AD4E3D367 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Plug/Pods-Plug-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1025,6 +1043,7 @@
 				ED44B21D23FD8C9900AEB833 /* SettingCells.swift in Sources */,
 				EDC1CD3823EAE61C006ED196 /* MainVC.swift in Sources */,
 				ED7D59CD21B3DCA90029E80A /* Queries.swift in Sources */,
+				ED0DDC952414236800F73359 /* OffSelectCell.swift in Sources */,
 				ED2A26EA23F8714D00E22B01 /* SetProfileViewController.swift in Sources */,
 				EDE731EE217C1D3E00D302DF /* Strings.swift in Sources */,
 				ED8C493123EC4B4000443477 /* WebVC.swift in Sources */,
@@ -1053,6 +1072,7 @@
 				ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */,
 				EDBE948F23DC534A000D81AA /* ChatroomIdentity.swift in Sources */,
 				ED44B21F24002E5800AEB833 /* SettingProfileVC.swift in Sources */,
+				ED0DDC932414203400F73359 /* OffSelectView.swift in Sources */,
 				ED1FB5AC217E00880075C4CE /* WideButton.swift in Sources */,
 				ED44B2232400580900AEB833 /* PlugClassCell.swift in Sources */,
 				ED8C493823EF1A6700443477 /* Networking.swift in Sources */,
@@ -1261,7 +1281,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 			};
 			name = Debug;
 		};
@@ -1314,10 +1333,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1360,7 +1377,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = "";
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1403,7 +1420,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Plug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = "";
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

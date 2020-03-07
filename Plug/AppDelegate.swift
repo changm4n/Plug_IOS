@@ -5,7 +5,6 @@
 //  Created by changmin lee on 2018. 10. 20..
 //  Copyright © 2018년 changmin. All rights reserved.
 //
-import Siren
 import UIKit
 import KakaoOpenSDK
 import Firebase
@@ -23,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
-        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
-        Siren.shared.wail()
+//        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
+//        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
+//        Siren.shared.wail()
         
         Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {

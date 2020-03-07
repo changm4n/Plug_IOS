@@ -12,7 +12,7 @@ target 'Plug' do
     pod 'Apollo/WebSocket'
     pod 'Firebase/Messaging'
     pod 'SwiftyJSON'
-    pod 'Siren'
+    pod 'BEMCheckBox'
     pod 'RxSwift', '~> 5'
     pod 'RxCocoa', '~> 5'
     pod 'RxDataSources', '~> 4.0'
