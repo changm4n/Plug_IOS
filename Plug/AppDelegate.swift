@@ -11,6 +11,7 @@ import KakaoOpenSDK
 import Firebase
 import UserNotifications
 import SwiftyJSON
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        Siren.shared.forceLanguageLocalization = .korean
-        Siren.shared.checkVersion(checkType: .immediately)
+        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
+        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
+        Siren.shared.wail()
         
         Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {
@@ -31,9 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (garanted, error) in
+            }
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -49,6 +50,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let user = Session.fetchUserFromSavedData() {
             Session.me = user
         }
+        
+//        SubscriptionManager.shared.start()
+        
+//        if let token = UserDefaults.standard.object(forKey: kSubscriptToken) {
+//
+//        }
+//
         return true
     }
     
@@ -67,8 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        Siren.shared.forceLanguageLocalization = .korean
-        Siren.shared.checkVersion(checkType: .weekly)
         KOSession.handleDidBecomeActive()
     }
     
@@ -90,12 +96,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     }
     
+   
     func applicationWillEnterForeground(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
+        if let me = Session.me {
+            me.reload().subscribe().disposed(by: me.disposeBag)
+        }
     }
-    
+   
     func applicationDidEnterBackground(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
+        guard let me = Session.me else {
+            application.applicationIconBadgeNumber = 0
+            return
+        }
+        let badgeCount = me.summaryData.value.reduce(0) { (result, summary) -> Int in
+            return result + summary.unreadCount
+        }
+        
+        application.applicationIconBadgeNumber = badgeCount
     }
 }
 
@@ -120,8 +137,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //        let userInfo = notification.request.content.userInfo
-         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newMessage"), object: nil)
-        
         completionHandler([])
     }
     

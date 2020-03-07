@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
+import RxRealm
+import RealmSwift
+import RxDataSources
 
 struct MessageItem {
     var id: String
@@ -43,9 +48,9 @@ struct MessageItem {
         self.text = "text"
         self.receiverId = Session.me!.userId!
         self.receiverName = kDefault
-        self.senderId = "lcmini6528@gmail.com"
+        self.senderId = kDefault
         self.senderName = kDefault
-        self.isMine = false
+        self.isMine = true
         self.createAt = Date()
     }
     
@@ -66,6 +71,32 @@ struct MessageItem {
         readedAt = formatter.date(from: message.readedAt ?? "")
         
         self.isMine = isMine
+    }
+    
+    public init(with chatlog: ChatLog, isMine: Bool) {
+        id = chatlog.id
+        chatroomId = chatlog.id
+        text = chatlog.text
+        receiverId = chatlog.rID
+        receiverName = chatlog.rName
+        senderId = chatlog.sID
+        senderName = chatlog.sName
+        createAt = chatlog.createAt
+        readedAt = chatlog.readedAt
+        
+        self.isMine = isMine
+    }
+    
+    public init(text: String, chatroom: String, receiver: String) {
+        self.id = kDefault
+        self.chatroomId = chatroom
+        self.text = text
+        self.receiverId = receiver
+        self.receiverName = kDefault
+        self.senderId = kDefault
+        self.senderName = kDefault
+        self.isMine = true
+        self.createAt = Date()
     }
 }
 
@@ -89,116 +120,43 @@ struct MessageViewItem {
     }
 }
 
-class MessageModel: NSObject {
-    private var mItems: [MessageItem] = []
-    var mViewModel: [[MessageViewItem]] = []
+struct ChatroomViewModel {
+    var identity: ChatroomIdentity
+    var disposeBag = DisposeBag()
     
-    var lastIndexPath: IndexPath {
-        if mViewModel.count == 0 {
-            return IndexPath(row: 0, section: 0)
-        } else {
-            return IndexPath(row: mViewModel[mViewModel.count - 1].count - 1,
-                             section: mViewModel.count - 1)
-        }
-        
+    var output: PublishSubject<[SectionModel<String, MessageViewItem>]> = PublishSubject()
+    
+    var model: ChatroomModel
+    
+    init(identity: ChatroomIdentity) {
+        self.identity = identity
+        self.model = ChatroomModel(identity: identity)
     }
     
-    override init() {
-        super.init()
-        mItems = []
-        mViewModel = []
+    func load() {
+        self.model.output.distinctUntilChanged({ (lhs, rhs) -> Bool in
+            lhs.count == rhs.count
+        })
+            .filter({!$0.isEmpty})
+            .map({
+            self.setViewModel(items: $0)
+        })
+            .bind(to: output).disposed(by: disposeBag)
+        model.load()
     }
     
-    init(withMessages messages: [MessageItem]) {
-        super.init()
-        
-        self.mItems = messages
-        self.mViewModel = setViewModel(items: messages)
-    }
-    
-    public func getIndexPath(of id:String) -> IndexPath {
-        
-        for (s, i) in mViewModel.enumerated() {
-            for (r, j) in mViewModel[s].enumerated() {
-                if j.message?.id == id {
-                    return IndexPath(row: r, section: s)
-                }
-            }
-        }
-        
-        return IndexPath(row: 0, section: 0)
-    }
-    
-    public func setItems(messages: [MessageItem]) {
-        self.mItems = messages
-        self.mViewModel = setViewModel(items: messages)
-    }
-    
-    public func addItemsFront(messages: [MessageItem]) -> IndexPath{
-        self.mItems = messages + self.mItems
-        let newVM = setViewModel(items: messages)
-        mViewModel = newVM + mViewModel
-        
-        if newVM.count > 0 && newVM[newVM.count - 1].count > 0 {
-            return IndexPath(row: newVM[newVM.count - 1].count - 1,
-                             section: newVM.count - 1)
-        }
-        return IndexPath(row: 0, section: 0)
-    }
-    
-    public func addMessage(newMessage: MessageItem) {
-        var r = 0
-        var s = 0
-        if mViewModel.count > 0 {
-            mViewModel[mViewModel.count - 1].removeLast()
-            r = mViewModel[mViewModel.count - 1].count - 1
-            s = mViewModel.count - 1
-        }
-        
-        if let lastMessage = mViewModel.last?.last?.message {
-            
-            var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
-            item.isShowTime = true
-            
-            if !lastMessage.createAt.isSameDay(rhs: newMessage.createAt) {
-                mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
-                return
-            }
-            
-            if lastMessage.isMine == newMessage.isMine &&
-                lastMessage.createAt.isSameMin(rhs: newMessage.createAt) {
-                mViewModel[s][r].isShowTime = false
-            } else {
-                mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
-            }
-        
-            mViewModel[mViewModel.count - 1].append(item)
-            mViewModel[mViewModel.count - 1].append(MessageViewItem(type: .BLANK))
-        } else {
-            var item = MessageViewItem(withMessage: newMessage, type: newMessage.isMine  ? .RCELL : .LCELL)
-            item.isShowTime = true
-            mViewModel.append([MessageViewItem.init(type: .STAMP), item, MessageViewItem(type: .BLANK)])
-            return
-            
-        }
-    }
-    
-    public func getType(of indexPath: IndexPath) -> MessageViewType {
-        return mViewModel[indexPath.section][indexPath.row].messageType
-    }
-    
-    private func setViewModel(items: [MessageItem]) -> [[MessageViewItem]] {
+    private func setViewModel(items: [MessageItem]) -> [SectionModel<String, MessageViewItem>] {
         var result: [[MessageViewItem]] = []
         if items.count == 0 {
             return []
         }
         
-        var tmp: [MessageViewItem] = [MessageViewItem.init(type: .STAMP)]
+        var tmp: [MessageViewItem] = [MessageViewItem.init(withMessage: items.first, type: .STAMP)]
         
         for i in 0 ..< items.count {
             
             let current = items[i]
-            var item = MessageViewItem(withMessage: current, type: current.isMine  ? .RCELL : .LCELL)
+            var item = MessageViewItem(withMessage: current, type: current.isMine ? .RCELL : .LCELL)
             
             if i == items.count - 1 {
                 item.isShowTime = true
@@ -213,7 +171,7 @@ class MessageModel: NSObject {
                 tmp.append(item)
                 
                 result.append(tmp)
-                tmp = [MessageViewItem.init(type: .STAMP)]
+                tmp = [MessageViewItem.init(withMessage: next, type: .STAMP)]
                 
                 continue
             }
@@ -234,41 +192,106 @@ class MessageModel: NSObject {
         
         tmp.append(MessageViewItem(type: .BLANK))
         result.append(tmp)
-        return result
+        
+        let sections = result.map({
+            SectionModel<String, MessageViewItem>(model: $0.first?.message?.timeStampLong ?? "", items: $0)
+        })
+        return sections
+    }
+    
+    public func addMessage(message: MessageItem) {
+        model.addMessage(newMessage: message)
+    }
+    
+    public func sendMessage(message: MessageItem) {
+        model.sendMessage(message: message)
     }
 }
 
-extension MessageModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = mViewModel[indexPath.section][indexPath.row]
-        if item.messageType == .BLANK {
-            let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath)
-            return cell
-            
-        } else if item.messageType == .RCELL {
-            let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
-            cell.configure(viewItem: item)
-            return cell
-            
-        } else if item.messageType == .LCELL {
-            let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! ChatRCell
-            cell.configure(viewItem: item)
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: item.messageType.rawValue, for: indexPath) as! StampCell
-            if let date = mViewModel[indexPath.section][1].message?.createAt {
-                cell.setTimeStamp(date: date)
-            }
-            return cell
+class ChatroomModel {
+    var identity: ChatroomIdentity
+    private var items: [MessageItem] = [] {
+        didSet {
+            output.onNext(self.items)
         }
     }
+    var output: BehaviorSubject<[MessageItem]> = BehaviorSubject(value: [])
+    var disposeBag = DisposeBag()
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mViewModel[section].count
+    init(identity: ChatroomIdentity) {
+        self.identity = identity
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return mViewModel.count
+    func saveMessage(messages: [ChatLog]) {
+        Observable.from(messages).bind(to: Realm.rx.add(update: .modified, onError: { elements, error in
+            if let elements = elements {
+                print("Error \(error.localizedDescription) while saving objects \(String(describing: elements))")
+            } else {
+                print("Error \(error.localizedDescription) while opening realm.")
+            }
+        })).disposed(by: disposeBag)
+    }
+    
+//    func load() {
+//        let realm = try! Realm()
+//        let logs = realm.objects(ChatLog.self).filter("hashKey == %@", identity.hashKey)
+//        if logs.count >= kMessageWindowSize {
+//            self.items = logs.map({ MessageItem(with: $0, isMine: identity.receiver.id == $0.sID)})
+//        } else {
+//
+//            let lastMessage = items.first?.id
+//            MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: lastMessage).subscribe(onSuccess: { (messages) in
+//                self.saveMessage(messages: messages.map({ ChatLog($0) }))
+//                let logs = realm.objects(ChatLog.self).filter("hashKey == %@", self.identity.hashKey)
+//                self.items = logs.map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+//            }, onError: { (error) in
+//
+//            }).disposed(by: disposeBag)
+//        }
+//    }
+    func load() {
+       MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil).subscribe(onSuccess: { (messages) in
+            self.items = messages.map({ ChatLog($0) }).map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+        }, onError: { (error) in
+            
+        }).disposed(by: disposeBag)
+    }
+    
+    public func setItems(messages: [MessageItem]) {
+        self.items = messages
+    }
+    
+    public func addItemsFront(messages: [MessageItem]) {
+        self.items.insert(contentsOf: messages, at: 0)
+    }
+    
+    public func addMessage(newMessage: MessageItem) {
+        self.items.append(newMessage)
+    }
+    
+    public func sendMessage(message: MessageItem) {
+        MessageAPI.sendMessage(message: message).subscribe(onSuccess: { [weak self] (message) in
+//            self?.saveMessage(messages: [ChatLog(message)])
+            self?.addMessage(newMessage: MessageItem(with: message, isMine: true))
+            }, onError: { (error) in
+                switch error {
+                case let ApolloError.gqlErrors(errors):
+                    print(errors.first?.message)
+                default:
+                    print(error.localizedDescription)
+                }
+        }).disposed(by: disposeBag)
+    }
+}
+
+final class RxTableViewSectionedReloadDataSourceWithReloadSignal<S: SectionModelType>: RxTableViewSectionedReloadDataSource<S> {
+    private let relay = PublishRelay<Void>()
+    var dataReloaded : Signal<Void> {
+        return relay.asSignal()
+    }
+    
+    override func tableView(_ tableView: UITableView, observedEvent: Event<[S]>) {
+        super.tableView(tableView, observedEvent: observedEvent)
+        relay.accept(())
     }
 }

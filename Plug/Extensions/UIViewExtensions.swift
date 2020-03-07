@@ -32,22 +32,21 @@ extension UIView {
 
 extension UIButton {
     func setPlugBlue() {
-        layer.cornerRadius = 2
+        layer.cornerRadius = 8
         layer.borderWidth = 0
-        clipsToBounds = true
+//        clipsToBounds = true
         backgroundColor = UIColor.plugBlue
         setTitleColor(UIColor.white, for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+//        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
     
     func setPlugWhite() {
-        layer.cornerRadius = 2
-        layer.borderWidth = 1
-        layer.borderColor = UIColor(r: 53, g: 99, b: 217).cgColor
-        clipsToBounds = true
+        layer.cornerRadius = 8
+        layer.borderWidth = 0
+//        clipsToBounds = true
         backgroundColor = UIColor.white
         setTitleColor(UIColor.plugBlue, for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+//        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
 }
 
@@ -66,7 +65,7 @@ extension Date {
         return cal.component(.minute, from: self) == cal.component(.minute, from: rhs)
     }
     
-    func toString(format: String) -> String {
+    func toString(format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
@@ -115,4 +114,20 @@ extension String {
     }
 }
 
+extension UITableView {
+    var lastIndexPath: IndexPath? {
+        let lastSectionIndex = numberOfSections - 1
+        guard lastSectionIndex >= 0 else { return nil }
+
+        let lastIndexInLastSection = numberOfRows(inSection: lastSectionIndex) - 1
+        guard lastIndexInLastSection >= 0 else { return nil }
+
+        return IndexPath(row: lastIndexInLastSection, section: lastSectionIndex)
+    }
+    
+    func scrollToBottom(animated: Bool = false) {
+        guard let indexPath = lastIndexPath else { return }
+        self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+    }
+}
 

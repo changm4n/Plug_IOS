@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Apollo
+import UserNotifications
 
 let SCREEN_WIDTH  = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
@@ -74,11 +76,29 @@ func getUserDefaultIntValue(_ key: String) -> Int {
     return value
 }
 
+func getUserDefaultStringValue(_ key: String) -> String? {
+    return UserDefaults.standard.string(forKey: key)
+}
+
 func showAlertWithString(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())? = nil) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
     alert.addAction(UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: handler))
     sender.view.endEditing(true)
     sender.present(alert, animated: true, completion: nil)
+}
+
+func showErrorAlert(error: Error, sender: UIViewController?) {
+    var message = ""
+    switch error {
+    case let ApolloError.gqlErrors(errors):
+        message = errors.first?.message ?? "오류가 발생하였습니다."
+    default:
+        message = "오류가 발생하였습니다."
+    }
+    let alert = UIAlertController(title: "오류", message: message, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: nil))
+    sender?.view.endEditing(true)
+    sender?.present(alert, animated: true, completion: nil)
 }
 
 func showAlertWithSelect(_ title: String , message: String, sender: UIViewController, handler: ((UIAlertAction)->())?, canceltype: UIAlertAction.Style = .default, confirmtype: UIAlertAction.Style = .default, cancelHandler: ((UIAlertAction)->())? = nil) {
@@ -104,8 +124,14 @@ var isBlockUserInteract: Bool = false {
     }
 }
 
+func checkPermission(completion: @escaping (_ authorized: Bool) -> Void) {
+    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+        completion(settings.authorizationStatus == .authorized)
+    }
+}
+
 extension UIStoryboard {
-    class func viewController(storyBoard sbID: String,withID identifier: String) -> UIViewController {
+    class func viewController(storyBoard sbID: String, withID identifier: String) -> UIViewController {
         return UIStoryboard(name: sbID, bundle: nil).instantiateViewController(withIdentifier: identifier)
     }
 }

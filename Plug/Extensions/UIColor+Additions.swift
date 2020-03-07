@@ -18,6 +18,39 @@ extension UIColor {
         return UIColor(red: 56.0 / 255.0, green: 103.0 / 255.0, blue: 214.0 / 255.0, alpha: 1.0)
     }
     
+    @nonobjc class var darkGreyText: UIColor {
+      return UIColor(red: 19.0 / 255.0, green: 20.0 / 255.0, blue: 21.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var charcoalGrey: UIColor {
+        return UIColor(red: 64.0 / 255.0, green: 68.0 / 255.0, blue: 82.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var charcoalGreyTwo: UIColor {
+      return UIColor(red: 56.0 / 255.0, green: 60.0 / 255.0, blue: 72.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var blueGrey: UIColor {
+      return UIColor(red: 126.0 / 255.0, green: 133.0 / 255.0, blue: 155.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var plugBlueDisable: UIColor {
+        return UIColor(red: 56.0 / 255.0, green: 103.0 / 255.0, blue: 214.0 / 255.0, alpha: 0.4)
+    }
+    
+    @nonobjc class var textBlue: UIColor {
+        return UIColor(red: 65.0 / 255.0, green: 114.0 / 255.0, blue: 219.0 / 255.0, alpha: 1.0)
+    }
+    
+    
+    @nonobjc class var filterBlue: UIColor {
+        return UIColor(red: 65.0 / 255.0, green: 114.0 / 255.0, blue: 219.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var filterGray: UIColor {
+        return UIColor(red: 183.0 / 255.0, green: 183.0 / 255.0, blue: 183.0 / 255.0, alpha: 1.0)
+    }
+    
     @nonobjc class var plugBlue2: UIColor {
         return UIColor(red: 84.0 / 255.0, green: 102.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
     }
@@ -71,4 +104,7 @@ extension UIColor {
         return UIColor(red: 252.0 / 255.0, green: 61.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
     }
     
+    @nonobjc class var paleGrey2: UIColor {
+      return UIColor(red: 241.0 / 255.0, green: 241.0 / 255.0, blue: 244.0 / 255.0, alpha: 1.0)
+    }
 }

@@ -46,4 +46,8 @@ class PlugTests: XCTestCase {
         let result = cal.component(.minute, from: formatter.date(from: str1)!) == cal.component(.minute, from: formatter.date(from: str2)!)
         XCTAssertTrue(result)
     }
+    
+    func testFileName() {
+        
+    }
 }

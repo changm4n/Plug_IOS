@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Spoqa Han Sans Bold.ttf">
+            <string>SpoqaHanSans-Bold</string>
+        </array>
+        <array key="Spoqa Han Sans Regular.ttf">
+            <string>SpoqaHanSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="multi" rowHeight="72" id="anI-LG-i2h" customClass="MultiSendCell" customModule="Plug" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="anI-LG-i2h" id="WlY-h9-cl2">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatarFull" translatesAutoresizingMaskIntoConstraints="NO" id="Z8w-hl-du7">
+                        <rect key="frame" x="24" y="12" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="AMl-V0-FbJ"/>
+                            <constraint firstAttribute="height" constant="48" id="abe-mY-vlb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이창민 부모님" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyV-73-CLY">
+                        <rect key="frame" x="86" y="24" width="92" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="n4Q-5O-LF2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SpoqaHanSans-Regular" family="SpoqaHanSans" pointSize="16"/>
+                        <color key="textColor" red="0.074509803920000006" green="0.078431372550000003" blue="0.08235294118" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjw-hW-0Th">
+                        <rect key="frame" x="183" y="33" width="0.0" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="XQI-lV-2ij"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SpoqaHanSans-Bold" family="SpoqaHanSans" pointSize="10"/>
+                        <color key="textColor" red="0.49411764705882355" green="0.52156862745098043" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Mjw-hW-0Th" firstAttribute="bottom" secondItem="GyV-73-CLY" secondAttribute="bottom" id="1KK-Mh-6yy"/>
+                    <constraint firstItem="Z8w-hl-du7" firstAttribute="centerY" secondItem="WlY-h9-cl2" secondAttribute="centerY" id="5sQ-Zc-1C2"/>
+                    <constraint firstItem="Mjw-hW-0Th" firstAttribute="leading" secondItem="GyV-73-CLY" secondAttribute="trailing" constant="5" id="BON-Go-ijN"/>
+                    <constraint firstItem="GyV-73-CLY" firstAttribute="leading" secondItem="Z8w-hl-du7" secondAttribute="trailing" constant="14" id="IJw-jV-PGx"/>
+                    <constraint firstItem="GyV-73-CLY" firstAttribute="centerY" secondItem="WlY-h9-cl2" secondAttribute="centerY" id="ISe-Ox-ROo"/>
+                    <constraint firstItem="Z8w-hl-du7" firstAttribute="leading" secondItem="WlY-h9-cl2" secondAttribute="leading" constant="24" id="wI7-t4-1i4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="classNameLabel" destination="Mjw-hW-0Th" id="tag-4H-ytj"/>
+                <outlet property="nameLabel" destination="GyV-73-CLY" id="gCp-r8-1Qs"/>
+                <outlet property="profileImage" destination="Z8w-hl-du7" id="wh4-pq-rr0"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="154"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="avatarFull" width="36" height="36"/>
+    </resources>
+</document>

@@ -10,12 +10,21 @@ import Foundation
 import UIKit
 
 let kLaunchDescString: NSMutableAttributedString = { () -> NSMutableAttributedString in
-    let attributedString = NSMutableAttributedString(string: "이메일과 카카오톡 계정은 타인에게 노출되지 않습니다. 회원가입 시 개인정보 취급방침 및 이용약관에 동의한 것으로 간주합니다. ", attributes: [
+    let attributedString = NSMutableAttributedString(string: "이메일과 카카오톡 계정은 타인에게 노출되지 않습니다. 회원가입 시\n개인정보 취급방침 및 이용약관에 동의한 것으로 간주합니다. ", attributes: [
+        .font: UIFont(name: "SpoqaHanSans-Regular", size: 12.0)!,
+        .foregroundColor: UIColor.grey,
+        .kern: -0.24
+        ])
+    attributedString.addAttribute(.font, value: UIFont(name: "SpoqaHanSans-Bold", size: 12.0)!, range: NSRange(location: 37, length: 16))
+    return attributedString
+}()
+
+let kLaunchTestDescString: NSMutableAttributedString = { () -> NSMutableAttributedString in
+    let attributedString = NSMutableAttributedString(string: "Plug Test Build", attributes: [
         .font: UIFont(name: "AppleSDGothicNeo-Regular", size: 12.0)!,
         .foregroundColor: UIColor.grey,
         .kern: -0.24
         ])
-    attributedString.addAttribute(.font, value: UIFont(name: "AppleSDGothicNeo-Bold", size: 12.0)!, range: NSRange(location: 37, length: 16))
     return attributedString
 }()
 

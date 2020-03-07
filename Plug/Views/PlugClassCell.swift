@@ -18,14 +18,18 @@ class PlugClassCell: UITableViewCell {
         self.accessoryType = showArrow ? .disclosureIndicator : .none
     }
     
-    func configure(title: String, year: String, count: Int, showArrow: Bool = false) {
-        self.nameLabel.text = title
-        self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(count)명"
-        self.accessoryType = showArrow ? .disclosureIndicator : .none
-    }
-    
-    func configure(title: String, year: String, info: String) {
-        self.nameLabel.text = title
-        self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(info)"
+    func configure(item: ChatRoomApolloFragment, isAdmin: Bool = true) {
+        let year = item.chatRoomAt
+        let count = "\(item.kids?.count ?? 0)"
+        
+        self.nameLabel.text = item.name
+        self.accessoryType = isAdmin ? .disclosureIndicator : .none
+        
+        if isAdmin {
+            self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(count)명"
+        } else {
+            let tName = item.admins?.first?.fragments.userApolloFragment.name ?? ""
+            self.infoLabel.text = "\(year[..<year.index(year.startIndex, offsetBy: 4)]) 학년도 ・ \(tName)"
+        }
     }
 }

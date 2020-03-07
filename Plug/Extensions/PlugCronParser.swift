@@ -66,7 +66,7 @@ class Schedule: NSObject {
     }
     
     func toString() -> String {
-        return "\(sMin)-\(eMin) \(sHour)-\(eHour) \(days)"
+        return isOn ? "\(sMin)-\(eMin) \(sHour)-\(eHour) \(days)" : ""
     }
     
     func getStartDate() -> Date? {

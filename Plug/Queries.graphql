@@ -10,6 +10,14 @@ mutation SignUp($data: UserInput!) {
     }
 }
 
+query isMemeber($userId: String!) {
+    isSignup(userId: $userId) 
+}
+
+query isSignup($userId: String!) {
+  isSignup(userId: $userId)
+}
+
 mutation changePW($userId: String!, $old: String!, $new: String!) {
     updateNewPassword(email:$userId
                       newPassword:$new,
@@ -22,6 +30,7 @@ mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
     updateUser(where : $where,
                data : $data) {
         name
+        profileImageUrl
     }
 }
 
@@ -56,16 +65,14 @@ mutation withdrawKid($chatroomID: ID!, $userID: ID!, $kidName: String!) {
     
 }
 
+
 mutation setOffice($crontab: String!) {
     upsertOfficePeriod(data: {crontab :$crontab}) {
         crontab
     }
 }
 
-query getUserInfo($id: ID!, $userId: String) {
-    chatRooms(where: { users_some: { userId: $userId }}) {
-        ...ChatRoomApolloFragment
-    }
+query getUserInfo($id: ID!) {
     
     officePeriods(where: {user : {id : $id}}) {
         crontab
@@ -73,10 +80,6 @@ query getUserInfo($id: ID!, $userId: String) {
 }
 
 query getUserInfoInStart($id: ID!, $userId: String!) {
-    chatRooms(where: { users_some: { userId: $userId }}) {
-        ...ChatRoomApolloFragment
-    }
-    
     officePeriods(where: {user : {id : $id}}) {
         crontab
     }
@@ -129,9 +132,14 @@ mutation ReadMessage($chatroom: ID!, $sender: ID!, $receiver: ID!) {
     }
 }
 
-mutation kakaoSignUp($role: Role!, $userId: String!) {
-    kakaoSignup(data: {kakaoUserId: $userId,
-                role : $role }) {
+mutation withdrawUser($userId: String!) {
+  withdrawUser(userId :$userId) {
+    userId
+  }
+}
+
+mutation kakaoSignUp($data: KaKaoUserInput!) {
+    kakaoSignup(data: $data) {
         userId
         id
     }
@@ -149,6 +157,16 @@ mutation registerPushKey($pushKey: String!) {
                          }) {
         pushKey
     }
+}
+
+mutation removePushKey {
+    removeNotification {
+        pushKey
+    }
+}
+
+mutation generateSubscription {
+  generateSubscriptionToken
 }
 
 mutation refreshEmail($email: String!) {
@@ -188,6 +206,18 @@ query Me {
     }
 }
 
+query memberRoom($userId: String!) {
+    chatRooms(where: {users_some : {userId : $userId}, admins_none : {userId: $userId}}) {
+        ...ChatRoomApolloFragment
+    }
+}
+
+query adminRoom($userId: String!) {
+    chatRooms(where: { admins_some: { userId: $userId}}) {
+        ...ChatRoomApolloFragment
+    }
+}
+
 subscription MessageSubscription {
     message {
         ... MessageSubscriptionPayloadApolloFragment
@@ -200,6 +230,17 @@ mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileId
                 chatRoomId : $chatRoomId
                 fileIds : $fileIds
                 receiverIds : [$receiverId]
+                }) {
+        ... MessageApolloFragment
+    }
+}
+
+mutation SendMultiMessage($text: String!, $chatRoomId: ID!, $receiverId: [ID!]!, $fileIds: [ID!]!) {
+    sendMessage(data: {
+                text : $text
+                chatRoomId : $chatRoomId
+                fileIds : $fileIds
+                receiverIds : $receiverId
                 }) {
         ... MessageApolloFragment
     }
@@ -221,6 +262,13 @@ mutation ApplyChatRoom($id: ID!, $userId: ID!, $kidName: String!) {
     applyChatRoom(id: $id, data : {userId:$userId
                   kidName :$kidName}) {
         id
+        name
+    }
+}
+
+mutation DeleteChatRoom($id: ID!) {
+    deleteChatRoom(id: $id) {
+        id
     }
 }
 
@@ -239,6 +287,7 @@ fragment UserApolloFragment on User {
     name
     profileImageUrl
     phoneNumber
+    userStatus
 }
 
 fragment KidApolloFragment on Kid {
@@ -250,6 +299,7 @@ fragment KidApolloFragment on Kid {
 fragment ChatRoomSummaryApolloFragment on ChatRoom {
     id
     name
+    admins { ...UserApolloFragment }
     chatRoomAt
     createdAt
 }
@@ -263,6 +313,7 @@ fragment ChatRoomApolloFragment on ChatRoom {
     inviteCode,
     chatRoomAt
     createdAt
+    status
 }
 
 fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
@@ -299,7 +350,7 @@ fragment MessagePreviousValuesApolloFragment on MessagePreviousValues {
 
 fragment MessageSummaryApolloFragment on MessageSummary {
     id
-    chatRoom { ...ChatRoomSummaryApolloFragment }
+    chatRoom { ...ChatRoomApolloFragment }
     sender { ...UserApolloFragment },
     receiver { ...UserApolloFragment },
     unReadMessageCount,

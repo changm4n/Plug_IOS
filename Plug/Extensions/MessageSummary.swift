@@ -18,7 +18,7 @@ import Foundation
 
 struct MessageSummary {
     var id: String
-    var chatroom: ChatRoomSummaryApolloFragment
+    var chatroom: ChatRoomApolloFragment
     var unreadCount: Int
     var sender: UserApolloFragment
     var receiver: UserApolloFragment
@@ -26,31 +26,37 @@ struct MessageSummary {
     var createAt: Date
     
     var displayName: String {
-        if let me = Session.me,
-            me.role == .TEACHER {
-            if let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.userId) {
+        guard let me = Session.me,
+            let admin = chatroom.admin else { return ""}
+        
+        if sender.userStatus == UserStatus.deleted {
+            return "탈퇴한 사용자"
+        }
+        
+        if admin.userId == me.userId {
+            if let kid = chatroom.getKid(parent: sender) {
                 return "\(kid.name) 부모님"
             } else {
-                return "\(sender.name)"
+                return "\(sender.name) 부모님"
             }
             
         } else {
             return "\(sender.name) 선생님"
         }
     }
+    
     public init(with classData: ChatRoomApolloFragment) {
         id = "id"
-        chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
+        chatroom = classData
         unreadCount = 0
         lastMessage = MessageItem()
-        lastMessage.text = "채팅을 시작하세요"
-        let admin = classData.admins!.first!.fragments.userApolloFragment
+        lastMessage.text = "\(classData.admin?.name ?? "") 선생님과 대화를 시작해보세요."
         
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         
-        sender = admin
+        sender = classData.admin!
         receiver = classData.users!.filter({$0.fragments.userApolloFragment.userId == Session.me!.userId}).first!.fragments.userApolloFragment
         
         createAt = Date()
@@ -58,17 +64,18 @@ struct MessageSummary {
     
     public init(with user: UserApolloFragment, classData: ChatRoomApolloFragment, myType: SessionRole) {
         id = "id"
-        chatroom = ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
+        chatroom = classData
+        //ChatRoomSummaryApolloFragment(id: classData.id, name: classData.name, chatRoomAt: classData.chatRoomAt, createdAt: classData.createdAt)
         unreadCount = 0
         lastMessage = MessageItem()
         
-        if myType == .TEACHER {
-            if let kidName = Session.me?.getKid(chatroomID: classData.id , parentID: user.userId)?.name {
-                lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
-            }
-        } else {
-            lastMessage.text = "\(user.name) 선생님과 대화를 시작해보세요."
-        }
+//        if myType == .TEACHER {
+//            if let kidName = Session.me?.getKid(chatroomID: classData.id , parentID: user.userId)?.name {
+//                lastMessage.text = "\(kidName) 부모님이 \(classData.name) 클래스에 가입했습니다."
+//            }
+//        } else {
+//            lastMessage.text = "\(user.name) 선생님과 대화를 시작해보세요."
+//        }
         
         
         sender = user
@@ -79,7 +86,7 @@ struct MessageSummary {
     
     public init(with summary: MessageSummaryApolloFragment) {
         id = summary.id
-        chatroom = summary.chatRoom.fragments.chatRoomSummaryApolloFragment
+        chatroom = summary.chatRoom.fragments.chatRoomApolloFragment
         unreadCount = summary.unReadMessageCount
         if let last = summary.lastMessage?.fragments.messageApolloFragment {
             lastMessage = MessageItem(with: last, isMine: true)
@@ -97,7 +104,9 @@ struct MessageSummary {
     }
     
     static func ==(lhs: MessageSummary, rhs: MessageSummary) -> Bool {
-        return ((lhs.sender.userId == rhs.receiver.userId) && (lhs.receiver.userId == rhs.sender.userId)) || ((lhs.sender.userId == rhs.sender.userId) && (lhs.receiver.userId == rhs.receiver.userId))
+        return ((lhs.sender.userId == rhs.receiver.userId) && (lhs.receiver.userId == rhs.sender.userId) && (lhs.chatroom.id == rhs.chatroom.id))
+            ||
+            ((lhs.sender.userId == rhs.sender.userId) && (lhs.receiver.userId == rhs.receiver.userId) && (lhs.chatroom.id == rhs.chatroom.id))
     }
     
     static func sortSummary(arr: [MessageSummary]) -> [MessageSummary] {
@@ -135,23 +144,23 @@ struct MessageSummary {
         
         summary.sort(by: { (lhs, rhs) -> Bool in
             lhs.lastMessage.createAt > rhs.lastMessage.createAt
-        })
+            })
         
         summary.sort(by: { (lhs, rhs) -> Bool in
             return lhs.unreadCount != 0 && rhs.unreadCount == 0
         })
         
-        if Session.me?.role ?? .NONE == .TEACHER {//탈퇴한 부모의 서머리 삭제
-            summary = summary.filter { (summary) -> Bool in
-                return me.getKid(chatroomID: summary.chatroom.id, parentID: summary.sender.userId) != nil
-            }
-        } else {//탈퇴한 클래스 선생님 삭제
-            summary = summary.filter({ (summary) -> Bool in
-                me.classData.filter({ (chatroom) -> Bool in
-                    return chatroom.id == summary.chatroom.id
-                }).count > 0
-            })
-        }
+//        if Session.me?.role ?? .NONE == .TEACHER {//탈퇴한 부모의 서머리 삭제
+//            summary = summary.filter { (summary) -> Bool in
+//                return me.getKid(chatroomID: summary.chatroom.id, parentID: summary.sender.userId) != nil
+//            }
+//        } else {//탈퇴한 클래스 선생님 삭제
+//            summary = summary.filter({ (summary) -> Bool in
+//                me.classData.filter({ (chatroom) -> Bool in
+//                    return chatroom.id == summary.chatroom.id
+//                }).count > 0
+//            })
+//        }
         return summary
     }
 }

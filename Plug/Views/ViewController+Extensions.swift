@@ -10,43 +10,40 @@ import Foundation
 import UIKit
 import SkyFloatingLabelTextField
 
+
 class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var bottomButton : UIButton? = nil {
-        didSet {
-             bottomButton?.addTarget(self, action: #selector(PlugViewController.bottomButtonPressed), for: .touchUpInside)
-        }
-    }
-    var bottomAction: (() -> Void)?
-    var keyboardHeight: CGFloat = 0
-    var isKeyboardShow: Bool = false
-    var statusbarLight: Bool = true {
-        didSet {
-            UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
-        }
-    }
+    //    var statusbarLight: Bool = false {
+    //        didSet {
+    //            UIApplication.shared.statusBarStyle = statusbarLight ? .lightContent : .default
+    //        }
+    //    }
     
     @IBAction func back(segue: UIStoryboardSegue) {}
     
     func hideNavigationBar() {
-        UIApplication.shared.statusBarStyle = .lightContent
+        //        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
     }
     
-    
-    
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(PlugViewController.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-      
+        super.viewDidLoad()
+        
+        setViews()
+        setBinding()
     }
     
-    @objc func bottomButtonPressed() {
-        bottomAction?()
+    func setViews() {
+        let yourBackImage = UIImage(named: "backBtn")
+        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
+        self.navigationItem.leftItemsSupplementBackButton = true    
     }
+    
+    func setBinding() { }
     
     func setKeyboardHide() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PlugViewController.dismissKeyboard))
@@ -58,46 +55,6 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         view.endEditing(true)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let bottomButton = bottomButton else { return }
-        let offset = view.frame.size.height - bottomButton.frame.size.height
-        bottomButton.frame.origin.y = isKeyboardShow ? offset - keyboardHeight : offset
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        isKeyboardShow = true
-        guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            if bottomButton.frame.origin.y == view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
-            }
-        }
-    }
-    
-    
-    @objc func keyboardChanged(notification: NSNotification) {
-        guard isKeyboardShow else { return }
-        guard let bottomButton = bottomButton else { return }
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height - keyboardSize.height
-            }
-        }
-        
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        isKeyboardShow = false
-        guard let bottomButton = bottomButton else { return }
-        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if bottomButton.frame.origin.y != view.frame.size.height - bottomButton.frame.size.height {
-                bottomButton.frame.origin.y = view.frame.size.height - bottomButton.frame.size.height
-            }
-        }
-    }
     
     func play() {
         PlugIndicator.shared.play()
@@ -108,13 +65,35 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         PlugIndicator.shared.stop()
         self.view.isUserInteractionEnabled = true
     }
+    
+    func setTitle(title: String) {
+        guard let me = Session.me else { return }
+        
+        let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor.charcoalGrey,
+                               NSAttributedString.Key.font : UIFont.getBold(withSize: 20)]
+        
+        let title:NSMutableAttributedString = NSMutableAttributedString(string: title, attributes: titleParameters)
+        
+        
+        let size = title.size()
+        let width = SCREEN_WIDTH - 120
+        
+        guard let height = navigationController?.navigationBar.frame.size.height else { return }
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        titleLabel.attributedText = title
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .left
+        
+        navigationItem.titleView = titleLabel
+    }
 }
 
 
 extension UIViewController {
-    func setStatusBar(isWhite: Bool) {
-        UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
-    }
+    //    func setStatusBar(isWhite: Bool) {
+    //        UIApplication.shared.statusBarStyle = isWhite ? .lightContent : .default
+    //    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -127,17 +106,52 @@ extension UIViewController {
     
     func setNavibar(isHide: Bool) {
         if isHide {
-//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            //            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
         } else {
             self.navigationController?.navigationBar.shadowImage = nil
         }
     }
     
+    
     func resetNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+}
+
+class PlugBarbuttonItem: UIBarButtonItem {
+    
+    override init() {
+        super.init()
+        self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)], for: .normal)
+    }
+}
+
+extension UIImageView {
+    func setImageWithURL(urlString: String?, showDefault: Bool = true) {
+        guard let urlString = urlString else {
+            self.image = showDefault ? UIImage(named: "profileDefault") : nil
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            self.image = showDefault ? UIImage(named: "profileDefault") : nil
+            return
+            
+        }
+        self.kf.setImage(with: url)
+    }
+}
+
+extension UIImage {
+    static func getDefaultProfile() -> UIImage? {
+        return UIImage(named: "profileDefault") ?? nil
     }
 }

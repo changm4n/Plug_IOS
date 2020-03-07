@@ -12,7 +12,5 @@ import UIKit
 class ClassHeader: UIView {
     
     @IBOutlet weak var label: UILabel!
-    func configure(type: SessionRole, count: Int) {
-        label.text = type == .TEACHER ? "관리중인 클래스(\(count))" : "가입한 클래스\(count)"
-    }
+    @IBOutlet weak var subLabel: UILabel!
 }
