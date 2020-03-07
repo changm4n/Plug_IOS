@@ -10,7 +10,7 @@ import Foundation
 
 
 let kDays = ["월", "화", "수", "목", "금", "토", "일"]
-class Schedule: NSObject {
+struct Schedule: Equatable {
     var sMin: String
     var sHour: String
     var eMin: String
@@ -37,6 +37,10 @@ class Schedule: NSObject {
     }
     //"0-30 9-18 1,3,5,7"
     
+    static func == (lhs: Schedule, rhs: Schedule) -> Bool {
+        return lhs.toString() == rhs.toString()
+    }
+    
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -44,7 +48,7 @@ class Schedule: NSObject {
         return formatter
     }()
     
-    public init(schedule: String) {
+    public init(schedule: String = "0-30 9-18 6,7") {
         guard schedule.split(separator: " ").count >=  2 else {
             sMin = ""
             sHour = ""
@@ -77,12 +81,12 @@ class Schedule: NSObject {
         return formatter.date(from: "\(eHour):\(eMin)")
     }
     
-    func setStartDate(with date: Date) {
+    mutating func setStartDate(with date: Date) {
         self.sHour = String(Calendar.current.component(.hour, from: date))
         self.sMin = String(Calendar.current.component(.minute, from: date))
     }
     
-    func setEndDate(with date: Date) {
+    mutating func setEndDate(with date: Date) {
         self.eHour = String(Calendar.current.component(.hour, from: date))
         self.eMin = String(Calendar.current.component(.minute, from: date))
     }
@@ -98,7 +102,7 @@ class Schedule: NSObject {
         return arr.map({ (Int($0) ?? 0)})
     }
     
-    func setDaysby(arr: [Int]) {
+    mutating func setDaysby(arr: [Int]) {
         self.days = arr.map({ "\($0)" }).joined(separator: ",")
     }
     

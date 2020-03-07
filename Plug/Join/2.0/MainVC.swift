@@ -53,7 +53,7 @@ class MainVC: PlugViewController {
     let descLabel: UILabel = {
         let lb = UILabel(frame: CGRect.zero)
         lb.attributedText = kLaunchDescString
-        lb.numberOfLines = 2
+        lb.numberOfLines =    2
         lb.textColor = UIColor.textBlue
         lb.textAlignment = .center
         return lb

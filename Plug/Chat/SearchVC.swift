@@ -148,7 +148,7 @@ class SearchVC: PlugViewController {
     func startChat(item: KidItem) {
         guard let sender = item.kid.parent,
             let userId = Session.me?.userId,
-            let name = Session.me?.name else {
+            let name = Session.me?.name.value else {
             return
         }
         

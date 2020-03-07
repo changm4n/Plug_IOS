@@ -68,7 +68,7 @@ class UserAPI: NSObject {
                 let crontab = data.officePeriods.first?.crontab
                 //            Session.me?.classData = classData
                 if let crontab = crontab {
-                    Session.me?.schedule = Schedule(schedule: crontab)
+                    Session.me?.schedule.accept(Schedule(schedule: crontab))
                 }
                 
 //                let tmp: [MessageSummary] = data.messageSummaries.compactMap{ $0 }.map({

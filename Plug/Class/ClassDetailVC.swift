@@ -89,7 +89,7 @@ class ClassDetailVC: PlugViewController {
     func startChat(row: Int) {
         guard let sender = kids[row].fragments.kidApolloFragment.parent,
             let userId = Session.me?.userId,
-            let name = Session.me?.name else {
+            let name = Session.me?.name.value else {
             return
         }
         

@@ -35,7 +35,7 @@ public class Session {
     public static var me: Session? = nil
     
     public var id: String?
-    public var name: String?
+    public var name: BehaviorRelay<String> = BehaviorRelay(value: "")
     public var role: SessionRole = .NONE
     public var userType: SessionType?
     public var userId: String?
@@ -58,7 +58,7 @@ public class Session {
     public var phoneNumber: String?
     public var token: String?
     public var password: String?
-    var schedule: Schedule
+    var schedule: BehaviorRelay<Schedule> = BehaviorRelay(value: Schedule())
     
     var subscriptionToken: String?
     var profileImage: BehaviorSubject<UIImage?> = BehaviorSubject(value: UIImage.getDefaultProfile())
@@ -75,18 +75,16 @@ public class Session {
     public convenience init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
-         schedule = Schedule(schedule: "0-30 9-18 6,7")
     }
     
     public init (withUser data: UserApolloFragment) {
         id = data.id
-        name = data.name
+        name.accept(data.name)
         role = SessionRole(rawValue: data.role.rawValue) ?? .NONE
         userType = SessionType(rawValue: data.type.rawValue)
         userId = data.userId
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
-        schedule = Schedule(schedule: "0-30 9-18 6,7")
         password = nil
         
         if let urlStr = profileImageUrl,
@@ -103,7 +101,7 @@ public class Session {
     
     public init (withDic dic: [String : Any]) {
         id = dic["id"] as? String
-        name = dic["name"] as? String
+        name.accept((dic["name"] as? String) ?? "")
         role = SessionRole(rawValue: dic["role"] as! String) ?? .NONE
         userType = SessionType(rawValue: dic["userType"] as! String)
         userId = dic["userId"] as? String
@@ -113,7 +111,6 @@ public class Session {
         
         subscriptionToken = dic["subscriptionToken"] as? String
         
-        schedule = Schedule(schedule: "0-30 9-18 6,7")
         setBinding()
     }
     
@@ -239,29 +236,11 @@ public class Session {
         }
     }
     
-//    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
-//        if let id = id {
-//            return Session.me?.classData.filter({$0.id == id}).first ?? nil
-//        } else {
-//            return nil
-//        }
-//    }
-    
     func getKid(chatroom: ChatRoomApolloFragment) -> KidApolloFragment? {
         let kids = chatroom.kids?.compactMap({ $0.fragments.kidApolloFragment }) ?? []
         let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.id == id}) ?? []).count > 0}).first
         return kid
     }
-    
-//    func getKid(chatroomID: String,parentID: String) -> KidApolloFragment? {
-//        if let room = classData.filter({ $0.id == chatroomID }).first,
-//            let kids = room.kids?.compactMap({ $0.fragments.kidApolloFragment }),
-//        let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.userId == parentID }) ?? []).count > 0}).first {
-//            return kid
-//        } else {
-//            return nil
-//        }
-//    }
     
     fileprivate func saveToken() {
         UserDefaults.standard.set(self.token, forKey: "UserToken")
@@ -309,7 +288,7 @@ public class Session {
         var data = [String:AnyObject]()
         
         if let id = self.id { data["id"] = id as AnyObject }
-        if let name = self.name { data["name"] = name as AnyObject }
+        data["name"] = self.name.value as AnyObject 
         if let userType = self.userType?.rawValue { data["userType"] = userType as AnyObject }
         if let userId = self.userId { data["userId"] = userId as AnyObject }
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as AnyObject }
@@ -334,23 +313,6 @@ public class Session {
         
         return defaultHeaders
     }
-    
-    func toJSON() -> [String : Any] {
-        var data = [String : Any]()
-        
-        if let id = self.id { data["id"] = id as String }
-        if let name = self.name { data["name"] = name as String }
-        
-        if let userType = self.userType?.rawValue { data["userType"] = userType as String }
-        if let userId = self.userId { data["userId"] = userId as String }
-        if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as String }
-        if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as String }
-        
-        data["role"] = role.rawValue
-        data["push_id"] = Session.fetchDeviceKey()
-     
-        return data
-    }
 }
 
 extension Session {
@@ -361,7 +323,7 @@ extension Session {
                 return UserAPI.updateUser(me: Session.me, name: name, url: url)
         }.subscribe(onNext: { (result) in
             Session.me?.profileImageUrl = result.updateUser?.profileImageUrl
-            Session.me?.name = result.updateUser?.name
+            Session.me?.name.accept(result.updateUser?.name ?? "")
         }).disposed(by: disposeBag)
     }
 }
