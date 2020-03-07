@@ -46,6 +46,22 @@ class SubscriptionManager {
     }
     
     func start() {
+        
+        #if DEBUG
+        if let token = Session.fetchToken() {
+            self.subscription(token: token).subscribe(onNext: { (data) in
+               print("message received")
+                    if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
+                        .node?.fragments.messageApolloFragment {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
+                    }
+                }, onError: { error in
+                    print("subscript error")
+                }, onDisposed: {
+                    print("subscript disposed")
+                }).disposed(by: dispoeBag)
+        }
+        #else
         MessageAPI.getSubscriptToken().asObservable().flatMap { [unowned self] (token) in
             self.subscription(token: "Bearer " + token)
         }.subscribe(onNext: { (data) in
@@ -59,6 +75,7 @@ class SubscriptionManager {
         }, onDisposed: {
             print("subscript disposed")
         }).disposed(by: dispoeBag)
+        #endif
     }
 }
 

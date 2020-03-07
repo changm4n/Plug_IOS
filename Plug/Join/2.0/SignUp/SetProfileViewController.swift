@@ -68,7 +68,10 @@ class SetProfileViewController: PlugViewControllerWithButton {
         viewModel.signUpSuccess.subscribe(onNext: { (result) in
             if result {
                 print("회원가입 성공")
-                self.navigationController?.popToRootViewController(animated: true)
+                showAlertWithString("회원가입", message: "회원가입에 성공하였습니다.", sender: self) { [weak self] (_) in
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+                
             }
         }).disposed(by: disposeBag)
         

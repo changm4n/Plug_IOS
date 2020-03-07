@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Session.me = user
         }
         
-        SubscriptionManager.shared.start()
+//        SubscriptionManager.shared.start()
         
 //        if let token = UserDefaults.standard.object(forKey: kSubscriptToken) {
 //

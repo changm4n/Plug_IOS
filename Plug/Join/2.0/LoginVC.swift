@@ -168,6 +168,7 @@ class LoginViewModel {
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()
                 }, onError: { [unowned self] (error) in
+                    self.isNetworking.accept(false)
                     showErrorAlert(error: error, sender: self.target)
             }).disposed(by: disposeBag)
     }

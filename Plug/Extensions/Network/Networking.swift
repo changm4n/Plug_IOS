@@ -116,7 +116,12 @@ extension Network: HTTPNetworkTransportPreflightDelegate {
         // Get the existing headers, or create new ones if they're nil
         var headers = request.allHTTPHeaderFields ?? [String: String]()
         if let token = Session.fetchToken() {
+            
+            #if DEBUG
+            headers["Authorization"] = token
+            #else
             headers["Authorization"] = "Bearer " + token
+            #endif
             headers["Platform"] = "IOS"
         }
         

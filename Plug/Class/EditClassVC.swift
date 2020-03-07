@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class EditClassVC: CreateClassVC {
+    
     var item: ChatRoomApolloFragment!
 
     var editViewModel: EditClassViewModel!
@@ -20,8 +21,6 @@ class EditClassVC: CreateClassVC {
         // Do any additional setup after loading the view.
     }
     
-    
-
     override func bindForm() {
         
         nameTF.text = item.name
@@ -39,7 +38,7 @@ class EditClassVC: CreateClassVC {
         
         editViewModel.editSuccess.subscribe(onNext: { [unowned self] (result) in
             if let _ = result {
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToViewController(ofClass: ClassListVC.self)
             } else {
                 showAlertWithString("클래스 편집", message: "클래스 편집에 실패하였습니다.", sender: self, handler: nil)
             }}).disposed(by: disposeBag)
