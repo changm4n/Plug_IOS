@@ -26,7 +26,12 @@ class MainVC: PlugViewController {
     
     let titleLabel: UILabel = {
         var lb = UILabel(frame: CGRect.zero)
+        #if DEBUG
+        lb.text = "Plug\nDev Build"
+        #else
         lb.text = "학부모와 교사를\n새롭게\n연결합니다."
+        #endif
+        
         lb.font = UIFont.getBold(withSize: 38)
         lb.numberOfLines = 3
         return lb

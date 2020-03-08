@@ -17,18 +17,41 @@ class SubscriptionManager {
     
     static let shared = SubscriptionManager()
     let dispoeBag = DisposeBag()
-    var token = ""
+    var token = "" {
+        willSet {
+            self.subscription2(token: newValue)
+        }
+    }
     
-    // Use the configured network transport in your Apollo client.
+    func getSubscriptClient2(token: String) -> ApolloClient {
+        print("[sub] start with \(token)")
+        let map: GraphQLMap = ["Authorization" : token]
+        let wsEndpointURL = URL(string: kPrismaURL)!
+        let endpointURL = URL(string: kPrismaURL)!
+        
+        var request = URLRequest(url: wsEndpointURL)
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        let websocket = WebSocketTransport(request: request, connectingPayload: map)
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = ["Authorization" : token]
+        
+        let urlSession = URLSession(configuration: configuration)
+        
+        let a = HTTPNetworkTransport(url: endpointURL, session: urlSession)
+        let split = SplitNetworkTransport(httpNetworkTransport: a,
+                                          webSocketNetworkTransport: websocket)
+        return ApolloClient(networkTransport: split)
+    }
+
+    
     func getSubscriptClient(token: String) -> ApolloClient {
         let map: GraphQLMap = ["Authorization" : token]
         let wsEndpointURL = URL(string: kPrismaURL)!
-        let endpointURL = URL(string: kBaseURL)!
+        let endpointURL = URL(string: kPrismaURL)!
         let websocket = WebSocketTransport(request: URLRequest(url: wsEndpointURL), connectingPayload: map)
         
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 5
         configuration.httpAdditionalHeaders = ["Authorization" : token]
         
         
@@ -41,46 +64,64 @@ class SubscriptionManager {
     
     func subscription(token: String) -> Observable<MessageSubscriptionSubscription.Data> {
         self.token = token
-        print(token)
-        return self.getSubscriptClient(token: token).rx.subscribe(subscription: MessageSubscriptionSubscription(), queue: .main)
+        print("[sub] token : \(token)")
+        return self.getSubscriptClient2(token: token)
+            .rx.subscribe(subscription: MessageSubscriptionSubscription(), queue: .main)
     }
     
-    func start() {
+    func subscription2(token: String) {
         
-        #if DEBUG
-        if let token = Session.fetchToken() {
-            self.subscription(token: token).subscribe(onNext: { (data) in
-               print("message received")
-                    if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
-                        .node?.fragments.messageApolloFragment {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
-                    }
-                }, onError: { error in
-                    print("subscript error")
-                }, onDisposed: {
-                    print("subscript disposed")
-                }).disposed(by: dispoeBag)
+        self.getSubscriptClient2(token: "Bearer \(token)").subscribe(subscription: MessageSubscriptionSubscription(), queue: .main) { (result) in
+         print("[sub] received")
         }
-        #else
-        MessageAPI.getSubscriptToken().asObservable().flatMap { [unowned self] (token) in
-            self.subscription(token: "Bearer " + token)
-        }.subscribe(onNext: { (data) in
-            print("message received")
-            if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
-                .node?.fragments.messageApolloFragment {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
-            }
-        }, onError: { error in
-            print("subscript error")
+    }
+    
+//    func start() {
+//        print("[sub] start")
+//        #if DEBUG
+//        MessageAPI.getSubscriptToken().asObservable().flatMap { [unowned self] (token) in
+//            self.subscription(token: "Bearer " + token)
+//        }.subscribe(onNext: { (data) in
+//            print("[sub] received")
+//            if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
+//                .node?.fragments.messageApolloFragment {
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
+//            }
+//        }, onError: { error in
+//            print("[sub] onerror")
+//        }, onDisposed: {
+//            print("[sub] disposed")
+//        }).disposed(by: dispoeBag)
+//        #else
+//        MessageAPI.getSubscriptToken().asObservable().flatMap { [unowned self] (token) in
+//            self.subscription(token: "Bearer " + token)
+//        }.subscribe(onNext: { (data) in
+//            print("[sub] received")
+//            if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
+//                .node?.fragments.messageApolloFragment {
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
+//            }
+//        }, onError: { error in
+//            print("[sub] onerror")
+//        }, onDisposed: {
+//            print("[sub] disposed")
+//        }).disposed(by: dispoeBag)
+//        #endif
+//    }
+    func start() {
+        print("[sub] start")
+        MessageAPI.getSubscriptToken().asObservable().subscribe(onNext: { (token) in
+            print("[sub] \(token)")
+            self.token = token
+        }, onError: nil, onCompleted: {
+            print("[sub] onComplete")
         }, onDisposed: {
-            print("subscript disposed")
+                print("[sub] disposed")
         }).disposed(by: dispoeBag)
-        #endif
     }
 }
 
 // MARK: - Pre-flight delegate
-
 extension SubscriptionManager: HTTPNetworkTransportPreflightDelegate {
 
     func networkTransport(_ networkTransport: HTTPNetworkTransport,
@@ -91,7 +132,7 @@ extension SubscriptionManager: HTTPNetworkTransportPreflightDelegate {
 
     func networkTransport(_ networkTransport: HTTPNetworkTransport,
                           willSend request: inout URLRequest) {
-
+        print("[sub] through delegate")
         // Get the existing headers, or create new ones if they're nil
         var headers = request.allHTTPHeaderFields ?? [String: String]()
         headers["Authorization"] = self.token

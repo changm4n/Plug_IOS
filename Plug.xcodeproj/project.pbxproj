@@ -13,6 +13,7 @@
 		ED0DDC932414203400F73359 /* OffSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0DDC922414203400F73359 /* OffSelectView.swift */; };
 		ED0DDC952414236800F73359 /* OffSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0DDC942414236800F73359 /* OffSelectCell.swift */; };
 		ED0DDC972414237200F73359 /* OffSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0DDC962414237200F73359 /* OffSelectCell.xib */; };
+		ED0DDC992414DEDA00F73359 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0DDC982414DEDA00F73359 /* TimeSelectorView.swift */; };
 		ED0E65DB225CAE3500D25E0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E65DA225CAE3500D25E0D /* Constants.swift */; };
 		ED1153212402B99600AD59FA /* CreateClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153202402B99600AD59FA /* CreateClassVC.swift */; };
 		ED1153242402CA9F00AD59FA /* CodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1153232402CA9F00AD59FA /* CodeVC.swift */; };
@@ -201,6 +202,7 @@
 		ED0DDC922414203400F73359 /* OffSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffSelectView.swift; sourceTree = "<group>"; };
 		ED0DDC942414236800F73359 /* OffSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffSelectCell.swift; sourceTree = "<group>"; };
 		ED0DDC962414237200F73359 /* OffSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OffSelectCell.xib; sourceTree = "<group>"; };
+		ED0DDC982414DEDA00F73359 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		ED0E65DA225CAE3500D25E0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED1153202402B99600AD59FA /* CreateClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassVC.swift; sourceTree = "<group>"; };
 		ED1153232402CA9F00AD59FA /* CodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVC.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				ED0DDC922414203400F73359 /* OffSelectView.swift */,
+				ED0DDC982414DEDA00F73359 /* TimeSelectorView.swift */,
 				ED0DDC962414237200F73359 /* OffSelectCell.xib */,
 				ED0DDC942414236800F73359 /* OffSelectCell.swift */,
 			);
@@ -1025,6 +1028,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED0DDC992414DEDA00F73359 /* TimeSelectorView.swift in Sources */,
 				ED8C492F23EC4AED00443477 /* Secret.swift in Sources */,
 				ED2A26E823F84A8700E22B01 /* KakaoLoginManager.swift in Sources */,
 				EDE731DC217B4E7000D302DF /* ViewController.swift in Sources */,
