@@ -326,4 +326,14 @@ extension Session {
             Session.me?.name.accept(result.updateUser?.name ?? "")
         }).disposed(by: disposeBag)
     }
+    
+    func updateOffice(newOffice: Schedule) {
+        if self.schedule.value != newOffice {
+            print("update office")
+            ChatroomAPI.updateOffice(crontab:newOffice.toString()).subscribe(onSuccess: { [weak self] (data) in
+                print("update success")
+                self?.schedule.accept(Schedule(schedule: data.upsertOfficePeriod.crontab ?? ""))
+            }).disposed(by: disposeBag)
+        }
+    }
 }

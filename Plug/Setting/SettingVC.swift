@@ -25,7 +25,7 @@ class SettingVC: PlugViewController {
         }
     }
     let classCell: [(String, String)] = [("내 클래스 관리/초대코드", "class"), ("새 클래스 만들기", "new"),("클래스 가입하기", "join")]
-    let exCell: [(String, String)] = [("약관 및 개인정보 처리방침","privacy"), ("오픈소스 라이선스","opensource"),("로그아웃","logout")]
+    let exCell: [(String, String)] = [("약관 및 개인정보 처리방침","privacy"),("로그아웃","logout")]
     
     var cells: [[(String, String)]] {
         get{
@@ -45,6 +45,17 @@ class SettingVC: PlugViewController {
     //    var textfield: UITextField = UITextField(frame: CGRect.zero)
     
     let selectorView: OffSelectorView = OffSelectorView()
+    let startSelector: TimeSelectorView = {
+        let selector = TimeSelectorView()
+        selector.setTitle(title: "근무 시작시간")
+        return selector
+    }()
+    
+    let endSelector: TimeSelectorView = {
+           let selector = TimeSelectorView()
+           selector.setTitle(title: "근무 종료시간")
+           return selector
+    }()
     
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -83,6 +94,25 @@ class SettingVC: PlugViewController {
             self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
         }
         
+        if let start = self.schedule.getStartDate() {
+            startSelector.selector.picker.setDate(start, animated: false)
+        }
+        
+        startSelector.selector.selectedHandler = { [weak self] in
+            self?.schedule.setStartDate(with: $0)
+            self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+        }
+        
+        if let end = self.schedule.getEndDate() {
+            endSelector.selector.picker.setDate(end, animated: false)
+        }
+        
+        endSelector.selector.selectedHandler = { [weak self] in
+            self?.schedule.setEndDate(with: $0)
+            self?.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .automatic)
+        }
+        
+        
         me.profileImage.bind(to: profileImageView.rx.image)
             .disposed(by: disposeBag)
         me.name.bind(to: self.nameLabel.rx.text).disposed(by: disposeBag)
@@ -95,11 +125,23 @@ class SettingVC: PlugViewController {
         setTitle(title: "계정 설정")
         self.profileImageView.makeCircle()
         self.view.addSubview(selectorView)
+        self.view.addSubview(startSelector)
+        self.view.addSubview(endSelector)
         
         selectorView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
         
+        startSelector.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        endSelector.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        startSelector.layoutIfNeeded()
+        endSelector.layoutIfNeeded()
         selectorView.layoutIfNeeded()
     }
     
@@ -118,34 +160,10 @@ class SettingVC: PlugViewController {
     
     @objc func updateOffice() {
         guard let me = Session.me else { return }
-        
-        if me.schedule.value != self.schedule {
-            print("update office")
-            ChatroomAPI.updateOffice(crontab:self.schedule.toString()).subscribe(onSuccess: { (data) in
-                me.schedule.accept(Schedule(schedule: data.upsertOfficePeriod.crontab ?? ""))
-            }).disposed(by: disposeBag)
-        }
+        me.updateOffice(newOffice: self.schedule)
     }
     
-    //    @objc func pickerChanged(picker: UIDatePicker) {
-    //        let indexPath = IndexPath(row: currentShowing == 1 ? 2 : 3, section: 0)
-    //        if let label = tableView.cellForRow(at: indexPath)?.viewWithTag(1) as? UILabel,
-    //            let me = Session.me {
-    //            currentShowing == 1 ? me.schedule.setStartDate(with: picker.date) : me.schedule.setEndDate(with: picker.date)
-    //            label.text = formatter.string(from: picker.date)
-    //        }
-    //    }
-    
     @objc func switchChanged(switchObj: UISwitch) {
-        //        FBLogger.shared.log(id: "edit_onoff")
-        //        isplugOn = !isplugOn
-        //        if isplugOn {
-        //            Session.me?.schedule = Schedule(schedule: "0-30 9-18 6,7")
-        //        }
-        //        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-        
-        guard let me = Session.me else { return }
-        
         if switchObj.isOn {
             self.schedule = Schedule(schedule: "0-30 9-18 6,7")
         } else {
@@ -164,7 +182,6 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         let item = cells[section][row]
         let id = item.1
         view.endEditing(true)
-        guard let me = Session.me else { return }
         
         if id == "class" {
             let vc = ClassListVC()
@@ -177,60 +194,16 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         } else if id == "off" {
             self.selectorView.show()
-        }
-        
-//                if self.role == .TEACHER {
-//                    let list = section == 0 ? currentList : shareTitles
-//                    let item = list[row]
-//                    if section == 0 {
-//                        if item.1 == "plug" {
-//
-//                        } else if item.1 == "off" {
-//                            performSegue(withIdentifier: "holiday", sender: nil)
-//                        } else if item.1 == "start" {
-//                            FBLogger.shared.log(id: "edit_on_time_start")
-//                            if currentShowing == 1 {
-//                                currentShowing = 0
-//                                view.endEditing(true)
-//                            } else {
-//                                currentShowing = 1
-//                                if let date = me.schedule.getStartDate() {
-//                                    datePicker?.date = date
-//                                }
-//                                textfield.becomeFirstResponder()
-//                            }
-//
-//                        } else if item.1 == "end" {
-//                            FBLogger.shared.log(id: "edit_on_time_end")
-//                            if currentShowing == 2 {
-//                                currentShowing = 0
-//                                view.endEditing(true)
-//                            } else {
-//                                currentShowing = 2
-//                                if let date = me.schedule.getEndDate() {
-//                                    datePicker?.date = date
-//                                }
-//                                textfield.becomeFirstResponder()
-//                            }
-//                        }
-//                    } else {
-//                    }
-//
-//                } else if self.role == .PARENT {
-//                    if section == 0 {
-//                        let classData = classItems[row]
-//                        performSegue(withIdentifier: "out", sender: classData.id)
-//                    }
-//                }
-        //
-        
-        else if id == "logout" {
+        } else if id == "start" {
+            self.startSelector.show()
+        } else if id == "end" {
+            self.endSelector.show()
+        } else if id == "logout" {
             self.logOut()
         } else if id == "privacy" {
             let vc = DescViewController()
             vc.type = .privacy
             self.navigationController?.pushViewController(vc, animated: true)
-        } else if item.0 == "오픈소스 라이선스" {
         }
     }
     
@@ -257,7 +230,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = item.0
         
         if id == "off" {
-            cell.setContentText(text: self.schedule.getDaysString() ?? "-")
+            cell.setContentText(text: self.schedule.getDaysString())
         } else if id == "start" {
             if let date = self.schedule.getStartDate() {
                 cell.setContentText(text: formatter.string(from: date))
