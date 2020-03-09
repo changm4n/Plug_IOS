@@ -87,6 +87,7 @@ class JoinClassVC: PlugViewControllerWithButton {
         self.view.addSubview(codeTF)
         self.view.addSubview(confirmButton)
         
+        self.codeTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

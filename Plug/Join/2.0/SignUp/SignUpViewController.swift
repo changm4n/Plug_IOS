@@ -94,7 +94,7 @@ class SignUpViewController: PlugViewControllerWithButton {
         self.view.addSubview(emailTF)
         self.view.addSubview(passwdTF)
         self.view.addSubview(confirmButton)
-        
+        self.emailTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

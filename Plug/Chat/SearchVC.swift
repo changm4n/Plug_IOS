@@ -10,22 +10,38 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+struct UserItem: Equatable {
+    static func == (lhs: UserItem, rhs: UserItem) -> Bool {
+        lhs.user.id == rhs.user.id
+    }
+    
+    var displayname: String
+    var user: UserApolloFragment
+    var chatroom: ChatRoomApolloFragment
+    
+    var userId: String {
+        user.userId
+    }
+    
+    var role: SessionRole
+}
+
 class SearchViewModel {
     let disposeBag = DisposeBag()
     //input
     var textinput: PublishSubject<String> = PublishSubject()
     
     //output
-    var outputList: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
+    var outputList: BehaviorRelay<[UserItem]> = BehaviorRelay(value: [])
     
     init() {
         guard let me = Session.me else { return }
-        Observable.combineLatest(me.kids, textinput) { (kids, query) in
+        Observable.combineLatest(me.users, textinput) { (users, query) in
             if query.isEmpty {
-                return kids
+                return users
             } else {
-                return kids.filter({ kid in
-                    (kid.chatroom.name.contains(query) || kid.kid.name.contains(query) || query.isEmpty)
+                return users.filter({ user in
+                    (user.chatroom.name.contains(query) || user.displayname.contains(query) || query.isEmpty)
                 }).map({ $0 })
             }
         }.bind(to: outputList).disposed(by: disposeBag)
@@ -89,13 +105,14 @@ class SearchVC: PlugViewController {
             self?.dismiss(animated: true, completion: nil)
         }).disposed(by: disposeBag)
         
-        self.tableView.rx.modelSelected(KidItem.self).subscribe(onNext: { [weak self] (item) in
+        self.tableView.rx.modelSelected(UserItem.self).subscribe(onNext: { [weak self] (item) in
             self?.startChat(item: item)
         }).disposed(by: disposeBag)
         
         viewModel.outputList.bind(to: tableView.rx.items) { tableView, row, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "multi", for: IndexPath(row: row, section: 0)) as! MultiSendCell
-            cell.configure(name: "\(item.kid.name) 부모님", desc: item.chatroom.name, urlString: item.kid.profileURL)
+            cell.configure(name: item.displayname, desc: item.chatroom.name, urlString: item.user.profileImageUrl)
+            print(item.displayname)
             return cell
         }.disposed(by: disposeBag)
     }
@@ -112,7 +129,7 @@ class SearchVC: PlugViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         self.view.addSubview(tableView)
-        
+        self.searchTF.becomeFirstResponder()
         setLayout()
     }
     
@@ -145,14 +162,13 @@ class SearchVC: PlugViewController {
         })
     }
     
-    func startChat(item: KidItem) {
-        guard let sender = item.kid.parent,
-            let userId = Session.me?.userId,
+    func startChat(item: UserItem) {
+        guard let userId = Session.me?.userId,
             let name = Session.me?.name.value else {
             return
         }
         
-        let senderI = Identity(id: sender.userId, name: sender.name)
+        let senderI = Identity(id: item.userId, name: item.displayname)
         let receiverI = Identity(id: userId, name: name)
         let chatroom = Identity(id: item.chatroom.id, name: item.chatroom.name)
         
@@ -162,7 +178,11 @@ class SearchVC: PlugViewController {
 
         let vc = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
         vc.identity = identity
-        
+        if item.role == .PARENT {
+            vc.role = .TEACHER
+        } else {
+            vc.role = .PARENT
+        }
         self.dismiss(animated: true) { [unowned self] in
             self.parentVC?.navigationController?.pushViewController(vc, animated: true)
         }

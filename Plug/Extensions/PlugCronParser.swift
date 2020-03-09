@@ -107,6 +107,10 @@ struct Schedule: Equatable {
     }
     
     func isPlugOn() -> Bool {
+        if !isOn || getDaysInt().count == 0 {
+            return true
+        }
+        
         let components = Calendar.current.dateComponents([.hour, .minute, .weekday], from: Date())
         
         let hour = components.hour ?? 99

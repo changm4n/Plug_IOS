@@ -35,6 +35,7 @@ class LoginVC2: PlugViewControllerWithButton {
         tf.lineHeight = 1
         tf.selectedLineColor = .plugBlue
         tf.errorColor = .plugRed
+        tf.isSecureTextEntry = true
         return tf
     }()
     
@@ -105,7 +106,7 @@ class LoginVC2: PlugViewControllerWithButton {
         self.view.addSubview(passwdTF)
         self.view.addSubview(confirmButton)
         self.view.addSubview(forgotButton)
-        
+        self.emailTF.becomeFirstResponder()
         self.bottomButton = forgotButton
         setLayout()
     }

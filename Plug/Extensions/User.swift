@@ -70,6 +70,7 @@ public class Session {
     var summaryData: BehaviorRelay<[MessageSummary]> = BehaviorRelay(value: [])
     
     var kids: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
+    var users: BehaviorRelay<[UserItem]> = BehaviorRelay(value: [])
     
     
     public convenience init() {
@@ -130,6 +131,25 @@ public class Session {
             })
             self.kids.accept(kidList)
         }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(adminClass, memberClass).map({
+            var arr: [UserItem] = []
+            $0.0.forEach({ room in
+                room.kids?.forEach({ kid in
+                    let k = kid.fragments.kidApolloFragment
+                    if let parent = k.parent {
+                        arr.append(UserItem(displayname: "\(k.name) 부모님", user: parent, chatroom: room, role: .PARENT))
+                    }
+                })
+            })
+            
+            $0.1.forEach({ room in
+                if let admin = room.admin {
+                    arr.append(UserItem(displayname: "\(admin.name) 선생님", user: admin, chatroom: room, role: .TEACHER))
+                }
+            })
+            return arr
+        }).bind(to: users).disposed(by: disposeBag)
         
         Observable.combineLatest(adminClass, memberClass).map({
             $0.0 + $0.1

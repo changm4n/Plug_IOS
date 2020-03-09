@@ -55,6 +55,7 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         identity.hashKey
     }
     
+    var role: SessionRole!
     var kOriginHeight: CGFloat = 0
     var kSafeAreaInset: CGFloat = 0
     
@@ -114,8 +115,19 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
             .asObservable()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: {
-                self.tableView.scrollToBottom(animated: true)
+                self.tableView.scrollToBottom(animated: false)
             }).disposed(by: disposeBag)
+        
+        if role == SessionRole.PARENT {
+            ChatroomAPI.getOffice(userId: sender.id).subscribe(onSuccess: { [unowned self] (crontab) in
+                if let crontab = crontab {
+                    let schedule = Schedule(schedule: crontab)
+                    if !schedule.isPlugOn() {
+                        self.isPlugOn = false
+                    }
+                }
+            }).disposed(by: disposeBag)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -297,12 +309,11 @@ extension ChatVC {
         
         var topText: String
         var bottomText: String
-        if me.role == .TEACHER {
-//            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.id) {
-            topText = "\(sender.name) 부모님"
+        if self.role == .TEACHER {
+            topText = sender.name
             bottomText = "\(chatroom.name)"
         } else {
-            topText = "\(sender.name) 선생님"
+            topText = sender.name
             bottomText = "\(chatroom.name) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
         }
         

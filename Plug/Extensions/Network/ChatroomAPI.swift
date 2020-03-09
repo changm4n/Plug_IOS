@@ -74,6 +74,10 @@ class ChatroomAPI: NSObject {
     static func updateOffice(crontab: String) -> Maybe<SetOfficeMutation.Data> {
         return Network.shared.perform(query: SetOfficeMutation(crontab: crontab))
     }
+    
+    static func getOffice(userId: String) -> Maybe<String?> {
+        return Network.shared.fetch(query: GetOfficeTimeQuery(userId: userId)).map{( $0.officePeriods.first?.crontab )}
+    }
 }
 
 

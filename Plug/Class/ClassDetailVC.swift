@@ -93,7 +93,7 @@ class ClassDetailVC: PlugViewController {
             return
         }
         
-        let senderI = Identity(id: sender.userId, name: sender.name)
+        let senderI = Identity(id: sender.userId, name: "\(kids[row].fragments.kidApolloFragment.name) 부모님")
         let receiverI = Identity(id: userId, name: name)
         let chatroom = Identity(id: self.item.id, name: self.item.name)
         
@@ -103,6 +103,8 @@ class ClassDetailVC: PlugViewController {
 
         let vc = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
         vc.identity = identity
+        vc.role = .TEACHER
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

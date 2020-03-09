@@ -84,7 +84,7 @@ class JoinKidVC: PlugViewControllerWithButton {
         self.view.addSubview(subTitleLabel)
         self.view.addSubview(nameTF)
         self.view.addSubview(confirmButton)
-        
+        self.nameTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
         setTitle()
