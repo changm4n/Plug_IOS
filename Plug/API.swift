@@ -388,51 +388,6 @@ public enum ChatRoomStatus: RawRepresentable, Equatable, Hashable, CaseIterable,
   }
 }
 
-public enum MutationType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  case created
-  case updated
-  case deleted
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "CREATED": self = .created
-      case "UPDATED": self = .updated
-      case "DELETED": self = .deleted
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .created: return "CREATED"
-      case .updated: return "UPDATED"
-      case .deleted: return "DELETED"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: MutationType, rhs: MutationType) -> Bool {
-    switch (lhs, rhs) {
-      case (.created, .created): return true
-      case (.updated, .updated): return true
-      case (.deleted, .deleted): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [MutationType] {
-    return [
-      .created,
-      .updated,
-      .deleted,
-    ]
-  }
-}
-
 public final class SignInMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =
@@ -3053,11 +3008,11 @@ public final class AdminRoomQuery: GraphQLQuery {
   }
 }
 
-public final class MessageSubscriptionSubscription: GraphQLSubscription {
+public final class MessageSubscription: GraphQLSubscription {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =
     """
-    subscription MessageSubscription {
+    subscription Message {
       message {
         __typename
         ...MessageSubscriptionPayloadApolloFragment
@@ -3065,9 +3020,9 @@ public final class MessageSubscriptionSubscription: GraphQLSubscription {
     }
     """
 
-  public let operationName = "MessageSubscription"
+  public let operationName = "Message"
 
-  public var queryDocument: String { return operationDefinition.appending(MessageSubscriptionPayloadApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition).appending(MessagePreviousValuesApolloFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(MessageSubscriptionPayloadApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
 
   public init() {
   }
@@ -4547,15 +4502,9 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
     """
     fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
       __typename
-      mutation
       node {
         __typename
         ...MessageApolloFragment
-      }
-      updatedFields
-      previousValues {
-        __typename
-        ...MessagePreviousValuesApolloFragment
       }
     }
     """
@@ -4564,10 +4513,7 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
 
   public static let selections: [GraphQLSelection] = [
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("mutation", type: .nonNull(.scalar(MutationType.self))),
     GraphQLField("node", type: .object(Node.selections)),
-    GraphQLField("updatedFields", type: .list(.nonNull(.scalar(String.self)))),
-    GraphQLField("previousValues", type: .object(PreviousValue.selections)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -4576,8 +4522,8 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(mutation: MutationType, node: Node? = nil, updatedFields: [String]? = nil, previousValues: PreviousValue? = nil) {
-    self.init(unsafeResultMap: ["__typename": "MessageSubscriptionPayload", "mutation": mutation, "node": node.flatMap { (value: Node) -> ResultMap in value.resultMap }, "updatedFields": updatedFields, "previousValues": previousValues.flatMap { (value: PreviousValue) -> ResultMap in value.resultMap }])
+  public init(node: Node? = nil) {
+    self.init(unsafeResultMap: ["__typename": "MessageSubscriptionPayload", "node": node.flatMap { (value: Node) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -4589,39 +4535,12 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
     }
   }
 
-  public var mutation: MutationType {
-    get {
-      return resultMap["mutation"]! as! MutationType
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "mutation")
-    }
-  }
-
   public var node: Node? {
     get {
       return (resultMap["node"] as? ResultMap).flatMap { Node(unsafeResultMap: $0) }
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "node")
-    }
-  }
-
-  public var updatedFields: [String]? {
-    get {
-      return resultMap["updatedFields"] as? [String]
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "updatedFields")
-    }
-  }
-
-  public var previousValues: PreviousValue? {
-    get {
-      return (resultMap["previousValues"] as? ResultMap).flatMap { PreviousValue(unsafeResultMap: $0) }
-    }
-    set {
-      resultMap.updateValue(newValue?.resultMap, forKey: "previousValues")
     }
   }
 
@@ -4667,60 +4586,6 @@ public struct MessageSubscriptionPayloadApolloFragment: GraphQLFragment {
       public var messageApolloFragment: MessageApolloFragment {
         get {
           return MessageApolloFragment(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-    }
-  }
-
-  public struct PreviousValue: GraphQLSelectionSet {
-    public static let possibleTypes = ["MessagePreviousValues"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(MessagePreviousValuesApolloFragment.self),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(id: GraphQLID, text: String? = nil, createdAt: String, readedAt: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "MessagePreviousValues", "id": id, "text": text, "createdAt": createdAt, "readedAt": readedAt])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var fragments: Fragments {
-      get {
-        return Fragments(unsafeResultMap: resultMap)
-      }
-      set {
-        resultMap += newValue.resultMap
-      }
-    }
-
-    public struct Fragments {
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public var messagePreviousValuesApolloFragment: MessagePreviousValuesApolloFragment {
-        get {
-          return MessagePreviousValuesApolloFragment(unsafeResultMap: resultMap)
         }
         set {
           resultMap += newValue.resultMap

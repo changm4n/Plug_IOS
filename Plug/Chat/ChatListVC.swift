@@ -213,6 +213,7 @@ class ChatListVC: PlugViewController {
         tableView.tableFooterView = UIView()
         bindData()
         
+        SubscriptionManager.shared.start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -319,13 +320,19 @@ class ChatListVC: PlugViewController {
             FBLogger.shared.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             
-            let sender = Identity(id: data.sender.userId, name: data.sender.name)
+            let sender = Identity(id: data.sender.userId, name: data.displayName)
             let receiver = Identity(id: data.receiver.userId, name: data.receiver.name)
             let chatroom = Identity(id: data.chatroom.id, name: data.chatroom.name)
             
             let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
             
             vc.identity = identity
+            
+            if let admin = data.chatroom.admin, admin.userId == Session.me?.userId {
+                vc.role = .TEACHER
+            } else {
+                vc.role = .PARENT
+            }
         }
     }
 }

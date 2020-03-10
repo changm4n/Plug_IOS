@@ -48,6 +48,7 @@ class MessageAPI: NSObject {
     
     static func registerPushKey() -> Maybe<RegisterPushKeyMutation.Data> {
         if let token = Messaging.messaging().fcmToken {
+            print("[sub] push registered")
             return Network.shared.perform(query: RegisterPushKeyMutation(pushKey: token))
         } else {
             return Maybe.error(NSError())

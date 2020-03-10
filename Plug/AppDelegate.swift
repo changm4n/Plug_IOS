@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Session.me = user
         }
         
-        SubscriptionManager.shared.start()
         return true
     }
     
@@ -75,12 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print(#function)
         state = userInfo
+        print("[sub] push received")
        
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         completionHandler(UIBackgroundFetchResult.newData)
+        print("[sub] push received")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -120,6 +121,7 @@ extension AppDelegate : MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
+        print("[sub] push received")
     }
 }
 
@@ -131,12 +133,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //        let userInfo = notification.request.content.userInfo
+        print("[sub] push received")
         completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("[sub] push received")
         print(#function)
     }
 }

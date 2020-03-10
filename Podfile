@@ -8,7 +8,7 @@ target 'Plug' do
     pod 'lottie-ios'
     pod 'Firebase/Core'
     pod 'Alamofire'
-    pod 'Apollo', '0.20.0'
+    pod 'Apollo'
     pod 'Apollo/WebSocket'
     pod 'Firebase/Messaging'
     pod 'SwiftyJSON'
