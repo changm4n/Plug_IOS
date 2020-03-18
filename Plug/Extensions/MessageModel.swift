@@ -127,6 +127,10 @@ struct ChatroomViewModel {
     var output: PublishSubject<[SectionModel<String, MessageViewItem>]> = PublishSubject()
     
     var model: ChatroomModel
+    var count: Int {
+        let result = try? model.output.value()
+        return result?.count ?? 0
+    }
     
     init(identity: ChatroomIdentity) {
         self.identity = identity
