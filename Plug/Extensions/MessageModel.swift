@@ -127,26 +127,35 @@ struct ChatroomViewModel {
     var output: PublishSubject<[SectionModel<String, MessageViewItem>]> = PublishSubject()
     
     var model: ChatroomModel
-    var count: Int {
-        let result = try? model.output.value()
-        return result?.count ?? 0
+    var messages: [MessageItem] {
+        return model.items
     }
     
     init(identity: ChatroomIdentity) {
         self.identity = identity
         self.model = ChatroomModel(identity: identity)
+        
+        setBind()
     }
     
-    func load() {
+    func setBind() {
         self.model.output.distinctUntilChanged({ (lhs, rhs) -> Bool in
             lhs.count == rhs.count
         })
             .filter({!$0.isEmpty})
             .map({
-            self.setViewModel(items: $0)
-        })
+                self.setViewModel(items: $0)
+            })
             .bind(to: output).disposed(by: disposeBag)
+    }
+    
+    func load() {
         model.load()
+    }
+    
+    func loadPrev() {
+        guard let id = messages.first?.id else { return }
+        model.loadPrev(id: id)
     }
     
     private func setViewModel(items: [MessageItem]) -> [SectionModel<String, MessageViewItem>] {
@@ -214,13 +223,16 @@ struct ChatroomViewModel {
 
 class ChatroomModel {
     var identity: ChatroomIdentity
-    private var items: [MessageItem] = [] {
+    var items: [MessageItem] = [] {
         didSet {
             output.onNext(self.items)
         }
     }
     var output: BehaviorSubject<[MessageItem]> = BehaviorSubject(value: [])
     var disposeBag = DisposeBag()
+    
+    var isEnd: Bool = false
+    var isLoading: Bool = false
     
     init(identity: ChatroomIdentity) {
         self.identity = identity
@@ -256,6 +268,22 @@ class ChatroomModel {
     func load() {
        MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: nil).subscribe(onSuccess: { (messages) in
             self.items = messages.map({ ChatLog($0) }).map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+        }, onError: { (error) in
+            
+        }).disposed(by: disposeBag)
+    }
+    
+    func loadPrev(id: String) {
+        guard self.isLoading == false, self.isEnd == false else { return }
+        print("load prev")
+        self.isLoading = true
+        
+        MessageAPI.getMessage(chatroomId: identity.chatroom.id, userId: identity.sender.id, receiverId: identity.receiver.id, before: id).subscribe(onSuccess: { (messages) in
+            self.isEnd = (messages.count == 0)
+            
+            let prev = messages.map({ ChatLog($0) }).map({ MessageItem(with: $0, isMine: self.identity.receiver.id == $0.sID)})
+            self.items.insert(contentsOf: prev, at: 0)
+            self.isLoading = false
         }, onError: { (error) in
             
         }).disposed(by: disposeBag)
