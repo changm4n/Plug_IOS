@@ -191,19 +191,7 @@ class ChatListVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
-        self.navigationController?.navigationBar.tintColor = .black
-        let style = NSMutableParagraphStyle()
-        style.firstLineHeadIndent = 8 // This is added to the default margin
-        self.navigationController?.navigationBar.largeTitleTextAttributes =
-            [NSAttributedString.Key.paragraphStyle : style,
-             NSAttributedString.Key.font : UIFont.getBold(withSize: 24)   ]
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
+        setNaviBarAttr()
         self.tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
         
         tableView.dataSource = nil
@@ -212,13 +200,32 @@ class ChatListVC: PlugViewController {
         
         tableView.tableFooterView = UIView()
         bindData()
-        
-        SubscriptionManager.shared.start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNaviBarAttr()
         Session.me?.reload().subscribe().disposed(by: disposeBag)
+    }
+    
+    func setNaviBarAttr() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = UIColor.clear
+        navBarAppearance.backgroundImage = UIImage()
+        navBarAppearance.shadowColor = UIColor.clear
+        
+        UINavigationBar.appearance().tintColor = UIColor.black
+        
+        self.navigationController?.navigationBar.standardAppearance = navBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        
+        let style = NSMutableParagraphStyle()
+        style.firstLineHeadIndent = 8 // This is added to the default margin
+        self.navigationController?.navigationBar.largeTitleTextAttributes =
+            [NSAttributedString.Key.paragraphStyle : style,
+             NSAttributedString.Key.font : UIFont.getBold(withSize: 24)   ]
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func setViews() {

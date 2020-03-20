@@ -165,6 +165,7 @@ class LoginViewModel {
             }).flatMap({ _ in
                 return Session.me!.reload()
             }).subscribe(onSuccess: { [weak self] (_) in
+                SubscriptionManager.shared.start()
                 self?.isNetworking.accept(false)
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()

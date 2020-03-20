@@ -2,21 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Spoqa Han Sans Bold</string>
-		<string>Spoqa Han Sans Light</string>
-		<string>Spoqa Han Sans Regular</string>
-		<string>Thin</string>
-	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>FirebaseScreenReportingEnabled</key>
-	<false/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -42,6 +29,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
 	<key>KAKAO_APP_KEY</key>
 	<string>efcb862abc346662203d10c6d51ae3e8</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -64,9 +55,17 @@
 	<string>프로필 사진 촬영</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 사진 선택</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Spoqa Han Sans Bold</string>
+		<string>Spoqa Han Sans Light</string>
+		<string>Spoqa Han Sans Regular</string>
+		<string>Thin</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -88,5 +87,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

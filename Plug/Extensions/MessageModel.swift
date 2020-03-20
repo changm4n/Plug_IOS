@@ -120,16 +120,17 @@ struct MessageViewItem {
     }
 }
 
-struct ChatroomViewModel {
+class ChatroomViewModel {
     var identity: ChatroomIdentity
     var disposeBag = DisposeBag()
     
-    var output: PublishSubject<[SectionModel<String, MessageViewItem>]> = PublishSubject()
+    var output: BehaviorRelay<[SectionModel<String, MessageViewItem>]> = BehaviorRelay(value: [])
     
     var model: ChatroomModel
     var messages: [MessageItem] {
         return model.items
     }
+    var topId: String? = nil
     
     init(identity: ChatroomIdentity) {
         self.identity = identity
@@ -155,6 +156,10 @@ struct ChatroomViewModel {
     
     func loadPrev() {
         guard let id = messages.first?.id else { return }
+        if let id = messages.first?.id {
+            topId = id
+        }
+        
         model.loadPrev(id: id)
     }
     
@@ -218,6 +223,20 @@ struct ChatroomViewModel {
     
     public func sendMessage(message: MessageItem) {
         model.sendMessage(message: message)
+    }
+    
+    func getTopIndexPath() -> IndexPath? {
+        guard let id = topId else { return nil }
+        let arr = output.value
+        for (section, i) in arr.enumerated() {
+            for (row, j) in i.items.enumerated() {
+                if j.message?.id == id {
+                    topId = nil
+                    return  IndexPath(row: row, section: section)
+                }
+            }
+        }
+        return nil
     }
 }
 

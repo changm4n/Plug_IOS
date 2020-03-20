@@ -18,6 +18,7 @@ class SubscriptionManager {
     static let shared = SubscriptionManager()
     let dispoeBag = DisposeBag()
     var socket: WebSocketTransport? = nil
+    private var subscriptionObject: Cancellable?
     
     private var magicToken = ""
     
@@ -41,7 +42,7 @@ class SubscriptionManager {
     private(set) lazy var client = ApolloClient(networkTransport: self.splitNetworkTransport)
     
     func subscription() {
-        self.client.subscribe(subscription: MessageSubscription(), queue: .main) { (result) in
+        self.subscriptionObject = self.client.subscribe(subscription: MessageSubscription(), queue: .main) { (result) in
             print("[sub] received")
             switch result {
             case .success(let graphQLResult):
@@ -55,10 +56,21 @@ class SubscriptionManager {
     }
     
     func start() {
+        guard subscriptionObject == nil else {
+            print("start sub but nil")
+            return
+        }
+        print("start sub")
         MessageAPI.getSubscriptToken().subscribe(onSuccess:  { (token) in
             self.magicToken = "Bearer \(token)"
             self.subscription()
         }).disposed(by: dispoeBag)
+    }
+    
+    func stop() {
+        print("stop sub")
+        self.subscriptionObject?.cancel()
+        self.subscriptionObject = nil
     }
 }
 

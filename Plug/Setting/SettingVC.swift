@@ -122,6 +122,7 @@ class SettingVC: PlugViewController {
     }
     
     override func setViews() {
+        super.setViews()
         setTitle(title: "계정 설정")
         self.profileImageView.makeCircle()
         self.view.addSubview(selectorView)

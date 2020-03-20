@@ -33,19 +33,20 @@ class StartVC: PlugViewController {
     }
     
     fileprivate func show() {
-
+        
         if Session.fetchToken() != nil {
             UserAPI.getMe().flatMap({ _ in
                 return UserAPI.getUserInfo()
-                }).flatMap({ _ in
-                   return Session.me!.reload()
-                })
+            }).flatMap({ _ in
+                return Session.me!.reload()
+            })
                 .subscribe(
-                onSuccess: { [weak self] (_) in
-                self?.animateSegue("Main", sender: nil)
-            },
-                onError: { [weak self] (_) in
-                self?.animateSegue("Login", sender: nil)
+                    onSuccess: { [weak self] (_) in
+                        SubscriptionManager.shared.start()
+                        self?.animateSegue("Main", sender: nil)
+                    },
+                    onError: { [weak self] (_) in
+                        self?.animateSegue("Login", sender: nil)
                 })
                 .disposed(by: disposeBag)
         } else {

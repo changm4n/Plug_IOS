@@ -10,5 +10,5 @@ import Foundation
 
 let kAppEnterBackGround = "kAppEnterBackGround"
 let kMessageReceived = "kMessageReceived"
-let kMessageWindowSize = 50
+let kMessageWindowSize = 35
 let kSubscriptToken = "SubscriptionToken"

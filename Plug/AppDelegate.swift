@@ -95,10 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         if let me = Session.me {
             me.reload().subscribe().disposed(by: me.disposeBag)
+            SubscriptionManager.shared.start()
         }
     }
    
     func applicationDidEnterBackground(_ application: UIApplication) {
+        SubscriptionManager.shared.stop()
         guard let me = Session.me else {
             application.applicationIconBadgeNumber = 0
             return

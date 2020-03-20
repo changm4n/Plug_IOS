@@ -30,17 +30,17 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let backBtn = UIImage(named: "backBtn")
+        self.navigationController?.navigationBar.standardAppearance.setBackIndicatorImage(backBtn, transitionMaskImage: backBtn)
+//        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", r
         setViews()
         setBinding()
     }
     
     func setViews() {
-        let yourBackImage = UIImage(named: "backBtn")
-        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-        self.navigationItem.leftItemsSupplementBackButton = true    
+         
     }
     
     func setBinding() { }
@@ -66,16 +66,21 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.isUserInteractionEnabled = true
     }
     
-    func setTitle(title: String) {
-        guard let me = Session.me else { return }
-        
+    func setTitle(title: String, subtitle: String? = nil) {
         let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor.charcoalGrey,
                                NSAttributedString.Key.font : UIFont.getBold(withSize: 20)]
         
         let title:NSMutableAttributedString = NSMutableAttributedString(string: title, attributes: titleParameters)
         
+        if let subtitle = subtitle {
+            let subtitleParameters = [NSAttributedString.Key.foregroundColor : UIColor.grey,
+                                      NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .regular)]
+            let subtitle:NSAttributedString = NSAttributedString(string: subtitle, attributes: subtitleParameters)
+            
+            title.append(NSAttributedString(string: " "))
+            title.append(subtitle)
+        }
         
-        let size = title.size()
         let width = SCREEN_WIDTH - 120
         
         guard let height = navigationController?.navigationBar.frame.size.height else { return }
