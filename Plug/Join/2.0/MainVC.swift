@@ -78,7 +78,6 @@ class MainVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hideNavigationBar()
     }
     
     override func setViews() {
@@ -93,6 +92,7 @@ class MainVC: PlugViewController {
         self.view.addSubview(selectorView)
         
         setLayout()
+        hideNavigationBar()
     }
     
     override func setBinding() {

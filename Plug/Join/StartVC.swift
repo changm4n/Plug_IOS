@@ -70,7 +70,7 @@ class StartVC: PlugViewController {
                         let VC = MainVC()
                         let NVC = UINavigationController(rootViewController: VC)
                         NVC.modalPresentationStyle = .fullScreen
-                        NVC.navigationBar.isTranslucent = false
+                        NVC.navigationBar.isTranslucent = true
                         self.present(NVC, animated: false, completion: nil)
                         
                     } else {

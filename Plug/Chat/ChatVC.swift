@@ -107,23 +107,23 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         sendButton.rx.tap.withLatestFrom(textView.rx.text.orEmpty)
             .filter({ $0 != nil && $0?.isEmpty == false })
             .subscribe(onNext: { [unowned self] (text) in
-                let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
-                self.viewModel.sendMessage(message: message)
-                self.resetTextView()
+                
+                if self.isPlugOn {
+                    FBLogger.shared.log(id: "chatEach_sendBtn")
+                    let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
+                    self.viewModel.sendMessage(message: message)
+                    self.resetTextView()
+                } else {
+                    showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { [unowned self] (action) in
+                        FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
+                        let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
+                                       self.viewModel.sendMessage(message: message)
+                                       self.resetTextView()
+                    }, canceltype: .destructive) { (action) in
+                        FBLogger.shared.log(id: "chatEach_PlugOffAlert_cancelBtn")
+                    }
+                }
             }).disposed(by: disposeBag)
-        
-//        self.chatDataSource.dataReloaded
-//            .asObservable()
-//            .observeOn(MainScheduler.asyncInstance)
-//            .subscribe(onNext: { [unowned self] in
-//                if let indexPath = self.viewModel.getTopIndexPath() {
-//                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-//                } else {
-//                    self.tableView.scrollToBottom(animated: false)
-//                }
-//
-//
-//            }).disposed(by: disposeBag)
         
         viewModel.output.subscribe(onNext: { (arr) in
             if let indexPath = self.viewModel.getTopIndexPath() {

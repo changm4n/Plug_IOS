@@ -22,10 +22,16 @@ class PlugViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func back(segue: UIStoryboardSegue) {}
     
     func hideNavigationBar() {
-        //        UIApplication.shared.statusBarStyle = .lightContent
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = UIColor.clear
+        navBarAppearance.backgroundImage = UIImage()
+        navBarAppearance.shadowColor = UIColor.clear
+        
+        UINavigationBar.appearance().tintColor = UIColor.black
+        
+        self.navigationController?.navigationBar.standardAppearance = navBarAppearance
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     
     override func viewDidLoad() {
