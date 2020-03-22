@@ -98,6 +98,7 @@ class MainVC: PlugViewController {
     override func setBinding() {
         descLabel.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] (_) in
             let vc = DescViewController()
+            vc.type = .privacy
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
         

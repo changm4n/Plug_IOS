@@ -224,6 +224,13 @@ subscription Message {
     }
 }
 
+subscription MessageFiltered($userId: String!) {
+  message(where : {OR :
+    [{node :{receivers_some : {userId :$userId}}},
+  , {node : {sender : {userId :$userId} }}]}) {
+    ...MessageSubscriptionPayloadApolloFragment
+  }
+}
 
 mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {
     sendMessage(data: {

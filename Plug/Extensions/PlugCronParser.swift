@@ -49,7 +49,8 @@ struct Schedule: Equatable {
     }()
     
     public init(schedule: String = "0-30 9-18 6,7") {
-        guard schedule.split(separator: " ").count >=  2 else {
+        let arr = schedule.split(separator: " ")
+        guard arr.count >=  2 else {
             sMin = ""
             sHour = ""
             eMin = ""
@@ -57,11 +58,22 @@ struct Schedule: Equatable {
             days = ""
             return
         }
-        self.sMin = String(schedule.split(separator: " ")[0].split(separator: "-")[0])
-        self.sHour = String(schedule.split(separator: " ")[1].split(separator: "-")[0])
-        self.eMin = String(schedule.split(separator: " ")[0].split(separator: "-")[1])
-        self.eHour = String(schedule.split(separator: " ")[1].split(separator: "-")[1])
-        if schedule.split(separator: " ").count >=  3 {
+        
+        if arr[0].split(separator: "-").count == 2 &&
+        arr[1].split(separator: "-").count == 2 {
+            self.sMin = String(arr[0].split(separator: "-")[0])
+            self.eMin = String(arr[0].split(separator: "-")[1])
+            self.sHour = String(arr[1].split(separator: "-")[0])
+            self.eHour = String(arr[1].split(separator: "-")[1])
+        } else {
+            sMin = ""
+            sHour = ""
+            eMin = ""
+            eHour = ""
+        }
+        
+        //휴일
+        if arr.count >=  3 {
             self.days = String(schedule.split(separator: " ")[2])
         } else {
             self.days = ""

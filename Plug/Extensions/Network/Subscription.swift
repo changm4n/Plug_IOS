@@ -41,8 +41,8 @@ class SubscriptionManager {
 
     private(set) lazy var client = ApolloClient(networkTransport: self.splitNetworkTransport)
     
-    func subscription() {
-        self.subscriptionObject = self.client.subscribe(subscription: MessageSubscription(), queue: .main) { (result) in
+    func subscription(userId: String) {
+        self.subscriptionObject = self.client.subscribe(subscription: MessageFilteredSubscription(userId: userId), queue: .main) { (result) in
             print("[sub] received")
             switch result {
             case .success(let graphQLResult):
@@ -56,14 +56,15 @@ class SubscriptionManager {
     }
     
     func start() {
-        guard subscriptionObject == nil else {
+        guard subscriptionObject == nil, let userId = Session.me?.userId else {
             print("start sub but nil")
             return
         }
         print("start sub")
+        
         MessageAPI.getSubscriptToken().subscribe(onSuccess:  { (token) in
             self.magicToken = "Bearer \(token)"
-            self.subscription()
+            self.subscription(userId: userId)
         }).disposed(by: dispoeBag)
     }
     

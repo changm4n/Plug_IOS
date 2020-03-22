@@ -22,7 +22,6 @@
 		ED1153292406B68200AD59FA /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C397218964CF008DA9E7 /* HomeHeaderView.swift */; };
 		ED11532A2406B92300AD59FA /* HomeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD8C39D21896F80008DA9E7 /* HomeHeaderCell.swift */; };
 		ED11532C2407C90E00AD59FA /* MultiSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */; };
-		ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11532D2407F89300AD59FA /* MultiSendCell.xib */; };
 		ED1153302407F8A500AD59FA /* MultiSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11532F2407F8A500AD59FA /* MultiSendCell.swift */; };
 		ED11533224083D5000AD59FA /* MultiSelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11533124083D5000AD59FA /* MultiSelectedCell.swift */; };
 		ED11533424083D8200AD59FA /* MultiSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED11533324083D8200AD59FA /* MultiSelectedCell.xib */; };
@@ -80,6 +79,7 @@
 		ED8C493C23EF1D1F00443477 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493B23EF1D1F00443477 /* UserAPI.swift */; };
 		ED8C493E23F04A0300443477 /* ChatroomAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493D23F04A0300443477 /* ChatroomAPI.swift */; };
 		ED8C494023F051B100443477 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C493F23F051B100443477 /* MessageAPI.swift */; };
+		ED8C6C3D24278C2300FA2C80 /* MultiSendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8C6C3C24278C2200FA2C80 /* MultiSendCell.xib */; };
 		EDA29FF4223A750700C1EA1E /* FBLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA29FF3223A750700C1EA1E /* FBLogger.swift */; };
 		EDADF85F239BFBD500C1D5B6 /* Spoqa Han Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */; };
 		EDADF860239BFBD500C1D5B6 /* Spoqa Han Sans Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDADF85C239BFBD300C1D5B6 /* Spoqa Han Sans Light.ttf */; };
@@ -191,7 +191,6 @@
 		ED1153252402D59600AD59FA /* JoinClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinClassVC.swift; sourceTree = "<group>"; };
 		ED115327240418A000AD59FA /* JoinKidVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinKidVC.swift; sourceTree = "<group>"; };
 		ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectVC.swift; sourceTree = "<group>"; };
-		ED11532D2407F89300AD59FA /* MultiSendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiSendCell.xib; sourceTree = "<group>"; };
 		ED11532F2407F8A500AD59FA /* MultiSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSendCell.swift; sourceTree = "<group>"; };
 		ED11533124083D5000AD59FA /* MultiSelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectedCell.swift; sourceTree = "<group>"; };
 		ED11533324083D8200AD59FA /* MultiSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiSelectedCell.xib; sourceTree = "<group>"; };
@@ -253,6 +252,7 @@
 		ED8C493B23EF1D1F00443477 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		ED8C493D23F04A0300443477 /* ChatroomAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomAPI.swift; sourceTree = "<group>"; };
 		ED8C493F23F051B100443477 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
+		ED8C6C3C24278C2200FA2C80 /* MultiSendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiSendCell.xib; sourceTree = "<group>"; };
 		EDA29FF3223A750700C1EA1E /* FBLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLogger.swift; sourceTree = "<group>"; };
 		EDA438DC23D9DE680012EAD7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EDADF85B239BFBD200C1D5B6 /* Spoqa Han Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -373,8 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				ED11532B2407C90E00AD59FA /* MultiSelectVC.swift */,
-				ED11532D2407F89300AD59FA /* MultiSendCell.xib */,
 				ED11532F2407F8A500AD59FA /* MultiSendCell.swift */,
+				ED8C6C3C24278C2200FA2C80 /* MultiSendCell.xib */,
 				ED11533124083D5000AD59FA /* MultiSelectedCell.swift */,
 				ED11533324083D8200AD59FA /* MultiSelectedCell.xib */,
 				ED11533A240937BC00AD59FA /* MultiMessageCell.xib */,
@@ -768,13 +768,13 @@
 				ED11533B240937BC00AD59FA /* MultiMessageCell.xib in Resources */,
 				ED3CF409220A96F100356230 /* GoogleService-Info.plist in Resources */,
 				EDADF862239BFBD500C1D5B6 /* Spoqa Han Sans Bold.ttf in Resources */,
-				ED11532E2407F89300AD59FA /* MultiSendCell.xib in Resources */,
 				ED0DDC972414237200F73359 /* OffSelectCell.xib in Resources */,
 				ED44B22B24025D6D00AEB833 /* MemberCell.xib in Resources */,
 				ED7D59C921B3D89D0029E80A /* Queries.graphql in Resources */,
 				EDE731DF217B4E7000D302DF /* Main.storyboard in Resources */,
 				ED71B6B42219359400AC21FF /* licenses.json in Resources */,
 				ED11533424083D8200AD59FA /* MultiSelectedCell.xib in Resources */,
+				ED8C6C3D24278C2300FA2C80 /* MultiSendCell.xib in Resources */,
 				ED4750FC21ECB6540043FD18 /* indicator.json in Resources */,
 				EDD8C39C2189693D008DA9E7 /* HomeHeaderCell.xib in Resources */,
 				ED44B2252400629300AEB833 /* DefaultCell.xib in Resources */,
@@ -1235,6 +1235,7 @@
 				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1279,6 +1280,7 @@
 				CODE_SIGN_ENTITLEMENTS = Plug/Plug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UZGZ2YCNAM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

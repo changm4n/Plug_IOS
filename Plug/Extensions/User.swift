@@ -170,19 +170,20 @@ public class Session {
     }
     
     func refreshSummary() {
-//        guard let userId = userId else {
-//            return
-//        }
-//        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [unowned self] (data) in
-//            let tmp: [MessageSummary] = data.messageSummaries.compactMap{$0}.map({
-//                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
-//            })
-//            self.summaryData.accept(MessageSummary.sortSummary(arr: tmp).filter({ summary in
-//                self.allClass.value.contains(where: { (chatroom) -> Bool in
-//                    return chatroom.id == summary.chatroom.id
-//                })
-//            }))
-//        }).disposed(by: disposeBag)
+        guard let userId = userId else {
+            return
+        }
+        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [unowned self] (data) in
+           let list = MessageSummary.sortSummary(arr: data).filter({ summary in
+                if let index = self.allClass.value.firstIndex(of: summary.chatroom) {
+                    let users = self.allClass.value[index].users ?? []
+                    return users.map({$0.fragments.userApolloFragment}).contains(summary.sender)
+                } else {
+                    return false
+                }
+            })
+            self.summaryData.accept(list)
+        }).disposed(by: disposeBag)
     }
     
     func reloadChatRoom() {

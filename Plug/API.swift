@@ -3105,6 +3105,110 @@ public final class MessageSubscription: GraphQLSubscription {
   }
 }
 
+public final class MessageFilteredSubscription: GraphQLSubscription {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    subscription MessageFiltered($userId: String!) {
+      message(where: {OR: [{node: {receivers_some: {userId: $userId}}}, {node: {sender: {userId: $userId}}}]}) {
+        __typename
+        ...MessageSubscriptionPayloadApolloFragment
+      }
+    }
+    """
+
+  public let operationName = "MessageFiltered"
+
+  public var queryDocument: String { return operationDefinition.appending(MessageSubscriptionPayloadApolloFragment.fragmentDefinition).appending(MessageApolloFragment.fragmentDefinition) }
+
+  public var userId: String
+
+  public init(userId: String) {
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Subscription"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("message", arguments: ["where": ["OR": [["node": ["receivers_some": ["userId": GraphQLVariable("userId")]]], ["node": ["sender": ["userId": GraphQLVariable("userId")]]]]]], type: .object(Message.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(message: Message? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Subscription", "message": message.flatMap { (value: Message) -> ResultMap in value.resultMap }])
+    }
+
+    public var message: Message? {
+      get {
+        return (resultMap["message"] as? ResultMap).flatMap { Message(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "message")
+      }
+    }
+
+    public struct Message: GraphQLSelectionSet {
+      public static let possibleTypes = ["MessageSubscriptionPayload"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(MessageSubscriptionPayloadApolloFragment.self),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var messageSubscriptionPayloadApolloFragment: MessageSubscriptionPayloadApolloFragment {
+          get {
+            return MessageSubscriptionPayloadApolloFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+    }
+  }
+}
+
 public final class SendMessageMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =

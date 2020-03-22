@@ -206,6 +206,17 @@ class ChatListVC: PlugViewController {
         super.viewWillAppear(animated)
         setNaviBarAttr()
         Session.me?.reload().subscribe().disposed(by: disposeBag)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatListVC.refreshSummary), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
+    }
+    
+    @objc func refreshSummary() {
+        Session.me?.refreshSummary()
     }
     
     func setNaviBarAttr() {

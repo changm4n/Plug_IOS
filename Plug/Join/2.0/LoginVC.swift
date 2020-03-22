@@ -100,6 +100,7 @@ class LoginVC2: PlugViewControllerWithButton {
     }
     
     override func setViews() {
+        setTitle(title: "로그인")
         self.view.backgroundColor = .white
         
         self.view.addSubview(emailTF)

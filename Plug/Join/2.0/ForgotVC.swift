@@ -82,7 +82,7 @@ class ForgotVC: PlugViewControllerWithButton {
     
     override func setViews() {
         self.view.backgroundColor = .white
-        
+        setTitle(title: "")
         self.view.addSubview(titleLabel)
         self.view.addSubview(subTitleLabel)
         self.view.addSubview(emailTF)
