@@ -34,7 +34,7 @@ class Networking: NSObject {
 
         let wsEndpointURL = URL(string: kBaseURL)!
         let endpointURL = URL(string: kBaseURL)!
-        let websocket = WebSocketTransport(request: URLRequest(url: wsEndpointURL), connectingPayload: map)
+        let websocket = WebSocketTransport(request: URLRequest(url:     ), connectingPayload: map)
         let splitNetworkTransport = SplitNetworkTransport(
             httpNetworkTransport: HTTPNetworkTransport(
                 url: endpointURL,

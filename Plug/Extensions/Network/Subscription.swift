@@ -17,86 +17,110 @@ class SubscriptionManager {
     
     static let shared = SubscriptionManager()
     let dispoeBag = DisposeBag()
-    var token = ""
+    var socket: WebSocketTransport? = nil
+    private var subscriptionObject: Cancellable?
     
-    // Use the configured network transport in your Apollo client.
-    func getSubscriptClient(token: String) -> ApolloClient {
-        let map: GraphQLMap = ["Authorization" : token]
-        let wsEndpointURL = URL(string: kPrismaURL)!
-        let endpointURL = URL(string: kBaseURL)!
-        let websocket = WebSocketTransport(request: URLRequest(url: wsEndpointURL), connectingPayload: map)
-        
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 5
-        configuration.httpAdditionalHeaders = ["Authorization" : token]
-        
-        
-        let a = HTTPNetworkTransport(url: endpointURL, session: URLSession(configuration: configuration),  delegate: self)
-        let split = SplitNetworkTransport(httpNetworkTransport: a,
-                                          webSocketNetworkTransport: websocket)
-        
-        return ApolloClient(networkTransport: split)
-    }
+    private var magicToken = ""
     
-    func subscription(token: String) -> Observable<MessageSubscriptionSubscription.Data> {
-        self.token = token
-        print(token)
-        return self.getSubscriptClient(token: token).rx.subscribe(subscription: MessageSubscriptionSubscription(), queue: .main)
+    private lazy var webSocketTransport: WebSocketTransport = {
+      let url = URL(string: kPrismaURL)!
+      let request = URLRequest(url: url)
+      let authPayload = ["Authorization": magicToken]
+      return WebSocketTransport(request: request, connectingPayload: authPayload)
+    }()
+    
+    private lazy var httpTransport: HTTPNetworkTransport = {
+      let url = URL(string: kPrismaURL)!
+      return HTTPNetworkTransport(url: url)
+    }()
+
+    private lazy var splitNetworkTransport = SplitNetworkTransport(
+      httpNetworkTransport: self.httpTransport,
+      webSocketNetworkTransport: self.webSocketTransport
+    )
+
+    private(set) lazy var client = ApolloClient(networkTransport: self.splitNetworkTransport)
+    
+    func subscription(userId: String) {
+        self.subscriptionObject = self.client.subscribe(subscription: MessageFilteredSubscription(userId: userId), queue: .main) { (result) in
+            print("[sub] received")
+            switch result {
+            case .success(let graphQLResult):
+                if let message = graphQLResult.data?.message?.fragments.messageSubscriptionPayloadApolloFragment.node?.fragments.messageApolloFragment {
+                
+                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : message])
+              } // else, something went wrong and you should check `graphQLResult.error` for problems
+            case .failure(_): break
+            }
+        }
     }
     
     func start() {
-        
-        #if DEBUG
-        if let token = Session.fetchToken() {
-            self.subscription(token: token).subscribe(onNext: { (data) in
-               print("message received")
-                    if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
-                        .node?.fragments.messageApolloFragment {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
-                    }
-                }, onError: { error in
-                    print("subscript error")
-                }, onDisposed: {
-                    print("subscript disposed")
-                }).disposed(by: dispoeBag)
+        guard subscriptionObject == nil, let userId = Session.me?.userId else {
+            print("start sub but nil")
+            return
         }
-        #else
-        MessageAPI.getSubscriptToken().asObservable().flatMap { [unowned self] (token) in
-            self.subscription(token: "Bearer " + token)
-        }.subscribe(onNext: { (data) in
-            print("message received")
-            if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
-                .node?.fragments.messageApolloFragment {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
-            }
-        }, onError: { error in
-            print("subscript error")
-        }, onDisposed: {
-            print("subscript disposed")
+        print("start sub")
+        
+        MessageAPI.getSubscriptToken().subscribe(onSuccess:  { (token) in
+            self.magicToken = "Bearer \(token)"
+            self.subscription(userId: userId)
         }).disposed(by: dispoeBag)
-        #endif
+    }
+    
+    func stop() {
+        print("stop sub")
+        self.subscriptionObject?.cancel()
+        self.subscriptionObject = nil
     }
 }
 
 // MARK: - Pre-flight delegate
-
-extension SubscriptionManager: HTTPNetworkTransportPreflightDelegate {
+extension SubscriptionManager: HTTPNetworkTransportPreflightDelegate, HTTPNetworkTransportGraphQLErrorDelegate {
+    func networkTransport(_ networkTransport: HTTPNetworkTransport, receivedGraphQLErrors errors: [GraphQLError], retryHandler: @escaping (Bool) -> Void) {
+        print("[sub] \(errors.first?.message ?? "")")
+    }
 
     func networkTransport(_ networkTransport: HTTPNetworkTransport,
                           shouldSend request: URLRequest) -> Bool {
-        // If there's an authenticated user, send the request. If not, don't.
+        print("[sub] should send")
         return true
     }
 
     func networkTransport(_ networkTransport: HTTPNetworkTransport,
                           willSend request: inout URLRequest) {
-
-        // Get the existing headers, or create new ones if they're nil
-        var headers = request.allHTTPHeaderFields ?? [String: String]()
-        headers["Authorization"] = self.token
-        // Re-assign the updated headers to the request.
-        request.allHTTPHeaderFields = headers
+        print("[sub] through delegate")
+//        var headers = request.allHTTPHeaderFields ?? [String: String]()
+//        request.allHTTPHeaderFields = headers
     }
 }
 
+extension SubscriptionManager: WebSocketTransportDelegate {
+    
+    func webSocketTransportDidConnect(_ webSocketTransport: WebSocketTransport) {
+        print("[sub] socket connected \(webSocketTransport.self.isConnected())")
+        
+    }
+    
+    func webSocketTransportDidReconnect(_ webSocketTransport: WebSocketTransport) {
+        print("[sub] socket disconnected")
+    }
+    
+    func webSocketTransport(_ webSocketTransport: WebSocketTransport, didDisconnectWithError error:Error?) {
+        print("[sub] socket error \(error?.localizedDescription)")
+    }
+}
+
+
+//            if let newMessage = data.message?.fragments.messageSubscriptionPayloadApolloFragment
+//                .node?.fragments.messageApolloFragment {
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kMessageReceived), object: nil, userInfo: ["message" : newMessage])
+//            }
+
+//subscription Message($userId: String!) {
+//  message(where : {OR :
+//    [{node :{receivers_some : {userId : $userId}}},
+//  , {node : {sender : {userId : $userId} }}]}) {
+//    ...MessageSubscriptionPayloadApolloFragment
+//  }
+//}

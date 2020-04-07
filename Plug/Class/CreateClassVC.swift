@@ -108,7 +108,7 @@ class CreateClassVC: PlugViewControllerWithButton {
         let thePicker = UIPickerView()
         thePicker.delegate = self
         yearTF.inputView = thePicker
-        
+        self.nameTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

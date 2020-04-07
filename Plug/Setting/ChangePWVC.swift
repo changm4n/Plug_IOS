@@ -77,7 +77,7 @@ class ChangePWVC: PlugViewControllerWithButton {
         self.view.addSubview(originTF)
         self.view.addSubview(newTF)
         self.view.addSubview(confirmButton)
-        
+        self.originTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

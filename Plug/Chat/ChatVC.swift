@@ -55,8 +55,10 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         identity.hashKey
     }
     
+    var role: SessionRole!
     var kOriginHeight: CGFloat = 0
     var kSafeAreaInset: CGFloat = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +74,9 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.estimatedRowHeight = UITableView.automaticDimension
-        textView.layer.cornerRadius = 18
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
+//        textView.layer.cornerRadius = 18
+//        textView.layer.borderWidth = 1
+//        textView.layer.borderColor = UIColor(r: 215, g: 215, b: 215).cgColor
         textView.contentInset = UIEdgeInsets.zero
         
         textView.textContainerInset.left = 8
@@ -105,21 +107,46 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
         sendButton.rx.tap.withLatestFrom(textView.rx.text.orEmpty)
             .filter({ $0 != nil && $0?.isEmpty == false })
             .subscribe(onNext: { [unowned self] (text) in
-                let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
-                self.viewModel.sendMessage(message: message)
-                self.resetTextView()
+                
+                if self.isPlugOn {
+                    FBLogger.shared.log(id: "chatEach_sendBtn")
+                    let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
+                    self.viewModel.sendMessage(message: message)
+                    self.resetTextView()
+                } else {
+                    showAlertWithSelect("플러그 오프 안내", message: "선생님의 근무시간이 아닙니다.\n메시지를 확인하지 못할 수도 있습니다. ", sender: self, handler: { [unowned self] (action) in
+                        FBLogger.shared.log(id: "chatEach_PlugOffAlert_sendBtn")
+                        let message = MessageItem(text: text, chatroom: self.chatroom.id, receiver: self.sender.id)
+                                       self.viewModel.sendMessage(message: message)
+                                       self.resetTextView()
+                    }, canceltype: .destructive) { (action) in
+                        FBLogger.shared.log(id: "chatEach_PlugOffAlert_cancelBtn")
+                    }
+                }
             }).disposed(by: disposeBag)
         
-        self.chatDataSource.dataReloaded
-            .asObservable()
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe(onNext: {
-                self.tableView.scrollToBottom(animated: true)
+        viewModel.output.subscribe(onNext: { (arr) in
+            if let indexPath = self.viewModel.getTopIndexPath() {
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+            } else {
+                self.tableView.scrollToBottom(animated: false)
+            }
+        }).disposed(by: disposeBag)
+        
+        if role == SessionRole.PARENT {
+            ChatroomAPI.getOffice(userId: sender.id).subscribe(onSuccess: { [unowned self] (crontab) in
+                if let crontab = crontab {
+                    let schedule = Schedule(schedule: crontab)
+                    if !schedule.isPlugOn() {
+                        self.isPlugOn = false
+                    }
+                }
             }).disposed(by: disposeBag)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setColors()
+        setNaviBarAttr()
         super.viewWillAppear(animated)
         readMessage()
         
@@ -142,24 +169,15 @@ class ChatVC: PlugViewControllerWithButton, UITextViewDelegate {
     }
     
     override func willMove(toParent parent: UIViewController?) {
-        if parent == nil {  
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-//            statusbarLight = true
-            
-            if self.navigationController?.viewControllers.count ?? 0 == 3 {
-                self.navigationController?.navigationBar.isTranslucent = false
-            }
+        if parent == nil {
+            self.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.clear
         }
         
         super.willMove(toParent: parent)
     }
     
-    private func setColors() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.isTranslucent = true
+    private func setNaviBarAttr() {
+        self.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.paleGrey2
     }
     
     @IBAction func addSampleMessage(_ userinfo: Any) {
@@ -270,6 +288,7 @@ extension ChatVC {
             }
             let item = MessageItem(with: newMessage, isMine: receiver.id == newMessage.sender.userId)
             self.viewModel.addMessage(message: item)
+            self.readMessage()
         }
     }
    
@@ -278,7 +297,7 @@ extension ChatVC {
     }
     
     @objc func enterBackgound() {
-        readMessage()
+//        readMessage()
         saveTextViewText()
     }
     
@@ -293,41 +312,7 @@ extension ChatVC {
     }
     
     func setTitle() {
-        guard let me = Session.me else { return }
-        
-        var topText: String
-        var bottomText: String
-        if me.role == .TEACHER {
-//            let kid = me.getKid(chatroomID: chatroom.id, parentID: sender.id) {
-            topText = "\(sender.name) 부모님"
-            bottomText = "\(chatroom.name)"
-        } else {
-            topText = "\(sender.name) 선생님"
-            bottomText = "\(chatroom.name) ･ \(isPlugOn ? "플러그 온" : "플러그 오프")"
-        }
-        
-        let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey,
-                               NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: .medium)]
-        let subtitleParameters = [NSAttributedString.Key.foregroundColor : UIColor.grey,
-                                  NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .regular)]
-        
-        let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
-        let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
-        
-        title.append(NSAttributedString(string: "\n"))
-        title.append(subtitle)
-        
-        let size = title.size()
-        let width = size.width
-        
-        guard let height = navigationController?.navigationBar.frame.size.height else { return }
-        
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        titleLabel.attributedText = title
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        
-        navigationItem.titleView = titleLabel
+        super.setTitle(title: sender.name, subtitle: chatroom.name)
         
         if !isPlugOn {
             banner.isHidden = false
@@ -337,48 +322,23 @@ extension ChatVC {
             }
         }
     }
-    
-    func addMessage(newMessage: MessageItem) {
-        
-//        self.tableView.reloadData()
-    }
-    
-//    func setTableViewScrollBottom(animated: Bool = false) {
-//        if self.chatModel.mViewModel.count > 0 {
-//            self.tableView.scrollToRow(at: self.chatModel.lastIndexPath, at: .bottom, animated: animated)
-//        }
-//    }
 }
 
 extension ChatVC: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+//            self.viewModel.loadPrev()
+        }
+    }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let cell = cell as? ChatRCell else { return }
-//        
-//    }
-//
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 && indexPath.row == 0 {
-//            guard !self.isLoading,
-//                !self.isEnd,
-//                self.messageData.count != 0 else { return }
-//            self.isLoading = true
-//            let lastId = self.messageData[0].id
-//            PlugIndicator.shared.play()
-//            Networking.getMeassages(chatroomId: chatroom.id, userId: sender.id, receiverId: receiver.id, before: lastId) { [unowned self] (messages) in
-//                PlugIndicator.shared.stop()
-//                if messages.count == 0 {
-//                    self.isEnd = true
-//                }
-//                self.messageData = messages + self.messageData
-//                let lastIndexPath = self.chatModel.addItemsFront(messages: messages.map({ MessageItem(with: $0, isMine: self.receiver.id == $0.sender.userId)
-//                }))
-//                self.tableView.reloadData()
-//                self.tableView.scrollToRow(at: lastIndexPath, at: .top, animated: false)
-//                self.isLoading = false
-//            }
-//        }
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        if offset < -10 {
+            self.viewModel.loadPrev()
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = self.chatDataSource[indexPath]

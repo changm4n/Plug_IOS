@@ -89,12 +89,13 @@ class SignUpViewController: PlugViewControllerWithButton {
     
     override func setViews() {
         self.view.backgroundColor = .white
+        setTitle(title: "")
         
         self.view.addSubview(titleLabel)
         self.view.addSubview(emailTF)
         self.view.addSubview(passwdTF)
         self.view.addSubview(confirmButton)
-        
+        self.emailTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

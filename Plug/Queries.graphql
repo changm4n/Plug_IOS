@@ -218,10 +218,18 @@ query adminRoom($userId: String!) {
     }
 }
 
-subscription MessageSubscription {
+subscription Message {
     message {
-        ... MessageSubscriptionPayloadApolloFragment
+        ...MessageSubscriptionPayloadApolloFragment
     }
+}
+
+subscription MessageFiltered($userId: String!) {
+  message(where : {OR :
+    [{node :{receivers_some : {userId :$userId}}},
+  , {node : {sender : {userId :$userId} }}]}) {
+    ...MessageSubscriptionPayloadApolloFragment
+  }
 }
 
 mutation SendMessage($text: String!, $chatRoomId: ID!, $receiverId: ID!, $fileIds: [ID!]!) {
@@ -317,10 +325,7 @@ fragment ChatRoomApolloFragment on ChatRoom {
 }
 
 fragment MessageSubscriptionPayloadApolloFragment on MessageSubscriptionPayload {
-    mutation
     node { ...MessageApolloFragment }
-    updatedFields
-    previousValues {...MessagePreviousValuesApolloFragment}
 }
 
 fragment MessageApolloFragment on Message {

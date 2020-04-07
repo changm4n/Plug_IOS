@@ -35,7 +35,7 @@ public class Session {
     public static var me: Session? = nil
     
     public var id: String?
-    public var name: String?
+    public var name: BehaviorRelay<String> = BehaviorRelay(value: "")
     public var role: SessionRole = .NONE
     public var userType: SessionType?
     public var userId: String?
@@ -58,7 +58,7 @@ public class Session {
     public var phoneNumber: String?
     public var token: String?
     public var password: String?
-    var schedule: Schedule
+    var schedule: BehaviorRelay<Schedule> = BehaviorRelay(value: Schedule())
     
     var subscriptionToken: String?
     var profileImage: BehaviorSubject<UIImage?> = BehaviorSubject(value: UIImage.getDefaultProfile())
@@ -70,23 +70,22 @@ public class Session {
     var summaryData: BehaviorRelay<[MessageSummary]> = BehaviorRelay(value: [])
     
     var kids: BehaviorRelay<[KidItem]> = BehaviorRelay(value: [])
+    var users: BehaviorRelay<[UserItem]> = BehaviorRelay(value: [])
     
     
     public convenience init() {
         self.init(withDic:  ["userType" : "EMAIL" as AnyObject,
                              "role" : "TEACHER" as AnyObject] )
-         schedule = Schedule(schedule: "0-30 9-18 6,7")
     }
     
     public init (withUser data: UserApolloFragment) {
         id = data.id
-        name = data.name
+        name.accept(data.name)
         role = SessionRole(rawValue: data.role.rawValue) ?? .NONE
         userType = SessionType(rawValue: data.type.rawValue)
         userId = data.userId
         profileImageUrl = data.profileImageUrl
         phoneNumber = data.phoneNumber
-        schedule = Schedule(schedule: "0-30 9-18 6,7")
         password = nil
         
         if let urlStr = profileImageUrl,
@@ -103,7 +102,7 @@ public class Session {
     
     public init (withDic dic: [String : Any]) {
         id = dic["id"] as? String
-        name = dic["name"] as? String
+        name.accept((dic["name"] as? String) ?? "")
         role = SessionRole(rawValue: dic["role"] as! String) ?? .NONE
         userType = SessionType(rawValue: dic["userType"] as! String)
         userId = dic["userId"] as? String
@@ -113,7 +112,6 @@ public class Session {
         
         subscriptionToken = dic["subscriptionToken"] as? String
         
-        schedule = Schedule(schedule: "0-30 9-18 6,7")
         setBinding()
     }
     
@@ -135,6 +133,25 @@ public class Session {
         }).disposed(by: disposeBag)
         
         Observable.combineLatest(adminClass, memberClass).map({
+            var arr: [UserItem] = []
+            $0.0.forEach({ room in
+                room.kids?.forEach({ kid in
+                    let k = kid.fragments.kidApolloFragment
+                    if let parent = k.parent {
+                        arr.append(UserItem(displayname: "\(k.name) 부모님", user: parent, chatroom: room, role: .PARENT))
+                    }
+                })
+            })
+            
+            $0.1.forEach({ room in
+                if let admin = room.admin {
+                    arr.append(UserItem(displayname: "\(admin.name) 선생님", user: admin, chatroom: room, role: .TEACHER))
+                }
+            })
+            return arr
+        }).bind(to: users).disposed(by: disposeBag)
+        
+        Observable.combineLatest(adminClass, memberClass).map({
             $0.0 + $0.1
         }).bind(to: allClass).disposed(by: disposeBag)
     }
@@ -153,19 +170,20 @@ public class Session {
     }
     
     func refreshSummary() {
-//        guard let userId = userId else {
-//            return
-//        }
-//        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [unowned self] (data) in
-//            let tmp: [MessageSummary] = data.messageSummaries.compactMap{$0}.map({
-//                return MessageSummary(with: $0.fragments.messageSummaryApolloFragment)
-//            })
-//            self.summaryData.accept(MessageSummary.sortSummary(arr: tmp).filter({ summary in
-//                self.allClass.value.contains(where: { (chatroom) -> Bool in
-//                    return chatroom.id == summary.chatroom.id
-//                })
-//            }))
-//        }).disposed(by: disposeBag)
+        guard let userId = userId else {
+            return
+        }
+        MessageAPI.getSummary(userId: userId).subscribe(onSuccess: { [unowned self] (data) in
+           let list = MessageSummary.sortSummary(arr: data).filter({ summary in
+                if let index = self.allClass.value.firstIndex(of: summary.chatroom) {
+                    let users = self.allClass.value[index].users ?? []
+                    return users.map({$0.fragments.userApolloFragment}).contains(summary.sender)
+                } else {
+                    return false
+                }
+            })
+            self.summaryData.accept(list)
+        }).disposed(by: disposeBag)
     }
     
     func reloadChatRoom() {
@@ -239,29 +257,11 @@ public class Session {
         }
     }
     
-//    func getChatroomBy(id: String?) -> ChatRoomApolloFragment? {
-//        if let id = id {
-//            return Session.me?.classData.filter({$0.id == id}).first ?? nil
-//        } else {
-//            return nil
-//        }
-//    }
-    
     func getKid(chatroom: ChatRoomApolloFragment) -> KidApolloFragment? {
         let kids = chatroom.kids?.compactMap({ $0.fragments.kidApolloFragment }) ?? []
         let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.id == id}) ?? []).count > 0}).first
         return kid
     }
-    
-//    func getKid(chatroomID: String,parentID: String) -> KidApolloFragment? {
-//        if let room = classData.filter({ $0.id == chatroomID }).first,
-//            let kids = room.kids?.compactMap({ $0.fragments.kidApolloFragment }),
-//        let kid = kids.filter({ ($0.parents?.filter({$0.fragments.userApolloFragment.userId == parentID }) ?? []).count > 0}).first {
-//            return kid
-//        } else {
-//            return nil
-//        }
-//    }
     
     fileprivate func saveToken() {
         UserDefaults.standard.set(self.token, forKey: "UserToken")
@@ -309,7 +309,7 @@ public class Session {
         var data = [String:AnyObject]()
         
         if let id = self.id { data["id"] = id as AnyObject }
-        if let name = self.name { data["name"] = name as AnyObject }
+        data["name"] = self.name.value as AnyObject 
         if let userType = self.userType?.rawValue { data["userType"] = userType as AnyObject }
         if let userId = self.userId { data["userId"] = userId as AnyObject }
         if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as AnyObject }
@@ -334,23 +334,6 @@ public class Session {
         
         return defaultHeaders
     }
-    
-    func toJSON() -> [String : Any] {
-        var data = [String : Any]()
-        
-        if let id = self.id { data["id"] = id as String }
-        if let name = self.name { data["name"] = name as String }
-        
-        if let userType = self.userType?.rawValue { data["userType"] = userType as String }
-        if let userId = self.userId { data["userId"] = userId as String }
-        if let profileImageUrl = self.profileImageUrl { data["profileImageUrl"] = profileImageUrl as String }
-        if let phoneNumber = self.phoneNumber { data["phoneNumber"] = phoneNumber as String }
-        
-        data["role"] = role.rawValue
-        data["push_id"] = Session.fetchDeviceKey()
-     
-        return data
-    }
 }
 
 extension Session {
@@ -361,7 +344,17 @@ extension Session {
                 return UserAPI.updateUser(me: Session.me, name: name, url: url)
         }.subscribe(onNext: { (result) in
             Session.me?.profileImageUrl = result.updateUser?.profileImageUrl
-            Session.me?.name = result.updateUser?.name
+            Session.me?.name.accept(result.updateUser?.name ?? "")
         }).disposed(by: disposeBag)
+    }
+    
+    func updateOffice(newOffice: Schedule) {
+        if self.schedule.value != newOffice {
+            print("update office")
+            ChatroomAPI.updateOffice(crontab:newOffice.toString()).subscribe(onSuccess: { [weak self] (data) in
+                print("update success")
+                self?.schedule.accept(Schedule(schedule: data.upsertOfficePeriod.crontab ?? ""))
+            }).disposed(by: disposeBag)
+        }
     }
 }

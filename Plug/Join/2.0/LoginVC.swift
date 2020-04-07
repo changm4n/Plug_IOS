@@ -35,6 +35,7 @@ class LoginVC2: PlugViewControllerWithButton {
         tf.lineHeight = 1
         tf.selectedLineColor = .plugBlue
         tf.errorColor = .plugRed
+        tf.isSecureTextEntry = true
         return tf
     }()
     
@@ -99,13 +100,14 @@ class LoginVC2: PlugViewControllerWithButton {
     }
     
     override func setViews() {
+        setTitle(title: "로그인")
         self.view.backgroundColor = .white
         
         self.view.addSubview(emailTF)
         self.view.addSubview(passwdTF)
         self.view.addSubview(confirmButton)
         self.view.addSubview(forgotButton)
-        
+        self.emailTF.becomeFirstResponder()
         self.bottomButton = forgotButton
         setLayout()
     }
@@ -164,6 +166,7 @@ class LoginViewModel {
             }).flatMap({ _ in
                 return Session.me!.reload()
             }).subscribe(onSuccess: { [weak self] (_) in
+                SubscriptionManager.shared.start()
                 self?.isNetworking.accept(false)
                 self?.loginSuccess.onNext(true)
                 self?.loginSuccess.onCompleted()

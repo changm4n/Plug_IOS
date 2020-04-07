@@ -1,11 +1,12 @@
 PODS:
   - Alamofire (4.9.1)
-  - Apollo (0.20.0):
-    - Apollo/Core (= 0.20.0)
-  - Apollo/Core (0.20.0)
-  - Apollo/WebSocket (0.20.0):
+  - Apollo (0.21.0):
+    - Apollo/Core (= 0.21.0)
+  - Apollo/Core (0.21.0)
+  - Apollo/WebSocket (0.21.0):
     - Apollo/Core
     - Starscream (= 3.1.1)
+  - BEMCheckBox (1.4.1)
   - Differentiator (4.0.1)
   - Firebase/Core (6.17.0):
     - Firebase/CoreOnly
@@ -115,7 +116,6 @@ PODS:
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
-  - Siren (5.3.0)
   - SkyFloatingLabelTextField (3.8.0)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
@@ -123,8 +123,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Apollo (= 0.20.0)
+  - Apollo
   - Apollo/WebSocket
+  - BEMCheckBox
   - Firebase/Core
   - Firebase/Messaging
   - Kingfisher
@@ -135,7 +136,6 @@ DEPENDENCIES:
   - RxGesture
   - RxRealm
   - RxSwift (~> 5)
-  - Siren
   - SkyFloatingLabelTextField
   - SnapKit
   - SwiftyJSON
@@ -144,6 +144,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Apollo
+    - BEMCheckBox
     - Differentiator
     - Firebase
     - FirebaseAnalytics
@@ -171,7 +172,6 @@ SPEC REPOS:
     - RxRealm
     - RxRelay
     - RxSwift
-    - Siren
     - SkyFloatingLabelTextField
     - SnapKit
     - Starscream
@@ -179,7 +179,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Apollo: 46b40c7023c1d49f2220a0364cdff8829674d9d3
+  Apollo: 56a0aa81b744bf2810a8277e705f155c91ac9055
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
@@ -207,12 +208,11 @@ SPEC CHECKSUMS:
   RxRealm: 900f5c7e6f0a2d6527b56eaf7283f3035ec1e8ba
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
-  Siren: 9262e383365dcf41a75c2b4a42fc01c576a0363a
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 6c6242c81abeb018e5fb8115a08068cb179d20ee
+PODFILE CHECKSUM: 8eedb6618d9e30618bbd5846487e6fff9ab0c5b1
 
 COCOAPODS: 1.8.4

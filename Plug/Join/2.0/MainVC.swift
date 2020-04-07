@@ -26,7 +26,12 @@ class MainVC: PlugViewController {
     
     let titleLabel: UILabel = {
         var lb = UILabel(frame: CGRect.zero)
+        #if DEBUG
+        lb.text = "Plug\nDev Build"
+        #else
         lb.text = "학부모와 교사를\n새롭게\n연결합니다."
+        #endif
+        
         lb.font = UIFont.getBold(withSize: 38)
         lb.numberOfLines = 3
         return lb
@@ -53,7 +58,7 @@ class MainVC: PlugViewController {
     let descLabel: UILabel = {
         let lb = UILabel(frame: CGRect.zero)
         lb.attributedText = kLaunchDescString
-        lb.numberOfLines = 2
+        lb.numberOfLines =    2
         lb.textColor = UIColor.textBlue
         lb.textAlignment = .center
         return lb
@@ -73,7 +78,6 @@ class MainVC: PlugViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hideNavigationBar()
     }
     
     override func setViews() {
@@ -88,11 +92,13 @@ class MainVC: PlugViewController {
         self.view.addSubview(selectorView)
         
         setLayout()
+        hideNavigationBar()
     }
     
     override func setBinding() {
         descLabel.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] (_) in
             let vc = DescViewController()
+            vc.type = .privacy
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
         

@@ -10,7 +10,7 @@ import Foundation
 
 
 let kDays = ["월", "화", "수", "목", "금", "토", "일"]
-class Schedule: NSObject {
+struct Schedule: Equatable {
     var sMin: String
     var sHour: String
     var eMin: String
@@ -37,6 +37,10 @@ class Schedule: NSObject {
     }
     //"0-30 9-18 1,3,5,7"
     
+    static func == (lhs: Schedule, rhs: Schedule) -> Bool {
+        return lhs.toString() == rhs.toString()
+    }
+    
     var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -44,8 +48,9 @@ class Schedule: NSObject {
         return formatter
     }()
     
-    public init(schedule: String) {
-        guard schedule.split(separator: " ").count >=  2 else {
+    public init(schedule: String = "0-30 9-18 6,7") {
+        let arr = schedule.split(separator: " ")
+        guard arr.count >=  2 else {
             sMin = ""
             sHour = ""
             eMin = ""
@@ -53,11 +58,22 @@ class Schedule: NSObject {
             days = ""
             return
         }
-        self.sMin = String(schedule.split(separator: " ")[0].split(separator: "-")[0])
-        self.sHour = String(schedule.split(separator: " ")[1].split(separator: "-")[0])
-        self.eMin = String(schedule.split(separator: " ")[0].split(separator: "-")[1])
-        self.eHour = String(schedule.split(separator: " ")[1].split(separator: "-")[1])
-        if schedule.split(separator: " ").count >=  3 {
+        
+        if arr[0].split(separator: "-").count == 2 &&
+        arr[1].split(separator: "-").count == 2 {
+            self.sMin = String(arr[0].split(separator: "-")[0])
+            self.eMin = String(arr[0].split(separator: "-")[1])
+            self.sHour = String(arr[1].split(separator: "-")[0])
+            self.eHour = String(arr[1].split(separator: "-")[1])
+        } else {
+            sMin = ""
+            sHour = ""
+            eMin = ""
+            eHour = ""
+        }
+        
+        //휴일
+        if arr.count >=  3 {
             self.days = String(schedule.split(separator: " ")[2])
         } else {
             self.days = ""
@@ -77,12 +93,12 @@ class Schedule: NSObject {
         return formatter.date(from: "\(eHour):\(eMin)")
     }
     
-    func setStartDate(with date: Date) {
+    mutating func setStartDate(with date: Date) {
         self.sHour = String(Calendar.current.component(.hour, from: date))
         self.sMin = String(Calendar.current.component(.minute, from: date))
     }
     
-    func setEndDate(with date: Date) {
+    mutating func setEndDate(with date: Date) {
         self.eHour = String(Calendar.current.component(.hour, from: date))
         self.eMin = String(Calendar.current.component(.minute, from: date))
     }
@@ -98,11 +114,15 @@ class Schedule: NSObject {
         return arr.map({ (Int($0) ?? 0)})
     }
     
-    func setDaysby(arr: [Int]) {
+    mutating func setDaysby(arr: [Int]) {
         self.days = arr.map({ "\($0)" }).joined(separator: ",")
     }
     
     func isPlugOn() -> Bool {
+        if !isOn || getDaysInt().count == 0 {
+            return true
+        }
+        
         let components = Calendar.current.dateComponents([.hour, .minute, .weekday], from: Date())
         
         let hour = components.hour ?? 99

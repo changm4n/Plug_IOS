@@ -86,11 +86,11 @@ class SetProfileViewController: PlugViewControllerWithButton {
     
     override func setViews() {
         self.view.backgroundColor = .white
-        
+        setTitle(title: "회원 가입")
         self.view.addSubview(photoSelector)
         self.view.addSubview(nameTF)
         self.view.addSubview(confirmButton)
-        
+        self.nameTF.becomeFirstResponder()
         self.bottomButton = confirmButton
         setLayout()
     }

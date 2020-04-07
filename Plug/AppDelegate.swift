@@ -5,7 +5,6 @@
 //  Created by changmin lee on 2018. 10. 20..
 //  Copyright © 2018년 changmin. All rights reserved.
 //
-import Siren
 import UIKit
 import KakaoOpenSDK
 import Firebase
@@ -23,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
-        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
-        Siren.shared.wail()
+//        Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .korean)
+//        Siren.shared.rulesManager = RulesManager(globalRules: Rules(promptFrequency: .daily, forAlertType: .none))
+//        Siren.shared.wail()
         
         Messaging.messaging().delegate = self
         if #available(iOS 10.0, *) {
@@ -51,12 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Session.me = user
         }
         
-//        SubscriptionManager.shared.start()
-        
-//        if let token = UserDefaults.standard.object(forKey: kSubscriptToken) {
-//
-//        }
-//
         return true
     }
     
@@ -81,12 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print(#function)
         state = userInfo
+        print("[sub] push received")
        
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         completionHandler(UIBackgroundFetchResult.newData)
+        print("[sub] push received")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -100,10 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         if let me = Session.me {
             me.reload().subscribe().disposed(by: me.disposeBag)
+            SubscriptionManager.shared.start()
         }
     }
    
     func applicationDidEnterBackground(_ application: UIApplication) {
+        SubscriptionManager.shared.stop()
         guard let me = Session.me else {
             application.applicationIconBadgeNumber = 0
             return
@@ -126,6 +123,7 @@ extension AppDelegate : MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
+        print("[sub] push received")
     }
 }
 
@@ -137,12 +135,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //        let userInfo = notification.request.content.userInfo
+        print("[sub] push received")
         completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("[sub] push received")
         print(#function)
     }
 }

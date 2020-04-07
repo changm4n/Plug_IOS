@@ -84,6 +84,7 @@ class KakaoLoginManager {
         }).flatMap({ _ in
             return Session.me!.reload()
         }).subscribe(onSuccess: { [weak self] (_) in
+            SubscriptionManager.shared.start()
             self?.isNetworking.accept(false)
             self?.output.onNext((true, id))
             self?.output.onCompleted()

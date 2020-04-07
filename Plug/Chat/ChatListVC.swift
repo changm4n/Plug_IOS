@@ -191,19 +191,7 @@ class ChatListVC: PlugViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
-        self.navigationController?.navigationBar.tintColor = .black
-        let style = NSMutableParagraphStyle()
-        style.firstLineHeadIndent = 8 // This is added to the default margin
-        self.navigationController?.navigationBar.largeTitleTextAttributes =
-            [NSAttributedString.Key.paragraphStyle : style,
-             NSAttributedString.Key.font : UIFont.getBold(withSize: 24)   ]
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
+        setNaviBarAttr()
         self.tableView.register(UINib(nibName: "HomeHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "HomeHeaderView")
         
         tableView.dataSource = nil
@@ -212,12 +200,43 @@ class ChatListVC: PlugViewController {
         
         tableView.tableFooterView = UIView()
         bindData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNaviBarAttr()
         Session.me?.reload().subscribe().disposed(by: disposeBag)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatListVC.refreshSummary), name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kMessageReceived), object: nil)
+    }
+    
+    @objc func refreshSummary() {
+        Session.me?.refreshSummary()
+    }
+    
+    func setNaviBarAttr() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = UIColor.clear
+        navBarAppearance.backgroundImage = UIImage()
+        navBarAppearance.shadowColor = UIColor.clear
+        
+        UINavigationBar.appearance().tintColor = UIColor.black
+        
+        self.navigationController?.navigationBar.standardAppearance = navBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        
+        let style = NSMutableParagraphStyle()
+        style.firstLineHeadIndent = 8 // This is added to the default margin
+        self.navigationController?.navigationBar.largeTitleTextAttributes =
+            [NSAttributedString.Key.paragraphStyle : style,
+             NSAttributedString.Key.font : UIFont.getBold(withSize: 24)   ]
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func setViews() {
@@ -319,13 +338,19 @@ class ChatListVC: PlugViewController {
             FBLogger.shared.log(id: "chatMain_userListItem")
             let vc = segue.destination as! ChatVC
             
-            let sender = Identity(id: data.sender.userId, name: data.sender.name)
+            let sender = Identity(id: data.sender.userId, name: data.displayName)
             let receiver = Identity(id: data.receiver.userId, name: data.receiver.name)
             let chatroom = Identity(id: data.chatroom.id, name: data.chatroom.name)
             
             let identity = ChatroomIdentity(sender: sender, receiver: receiver, chatroom: chatroom)
             
             vc.identity = identity
+            
+            if let admin = data.chatroom.admin, admin.userId == Session.me?.userId {
+                vc.role = .TEACHER
+            } else {
+                vc.role = .PARENT
+            }
         }
     }
 }

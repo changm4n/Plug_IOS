@@ -58,7 +58,7 @@ class SettingProfileVC: PlugViewController {
         super.viewWillDisappear(animated)
 
         if self.isMovingFromParent {
-            guard let myName = Session.me?.name, var name = nameTF.text else {
+            guard let myName = Session.me?.name.value, var name = nameTF.text else {
                 return
             }
             if name != myName {
@@ -86,7 +86,7 @@ class SettingProfileVC: PlugViewController {
             self.imagePicker.present(from: self.photoSelector)
         }).disposed(by: disposeBag)
         
-        nameTF.text = Session.me?.name
+        nameTF.text = Session.me?.name.value
     }
     
     override func setViews() {
